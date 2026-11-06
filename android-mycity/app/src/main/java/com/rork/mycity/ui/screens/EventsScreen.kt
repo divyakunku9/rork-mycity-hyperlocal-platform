@@ -113,9 +113,9 @@ fun EventsScreen(vm: CityViewModel, onOpenEvent: (String) -> Unit) {
     var bucket by rememberSaveable { mutableStateOf(DayBucket.TODAY) }
     val category = categoryName?.let { EventCategory.valueOf(it) }
 
-    val featured = vm.events.first { it.featured }
+    val featured = vm.events.firstOrNull { it.featured }
     val filtered = vm.events.filter { e ->
-        !e.featured &&
+        e.id != featured?.id &&
             (category == null || e.category == category || (category == EventCategory.WORKSHOP && e.category == EventCategory.ART)) &&
             (query.isBlank() || (e.title + e.venue + e.area).contains(query.trim(), ignoreCase = true))
     }
@@ -160,7 +160,7 @@ fun EventsScreen(vm: CityViewModel, onOpenEvent: (String) -> Unit) {
                 }
             }
         }
-        if (category == null && query.isBlank()) {
+        if (featured != null && category == null && query.isBlank()) {
             item {
                 FeaturedEventCard(featured, booked = (vm.bookings[featured.id] ?: 0) > 0) { onOpenEvent(featured.id) }
             }

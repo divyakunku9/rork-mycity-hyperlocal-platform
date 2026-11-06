@@ -65,7 +65,6 @@ dependencies {
     implementation(libs.ktor.serialization.json)
     implementation(libs.coil.compose)
     implementation(libs.coil.network.okhttp)
-    implementation(libs.koin.androidx.compose)
     implementation(libs.osmdroid.android)
     debugImplementation(libs.androidx.ui.tooling)
 }

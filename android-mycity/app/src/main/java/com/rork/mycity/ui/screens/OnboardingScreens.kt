@@ -539,7 +539,7 @@ private fun OtpScreen(
                     Spacer(Modifier.width(8.dp))
                     Text("Checking…", color = CityColors.Muted, style = MaterialTheme.typography.labelLarge)
                 }
-                wrong -> Text("That code didn't match. Try again.", color = Color(0xFFFCA5A5), style = MaterialTheme.typography.labelLarge)
+                wrong -> Text(vm.lastSignInError ?: "That code didn't match. Try again.", color = Color(0xFFFCA5A5), style = MaterialTheme.typography.labelLarge)
             }
         }
 

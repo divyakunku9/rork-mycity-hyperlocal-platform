@@ -248,6 +248,7 @@ fun AddEventSheet(vm: CityViewModel, onDismiss: () -> Unit, onCreated: (String, 
                 val id = vm.addEvent(
                     title = title, category = category, dateLabel = label, timeLabel = timeLabel(hour, minute), bucket = bucket,
                     venue = venue!!, priceRupees = if (free) 0 else priceValue ?: 0, imageUri = photo, description = about,
+                    startsAtMillis = com.rork.mycity.data.backend.Times.istAt(ms, hour, minute),
                 )
                 haptic.performHapticFeedback(HapticFeedbackType.Confirm)
                 onCreated(id, bucket)

@@ -7,31 +7,56 @@ import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import android.app.Application
+import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.rork.mycity.data.backend.CityBackend
+import com.rork.mycity.data.backend.PollOptionUi
+import com.rork.mycity.data.backend.PollUi
+import com.rork.mycity.data.backend.Res
+import com.rork.mycity.data.backend.Supabase
+import com.rork.mycity.data.backend.SupabaseConfig
+import com.rork.mycity.data.backend.SupabaseOtpProvider
+import com.rork.mycity.data.backend.photoForUpload
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import java.util.UUID
 
-class CityViewModel(app: Application) : AndroidViewModel(app) {
+class CityViewModel(private val app: Application) : AndroidViewModel(app) {
 
     val prefs = Prefs(app)
-    val otp: OtpProvider = DemoOtpProvider()
+    private val sb = Supabase(app)
+    private val backend = CityBackend(sb)
+    private val supabaseOtp = SupabaseOtpProvider(sb)
+    val otp: OtpProvider = supabaseOtp
 
     init {
         Cities.byId(prefs.cityId)?.let { CurrentCity.city = it }
     }
 
     // ---------- Session & profile ----------
-    var signedIn by mutableStateOf(prefs.signedIn)
+    // A sign-in from the old demo build has no server session, so it asks to sign in again.
+    var signedIn by mutableStateOf(prefs.signedIn && sb.signedIn)
         private set
-    var hasCity by mutableStateOf(prefs.signedIn && Cities.byId(prefs.cityId) != null)
+    var hasCity by mutableStateOf(signedIn && Cities.byId(prefs.cityId) != null)
         private set
     var profile by mutableStateOf(prefs.profile)
         private set
 
     val city: City get() = CurrentCity.city
+
+    /** True when this city's content comes from the MyCity backend rather than built-in samples. */
+    val isLive: Boolean get() = city.id in SupabaseConfig.liveCities
+
+    /** True while live content is being fetched. */
+    var loading by mutableStateOf(false)
+        private set
+
+    /** Why the last code check failed, for the sign-in screen. */
+    val lastSignInError: String? get() = supabaseOtp.lastError
 
     /** True while the city picker is open from the profile or header. */
     var pickingCity by mutableStateOf(false)
@@ -42,17 +67,34 @@ class CityViewModel(app: Application) : AndroidViewModel(app) {
         prefs.profile = profile
         prefs.signedIn = true
         signedIn = true
+        syncAccount()
+        if (hasCity) loadContent()
     }
 
     fun updateProfile(p: UserProfile) {
+        val before = profile
         profile = p
         prefs.profile = p
+        val uid = sb.userId ?: return
+        viewModelScope.launch {
+            if (p.name != before.name || p.ward != before.ward) {
+                (backend.updateProfile(uid, p.name, p.ward) as? Res.Err)?.let { toast("Profile not saved: ${it.message}") }
+            }
+            if (p.photoUri != before.photoUri) {
+                val bytes = photoForUpload(app, p.photoUri, maxSide = 600)
+                if (p.photoUri == null || bytes != null) {
+                    (backend.setAvatar(uid, bytes) as? Res.Err)?.let { toast("Photo not saved: ${it.message}") }
+                }
+            }
+        }
     }
 
     fun signOut() {
+        viewModelScope.launch { sb.signOut() }
         prefs.clearSession()
         signedIn = false
         hasCity = false
+        clearActivity()
     }
 
     val notif = mutableStateMapOf(
@@ -62,35 +104,62 @@ class CityViewModel(app: Application) : AndroidViewModel(app) {
     fun setNotif(key: String, on: Boolean) {
         notif[key] = on
         prefs.setFlag(key, on)
+        val uid = sb.userId ?: return
+        viewModelScope.launch { backend.setNotif(uid, key, on) }
+    }
+
+    /** After sign-in or app start: pulls the profile and settings saved on the server. */
+    private fun syncAccount() {
+        val uid = sb.userId ?: return
+        viewModelScope.launch {
+            backend.profile(uid)?.let { row ->
+                val local = profile
+                val merged = local.copy(
+                    name = row.fullName?.takeIf { it.isNotBlank() } ?: local.name,
+                    ward = row.ward?.takeIf { it.isNotBlank() } ?: local.ward,
+                    phone = row.phone?.removePrefix("+91")?.takeIf { it.isNotBlank() } ?: local.phone,
+                    email = row.email?.takeIf { it.isNotBlank() } ?: local.email,
+                    photoUri = local.photoUri ?: backend.avatarUrl(row.photoPath),
+                )
+                profile = merged
+                prefs.profile = merged
+                // A name typed on the sign-in screen before the account existed on the server.
+                if (row.fullName.isNullOrBlank() && merged.name.isNotBlank()) backend.updateProfile(uid, merged.name, merged.ward)
+            }
+            backend.notifPrefs(uid)?.let { n ->
+                mapOf("civic" to n.civic, "events" to n.events, "emergency" to n.emergency).forEach { (k, v) ->
+                    notif[k] = v; prefs.setFlag(k, v)
+                }
+            }
+        }
     }
 
     // ---------- City content ----------
-    val events = mutableStateListOf<CityEvent>().apply { addAll(SampleData.events) }
+    val events = mutableStateListOf<CityEvent>()
     var spots by mutableStateOf(SampleData.spots)
         private set
-    var news by mutableStateOf(SampleData.news)
+    var news by mutableStateOf<List<NewsItem>>(emptyList())
         private set
-    var alert by mutableStateOf(SampleData.alert)
+    /** The city's current authority alert, or null when there is none in force. */
+    var alert by mutableStateOf<CityAlert?>(null)
+        private set
+    /** The ward poll to show, or null when there is no open poll. */
+    var poll by mutableStateOf<PollUi?>(null)
         private set
 
-    val issues = mutableStateListOf<CivicIssue>().apply { addAll(SampleData.issues) }
+    val issues = mutableStateListOf<CivicIssue>()
 
-    /** Events the user hosts, kept per city. */
+    /** Sample-mode only: events and reports the user made, kept per city. */
     private val hostedByCity = HashMap<String, MutableList<CityEvent>>()
     private val reportsByCity = HashMap<String, MutableList<CivicIssue>>()
 
     fun selectCity(c: City) {
-        // Keep the user's own reports and events with the city they belong to.
-        reportsByCity[city.id] = issues.filter { it.isMine }.toMutableList()
+        if (!isLive) reportsByCity[city.id] = issues.filter { it.isMine }.toMutableList()
         CurrentCity.city = c
         prefs.cityId = c.id
         hasCity = true
         pickingCity = false
-        events.clear(); events.addAll(hostedByCity[c.id].orEmpty() + SampleData.events)
-        issues.clear(); issues.addAll(reportsByCity[c.id].orEmpty() + SampleData.issues)
         spots = SampleData.spots
-        news = SampleData.news
-        alert = SampleData.alert
         alertAcknowledged = false
         locationNotice = null
         val start = Transit.currentLocation
@@ -102,34 +171,101 @@ class CityViewModel(app: Application) : AndroidViewModel(app) {
         recentPlaces.clear(); recentPlaces.addAll(Transit.recentIds.mapNotNull { Transit.place(it) })
         weather = null
         recenterTick++
+        loadContent()
         refreshWeather()
         refreshTrending()
+    }
+
+    private var contentJob: Job? = null
+
+    /** Fills events, reports, news, the alert and the poll for the current city. */
+    fun loadContent() {
+        contentJob?.cancel()
+        clearActivity()
+        if (!isLive) {
+            events.clear(); events.addAll(hostedByCity[city.id].orEmpty() + SampleData.events)
+            issues.clear(); issues.addAll(reportsByCity[city.id].orEmpty() + SampleData.issues)
+            news = SampleData.news
+            alert = SampleData.alert
+            poll = samplePoll()
+            loading = false
+            return
+        }
+        // Clear the previous city's samples straight away so they never show as live content.
+        events.clear(); issues.clear(); news = emptyList(); alert = null; poll = null
+        val cityId = city.id
+        val uid = sb.userId
+        contentJob = viewModelScope.launch {
+            loading = true
+            val here = userPlace
+            val iss = async { backend.issues(cityId, uid, here.lat, here.lng) }
+            val evs = async { backend.events(cityId, uid, here.lat, here.lng) }
+            val nws = async { backend.news(cityId) }
+            val alr = async { backend.alert(cityId) }
+            val pol = async { backend.poll(cityId, profile.ward) }
+            val mine = uid?.let { async { backend.myActivity(it) } }
+            var failed: String? = null
+            when (val r = iss.await()) { is Res.Ok -> { issues.clear(); issues.addAll(r.value) }; is Res.Err -> failed = r.message }
+            when (val r = evs.await()) { is Res.Ok -> { events.clear(); events.addAll(r.value) }; is Res.Err -> failed = r.message }
+            when (val r = nws.await()) { is Res.Ok -> news = r.value; is Res.Err -> failed = r.message }
+            when (val r = alr.await()) { is Res.Ok -> alert = r.value; is Res.Err -> failed = r.message }
+            when (val r = pol.await()) { is Res.Ok -> poll = r.value; is Res.Err -> failed = r.message }
+            mine?.await()?.let { a ->
+                a.upvoted.forEach { upvotedIssues[it] = true }
+                a.savedEvents.forEach { savedEvents[it] = true }
+                bookings.putAll(a.bookings)
+                a.endorsed.forEach { endorsedNews[it] = true }
+                a.savedNews.forEach { savedNews[it] = true }
+                a.claimed.forEach { claimedOffers[it] = true }
+                poll?.let { p -> p.id?.let { a.votes[it] }?.let { opt -> pollChoice = p.options.indexOfFirst { it.id == opt }.takeIf { it >= 0 } } }
+                alertAcknowledged = alert?.id?.let { it in a.acked } == true
+            }
+            loading = false
+            failed?.let { toast(it) }
+        }
+    }
+
+    private fun clearActivity() {
+        savedEvents.clear(); bookings.clear(); upvotedIssues.clear(); endorsedNews.clear()
+        savedNews.clear(); claimedOffers.clear(); pollChoice = null; alertAcknowledged = false
     }
 
     fun addEvent(
         title: String, category: EventCategory, dateLabel: String, timeLabel: String, bucket: DayBucket,
         venue: Place, priceRupees: Int, imageUri: String?, description: String,
+        /** When the event starts; needed for live cities. */
+        startsAtMillis: Long? = null,
     ): String {
-        val id = "mine-${System.currentTimeMillis()}"
-        val fallback = when (category) {
-            EventCategory.MUSIC -> com.rork.mycity.R.drawable.img_indie_fest
-            EventCategory.WORKSHOP, EventCategory.ART -> com.rork.mycity.R.drawable.img_pottery
-            EventCategory.FLEA -> com.rork.mycity.R.drawable.img_flea_market
-            EventCategory.TECH -> com.rork.mycity.R.drawable.img_tech_demo
-            EventCategory.CULTURE -> com.rork.mycity.R.drawable.img_park_reading
-        }
+        val live = isLive && sb.signedIn && startsAtMillis != null
+        val id = if (live) UUID.randomUUID().toString() else "mine-${System.currentTimeMillis()}"
         val e = CityEvent(
             id = id, title = title.trim(), category = category, dateLabel = dateLabel, timeLabel = timeLabel,
             venue = venue.name, area = venue.area.substringBefore(",").ifBlank { city.name }, priceRupees = priceRupees,
-            imageRes = fallback, interested = 1,
+            imageRes = CityBackend.fallbackImage(category), interested = if (live) 0 else 1,
             distanceKm = Transit.distanceKm(userPlace.lat, userPlace.lng, venue.lat, venue.lng),
             description = description.trim().ifBlank { "Hosted by ${profile.name.ifBlank { "a MyCity neighbour" }}." },
             bucket = bucket, lat = venue.lat, lng = venue.lng, pinLabel = title.trim().take(18),
             imageUri = imageUri, hostedByYou = true,
         )
-        hostedByCity.getOrPut(city.id) { mutableListOf() }.add(0, e)
         events.add(0, e)
-        savedEvents[id] = true
+        if (!live) {
+            hostedByCity.getOrPut(city.id) { mutableListOf() }.add(0, e)
+            savedEvents[id] = true
+            return id
+        }
+        val uid = sb.userId!!
+        val cityId = city.id
+        viewModelScope.launch {
+            val photo = photoForUpload(app, imageUri)
+            val r = backend.addEvent(
+                id, cityId, uid, e.title, category, e.venue, e.area, e.lat, e.lng, startsAtMillis!!,
+                priceRupees, e.description, photo,
+            )
+            if (r is Res.Err) {
+                events.removeAll { it.id == id }
+                toast("Event not published: ${r.message}")
+            }
+        }
         return id
     }
 
@@ -285,59 +421,122 @@ class CityViewModel(app: Application) : AndroidViewModel(app) {
         if (favoriteLines[id] == true) favoriteLines.remove(id) else favoriteLines[id] = true
     }
 
-    // Ward infra vote
+    // ---------- Ward poll ----------
     var pollChoice by mutableStateOf<Int?>(null)
         private set
-    private var pollVotes = intArrayOf(948, 534)
-    var pollTotal by mutableIntStateOf(pollVotes.sum())
-        private set
+
+    val pollTotal: Int get() = poll?.options?.sumOf { it.votes } ?: 0
 
     fun pollPercent(index: Int): Int {
-        val total = pollVotes.sum().coerceAtLeast(1)
-        return Math.round(pollVotes[index] * 100f / total)
+        val opts = poll?.options ?: return 0
+        val total = opts.sumOf { it.votes }.coerceAtLeast(1)
+        return Math.round((opts.getOrNull(index)?.votes ?: 0) * 100f / total)
     }
 
     fun vote(index: Int) {
-        if (pollChoice != null) return
-        pollVotes[index] += 1
-        pollTotal = pollVotes.sum()
+        val p = poll ?: return
+        if (pollChoice != null || index !in p.options.indices) return
+        poll = p.copy(options = p.options.mapIndexed { i, o -> if (i == index) o.copy(votes = o.votes + 1) else o })
         pollChoice = index
+        val pollId = p.id ?: return
+        val optionId = p.options[index].id ?: return
+        val uid = sb.userId ?: return
+        viewModelScope.launch {
+            val r = backend.vote(pollId, optionId, uid)
+            if (r is Res.Err) {
+                poll = p; pollChoice = null
+                toast("Vote not counted: ${r.message}")
+            }
+        }
     }
 
-    val reportsValidated: Int get() = 54 + issues.count { it.isMine }
+    private fun samplePoll() = PollUi(
+        id = null,
+        title = "${profile.ward.ifBlank { "Ward 151" }} Infra Vote",
+        detail = "₹1.2 Cr ward fund — help prioritise the next project",
+        endsLabel = "Ends in 3 days",
+        options = listOf(
+            PollOptionUi(null, "Footpath Widening & Tactile Paving", 948),
+            PollOptionUi(null, "LED Streetlights & CCTV Grid", 534),
+        ),
+    )
+
+    val reportsValidated: Int get() = (if (isLive) 0 else 54) + issues.count { it.isMine }
     val myIssues: List<CivicIssue> get() = issues.filter { it.isMine }
 
     fun event(id: String) = events.firstOrNull { it.id == id }
     fun issue(id: String) = issues.firstOrNull { it.id == id }
 
     fun toggleSaveEvent(id: String) {
-        if (savedEvents[id] == true) savedEvents.remove(id) else savedEvents[id] = true
+        val on = savedEvents[id] != true
+        if (on) savedEvents[id] = true else savedEvents.remove(id)
+        syncMine("event_saves", "event_id", id, on) { if (on) savedEvents.remove(id) else savedEvents[id] = true }
     }
 
     fun book(id: String, qty: Int) {
         bookings[id] = (bookings[id] ?: 0) + qty
+        if (!isLive || !sb.signedIn) return
+        viewModelScope.launch {
+            when (val r = backend.book(id, qty)) {
+                is Res.Ok -> bookings[id] = r.value.quantity
+                is Res.Err -> {
+                    val left = (bookings[id] ?: 0) - qty
+                    if (left > 0) bookings[id] = left else bookings.remove(id)
+                    toast(r.message)
+                }
+            }
+        }
     }
 
     fun toggleUpvote(id: String) {
         val idx = issues.indexOfFirst { it.id == id }
         if (idx < 0) return
-        val already = upvotedIssues[id] == true
         val item = issues[idx]
+        if (isLive && item.isMine) { toast("You reported this one — neighbours can confirm it."); return }
+        val already = upvotedIssues[id] == true
         issues[idx] = item.copy(upvotes = item.upvotes + if (already) -1 else 1)
         if (already) upvotedIssues.remove(id) else upvotedIssues[id] = true
+        syncMine("issue_upvotes", "issue_id", id, !already) {
+            val j = issues.indexOfFirst { it.id == id }
+            if (j >= 0) issues[j] = issues[j].copy(upvotes = issues[j].upvotes + if (already) 1 else -1)
+            if (already) upvotedIssues[id] = true else upvotedIssues.remove(id)
+        }
     }
 
     fun toggleEndorse(id: String) {
-        if (endorsedNews[id] == true) endorsedNews.remove(id) else endorsedNews[id] = true
+        val on = endorsedNews[id] != true
+        if (on) endorsedNews[id] = true else endorsedNews.remove(id)
+        syncMine("news_endorsements", "news_id", id, on) { if (on) endorsedNews.remove(id) else endorsedNews[id] = true }
     }
 
     fun toggleSaveNews(id: String) {
-        if (savedNews[id] == true) savedNews.remove(id) else savedNews[id] = true
+        val on = savedNews[id] != true
+        if (on) savedNews[id] = true else savedNews.remove(id)
+        syncMine("news_saves", "news_id", id, on) { if (on) savedNews.remove(id) else savedNews[id] = true }
     }
 
-    fun claimOffer(id: String) { claimedOffers[id] = true }
+    fun claimOffer(id: String) {
+        if (claimedOffers[id] == true) return
+        claimedOffers[id] = true
+        syncMine("offer_claims", "news_id", id, true) { claimedOffers.remove(id) }
+    }
 
-    fun acknowledgeAlert() { alertAcknowledged = !alertAcknowledged }
+    fun acknowledgeAlert() {
+        alertAcknowledged = !alertAcknowledged
+        val id = alert?.id ?: return
+        val on = alertAcknowledged
+        syncMine("alert_acknowledgements", "alert_id", id, on) { alertAcknowledged = !on }
+    }
+
+    /** Saves a toggle to the server for live cities; [undo] runs if the server refuses it. */
+    private fun syncMine(table: String, column: String, key: String, on: Boolean, undo: () -> Unit) {
+        if (!isLive) return
+        val uid = sb.userId ?: return
+        viewModelScope.launch {
+            val r = backend.setMine(table, column, key, uid, on)
+            if (r is Res.Err) { undo(); toast(r.message) }
+        }
+    }
 
     fun submitReport(
         category: IssueCategory,
@@ -349,7 +548,8 @@ class CityViewModel(app: Application) : AndroidViewModel(app) {
         lat: Double? = null,
         lng: Double? = null,
     ): String {
-        val id = "report-${System.currentTimeMillis()}"
+        val live = isLive && sb.signedIn
+        val id = if (live) UUID.randomUUID().toString() else "report-${System.currentTimeMillis()}"
         val title = when (category) {
             IssueCategory.POTHOLE -> "Pothole reported"
             IssueCategory.STREETLIGHT -> "Streetlight outage"
@@ -357,29 +557,51 @@ class CityViewModel(app: Application) : AndroidViewModel(app) {
             IssueCategory.WATER -> "Water / drainage issue"
         } + " • " + location.substringBefore(",")
         val jitter = ((issues.size % 5) - 2) * 0.0009
-        issues.add(
-            CivicIssue(
-                id = id,
-                title = title,
-                category = category,
-                location = location,
-                description = description.trim(),
-                authorities = authorities,
-                urgency = urgency,
-                status = IssueStatus.REPORTED,
-                upvotes = 1,
-                imageUri = imageUri,
-                reportedAgo = "Just now",
-                isMine = true,
-                lat = lat ?: (userPlace.lat + jitter),
-                lng = lng ?: (userPlace.lng - jitter),
-            )
+        val issue = CivicIssue(
+            id = id,
+            title = title,
+            category = category,
+            location = location,
+            description = description.trim(),
+            authorities = authorities.ifEmpty { listOf("@MyCity") },
+            urgency = urgency,
+            status = IssueStatus.REPORTED,
+            upvotes = if (live) 0 else 1,
+            imageUri = imageUri,
+            reportedAgo = "Just now",
+            isMine = true,
+            lat = lat ?: (userPlace.lat + jitter),
+            lng = lng ?: (userPlace.lng - jitter),
         )
-        upvotedIssues[id] = true
+        if (live) issues.add(0, issue) else issues.add(issue)
+        if (!live) { upvotedIssues[id] = true; return id }
+
+        val uid = sb.userId!!
+        val cityId = city.id
+        viewModelScope.launch {
+            val photo = photoForUpload(app, imageUri)
+            val r = backend.submitIssue(
+                id, cityId, uid, category, title, issue.description, urgency, location, issue.lat, issue.lng,
+                photo, photoIsLive = false,
+            )
+            if (r is Res.Err) {
+                val i = issues.indexOfFirst { it.id == id }
+                if (i >= 0) issues[i] = issues[i].copy(authorityNote = "Not sent: ${r.message}")
+                toast("Report not sent: ${r.message}")
+            }
+        }
         return id
     }
 
+    private fun toast(message: String) {
+        Toast.makeText(app, message, Toast.LENGTH_LONG).show()
+    }
+
     init {
+        if (signedIn) {
+            syncAccount()
+            loadContent()
+        }
         if (hasCity) {
             refreshWeather()
             refreshTrending()

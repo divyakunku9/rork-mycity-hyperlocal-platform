@@ -199,18 +199,21 @@ fun CivicScreen(vm: CityViewModel, onOpenReports: (mine: Boolean) -> Unit) {
             }
         }
 
-        // Infra vote
+        // Ward poll (from the server for live cities; hidden when none is open)
+        vm.poll?.let { poll ->
         CityCard(Modifier.fillMaxWidth().padding(horizontal = 16.dp)) {
             Column(Modifier.padding(16.dp)) {
                 Row(verticalAlignment = Alignment.Top) {
-                    Text("${vm.profile.ward.ifBlank { "Ward 151" }} Infra Vote", style = MaterialTheme.typography.titleLarge, modifier = Modifier.weight(1f))
-                    Text("Ends in 3 days", style = MaterialTheme.typography.labelMedium, color = CityColors.Muted)
+                    Text(poll.title, style = MaterialTheme.typography.titleLarge, modifier = Modifier.weight(1f))
+                    Text(poll.endsLabel, style = MaterialTheme.typography.labelMedium, color = CityColors.Muted)
                 }
-                Text("₹1.2 Cr ward fund — help prioritise the next project", style = MaterialTheme.typography.bodySmall, color = CityColors.Muted)
+                if (poll.detail.isNotBlank()) {
+                    Text(poll.detail, style = MaterialTheme.typography.bodySmall, color = CityColors.Muted)
+                }
                 Spacer(Modifier.height(8.dp))
-                listOf("Footpath Widening & Tactile Paving", "LED Streetlights & CCTV Grid").forEachIndexed { i, label ->
+                poll.options.forEachIndexed { i, option ->
                     PollOption(
-                        label = label,
+                        label = option.label,
                         percent = vm.pollPercent(i),
                         selected = vm.pollChoice == i,
                         revealed = vm.pollChoice != null,
@@ -226,6 +229,7 @@ fun CivicScreen(vm: CityViewModel, onOpenReports: (mine: Boolean) -> Unit) {
                     modifier = Modifier.padding(top = 6.dp),
                 )
             }
+        }
         }
 
         // Helplines

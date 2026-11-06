@@ -283,7 +283,7 @@ fun ExploreScreen(
                         }
                     }
                     if (showCivic) {
-                        if (matches(vm.alert.title + vm.alert.body)) {
+                        if (vm.alert?.let { matches(it.title + it.body) } == true) {
                             item(key = "alert") {
                                 AuthorityAlertCard(vm) {
                                     haptic.performHapticFeedback(HapticFeedbackType.LongPress)
@@ -602,7 +602,7 @@ private fun LiveEventCard(
 
 @Composable
 private fun AuthorityAlertCard(vm: CityViewModel, onAck: () -> Unit) {
-    val a = vm.alert
+    val a = vm.alert ?: return
     val acked = vm.alertAcknowledged
     CityCard(Modifier.fillMaxWidth().padding(horizontal = 16.dp), borderColor = CityColors.Saffron.copy(alpha = 0.5f)) {
         Row(Modifier.height(IntrinsicSize.Min)) {

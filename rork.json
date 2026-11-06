@@ -1,0 +1,10 @@
+{
+  "apps": [
+    {
+      "name": "MyCity",
+      "path": "android-mycity",
+      "framework": "kotlin"
+    }
+  ],
+  "$schema": "https://rork.com/schema/rork.json"
+}

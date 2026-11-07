@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sheharsaathi.app.TimesTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-11-07T12:36:45.656Z" hostname="runnervm7aw5e" time="0.087">
+  <properties/>
+  <testcase name="pollEndsLabel" classname="com.sheharsaathi.app.TimesTest" time="0.032"/>
+  <testcase name="parsesDatabaseTimestamps" classname="com.sheharsaathi.app.TimesTest" time="0.001"/>
+  <testcase name="labelsEvents" classname="com.sheharsaathi.app.TimesTest" time="0.003"/>
+  <testcase name="hostedEventTimeIsIndiaTime" classname="com.sheharsaathi.app.TimesTest" time="0.0"/>
+  <testcase name="countsDaysInIndiaTime" classname="com.sheharsaathi.app.TimesTest" time="0.0"/>
+  <testcase name="formatsIsoForTheDatabase" classname="com.sheharsaathi.app.TimesTest" time="0.013"/>
+  <testcase name="jsonStringsAreEscaped" classname="com.sheharsaathi.app.TimesTest" time="0.025"/>
+  <testcase name="relativeTimes" classname="com.sheharsaathi.app.TimesTest" time="0.008"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

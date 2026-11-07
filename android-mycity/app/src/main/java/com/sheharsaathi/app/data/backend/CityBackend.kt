@@ -127,7 +127,9 @@ class CityBackend(val sb: Supabase) {
         if (rows is Res.Err) return rows
         return Res.Ok((rows as Res.Ok).value.map { r ->
             com.sheharsaathi.app.data.ListedEvent(
-                id = r.id, url = r.url, title = r.title, summary = r.summary, imageUrl = r.imageUrl,
+                id = r.id, url = r.url, title = r.title, summary = r.summary,
+                // Older Android can't show AVIF; AllEvents serves the same picture as JPEG.
+                imageUrl = r.imageUrl?.replace(Regex("\\.avif(\\?.*)?$", RegexOption.IGNORE_CASE), ".jpg$1"),
                 startMs = Times.parse(r.startsAt), endMs = r.endsAt?.let { Times.parse(it) }?.takeIf { it > 0 }, hasTime = r.hasTime,
                 venue = r.venue, address = r.address, lat = r.lat, lng = r.lng,
                 priceMin = r.priceMin, priceMax = r.priceMax, isFree = r.isFree,

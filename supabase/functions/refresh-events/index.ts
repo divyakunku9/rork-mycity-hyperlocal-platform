@@ -56,7 +56,9 @@ function firstImage(v: unknown): string | null {
   const arr = Array.isArray(v) ? v : [v];
   // Prefer a landscape picture when the site gives several.
   const urls = arr.map(pick).filter((u): u is string => !!u && /^https?:/.test(u));
-  return urls.find((u) => /horizontal|landscape|1200|banner/i.test(u)) ?? urls[0] ?? null;
+  const u = urls.find((x) => /horizontal|landscape|1200|banner/i.test(x)) ?? urls[0] ?? null;
+  // AVIF pictures don't display on Android 11 and older; AllEvents' image server also serves JPEG.
+  return u ? u.replace(/\.avif(\?.*)?$/i, ".jpg$1") : null;
 }
 
 // ---------- dates ----------
@@ -213,7 +215,7 @@ async function enrich(e: Ev): Promise<void> {
       const b = html.match(new RegExp(`<meta[^>]+content=["']([^"']+)["'][^>]+(?:property|name)=["']${p}["']`, "i"));
       return (a ?? b)?.[1] ?? null;
     };
-    if (!e.image_url) { const i = meta("og:image"); if (i && /^https?:/.test(i)) e.image_url = decode(i); }
+    if (!e.image_url) { const i = meta("og:image"); if (i && /^https?:/.test(i)) e.image_url = decode(i).replace(/\.avif(\?.*)?$/i, ".jpg$1"); }
     if (!e.summary) {
       const d = meta("og:description") ?? meta("description");
       const s = d ? snippet(clean(d)) : null;

@@ -55,6 +55,15 @@ jobs:
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -no-snapshot
           script: bash qa/run-emulator.sh
 
+      - name: Check results
+        id: gate
+        continue-on-error: true
+        run: |
+          cd android-mycity/qa-out
+          ! grep -q "INSTALL FAILED" install.txt
+          ! grep -q "CHECKS EXITED WITH ERRORS" checks.txt
+          ! grep -q "^FAIL" shots/report.txt 2>/dev/null
+
       - name: Publish results to the qa-results branch
         if: always()
         run: |
@@ -74,8 +83,5 @@ jobs:
           git push -f origin qa-results
 
       - name: Fail the run if the app didn't build or a walkthrough step failed
-        run: |
-          cd android-mycity/qa-out
-          ! grep -q "INSTALL FAILED" install.txt
-          ! grep -q "CHECKS EXITED WITH ERRORS" checks.txt
-          ! grep -q "^FAIL" shots/report.txt 2>/dev/null
+        if: steps.gate.outcome == 'failure'
+        run: exit 1

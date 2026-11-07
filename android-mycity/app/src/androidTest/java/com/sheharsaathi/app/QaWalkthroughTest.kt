@@ -56,7 +56,8 @@ class QaWalkthroughTest {
     private var failures = 0
 
     private fun shot(name: String) {
-        Thread.sleep(900)
+        rule.waitForIdle()
+        Thread.sleep(1500) // the emulator's screen capture lags the app by a frame or two
         runCatching {
             val bmp: Bitmap = instrumentation.uiAutomation.takeScreenshot() ?: return
             shotNo++
@@ -153,10 +154,19 @@ class QaWalkthroughTest {
             shot("news"); scrollDown(); shot("news-scroll"); scrollTop()
         }
         step("News topics filter") {
-            if (exists(hasText("Crime & Safety"))) { node(hasText("Crime & Safety")).performClick(); Thread.sleep(900); shot("news-topic") }
+            node(hasText("Crime & Safety")).performClick()
+            rule.waitForIdle(); Thread.sleep(1500)
+            check(!exists(hasText("For you").and(SemanticsMatcher("selected") { it.config.getOrNull(androidx.compose.ui.semantics.SemanticsProperties.Selected) == true }))) { "topic chip didn't select" }
+            check(exists(hasText("Crime & Safety", substring = true))) { "no crime stories shown" }
+            shot("news-topic")
             node(hasText("For you")).performClick(); Thread.sleep(500)
         }
-        step("News community tab") { node(hasText("Community")).performClick(); Thread.sleep(900); shot("news-community"); node(hasText("City news")).performClick() }
+        step("News community tab") {
+            node(hasText("Community")).performClick()
+            waitText("Civic Bulletins", 10)
+            Thread.sleep(1500); shot("news-community")
+            node(hasText("City news")).performClick(); Thread.sleep(500)
+        }
         step("Events tab") { tab("Events"); Thread.sleep(2500); shot("events"); scrollDown(); shot("events-scroll") }
         step("Add Event sheet") {
             scrollTop()

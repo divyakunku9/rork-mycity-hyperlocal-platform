@@ -94,6 +94,10 @@ class QaWalkthroughTest {
     private fun clickText(text: String) = node(hasText(text, substring = true)).performClick()
     private fun tab(label: String) = node(hasText(label)).performClick()
     private fun back() { instrumentation.uiAutomation.performGlobalAction(AccessibilityService.GLOBAL_ACTION_BACK); Thread.sleep(700) }
+    /** Presses back until the Explore screen is showing (the planner's keyboard can eat one press). */
+    private fun backToExplore() {
+        repeat(4) { if (exists(hasText("ransit nearby", substring = true))) return; back(); rule.waitForIdle() }
+    }
     private fun scrollDown() = rule.onRoot().performTouchInput { swipeUp(durationMillis = 400) }
     private fun scrollTop() = repeat(4) { rule.onRoot().performTouchInput { swipeDown(durationMillis = 250) } }
 
@@ -209,13 +213,13 @@ class QaWalkthroughTest {
             Thread.sleep(1500)
             clickText("Plan trip")
             Thread.sleep(2000); shot("planner")
-            back(); back()
+            backToExplore()
         }
         step("Live transit board") {
             tab("Explore"); Thread.sleep(1000)
             node(hasText("ransit nearby", substring = true)).performScrollTo().performClick()
             Thread.sleep(2000); shot("transit-board"); scrollDown(); shot("transit-board-scroll")
-            back()
+            backToExplore()
         }
         step("Profile") {
             tab("Explore"); Thread.sleep(1000)

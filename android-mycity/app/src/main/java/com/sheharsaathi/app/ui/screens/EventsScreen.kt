@@ -104,9 +104,41 @@ fun categoryColors(c: EventCategory): Pair<Color, Color> = when (c) {
 
 private val chipCategories = listOf(null, EventCategory.MUSIC, EventCategory.WORKSHOP, EventCategory.FLEA, EventCategory.TECH)
 
+/**
+ * Events tab. "Around the city" lists events from ticketing sites (book there);
+ * "Community" holds events hosted through Shehar Saathi, including Add Event.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EventsScreen(vm: CityViewModel, onOpenEvent: (String) -> Unit) {
+    var tab by rememberSaveable { mutableStateOf(if (vm.isLive) 0 else 1) }
+    val header: androidx.compose.foundation.lazy.LazyListScope.() -> Unit = {
+        item(key = "events-header") {
+            Column(Modifier.statusBarsPadding()) {
+                LocationHeader(title = vm.locationLabel, gps = vm.locationSource == com.sheharsaathi.app.data.LocationSource.GPS, locating = vm.locating, vm = vm, onClick = { vm.showLocationPicker = true })
+                Text(
+                    "${vm.city.name} Events",
+                    style = MaterialTheme.typography.headlineMedium,
+                    modifier = Modifier.padding(horizontal = 20.dp, vertical = 4.dp),
+                )
+                androidx.compose.material3.PrimaryTabRow(
+                    selectedTabIndex = tab,
+                    containerColor = CityColors.Canvas,
+                    contentColor = CityColors.Ink,
+                ) {
+                    androidx.compose.material3.Tab(selected = tab == 0, onClick = { tab = 0 }, text = { Text("Around the city") }, selectedContentColor = CityColors.Ink, unselectedContentColor = CityColors.Muted)
+                    androidx.compose.material3.Tab(selected = tab == 1, onClick = { tab = 1 }, text = { Text("Community") }, selectedContentColor = CityColors.Ink, unselectedContentColor = CityColors.Muted)
+                }
+            }
+        }
+    }
+    if (tab == 0) CityEventsFeed(vm, header) else CommunityEvents(vm, onOpenEvent, header)
+}
+
+/** Events hosted through Shehar Saathi: bookings, saves and Add Event. */
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun CommunityEvents(vm: CityViewModel, onOpenEvent: (String) -> Unit, header: androidx.compose.foundation.lazy.LazyListScope.() -> Unit) {
     val haptic = LocalHapticFeedback.current
     var query by rememberSaveable { mutableStateOf("") }
     var categoryName by rememberSaveable { mutableStateOf<String?>(null) }
@@ -131,9 +163,14 @@ fun EventsScreen(vm: CityViewModel, onOpenEvent: (String) -> Unit) {
         contentPadding = PaddingValues(bottom = 96.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
+        header()
         item {
-            Column(Modifier.statusBarsPadding()) {
-                LocationHeader(title = vm.locationLabel, gps = vm.locationSource == com.sheharsaathi.app.data.LocationSource.GPS, locating = vm.locating, vm = vm, onClick = { vm.showLocationPicker = true })
+            Column {
+                Text(
+                    "Hosted by people and businesses on Shehar Saathi. Add yours with the button below.",
+                    style = MaterialTheme.typography.bodySmall, color = CityColors.Muted,
+                    modifier = Modifier.padding(start = 20.dp, end = 20.dp, bottom = 8.dp),
+                )
                 CitySearchField(query, { query = it }, "Search gigs, flea markets, tech meetups")
             }
         }
@@ -235,7 +272,7 @@ fun EventsScreen(vm: CityViewModel, onOpenEvent: (String) -> Unit) {
                 bucket = b
                 query = ""
                 categoryName = null
-                scope.launch { listState.animateScrollToItem(3) }
+                scope.launch { listState.animateScrollToItem(4) }
             },
         )
     }

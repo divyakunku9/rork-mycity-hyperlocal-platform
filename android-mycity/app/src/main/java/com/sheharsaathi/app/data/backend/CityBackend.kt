@@ -112,6 +112,31 @@ class CityBackend(val sb: Supabase) {
     private fun hostOf(url: String): String =
         runCatching { java.net.URI(url).host.removePrefix("www.") }.getOrNull() ?: "News"
 
+    /** Upcoming events listed on ticketing/listing sites, soonest first. */
+    suspend fun listedEvents(cityId: String): Res<List<com.sheharsaathi.app.data.ListedEvent>> {
+        val now = System.currentTimeMillis()
+        val rows = sb.select(
+            "external_events",
+            "select" to "id,url,title,summary,image_url,starts_at,ends_at,has_time,venue,address,lat,lng,price_min,price_max,is_free,category,event_sources(name,book_label)",
+            "city_id" to "eq.$cityId",
+            // Starting from today, or a multi-day show still running.
+            "or" to "(starts_at.gte.${Times.iso(now - 12 * 3_600_000L)},ends_at.gte.${Times.iso(now)})",
+            "order" to "starts_at.asc",
+            "limit" to "400",
+        ).decode<List<ListedEventRow>>()
+        if (rows is Res.Err) return rows
+        return Res.Ok((rows as Res.Ok).value.map { r ->
+            com.sheharsaathi.app.data.ListedEvent(
+                id = r.id, url = r.url, title = r.title, summary = r.summary, imageUrl = r.imageUrl,
+                startMs = Times.parse(r.startsAt), endMs = r.endsAt?.let { Times.parse(it) }?.takeIf { it > 0 }, hasTime = r.hasTime,
+                venue = r.venue, address = r.address, lat = r.lat, lng = r.lng,
+                priceMin = r.priceMin, priceMax = r.priceMax, isFree = r.isFree,
+                category = com.sheharsaathi.app.data.ListedCategory.of(r.category),
+                source = r.source?.name ?: hostOf(r.url), bookLabel = r.source?.bookLabel ?: "View",
+            )
+        }.filter { it.isUpcoming(now) })
+    }
+
     suspend fun news(cityId: String): Res<List<NewsItem>> {
         val rows = sb.select(
             "news_items",

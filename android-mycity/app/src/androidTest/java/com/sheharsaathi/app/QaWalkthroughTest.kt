@@ -188,7 +188,28 @@ class QaWalkthroughTest {
             Thread.sleep(1500); shot("news-community")
             node(hasText("City news")).performClick(); Thread.sleep(500)
         }
-        step("Events tab") { tab("Events"); Thread.sleep(2500); shot("events"); scrollDown(); shot("events-scroll") }
+        step("Events: listings from ticketing sites") {
+            tab("Events")
+            waitFor(hasContentDescription("Listed event:", substring = true), 30)
+            shot("events"); scrollDown(); shot("events-scroll"); scrollTop()
+        }
+        step("Events: listing details and book link") {
+            node(hasContentDescription("Listed event:", substring = true)).performClick()
+            waitFor(hasText("Booking, payment and refunds are handled by", substring = true), 10)
+            shot("event-listing-sheet")
+            check(exists(hasText(" on District", substring = true)) || exists(hasText(" on Eventbrite", substring = true)) ||
+                exists(hasText(" on Meetup", substring = true)) || exists(hasText(" on AllEvents", substring = true))) { "no book link" }
+            back()
+        }
+        step("Events: topic and day filters") {
+            if (exists(hasText("Music"))) { node(hasText("Music")).performClick(); Thread.sleep(800) }
+            node(hasText("This weekend")).performClick(); Thread.sleep(800); shot("events-filtered")
+            node(hasText("Any day")).performClick(); if (exists(hasText("All"))) node(hasText("All")).performClick()
+        }
+        step("Events: Community tab with Add Event") {
+            node(hasText("Community")).performClick(); Thread.sleep(1200)
+            waitText("Add Event", 10); shot("events-community")
+        }
         step("Add Event sheet") {
             scrollTop()
             clickText("Add Event")

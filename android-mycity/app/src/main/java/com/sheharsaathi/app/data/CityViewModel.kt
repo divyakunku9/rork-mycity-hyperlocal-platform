@@ -161,6 +161,29 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
     var serviceStatus by mutableStateOf<List<ServiceStatus>>(emptyList())
         private set
 
+    /** Events listed on ticketing sites (District, Eventbrite, Meetup, AllEvents); live cities only. */
+    var listedEvents by mutableStateOf<List<ListedEvent>>(emptyList())
+        private set
+    var listedEventsLoading by mutableStateOf(false)
+        private set
+    private var listedEventsJob: Job? = null
+    private var listedEventsCity: String? = null
+
+    fun refreshListedEvents() {
+        if (!isLive) { listedEvents = emptyList(); return }
+        val cityId = city.id
+        if (listedEventsCity != cityId) listedEvents = emptyList()
+        listedEventsJob?.cancel()
+        listedEventsJob = viewModelScope.launch {
+            listedEventsLoading = true
+            when (val r = backend.listedEvents(cityId)) {
+                is Res.Ok -> { listedEvents = r.value; listedEventsCity = cityId }
+                is Res.Err -> if (listedEvents.isEmpty()) toast("Couldn't load city events. Pull down to try again.")
+            }
+            listedEventsLoading = false
+        }
+    }
+
     /** Headlines from city news sites (live cities only). */
     var webNews by mutableStateOf<List<WebStory>>(emptyList())
     var webNewsLoading by mutableStateOf(false)
@@ -228,6 +251,7 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
             issues.clear(); issues.addAll(reportsByCity[city.id].orEmpty() + SampleData.issues)
             news = SampleData.news
             webNews = emptyList()
+            listedEvents = emptyList()
             spots = SampleData.spots
             alert = SampleData.alert
             poll = samplePoll()
@@ -242,6 +266,7 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
         spots = emptyList() // nearby places come from the live "trending" lookup instead
         if (webNewsCity != city.id) webNews = emptyList() // never show another city's headlines
         refreshWebNews()
+        refreshListedEvents()
         val cityId = city.id
         val uid = sb.userId
         contentJob = viewModelScope.launch {

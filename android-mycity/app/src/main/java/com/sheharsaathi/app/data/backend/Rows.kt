@@ -152,3 +152,26 @@ data class WebNewsRow(
     @SerialName("published_at") val publishedAt: String,
     @SerialName("news_sources") val source: SourceRef? = null,
 )
+
+@Serializable data class EventSourceRef(val name: String, @SerialName("book_label") val bookLabel: String = "Book")
+
+@Serializable
+data class ListedEventRow(
+    val id: Long,
+    val url: String,
+    val title: String,
+    val summary: String? = null,
+    @SerialName("image_url") val imageUrl: String? = null,
+    @SerialName("starts_at") val startsAt: String,
+    @SerialName("ends_at") val endsAt: String? = null,
+    @SerialName("has_time") val hasTime: Boolean = true,
+    val venue: String? = null,
+    val address: String? = null,
+    val lat: Double? = null,
+    val lng: Double? = null,
+    @SerialName("price_min") val priceMin: Double? = null,
+    @SerialName("price_max") val priceMax: Double? = null,
+    @SerialName("is_free") val isFree: Boolean? = null,
+    val category: String = "other",
+    @SerialName("event_sources") val source: EventSourceRef? = null,
+)

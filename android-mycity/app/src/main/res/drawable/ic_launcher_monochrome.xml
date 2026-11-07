@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Themed-icon version (Android 13+): one colour, with the skyline cut out of the pin. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <group android:translateX="28.5" android:translateY="23.4" android:scaleX="0.85" android:scaleY="0.85">
+        <path android:fillColor="#FFFFFFFF" android:fillType="evenOdd"
+            android:pathData="M30,2 C45.5,2 58,14.5 58,30 C58,49 30,70 30,70 C30,70 2,49 2,30 C2,14.5 14.5,2 30,2 Z
+                              M13,42 L47,42 L47,30 L41,30 L41,21 L36,21 L36,27 L32,27 L32,15 L28.5,12 L25,15 L25,33 L22,33 L22,25 L18,25 L18,31 L13,31 Z" />
+    </group>
+</vector>

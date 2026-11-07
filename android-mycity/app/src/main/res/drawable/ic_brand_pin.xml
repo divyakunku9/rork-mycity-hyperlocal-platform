@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Shehar Saathi mark: a city skyline inside a map pin. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="60dp" android:height="72dp"
+    android:viewportWidth="60" android:viewportHeight="72">
+    <!-- Pin -->
+    <path android:pathData="M30,2 C45.5,2 58,14.5 58,30 C58,49 30,70 30,70 C30,70 2,49 2,30 C2,14.5 14.5,2 30,2 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient android:type="linear" android:startX="8" android:startY="4" android:endX="52" android:endY="62">
+                <item android:offset="0" android:color="#FFFFA24A" />
+                <item android:offset="0.55" android:color="#FFF97316" />
+                <item android:offset="1" android:color="#FFE2571F" />
+            </gradient>
+        </aapt:attr>
+    </path>
+    <!-- Ground -->
+    <path android:fillColor="#FF0F172A" android:pathData="M12,42 L48,42 L48,44.5 L12,44.5 Z" />
+    <!-- Skyline -->
+    <path android:fillColor="#FFFFFFFF"
+        android:pathData="M13,42 L13,31 L18,31 L18,25 L22,25 L22,33 L25,33 L25,15 L28.5,12 L32,15 L32,27 L36,27 L36,21 L41,21 L41,30 L47,30 L47,42 Z" />
+    <!-- Windows -->
+    <path android:fillColor="#FF0F172A"
+        android:pathData="M27,18 h3 v2.5 h-3 Z M27,23 h3 v2.5 h-3 Z M27,28 h3 v2.5 h-3 Z M27,33 h3 v2.5 h-3 Z
+                          M37.5,24 h2 v2.5 h-2 Z M37.5,29 h2 v2.5 h-2 Z M37.5,34 h2 v2.5 h-2 Z
+                          M15,34 h1.8 v2.5 h-1.8 Z M19.5,28 h1.6 v2.5 h-1.6 Z M43,33 h2 v2.5 h-2 Z" />
+</vector>

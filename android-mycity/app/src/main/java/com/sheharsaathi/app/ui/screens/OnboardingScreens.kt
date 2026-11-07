@@ -208,7 +208,7 @@ private fun SplashScreen() {
                 color = CityColors.Ink, modifier = Modifier.graphicsLayer { alpha = textAlpha },
             )
             Text(
-                "Your city, live in your pocket", style = MaterialTheme.typography.bodyLarge, color = CityColors.Muted,
+                "The living canvas of your city", style = MaterialTheme.typography.bodyLarge, color = CityColors.Muted,
                 modifier = Modifier.padding(top = 6.dp).graphicsLayer { alpha = textAlpha; translationY = (1 - textAlpha) * 24f },
             )
         }
@@ -217,13 +217,12 @@ private fun SplashScreen() {
 
 @Composable
 private fun BrandMark(modifier: Modifier = Modifier, size: Int = 56) {
-    Box(
-        modifier.size(size.dp).clip(RoundedCornerShape((size * 0.3f).dp))
-            .background(Brush.linearGradient(listOf(Color(0xFFFF9A3D), CityColors.Saffron, Color(0xFFE2571F)))),
-        contentAlignment = Alignment.Center,
-    ) {
-        Icon(Icons.Filled.LocationCity, contentDescription = "Shehar Saathi", tint = Color.White, modifier = Modifier.size((size * 0.55f).dp))
-    }
+    // The same skyline-in-a-pin mark as the app icon. [size] is the mark's height.
+    androidx.compose.foundation.Image(
+        painter = androidx.compose.ui.res.painterResource(com.sheharsaathi.app.R.drawable.ic_brand_pin),
+        contentDescription = "Shehar Saathi",
+        modifier = modifier.height(size.dp).width((size * 60f / 72f).dp),
+    )
 }
 
 // ---------------------------------------------------------------- Sign in

@@ -24,6 +24,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.Chat
@@ -182,7 +183,7 @@ private fun UrgentCard(n: NewsItem) {
                 }
                 Text(n.title, style = MaterialTheme.typography.titleMedium)
                 Spacer(Modifier.height(4.dp))
-                Text(n.body, style = MaterialTheme.typography.bodySmall, color = CityColors.Muted)
+                ExpandableBody(n.body, MaterialTheme.typography.bodySmall)
             }
         }
     }
@@ -207,7 +208,7 @@ private fun StoryCard(n: NewsItem, endorsed: Boolean, saved: Boolean, onEndorse:
             Spacer(Modifier.height(8.dp))
             Text(n.title, style = MaterialTheme.typography.titleLarge)
             Spacer(Modifier.height(6.dp))
-            Text(n.body, style = MaterialTheme.typography.bodyMedium, color = CityColors.Muted)
+            ExpandableBody(n.body, MaterialTheme.typography.bodyMedium)
             if (n.imageRes != null) {
                 Spacer(Modifier.height(12.dp))
                 Image(
@@ -268,7 +269,7 @@ private fun OfferCard(n: NewsItem, claimed: Boolean, onClaim: () -> Unit) {
                 Column(Modifier.weight(1f)) {
                     Text(n.title, style = MaterialTheme.typography.titleLarge)
                     Spacer(Modifier.height(4.dp))
-                    Text(n.body, style = MaterialTheme.typography.bodySmall, color = CityColors.Muted)
+                    ExpandableBody(n.body, MaterialTheme.typography.bodySmall)
                 }
                 if (n.imageRes != null) {
                     Spacer(Modifier.width(12.dp))
@@ -308,4 +309,25 @@ private fun copy(context: Context, text: String) {
     val cm = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
     cm.setPrimaryClip(ClipData.newPlainText("Shehar Saathi offer", text))
     Toast.makeText(context, "Code copied", Toast.LENGTH_SHORT).show()
+}
+
+
+/** Post text that collapses to four lines with "Read more" when it's long. */
+@Composable
+private fun ExpandableBody(text: String, style: androidx.compose.ui.text.TextStyle) {
+    var expanded by rememberSaveable(text) { mutableStateOf(false) }
+    var overflows by androidx.compose.runtime.remember(text) { mutableStateOf(false) }
+    Text(
+        text, style = style, color = CityColors.Muted,
+        maxLines = if (expanded) Int.MAX_VALUE else 4,
+        overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis,
+        onTextLayout = { if (!expanded) overflows = it.hasVisualOverflow },
+    )
+    if (overflows || expanded) {
+        Text(
+            if (expanded) "Show less" else "Read more",
+            style = MaterialTheme.typography.labelLarge, color = CityColors.Indigo,
+            modifier = Modifier.padding(top = 4.dp).clip(RoundedCornerShape(6.dp)).clickable { expanded = !expanded }.padding(vertical = 2.dp),
+        )
+    }
 }

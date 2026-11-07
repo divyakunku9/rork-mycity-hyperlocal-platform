@@ -212,7 +212,7 @@ fun ExploreScreen(
             add(
                 MapPinUi(
                     id = e.id, lat = e.lat, lng = e.lng, label = e.pinLabel.substringBeforeLast(" "),
-                    sub = e.pinLabel.substringAfterLast(" "), color = CityColors.Saffron, icon = Icons.Filled.MusicNote,
+                    sub = e.pinLabel.substringAfterLast(" "), color = Color(0xFF8B5CF6), icon = Icons.Filled.MusicNote,
                     visible = showEvents && matches(e.title + e.venue), onClick = { onOpenEvent(e.id) },
                 )
             )
@@ -221,7 +221,7 @@ fun ExploreScreen(
             add(
                 MapPinUi(
                     id = "t-" + t.id, lat = t.lat, lng = t.lng, label = t.name, sub = t.kind.tag.lowercase(),
-                    color = Color(0xFF14B8A6), icon = trendIcon(t.kind),
+                    color = CityColors.Saffron, icon = trendIcon(t.kind),
                     visible = showFood && matches(t.name),
                     onClick = { showPlace(Place("trend-${t.id}", t.name, "%.1f km away".format(t.distanceKm), t.lat, t.lng, PlaceKind.LANDMARK)) },
                 )
@@ -231,7 +231,7 @@ fun ExploreScreen(
             add(
                 MapPinUi(
                     id = s.id, lat = s.lat, lng = s.lng, label = s.name, sub = s.sub.substringBefore(" •"),
-                    color = CityColors.Indigo, icon = Icons.Filled.Restaurant,
+                    color = CityColors.Saffron, icon = Icons.Filled.Restaurant,
                     visible = showFood && matches(s.name + s.sub), onClick = { selectedSpot = s },
                 )
             )

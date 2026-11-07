@@ -204,6 +204,7 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
             events.clear(); events.addAll(hostedByCity[city.id].orEmpty() + SampleData.events)
             issues.clear(); issues.addAll(reportsByCity[city.id].orEmpty() + SampleData.issues)
             news = SampleData.news
+            spots = SampleData.spots
             alert = SampleData.alert
             poll = samplePoll()
             loading = false
@@ -214,6 +215,7 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
         val pendingIssues = issues.filter { it.isMine && it.reportedAgo == "Just now" }
         val pendingEvents = events.filter { it.hostedByYou }
         events.clear(); issues.clear(); news = emptyList(); alert = null; poll = null; serviceStatus = emptyList()
+        spots = emptyList() // nearby places come from the live "trending" lookup instead
         val cityId = city.id
         val uid = sb.userId
         contentJob = viewModelScope.launch {

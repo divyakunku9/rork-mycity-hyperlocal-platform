@@ -123,6 +123,9 @@ fun rememberPressScale(interaction: MutableInteractionSource): Float {
 /** Lets any header open the profile without threading a callback through every screen. */
 val LocalOpenProfile = staticCompositionLocalOf<() -> Unit> { {} }
 
+/** Opens the full weather screen from the header's weather chip. */
+val LocalOpenWeather = staticCompositionLocalOf<() -> Unit> { {} }
+
 @Composable
 fun LocationHeader(
     title: String,
@@ -170,7 +173,7 @@ fun LocationHeader(
             Icon(Icons.Filled.KeyboardArrowDown, contentDescription = null, tint = CityColors.Ink)
         }
         Spacer(Modifier.width(8.dp))
-        WeatherChip(vm?.weather)
+        WeatherChip(vm?.weather, onClick = if (vm != null) LocalOpenWeather.current else null)
         if (vm != null) {
             Spacer(Modifier.width(8.dp))
             val open = LocalOpenProfile.current
@@ -199,10 +202,11 @@ fun aqiColor(aqi: Int?): Color = when {
 }
 
 @Composable
-fun WeatherChip(weather: Weather? = null) {
+fun WeatherChip(weather: Weather? = null, onClick: (() -> Unit)? = null) {
     Row(
         modifier = Modifier
             .clip(CircleShape)
+            .then(if (onClick != null) Modifier.clickable(onClickLabel = "Open weather", onClick = onClick) else Modifier)
             .background(CityColors.Glass)
             .border(1.dp, CityColors.GlassBorder, CircleShape)
             .padding(horizontal = 12.dp, vertical = 7.dp)

@@ -210,6 +210,7 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
         activeRoute = null
         recentPlaces.clear(); recentPlaces.addAll(Transit.recentIds.mapNotNull { Transit.place(it) })
         weather = null
+        weatherDetail = null
         recenterTick++
         loadContent()
         refreshWeather()
@@ -348,6 +349,25 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
                 LiveData.weather(p.lat, p.lng)?.let { weather = it }
                 delay(15 * 60_000L)
             }
+        }
+    }
+
+    /** Full forecast for the weather screen. */
+    var weatherDetail by mutableStateOf<WeatherDetail?>(null)
+        private set
+    var weatherDetailLoading by mutableStateOf(false)
+        private set
+    private var weatherDetailJob: Job? = null
+
+    fun loadWeatherDetail() {
+        weatherDetailJob?.cancel()
+        weatherDetailJob = viewModelScope.launch {
+            weatherDetailLoading = true
+            val p = userPlace
+            val d = WeatherService.detail(p.lat, p.lng)
+            if (d != null) { weatherDetail = d; weather = d.now } // keep the header chip in step
+            else if (weatherDetail == null) toast("Couldn't load the forecast. Check your connection and try again.")
+            weatherDetailLoading = false
         }
     }
 

@@ -152,6 +152,16 @@ class QaWalkthroughTest {
             scrollDown(); shot("explore-scroll-3")
             scrollTop()
         }
+        step("Weather screen from the header chip") {
+            tab("Explore"); Thread.sleep(1000); dismissLocationPicker()
+            val chip = SemanticsMatcher("click label 'Open weather'") { it.config.getOrNull(SemanticsActions.OnClick)?.label == "Open weather" }
+            waitFor(chip, 20)
+            node(chip).performClick()
+            waitText("Next 24 hours", 30)
+            shot("weather"); scrollDown(); shot("weather-scroll-1"); scrollDown(); shot("weather-scroll-2"); scrollDown(); shot("weather-scroll-3")
+            check(exists(hasText("day forecast", substring = true))) { "no daily forecast" }
+            back()
+        }
         step("News Hub: city headlines load") {
             tab("News Hub")
             waitFor(hasContentDescription("Story:", substring = true), 30)

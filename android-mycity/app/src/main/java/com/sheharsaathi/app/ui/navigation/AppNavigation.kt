@@ -33,6 +33,7 @@ import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.CompositionLocalProvider
 import com.sheharsaathi.app.ui.components.LocalOpenProfile
+import com.sheharsaathi.app.ui.components.LocalOpenWeather
 import com.sheharsaathi.app.ui.screens.ProfileScreen
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
@@ -53,6 +54,7 @@ import com.sheharsaathi.app.ui.screens.PlannerScreen
 import com.sheharsaathi.app.ui.screens.TransitBoardScreen
 import com.sheharsaathi.app.ui.screens.IssueDetailScreen
 import com.sheharsaathi.app.ui.screens.NewsScreen
+import com.sheharsaathi.app.ui.screens.WeatherScreen
 import com.sheharsaathi.app.ui.screens.ReportScreen
 import com.sheharsaathi.app.ui.theme.CityColors
 
@@ -112,7 +114,10 @@ fun AppNavigation(vm: CityViewModel) {
             }
         },
     ) { inner ->
-      CompositionLocalProvider(LocalOpenProfile provides { navController.navigate("profile") { launchSingleTop = true } }) {
+      CompositionLocalProvider(
+          LocalOpenProfile provides { navController.navigate("profile") { launchSingleTop = true } },
+          LocalOpenWeather provides { navController.navigate("weather") { launchSingleTop = true } },
+      ) {
         NavHost(
             navController = navController,
             startDestination = "explore",
@@ -129,6 +134,7 @@ fun AppNavigation(vm: CityViewModel) {
             popEnterTransition = { slideInHorizontally(tween(320)) { -it / 6 } + fadeIn(tween(280)) },
             popExitTransition = { slideOutHorizontally(tween(320)) { it / 3 } + fadeOut(tween(240)) },
         ) {
+            composable("weather") { WeatherScreen(vm = vm, onBack = { navController.popBackStack() }) }
             composable("profile") {
                 ProfileScreen(
                     vm = vm,

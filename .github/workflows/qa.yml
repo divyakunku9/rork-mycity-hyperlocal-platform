@@ -72,3 +72,10 @@ jobs:
           git add -A
           git commit -qm "QA results for $GITHUB_SHA"
           git push -f origin qa-results
+
+      - name: Fail the run if the app didn't build or a walkthrough step failed
+        run: |
+          cd android-mycity/qa-out
+          ! grep -q "INSTALL FAILED" install.txt
+          ! grep -q "CHECKS EXITED WITH ERRORS" checks.txt
+          ! grep -q "^FAIL" shots/report.txt 2>/dev/null

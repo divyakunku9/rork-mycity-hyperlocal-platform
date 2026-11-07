@@ -159,6 +159,7 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
         private set
     /** Official transit notices for live cities (from the backend), shown on the departures board. */
     var serviceStatus by mutableStateOf<List<ServiceStatus>>(emptyList())
+        private set
 
     /** Headlines from city news sites (live cities only). */
     var webNews by mutableStateOf<List<WebStory>>(emptyList())
@@ -181,7 +182,6 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
             webNewsLoading = false
         }
     }
-        private set
 
     /** The ward poll to show, or null when there is no open poll. */
     var poll by mutableStateOf<PollUi?>(null)

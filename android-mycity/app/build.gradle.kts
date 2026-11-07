@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.rork.mycity"
+    namespace = "com.sheharsaathi.app"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.rork.mycity"
+        applicationId = "com.sheharsaathi.app"
         minSdk = 24
         targetSdk = 36
         versionCode = 1

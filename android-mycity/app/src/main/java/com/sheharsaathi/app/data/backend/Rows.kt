@@ -138,3 +138,17 @@ data class ServiceStatusRow(
 @Serializable data class NewsIdRow(@SerialName("news_id") val newsId: String)
 @Serializable data class AlertIdRow(@SerialName("alert_id") val alertId: String)
 @Serializable data class VoteRow(@SerialName("poll_id") val pollId: String, @SerialName("option_id") val optionId: Long)
+
+@Serializable data class SourceRef(val name: String, @SerialName("site_url") val siteUrl: String? = null)
+
+@Serializable
+data class WebNewsRow(
+    val id: Long,
+    val url: String,
+    val title: String,
+    val summary: String? = null,
+    @SerialName("image_url") val imageUrl: String? = null,
+    val category: String = "city",
+    @SerialName("published_at") val publishedAt: String,
+    @SerialName("news_sources") val source: SourceRef? = null,
+)

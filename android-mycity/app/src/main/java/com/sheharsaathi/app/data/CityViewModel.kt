@@ -159,6 +159,28 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
         private set
     /** Official transit notices for live cities (from the backend), shown on the departures board. */
     var serviceStatus by mutableStateOf<List<ServiceStatus>>(emptyList())
+
+    /** Headlines from city news sites (live cities only). */
+    var webNews by mutableStateOf<List<WebStory>>(emptyList())
+    var webNewsLoading by mutableStateOf(false)
+    var webNewsUpdatedMs by mutableStateOf(0L)
+    private var webNewsJob: Job? = null
+    private var webNewsCity: String? = null
+
+    /** Fetches the latest city headlines. Called on city load and on pull-to-refresh. */
+    fun refreshWebNews() {
+        if (!isLive) { webNews = emptyList(); return }
+        val cityId = city.id
+        webNewsJob?.cancel()
+        webNewsJob = viewModelScope.launch {
+            webNewsLoading = true
+            when (val r = backend.webNews(cityId)) {
+                is Res.Ok -> { webNews = r.value; webNewsCity = cityId; webNewsUpdatedMs = System.currentTimeMillis() }
+                is Res.Err -> if (webNews.isEmpty()) toast("Couldn't load city news. Pull down to try again.")
+            }
+            webNewsLoading = false
+        }
+    }
         private set
 
     /** The ward poll to show, or null when there is no open poll. */
@@ -204,6 +226,7 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
             events.clear(); events.addAll(hostedByCity[city.id].orEmpty() + SampleData.events)
             issues.clear(); issues.addAll(reportsByCity[city.id].orEmpty() + SampleData.issues)
             news = SampleData.news
+            webNews = emptyList()
             spots = SampleData.spots
             alert = SampleData.alert
             poll = samplePoll()
@@ -216,6 +239,8 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
         val pendingEvents = events.filter { it.hostedByYou }
         events.clear(); issues.clear(); news = emptyList(); alert = null; poll = null; serviceStatus = emptyList()
         spots = emptyList() // nearby places come from the live "trending" lookup instead
+        if (webNewsCity != city.id) webNews = emptyList() // never show another city's headlines
+        refreshWebNews()
         val cityId = city.id
         val uid = sb.userId
         contentJob = viewModelScope.launch {

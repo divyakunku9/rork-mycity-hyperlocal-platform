@@ -21,6 +21,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
@@ -46,6 +47,8 @@ import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.PrimaryTabRow
+import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -76,6 +79,7 @@ import com.sheharsaathi.app.ui.theme.CityColors
 
 private enum class NewsFilter(val label: String) { TOP("Top Stories"), BULLETINS("Civic Bulletins"), OFFERS("Business Offers"), WINS("Ward Wins") }
 
+@OptIn(androidx.compose.material3.ExperimentalMaterial3Api::class)
 @Composable
 fun NewsScreen(vm: CityViewModel) {
     val context = LocalContext.current
@@ -91,22 +95,38 @@ fun NewsScreen(vm: CityViewModel) {
         }
     }
 
+    // "City news" = headlines from local news sites; "Community" = bulletins, offers and ward wins.
+    var tab by rememberSaveable { mutableStateOf(if (vm.isLive) 0 else 1) }
+    val header: LazyListScope.() -> Unit = {
+        item(key = "header") {
+            Column(Modifier.statusBarsPadding()) {
+                LocationHeader(title = vm.locationLabel, gps = vm.locationSource == com.sheharsaathi.app.data.LocationSource.GPS, locating = vm.locating, vm = vm, onClick = { vm.showLocationPicker = true })
+                TagLabel(if (tab == 0) "Latest from the city" else "Live city dispatch", CityColors.Indigo, Modifier.padding(start = 20.dp, top = 8.dp))
+                Text(
+                    "${com.sheharsaathi.app.data.CurrentCity.city.name} News",
+                    style = MaterialTheme.typography.headlineMedium,
+                    modifier = Modifier.padding(horizontal = 20.dp, vertical = 4.dp),
+                )
+                PrimaryTabRow(
+                    selectedTabIndex = tab,
+                    containerColor = CityColors.Canvas,
+                    contentColor = CityColors.Ink,
+                    modifier = Modifier.padding(top = 4.dp),
+                ) {
+                    Tab(selected = tab == 0, onClick = { tab = 0 }, text = { Text("City news") }, selectedContentColor = CityColors.Ink, unselectedContentColor = CityColors.Muted)
+                    Tab(selected = tab == 1, onClick = { tab = 1 }, text = { Text("Community") }, selectedContentColor = CityColors.Ink, unselectedContentColor = CityColors.Muted)
+                }
+            }
+        }
+    }
+    if (tab == 0) { CityNewsFeed(vm, header); return }
+
     LazyColumn(
         Modifier.fillMaxSize().background(CityColors.Canvas),
         contentPadding = PaddingValues(bottom = 24.dp),
         verticalArrangement = Arrangement.spacedBy(14.dp),
     ) {
-        item {
-            Column(Modifier.statusBarsPadding()) {
-                LocationHeader(title = vm.locationLabel, gps = vm.locationSource == com.sheharsaathi.app.data.LocationSource.GPS, locating = vm.locating, vm = vm, onClick = { vm.showLocationPicker = true })
-                TagLabel("Live city dispatch", CityColors.Indigo, Modifier.padding(start = 20.dp, top = 8.dp))
-                Text(
-                    "${com.sheharsaathi.app.data.CurrentCity.city.name} Civic & Community News",
-                    style = MaterialTheme.typography.headlineMedium,
-                    modifier = Modifier.padding(horizontal = 20.dp, vertical = 4.dp),
-                )
-            }
-        }
+        header()
         item {
             LazyRow(contentPadding = PaddingValues(horizontal = 20.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 items(NewsFilter.entries) { f ->

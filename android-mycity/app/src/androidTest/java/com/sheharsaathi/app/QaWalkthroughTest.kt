@@ -147,7 +147,16 @@ class QaWalkthroughTest {
             scrollDown(); shot("explore-scroll-3")
             scrollTop()
         }
-        step("News Hub tab") { tab("News Hub"); Thread.sleep(2500); shot("news"); scrollDown(); shot("news-scroll") }
+        step("News Hub: city headlines load") {
+            tab("News Hub")
+            waitFor(hasContentDescription("Story:", substring = true), 30)
+            shot("news"); scrollDown(); shot("news-scroll"); scrollTop()
+        }
+        step("News topics filter") {
+            if (exists(hasText("Crime & Safety"))) { node(hasText("Crime & Safety")).performClick(); Thread.sleep(900); shot("news-topic") }
+            node(hasText("For you")).performClick(); Thread.sleep(500)
+        }
+        step("News community tab") { node(hasText("Community")).performClick(); Thread.sleep(900); shot("news-community"); node(hasText("City news")).performClick() }
         step("Events tab") { tab("Events"); Thread.sleep(2500); shot("events"); scrollDown(); shot("events-scroll") }
         step("Add Event sheet") {
             scrollTop()

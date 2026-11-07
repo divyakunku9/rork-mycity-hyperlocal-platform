@@ -74,6 +74,7 @@ dependencies {
     implementation(libs.coil.network.okhttp)
     implementation(libs.osmdroid.android)
     implementation("androidx.exifinterface:exifinterface:1.3.7")
+    implementation("androidx.browser:browser:1.8.0") // opens news stories in an in-app browser tab
     debugImplementation(libs.androidx.ui.tooling)
 
     // Tests: JVM unit tests (app/src/test) and the on-device walkthrough (app/src/androidTest)

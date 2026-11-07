@@ -85,6 +85,33 @@ class CityBackend(val sb: Supabase) {
         return Res.Ok((rows as Res.Ok).value.map { it.toEvent(myId, fromLat, fromLng) })
     }
 
+    /** Latest headlines gathered from city news sites, newest first. */
+    suspend fun webNews(cityId: String): Res<List<com.sheharsaathi.app.data.WebStory>> {
+        val rows = sb.select(
+            "news_articles",
+            "select" to "id,url,title,summary,image_url,category,published_at,news_sources(name,site_url)",
+            "city_id" to "eq.$cityId",
+            "order" to "published_at.desc",
+            "limit" to "150",
+        ).decode<List<WebNewsRow>>()
+        if (rows is Res.Err) return rows
+        val seen = HashSet<String>()
+        return Res.Ok((rows as Res.Ok).value.mapNotNull { r ->
+            // The same story sometimes appears in two of a publisher's feeds under different links.
+            val key = r.title.lowercase().filter { it.isLetterOrDigit() }.take(70)
+            if (!seen.add(key)) return@mapNotNull null
+            com.sheharsaathi.app.data.WebStory(
+                id = r.id, url = r.url, title = r.title, summary = r.summary, imageUrl = r.imageUrl,
+                category = com.sheharsaathi.app.data.NewsTopic.of(r.category),
+                source = r.source?.name ?: hostOf(r.url), siteUrl = r.source?.siteUrl,
+                publishedMs = Times.parse(r.publishedAt),
+            )
+        })
+    }
+
+    private fun hostOf(url: String): String =
+        runCatching { java.net.URI(url).host.removePrefix("www.") }.getOrNull() ?: "News"
+
     suspend fun news(cityId: String): Res<List<NewsItem>> {
         val rows = sb.select(
             "news_items",

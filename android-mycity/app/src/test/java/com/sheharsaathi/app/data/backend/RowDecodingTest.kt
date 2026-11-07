@@ -22,6 +22,17 @@ class RowDecodingTest {
         assertNull(rows[0].ward)
     }
 
+    @Test fun webNewsWithEmbeddedSource() {
+        val row = json.decodeFromString<List<WebNewsRow>>(
+            """[{"id":7,"url":"https://example.com/a","title":"GHMC fills potholes","summary":null,"image_url":null,
+               "category":"civic","published_at":"2026-11-07T10:37:33+00:00","news_sources":{"name":"The Hindu","site_url":"https://www.thehindu.com"}}]"""
+        ).single()
+        assertEquals("The Hindu", row.source?.name)
+        assertNull(row.imageUrl)
+        assertEquals(com.sheharsaathi.app.data.NewsTopic.CIVIC, com.sheharsaathi.app.data.NewsTopic.of(row.category))
+        assertEquals(com.sheharsaathi.app.data.NewsTopic.CITY, com.sheharsaathi.app.data.NewsTopic.of("unknown"))
+    }
+
     @Test fun bookingReply() {
         val text = """{"id":"f770cb5c-5908-4695-8400-370630be10cf","event_id":"bbbbbbbb-0000-4000-8000-000000000001",
             "user_id":"a617a897-67c4-4939-8a05-f0e1c37453f8","quantity":2,"status":"confirmed","booking_code":"MC-683D2A3D",

@@ -31,6 +31,15 @@ jobs:
           chmod +x gradlew
           ./gradlew assembleDebug --stacktrace
 
+      - name: Unit tests
+        run: ./gradlew testDebugUnitTest
+
+      - name: Lint (report only)
+        if: always()
+        run: |
+          ./gradlew lintDebug || true
+          cat app/build/reports/lint.txt 2>/dev/null | tail -300 || true
+
       - uses: actions/upload-artifact@v4
         with:
           name: app-debug-apk

@@ -13,7 +13,7 @@ permissions:
 
 concurrency:
   group: qa
-  cancel-in-progress: true
+  cancel-in-progress: false  # a new push waits for the running walkthrough instead of cancelling it
 
 jobs:
   qa:

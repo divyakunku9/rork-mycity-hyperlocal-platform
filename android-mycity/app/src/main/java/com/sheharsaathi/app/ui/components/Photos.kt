@@ -2,7 +2,7 @@ package com.sheharsaathi.app.ui.components
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.media.ExifInterface
+import androidx.exifinterface.media.ExifInterface
 import android.net.Uri
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

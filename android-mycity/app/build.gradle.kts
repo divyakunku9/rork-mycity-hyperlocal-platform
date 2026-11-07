@@ -73,6 +73,7 @@ dependencies {
     implementation(libs.coil.compose)
     implementation(libs.coil.network.okhttp)
     implementation(libs.osmdroid.android)
+    implementation("androidx.exifinterface:exifinterface:1.3.7")
     debugImplementation(libs.androidx.ui.tooling)
 
     // Tests: JVM unit tests (app/src/test) and the on-device walkthrough (app/src/androidTest)

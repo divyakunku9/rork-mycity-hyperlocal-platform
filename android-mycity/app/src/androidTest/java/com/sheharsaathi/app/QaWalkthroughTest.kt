@@ -162,8 +162,11 @@ class QaWalkthroughTest {
                 shot("weather")
                 check(exists(hasText("Air quality", substring = true, ignoreCase = true))) { "no air quality" }
                 scrollDown(); shot("weather-scroll-1")
-                check(exists(hasText("day forecast", substring = true, ignoreCase = true))) { "no daily forecast" }
-                scrollDown(); shot("weather-scroll-2"); scrollDown(); shot("weather-scroll-3")
+                // The daily list sits below the tall air-quality card; scroll straight to it.
+                rule.onAllNodes(hasScrollToNodeAction())[0].performScrollToNode(hasText("day forecast", substring = true, ignoreCase = true))
+                shot("weather-daily")
+                rule.onAllNodes(hasScrollToNodeAction())[0].performScrollToNode(hasText("Sunrise"))
+                shot("weather-details")
             } finally { backToExplore() }
         }
         step("News Hub: city headlines load") {

@@ -1,0 +1,74 @@
+# Full quality check: lint, unit tests, and an on-device walkthrough on an emulator.
+# Results (screenshots, reports, logs) are published to the "qa-results" branch.
+name: QA
+
+on:
+  push:
+    branches: [supabase-backend]
+    paths: ["android-mycity/**", "qa/**", ".github/workflows/qa.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: qa
+  cancel-in-progress: true
+
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Lint and unit tests
+        working-directory: android-mycity
+        run: |
+          chmod +x gradlew
+          mkdir -p qa-out
+          ./gradlew lintDebug testDebugUnitTest --continue > qa-out/checks.txt 2>&1 || echo "CHECKS EXITED WITH ERRORS" >> qa-out/checks.txt
+          cp app/build/reports/lint.txt qa-out/lint.txt 2>/dev/null || true
+          mkdir -p qa-out/unit-tests && cp -r app/build/test-results/testDebugUnitTest/*.xml qa-out/unit-tests/ 2>/dev/null || true
+
+      - name: Enable KVM for the emulator
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      - name: Walkthrough on an Android 10 emulator
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 29
+          arch: x86_64
+          target: google_apis
+          profile: pixel_6
+          disable-animations: true
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -no-snapshot
+          script: bash qa/run-emulator.sh
+
+      - name: Publish results to the qa-results branch
+        if: always()
+        run: |
+          set -x
+          RES=$(mktemp -d)
+          cp -r android-mycity/qa-out/. "$RES"/ 2>/dev/null || true
+          echo "commit: $GITHUB_SHA" > "$RES/RUN.txt"
+          echo "run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" >> "$RES/RUN.txt"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout --orphan qa-results
+          git rm -rq --cached . || true
+          find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          cp -r "$RES"/. .
+          git add -A
+          git commit -qm "QA results for $GITHUB_SHA"
+          git push -f origin qa-results

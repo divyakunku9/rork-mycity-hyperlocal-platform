@@ -15,6 +15,13 @@ android {
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    lint {
+        abortOnError = false
+        textReport = true
+        textOutput = file("build/reports/lint.txt")
     }
 
     buildTypes {
@@ -67,4 +74,13 @@ dependencies {
     implementation(libs.coil.network.okhttp)
     implementation(libs.osmdroid.android)
     debugImplementation(libs.androidx.ui.tooling)
+
+    // Tests: JVM unit tests (app/src/test) and the on-device walkthrough (app/src/androidTest)
+    testImplementation("junit:junit:4.13.2")
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+    debugImplementation("androidx.compose.ui:ui-test-manifest")
+    androidTestImplementation("androidx.test.ext:junit:1.2.1")
+    androidTestImplementation("androidx.test:runner:1.6.2")
+    androidTestImplementation("androidx.test:rules:1.6.1")
 }

@@ -137,8 +137,9 @@ fun LocationHeader(
         modifier = modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
+        // Takes all the width the weather chip and avatar don't need, so the area name isn't cut short.
         Row(
-            Modifier.weight(1f, fill = false).clip(RoundedCornerShape(12.dp))
+            Modifier.weight(1f).clip(RoundedCornerShape(12.dp))
                 .then(if (onClick != null) Modifier.clickable(onClickLabel = "Change location", onClick = onClick) else Modifier)
                 .padding(end = 4.dp),
             verticalAlignment = Alignment.CenterVertically,
@@ -168,7 +169,6 @@ fun LocationHeader(
             }
             Icon(Icons.Filled.KeyboardArrowDown, contentDescription = null, tint = CityColors.Ink)
         }
-        Spacer(Modifier.weight(1f))
         Spacer(Modifier.width(8.dp))
         WeatherChip(vm?.weather)
         if (vm != null) {

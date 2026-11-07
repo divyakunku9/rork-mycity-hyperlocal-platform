@@ -88,7 +88,7 @@ private fun IssueThumb(issue: CivicIssue, modifier: Modifier) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun IssueDetailScreen(vm: CityViewModel, issueId: String, onBack: () -> Unit) {
-    val issue = vm.issue(issueId) ?: return
+    val issue = vm.issue(issueId) ?: return MissingItem("This report isn't available", "It may have been removed, or the list is still loading.", onBack)
     val context = LocalContext.current
     val haptic = LocalHapticFeedback.current
     val upvoted = vm.upvotedIssues[issue.id] == true
@@ -109,7 +109,7 @@ fun IssueDetailScreen(vm: CityViewModel, issueId: String, onBack: () -> Unit) {
             )
         },
         bottomBar = {
-            if (issue.status != IssueStatus.RESOLVED) {
+            if (issue.status != IssueStatus.RESOLVED && !(vm.isLive && issue.isMine)) {
                 Surface(color = CityColors.Surface, shadowElevation = 12.dp) {
                     Button(
                         onClick = {
@@ -222,7 +222,7 @@ fun IssueDetailScreen(vm: CityViewModel, issueId: String, onBack: () -> Unit) {
 @Composable
 fun CivicReportsScreen(vm: CityViewModel, startOnMine: Boolean, onBack: () -> Unit, onOpenIssue: (String) -> Unit) {
     var tab by rememberSaveable { mutableIntStateOf(if (startOnMine) 1 else 0) }
-    val list = if (tab == 0) vm.issues.sortedByDescending { it.upvotes } else vm.myIssues.reversed()
+    val list = if (tab == 0) vm.issues.sortedByDescending { it.upvotes } else vm.myIssues
 
     Scaffold(
         containerColor = CityColors.Canvas,
@@ -234,7 +234,7 @@ fun CivicReportsScreen(vm: CityViewModel, startOnMine: Boolean, onBack: () -> Un
                     colors = TopAppBarDefaults.topAppBarColors(containerColor = CityColors.Canvas),
                 )
                 PrimaryTabRow(selectedTabIndex = tab, containerColor = CityColors.Canvas) {
-                    Tab(selected = tab == 0, onClick = { tab = 0 }, text = { Text("Ward 151") })
+                    Tab(selected = tab == 0, onClick = { tab = 0 }, text = { Text("All in ${vm.city.name}") })
                     Tab(selected = tab == 1, onClick = { tab = 1 }, text = { Text("My reports (${vm.myIssues.size})") })
                 }
             }
@@ -274,6 +274,31 @@ fun CivicReportsScreen(vm: CityViewModel, startOnMine: Boolean, onBack: () -> Un
                     }
                 }
             }
+        }
+    }
+}
+
+/** Shown instead of a blank screen when a report or event can't be found. */
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun MissingItem(title: String, body: String, onBack: () -> Unit) {
+    Scaffold(
+        containerColor = CityColors.Canvas,
+        topBar = {
+            TopAppBar(
+                title = {},
+                navigationIcon = { IconButton(onClick = onBack) { Icon(Icons.AutoMirrored.Filled.ArrowBack, "Back") } },
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = CityColors.Canvas),
+            )
+        },
+    ) { padding ->
+        Column(
+            Modifier.padding(padding).fillMaxSize().padding(32.dp),
+            horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center,
+        ) {
+            Text(title, style = MaterialTheme.typography.titleLarge)
+            Spacer(Modifier.height(6.dp))
+            Text(body, style = MaterialTheme.typography.bodyMedium, color = CityColors.Muted)
         }
     }
 }

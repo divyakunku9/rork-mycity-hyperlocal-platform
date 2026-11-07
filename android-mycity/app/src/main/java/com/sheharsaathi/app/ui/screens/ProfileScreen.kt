@@ -174,10 +174,12 @@ fun ProfileScreen(vm: CityViewModel, onBack: () -> Unit, onOpenEvent: (String) -
         CityCard(Modifier.fillMaxWidth().padding(horizontal = 16.dp)) {
             Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 ProfileField("Full name", name) { name = it.take(40) }
-                ProfileField("Mobile", phone, prefix = "+91  ", keyboard = KeyboardType.Phone, error = if (!phoneOk) "Enter a 10-digit Indian mobile" else null) { v ->
+                val loginPhone = vm.signInChannel == com.sheharsaathi.app.data.OtpChannel.PHONE
+                val loginEmail = vm.signInChannel == com.sheharsaathi.app.data.OtpChannel.EMAIL
+                ProfileField("Mobile", phone, prefix = "+91  ", keyboard = KeyboardType.Phone, readOnly = loginPhone, error = if (!phoneOk) "Enter a 10-digit Indian mobile" else null) { v ->
                     phone = v.filter { it.isDigit() }.take(10)
                 }
-                ProfileField("Email", email, keyboard = KeyboardType.Email, error = if (!emailOk) "Enter a valid email" else null) { email = it.trim().take(80) }
+                ProfileField("Email", email, keyboard = KeyboardType.Email, readOnly = loginEmail, error = if (!emailOk) "Enter a valid email" else null) { email = it.trim().take(80) }
                 ProfileField("Ward", ward, placeholder = "e.g. Ward 104, ${city.areas.first().first}") { ward = it.take(40) }
                 AnimatedVisibility(dirty || savedFlash) {
                     PrimaryButton(
@@ -286,14 +288,14 @@ private fun SectionTitle(text: String) {
 @Composable
 private fun ProfileField(
     label: String, value: String, prefix: String? = null, placeholder: String? = null,
-    keyboard: KeyboardType = KeyboardType.Text, error: String? = null, onChange: (String) -> Unit,
+    keyboard: KeyboardType = KeyboardType.Text, error: String? = null, readOnly: Boolean = false, onChange: (String) -> Unit,
 ) {
     OutlinedTextField(
-        value = value, onValueChange = onChange, label = { Text(label) }, singleLine = true,
+        value = value, onValueChange = onChange, label = { Text(label) }, singleLine = true, readOnly = readOnly,
         prefix = prefix?.let { { Text(it) } },
         placeholder = placeholder?.let { { Text(it, color = CityColors.Muted) } },
         isError = error != null,
-        supportingText = error?.let { { Text(it) } },
+        supportingText = (error ?: if (readOnly) "Used to sign in, so it can't be changed here" else null)?.let { { Text(it) } },
         keyboardOptions = KeyboardOptions(keyboardType = keyboard),
         shape = RoundedCornerShape(14.dp),
         colors = OutlinedTextFieldDefaults.colors(

@@ -83,7 +83,7 @@ import kotlin.math.roundToInt
 
 @Composable
 fun EventDetailScreen(vm: CityViewModel, eventId: String, onBack: () -> Unit, onPlanTrip: () -> Unit) {
-    val event = vm.event(eventId) ?: return
+    val event = vm.event(eventId) ?: return MissingItem("This event isn't available", "It may have ended or been cancelled.", onBack)
     val context = LocalContext.current
     val haptic = LocalHapticFeedback.current
     val snackbar = remember { SnackbarHostState() }
@@ -115,10 +115,12 @@ fun EventDetailScreen(vm: CityViewModel, eventId: String, onBack: () -> Unit, on
                         Icon(Icons.Filled.Add, contentDescription = "More tickets")
                     }
                     Spacer(Modifier.width(12.dp))
-                    Button(onClick = { confirm = true }, modifier = Modifier.weight(1f).height(52.dp)) {
+                    // One booking per person per event on live cities (the server enforces it too).
+                    val alreadyBooked = vm.isLive && booked > 0
+                    Button(onClick = { confirm = true }, enabled = !alreadyBooked, modifier = Modifier.weight(1f).height(52.dp)) {
                         Icon(Icons.Filled.ConfirmationNumber, null, Modifier.size(18.dp))
                         Spacer(Modifier.width(8.dp))
-                        Text(if (isFree) "RSVP Free" else "Book • ${rupees(total)}")
+                        Text(if (alreadyBooked) "Booked" else if (isFree) "RSVP Free" else "Book • ${rupees(total)}")
                     }
                 }
             }
@@ -174,7 +176,7 @@ fun EventDetailScreen(vm: CityViewModel, eventId: String, onBack: () -> Unit, on
                             Spacer(Modifier.width(10.dp))
                             Column {
                                 Text("You're going! $booked ${if (booked == 1) "pass" else "passes"} confirmed", style = MaterialTheme.typography.titleSmall, color = CityColors.Green)
-                                Text("Booking ID MC-${event.id.take(4).uppercase()}-${1000 + booked * 37}", style = MaterialTheme.typography.bodySmall, color = CityColors.Muted)
+                                Text("Booking ID " + (vm.bookingCodes[event.id] ?: if (vm.isLive) "confirming…" else "MC-${event.id.take(4).uppercase()}-${1000 + booked * 37}"), style = MaterialTheme.typography.bodySmall, color = CityColors.Muted)
                             }
                         }
                     }
@@ -185,7 +187,7 @@ fun EventDetailScreen(vm: CityViewModel, eventId: String, onBack: () -> Unit, on
                         HorizontalDivider(color = CityColors.Outline)
                         InfoRow(Icons.Filled.Place, event.venue, "${event.area} • ${"%.1f".format(com.sheharsaathi.app.data.Transit.distanceKm(vm.userPlace.lat, vm.userPlace.lng, event.lat, event.lng))} km away")
                         HorizontalDivider(color = CityColors.Outline)
-                        InfoRow(Icons.Filled.Groups, "${compactCount(event.interested)} interested", "Neighbours from " + com.sheharsaathi.app.data.CurrentCity.city.areas.take(3).joinToString(", ") { it.first })
+                        InfoRow(Icons.Filled.Groups, "${compactCount(event.interested)} interested", if (vm.isLive) "Residents who saved this event" else "Neighbours from " + com.sheharsaathi.app.data.CurrentCity.city.areas.take(3).joinToString(", ") { it.first })
                     }
                 }
                 Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
@@ -224,7 +226,7 @@ fun EventDetailScreen(vm: CityViewModel, eventId: String, onBack: () -> Unit, on
                                 Text("Total", style = MaterialTheme.typography.titleMedium, modifier = Modifier.weight(1f))
                                 Text(rupees(total), style = MaterialTheme.typography.titleLarge, color = CityColors.Indigo)
                             }
-                            Row(verticalAlignment = Alignment.CenterVertically) {
+                            if (!vm.isLive) Row(verticalAlignment = Alignment.CenterVertically) {
                                 Icon(Icons.Filled.VerifiedUser, null, tint = CityColors.Green, modifier = Modifier.size(16.dp))
                                 Spacer(Modifier.width(6.dp))
                                 Text("Verified venue & noise permits", style = MaterialTheme.typography.bodySmall, color = CityColors.Muted)
@@ -253,7 +255,7 @@ fun EventDetailScreen(vm: CityViewModel, eventId: String, onBack: () -> Unit, on
                     confirm = false
                     vm.book(event.id, qty)
                     haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                    scope.launch { snackbar.showSnackbar("Booked! Your pass is saved on this event.") }
+                    if (!vm.isLive) scope.launch { snackbar.showSnackbar("Booked! Your pass is saved on this event.") }
                 }) { Text("Confirm") }
             },
             dismissButton = { TextButton(onClick = { confirm = false }) { Text("Cancel") } },

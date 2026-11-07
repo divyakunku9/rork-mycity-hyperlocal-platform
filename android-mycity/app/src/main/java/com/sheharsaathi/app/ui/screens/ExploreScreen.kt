@@ -269,6 +269,13 @@ fun ExploreScreen(
                     }
                     if (showEvents) {
                         val live = vm.events.filter { matches(it.title + it.venue) }.sortedBy { it.distanceKm }.take(2)
+                        if (live.isEmpty() && !vm.loading) item(key = "no-events") {
+                            Text(
+                                if (query.isEmpty()) "No upcoming events yet. Host one from the Events tab." else "No events match \"$query\".",
+                                style = MaterialTheme.typography.bodyMedium, color = CityColors.Muted,
+                                modifier = Modifier.padding(horizontal = 20.dp),
+                            )
+                        }
                         items(live, key = { "ev-" + it.id }) { e ->
                             LiveEventCard(
                                 title = e.title, category = e.category.label, date = "${e.dateLabel} • ${e.timeLabel}",
@@ -293,6 +300,13 @@ fun ExploreScreen(
                         }
                         val open = vm.issues.filter { it.status != IssueStatus.RESOLVED && matches(it.title + it.location) }
                             .sortedByDescending { it.upvotes }.take(2)
+                        if (open.isEmpty() && vm.isLive && !vm.loading && query.isEmpty()) item(key = "no-issues") {
+                            Text(
+                                "No open civic reports nearby. Spot a pothole or broken streetlight? Use the Report tab.",
+                                style = MaterialTheme.typography.bodyMedium, color = CityColors.Muted,
+                                modifier = Modifier.padding(horizontal = 20.dp),
+                            )
+                        }
                         items(open, key = { "is-" + it.id }) { issue ->
                             CityCard(Modifier.fillMaxWidth().padding(horizontal = 16.dp), onClick = { onOpenIssue(issue.id) }) {
                                 Row(Modifier.padding(14.dp), verticalAlignment = Alignment.CenterVertically) {

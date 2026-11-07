@@ -32,6 +32,7 @@ data class MyActivity(
     val upvoted: Set<String> = emptySet(),
     val savedEvents: Set<String> = emptySet(),
     val bookings: Map<String, Int> = emptyMap(),
+    val bookingCodes: Map<String, String> = emptyMap(),
     val endorsed: Set<String> = emptySet(),
     val savedNews: Set<String> = emptySet(),
     val claimed: Set<String> = emptySet(),
@@ -146,17 +147,18 @@ class CityBackend(val sb: Supabase) {
         fun get(table: String, cols: String) = async { sb.select(table, "select" to cols, "user_id" to "eq.$uid") }
         val upvotes = get("issue_upvotes", "issue_id")
         val eventSaves = get("event_saves", "event_id")
-        val bookings = get("event_bookings", "event_id,quantity,status")
+        val bookings = get("event_bookings", "event_id,quantity,status,booking_code")
         val endorsed = get("news_endorsements", "news_id")
         val newsSaves = get("news_saves", "news_id")
         val claims = get("offer_claims", "news_id")
         val votes = get("poll_votes", "poll_id,option_id")
         val acks = get("alert_acknowledgements", "alert_id")
+        val myBookings = bookings.await().decodeList<BookingRow>().orEmpty().filter { it.status == "confirmed" }
         MyActivity(
             upvoted = upvotes.await().decodeList<IssueIdRow>().orEmpty().map { it.issueId }.toSet(),
             savedEvents = eventSaves.await().decodeList<EventIdRow>().orEmpty().map { it.eventId }.toSet(),
-            bookings = bookings.await().decodeList<BookingRow>().orEmpty()
-                .filter { it.status == "confirmed" }.associate { it.eventId to it.quantity },
+            bookings = myBookings.associate { it.eventId to it.quantity },
+            bookingCodes = myBookings.filter { it.bookingCode.isNotBlank() }.associate { it.eventId to it.bookingCode },
             endorsed = endorsed.await().decodeList<NewsIdRow>().orEmpty().map { it.newsId }.toSet(),
             savedNews = newsSaves.await().decodeList<NewsIdRow>().orEmpty().map { it.newsId }.toSet(),
             claimed = claims.await().decodeList<NewsIdRow>().orEmpty().map { it.newsId }.toSet(),
@@ -239,10 +241,13 @@ class CityBackend(val sb: Supabase) {
     suspend fun vote(pollId: String, optionId: Long, uid: String): Res<String> =
         sb.insert("poll_votes", """{"poll_id":${Supabase.q(pollId)},"option_id":$optionId,"user_id":${Supabase.q(uid)}}""")
 
-    suspend fun updateProfile(uid: String, name: String, ward: String): Res<String> {
+    suspend fun updateProfile(uid: String, name: String, ward: String, phone: String = "", email: String = ""): Res<String> {
+        val digits = phone.filter { it.isDigit() }.takeLast(10)
         val body = buildJsonObject {
             put("full_name", name.trim().take(80).ifBlank { null })
             put("ward", ward.trim().take(60).ifBlank { null })
+            put("phone", if (digits.length == 10) "+91$digits" else null)
+            put("email", email.trim().lowercase().ifBlank { null })
         }
         return sb.update("profiles", body.toString(), "id" to "eq.$uid")
     }

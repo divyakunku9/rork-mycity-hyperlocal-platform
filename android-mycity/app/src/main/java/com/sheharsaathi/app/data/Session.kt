@@ -62,7 +62,7 @@ data class UserProfile(
                 parts.size >= 2 -> "${parts[0].first()}${parts[1].first()}".uppercase()
                 parts.size == 1 -> parts[0].take(2).uppercase()
                 email.isNotBlank() -> email.take(2).uppercase()
-                else -> "MC"
+                else -> "SS"
             }
         }
 
@@ -96,7 +96,14 @@ class Prefs(context: Context) {
     fun flag(key: String, default: Boolean = true) = sp.getBoolean("n_$key", default)
     fun setFlag(key: String, v: Boolean) = sp.edit().putBoolean("n_$key", v).apply()
 
+    /** "PHONE" or "EMAIL": how the user signed in. That contact can't be edited in the profile. */
+    var signInChannel: String?
+        get() = sp.getString("signin_channel", null)
+        set(v) = sp.edit().putString("signin_channel", v).apply()
+
+    /** Forgets the account on this phone, so the next person starts fresh. */
     fun clearSession() {
-        sp.edit().remove("signed_in").remove("city").apply()
+        sp.edit().remove("signed_in").remove("city").remove("signin_channel")
+            .remove("p_name").remove("p_phone").remove("p_email").remove("p_ward").remove("p_photo").apply()
     }
 }

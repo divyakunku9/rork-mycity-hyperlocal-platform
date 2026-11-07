@@ -9,7 +9,7 @@ object SampleData {
     fun defaultAuthorityFor(category: IssueCategory): String = CurrentCity.city.let { c ->
         when (category) {
             IssueCategory.POTHOLE -> c.municipal.handle
-            IssueCategory.STREETLIGHT -> c.power.handle
+            IssueCategory.STREETLIGHT -> c.municipal.handle // streetlights are run by the municipal corporation
             IssueCategory.GARBAGE -> c.municipal.handle
             IssueCategory.WATER -> c.water.handle
         }

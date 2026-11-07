@@ -143,7 +143,7 @@ fun PlannerScreen(
             TextButton(onClick = onOpenBoard) {
                 Icon(Icons.Filled.Radar, null, Modifier.size(18.dp))
                 Spacer(Modifier.width(6.dp))
-                Text("Live board")
+                Text("Departures")
             }
         }
 
@@ -695,7 +695,7 @@ private fun NearbyRadarCard(onOpen: () -> Unit) {
                 Icon(Icons.Filled.Radar, null, tint = CityColors.Indigo, modifier = Modifier.size(20.dp))
                 Spacer(Modifier.width(8.dp))
                 Text("Nearby transit radar", style = MaterialTheme.typography.titleMedium, modifier = Modifier.weight(1f))
-                Text("Live board", style = MaterialTheme.typography.labelLarge, color = CityColors.Indigo)
+                Text("Departures", style = MaterialTheme.typography.labelLarge, color = CityColors.Indigo)
                 Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, null, tint = CityColors.Indigo)
             }
             Spacer(Modifier.height(10.dp))

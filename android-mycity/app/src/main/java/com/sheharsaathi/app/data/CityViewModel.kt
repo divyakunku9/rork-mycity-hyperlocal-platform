@@ -35,6 +35,14 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
 
     init {
         Cities.byId(prefs.cityId)?.let { CurrentCity.city = it }
+        sb.onSessionLost = {
+            viewModelScope.launch {
+                if (signedIn) {
+                    toast("Your session has expired. Please sign in again.")
+                    prefs.clearSession(); profile = UserProfile(); signedIn = false; hasCity = false; clearActivity()
+                }
+            }
+        }
     }
 
     // ---------- Session & profile ----------
@@ -65,6 +73,7 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
         val p = profile
         profile = if (target.channel == OtpChannel.PHONE) p.copy(phone = target.value) else p.copy(email = target.value)
         prefs.profile = profile
+        prefs.signInChannel = target.channel.name
         prefs.signedIn = true
         signedIn = true
         syncAccount()
@@ -77,8 +86,8 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
         prefs.profile = p
         val uid = sb.userId ?: return
         viewModelScope.launch {
-            if (p.name != before.name || p.ward != before.ward) {
-                (backend.updateProfile(uid, p.name, p.ward) as? Res.Err)?.let { toast("Profile not saved: ${it.message}") }
+            if (p.name != before.name || p.ward != before.ward || p.phone != before.phone || p.email != before.email) {
+                (backend.updateProfile(uid, p.name, p.ward, p.phone, p.email) as? Res.Err)?.let { toast("Profile not saved: ${it.message}") }
             }
             if (p.photoUri != before.photoUri) {
                 val bytes = photoForUpload(app, p.photoUri, maxSide = 600)
@@ -92,10 +101,14 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
     fun signOut() {
         viewModelScope.launch { sb.signOut() }
         prefs.clearSession()
+        profile = UserProfile()
         signedIn = false
         hasCity = false
         clearActivity()
     }
+
+    /** How the user signed in; that contact is their login and can't be edited. */
+    val signInChannel: OtpChannel? get() = prefs.signInChannel?.let { runCatching { OtpChannel.valueOf(it) }.getOrNull() }
 
     val notif = mutableStateMapOf(
         "civic" to prefs.flag("civic"), "events" to prefs.flag("events"), "emergency" to prefs.flag("emergency"),
@@ -124,7 +137,7 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
                 profile = merged
                 prefs.profile = merged
                 // A name typed on the sign-in screen before the account existed on the server.
-                if (row.fullName.isNullOrBlank() && merged.name.isNotBlank()) backend.updateProfile(uid, merged.name, merged.ward)
+                if (row.fullName.isNullOrBlank() && merged.name.isNotBlank()) backend.updateProfile(uid, merged.name, merged.ward, merged.phone, merged.email)
             }
             backend.notifPrefs(uid)?.let { n ->
                 mapOf("civic" to n.civic, "events" to n.events, "emergency" to n.emergency).forEach { (k, v) ->
@@ -214,7 +227,10 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
                 a.upvoted.forEach { upvotedIssues[it] = true }
                 a.savedEvents.forEach { savedEvents[it] = true }
                 bookings.putAll(a.bookings)
+                bookingCodes.putAll(a.bookingCodes)
                 a.endorsed.forEach { endorsedNews[it] = true }
+                // The server's count already includes the user's own endorsement; the screen adds it back.
+                if (a.endorsed.isNotEmpty()) news = news.map { if (it.id in a.endorsed) it.copy(endorsements = (it.endorsements - 1).coerceAtLeast(0)) else it }
                 a.savedNews.forEach { savedNews[it] = true }
                 a.claimed.forEach { claimedOffers[it] = true }
                 poll?.let { p -> p.id?.let { a.votes[it] }?.let { opt -> pollChoice = p.options.indexOfFirst { it.id == opt }.takeIf { it >= 0 } } }
@@ -226,7 +242,7 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
     }
 
     private fun clearActivity() {
-        savedEvents.clear(); bookings.clear(); upvotedIssues.clear(); endorsedNews.clear()
+        savedEvents.clear(); bookings.clear(); bookingCodes.clear(); upvotedIssues.clear(); endorsedNews.clear()
         savedNews.clear(); claimedOffers.clear(); pollChoice = null; alertAcknowledged = false
     }
 
@@ -253,12 +269,12 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
             savedEvents[id] = true
             return id
         }
-        val uid = sb.userId!!
+        val uid = sb.userId ?: return id
         val cityId = city.id
         viewModelScope.launch {
             val photo = photoForUpload(app, imageUri)
             val r = backend.addEvent(
-                id, cityId, uid, e.title, category, e.venue, e.area, e.lat, e.lng, startsAtMillis!!,
+                id, cityId, uid, e.title, category, e.venue, e.area, e.lat, e.lng, startsAtMillis ?: return@launch,
                 priceRupees, e.description, photo,
             )
             if (r is Res.Err) {
@@ -314,6 +330,8 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
 
     val savedEvents = mutableStateMapOf<String, Boolean>()
     val bookings = mutableStateMapOf<String, Int>()
+    /** Booking codes from the server, by event id (live cities). */
+    val bookingCodes = mutableStateMapOf<String, String>()
     val upvotedIssues = mutableStateMapOf<String, Boolean>()
     val endorsedNews = mutableStateMapOf<String, Boolean>()
     val savedNews = mutableStateMapOf<String, Boolean>()
@@ -462,7 +480,36 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
     )
 
     val reportsValidated: Int get() = (if (isLive) 0 else 54) + issues.count { it.isMine }
-    val myIssues: List<CivicIssue> get() = issues.filter { it.isMine }
+    /** The user's own reports, newest first. */
+    val myIssues: List<CivicIssue> get() = issues.filter { it.isMine }.let { if (isLive) it else it.reversed() }
+
+    /** Figures for the Civic Hub, worked out from the city's real reports (live cities). */
+    data class CivicStats(val total: Int, val resolved: Int, val open: Int, val potholesFixed: Int, val confirmations: Int) {
+        val resolutionRate: Float get() = if (total == 0) 0f else resolved.toFloat() / total
+    }
+
+    val civicStats: CivicStats
+        get() {
+            val resolved = issues.filter { it.status == IssueStatus.RESOLVED }
+            return CivicStats(
+                total = issues.size, resolved = resolved.size, open = issues.size - resolved.size,
+                potholesFixed = resolved.count { it.category == IssueCategory.POTHOLE },
+                confirmations = issues.sumOf { it.upvotes },
+            )
+        }
+
+    /** Title and badge for the citizen card, based on how many reports the user has filed. */
+    val citizenTier: Pair<String, String>
+        get() {
+            if (!isLive) return "Citizen Tier 3" to "Neighborhood Guardian"
+            val n = myIssues.size
+            return when {
+                n >= 20 -> "Citizen Tier 3" to "Neighbourhood Guardian"
+                n >= 5 -> "Citizen Tier 2" to "Ward Watcher"
+                n >= 1 -> "Citizen Tier 1" to "Active Neighbour"
+                else -> "New neighbour" to "File your first report"
+            }
+        }
 
     fun event(id: String) = events.firstOrNull { it.id == id }
     fun issue(id: String) = issues.firstOrNull { it.id == id }
@@ -474,11 +521,16 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
     }
 
     fun book(id: String, qty: Int) {
+        if (isLive && (bookings[id] ?: 0) > 0) { toast("You already have a booking for this event."); return }
         bookings[id] = (bookings[id] ?: 0) + qty
         if (!isLive || !sb.signedIn) return
         viewModelScope.launch {
             when (val r = backend.book(id, qty)) {
-                is Res.Ok -> bookings[id] = r.value.quantity
+                is Res.Ok -> {
+                    bookings[id] = r.value.quantity
+                    if (r.value.bookingCode.isNotBlank()) bookingCodes[id] = r.value.bookingCode
+                    toast("Booked! Your booking ID is ${r.value.bookingCode}.")
+                }
                 is Res.Err -> {
                     val left = (bookings[id] ?: 0) - qty
                     if (left > 0) bookings[id] = left else bookings.remove(id)
@@ -576,7 +628,7 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
         if (live) issues.add(0, issue) else issues.add(issue)
         if (!live) { upvotedIssues[id] = true; return id }
 
-        val uid = sb.userId!!
+        val uid = sb.userId ?: return id
         val cityId = city.id
         viewModelScope.launch {
             val photo = photoForUpload(app, imageUri)

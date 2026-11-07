@@ -352,7 +352,7 @@ private fun BoardingCard(leg: Leg, onBoard: Boolean, untilBoardMin: Int) {
             }
             Spacer(Modifier.height(12.dp))
             Text(
-                if (metro) "${leg.platform} • Every 4 min • ${leg.from} Stn" else "${leg.from} • Live GPS tracked • ${leg.detail}",
+                if (metro) "${leg.platform} • Every 4 min • ${leg.from} Stn" else "${leg.from} • Timetable estimate • ${leg.detail}",
                 style = MaterialTheme.typography.bodyMedium, color = Color.White.copy(alpha = 0.85f),
             )
             Spacer(Modifier.height(12.dp))
@@ -514,7 +514,7 @@ private fun StationTicker(leg: Leg, progress: Float) {
     Column(
         Modifier.fillMaxWidth().padding(top = 8.dp).clip(RoundedCornerShape(10.dp)).background(CityColors.IndigoSoft).padding(10.dp),
     ) {
-        TagLabel("Live stations ticker", CityColors.Muted)
+        TagLabel("Upcoming stations", CityColors.Muted)
         Spacer(Modifier.height(8.dp))
         Box(Modifier.fillMaxWidth().height(12.dp), contentAlignment = Alignment.CenterStart) {
             Box(Modifier.fillMaxWidth().height(2.dp).background(CityColors.IndigoMist))

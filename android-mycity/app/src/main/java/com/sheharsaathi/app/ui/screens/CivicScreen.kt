@@ -97,7 +97,10 @@ fun CivicScreen(vm: CityViewModel, onOpenReports: (mine: Boolean) -> Unit) {
 
     var started by remember { mutableStateOf(false) }
     LaunchedEffect(Unit) { started = true }
-    val health by animateFloatAsState(if (started) 0.84f else 0f, tween(1100), label = "health")
+    // Live cities show figures from real reports; sample cities keep the demo numbers.
+    val stats = vm.civicStats
+    val target = if (vm.isLive) stats.resolutionRate else 0.84f
+    val health by animateFloatAsState(if (started) target else 0f, tween(1100), label = "health")
 
     val city = vm.city
     val mine = vm.myIssues
@@ -132,8 +135,11 @@ fun CivicScreen(vm: CityViewModel, onOpenReports: (mine: Boolean) -> Unit) {
             Column(Modifier.padding(16.dp)) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Column(Modifier.weight(1f)) {
-                        Text("Neighbourhood Health Index", style = MaterialTheme.typography.titleLarge)
-                        Text("+4.2% vs last month", style = MaterialTheme.typography.bodySmall, color = CityColors.Green)
+                        Text(if (vm.isLive) "Report resolution rate" else "Neighbourhood Health Index", style = MaterialTheme.typography.titleLarge)
+                        Text(
+                            if (vm.isLive) "From ${stats.total} report${if (stats.total == 1) "" else "s"} on Shehar Saathi" else "+4.2% vs last month",
+                            style = MaterialTheme.typography.bodySmall, color = if (vm.isLive) CityColors.Muted else CityColors.Green,
+                        )
                     }
                     Text(
                         buildAnnotatedString {
@@ -155,13 +161,13 @@ fun CivicScreen(vm: CityViewModel, onOpenReports: (mine: Boolean) -> Unit) {
                 )
                 Spacer(Modifier.height(14.dp))
                 Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                    StatTile(Icons.Filled.Warning, "Potholes Fixed", "142", CityColors.Red, CityColors.RedSoft, Modifier.weight(1f))
-                    StatTile(Icons.Filled.Lightbulb, "Streetlights", "98%", CityColors.Saffron, CityColors.SaffronSoft, Modifier.weight(1f))
+                    StatTile(Icons.Filled.Warning, "Potholes Fixed", if (vm.isLive) "${stats.potholesFixed}" else "142", CityColors.Red, CityColors.RedSoft, Modifier.weight(1f))
+                    StatTile(Icons.Filled.Lightbulb, if (vm.isLive) "Resolved" else "Streetlights", if (vm.isLive) "${stats.resolved}" else "98%", CityColors.Saffron, CityColors.SaffronSoft, Modifier.weight(1f))
                 }
                 Spacer(Modifier.height(10.dp))
                 Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                    StatTile(Icons.Filled.Delete, "Waste Compliance", "92%", CityColors.Green, CityColors.GreenSoft, Modifier.weight(1f))
-                    StatTile(Icons.Filled.Description, "Grievances Open", "18", CityColors.Indigo, CityColors.IndigoSoft, Modifier.weight(1f))
+                    StatTile(Icons.Filled.Delete, if (vm.isLive) "Confirmations" else "Waste Compliance", if (vm.isLive) "${stats.confirmations}" else "92%", CityColors.Green, CityColors.GreenSoft, Modifier.weight(1f))
+                    StatTile(Icons.Filled.Description, "Grievances Open", if (vm.isLive) "${stats.open}" else "18", CityColors.Indigo, CityColors.IndigoSoft, Modifier.weight(1f))
                 }
             }
         }
@@ -171,17 +177,17 @@ fun CivicScreen(vm: CityViewModel, onOpenReports: (mine: Boolean) -> Unit) {
             Column(Modifier.padding(16.dp)) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Column(Modifier.weight(1f)) {
-                        Text("Citizen Tier 3", style = MaterialTheme.typography.titleLarge)
+                        Text(vm.citizenTier.first, style = MaterialTheme.typography.titleLarge)
                         Text("${vm.userPlace.area}, ${city.name}", style = MaterialTheme.typography.bodySmall, color = CityColors.Muted)
                     }
-                    SoftBadge("Neighborhood Guardian", CityColors.IndigoSoft, CityColors.IndigoDeep, icon = Icons.Filled.WorkspacePremium)
+                    SoftBadge(vm.citizenTier.second, CityColors.IndigoSoft, CityColors.IndigoDeep, icon = Icons.Filled.WorkspacePremium)
                 }
                 Spacer(Modifier.height(12.dp))
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(Icons.Filled.MilitaryTech, null, tint = CityColors.Saffron, modifier = Modifier.size(36.dp))
                     Spacer(Modifier.width(10.dp))
                     Column(Modifier.weight(1f)) {
-                        Text("${vm.reportsValidated} Reports Validated", style = MaterialTheme.typography.titleMedium)
+                        Text("${vm.reportsValidated} Report${if (vm.reportsValidated == 1) "" else "s"} ${if (vm.isLive) "Filed" else "Validated"}", style = MaterialTheme.typography.titleMedium)
                         Text("Making ${city.name} better, one report at a time", style = MaterialTheme.typography.bodySmall, color = CityColors.Muted)
                     }
                 }
@@ -265,9 +271,12 @@ fun CivicScreen(vm: CityViewModel, onOpenReports: (mine: Boolean) -> Unit) {
                 Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                     ServiceTile(
                         Icons.Filled.LocalShipping, "Bulk Waste",
-                        if (bulkRequested) "Pickup requested ✓" else "Request a pickup",
+                        if (vm.isLive) "Apply on the ${city.municipalShort} portal" else if (bulkRequested) "Pickup requested ✓" else "Request a pickup",
                         CityColors.Green, CityColors.GreenSoft, Modifier.weight(1f),
-                    ) { bulkWasteDialog = true }
+                    ) {
+                        // Pickups can't be booked through the app yet, so live cities go straight to the official service.
+                        if (vm.isLive) openUrl(context, city.portals.bulkWaste) else bulkWasteDialog = true
+                    }
                     ServiceTile(Icons.Filled.Forest, "Tree Fall / Hazard", "Report to ${city.municipalShort}", CityColors.Red, CityColors.RedSoft, Modifier.weight(1f)) {
                         openUrl(context, city.portals.treeHazard)
                     }

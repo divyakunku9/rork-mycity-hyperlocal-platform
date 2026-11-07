@@ -256,7 +256,7 @@ fun ReportScreen(vm: CityViewModel, onSubmitted: (String) -> Unit) {
                         }
                         Spacer(Modifier.height(10.dp))
                         Text("Snap a live photo of the issue", style = MaterialTheme.typography.titleMedium, color = CityColors.IndigoDeep)
-                        Text("GPS-stamped photos get resolved up to 3× faster", style = MaterialTheme.typography.bodySmall, color = CityColors.Muted)
+                        Text("A GPS-stamped photo helps crews find the exact spot", style = MaterialTheme.typography.bodySmall, color = CityColors.Muted)
                     }
                 }
             }
@@ -477,7 +477,7 @@ fun ReportScreen(vm: CityViewModel, onSubmitted: (String) -> Unit) {
             Icon(Icons.Filled.ErrorOutline, null, tint = CityColors.Indigo)
             Spacer(Modifier.width(10.dp))
             Text(
-                "Your report will notify nearby residents and route to the ${primaryAuthority.removePrefix("@")} Ward 151 desk.",
+                "Your report will be visible to nearby residents and routed to ${primaryAuthority.removePrefix("@")}.",
                 style = MaterialTheme.typography.bodySmall, color = CityColors.IndigoDeep,
             )
         }
@@ -522,7 +522,7 @@ fun ReportScreen(vm: CityViewModel, onSubmitted: (String) -> Unit) {
             onDismissRequest = { showInfo = false },
             title = { Text("How reporting works") },
             text = {
-                Text("1. Snap a photo and pin the spot.\n2. We route it to the right authority automatically.\n3. Neighbours confirm it to raise priority.\n4. You're notified when it's In Progress and Resolved.")
+                Text("1. Snap a photo and pin the spot.\n2. We route it to the right authority automatically.\n3. Neighbours confirm it to raise priority.\n4. Track its status any time under My filed issues in the Civic Hub.")
             },
             confirmButton = { TextButton(onClick = { showInfo = false }) { Text("Got it") } },
         )

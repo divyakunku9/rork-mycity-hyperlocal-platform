@@ -101,6 +101,9 @@ class Supabase(context: Context) {
         private set
 
     val userId: String? get() = session?.userId
+
+    /** Called when the server says the session can no longer be renewed, so the app can ask to sign in again. */
+    var onSessionLost: (() -> Unit)? = null
     val signedIn: Boolean get() = session != null
 
     // ------------------------------------------------------------------ Auth
@@ -157,7 +160,7 @@ class Supabase(context: Context) {
             runCatching { keep(json.decodeFromString<AuthResponse>(r.bodyAsText())) }
             true
         } else if (r.status.value in 400..499) {
-            session = null; store.clear(); false
+            session = null; store.clear(); onSessionLost?.invoke(); false
         } else true
     }
 

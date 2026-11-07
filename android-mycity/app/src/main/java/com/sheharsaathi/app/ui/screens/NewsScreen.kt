@@ -123,6 +123,15 @@ fun NewsScreen(vm: CityViewModel) {
                 }
             }
         }
+        if (items.isEmpty()) item(key = "empty") {
+            Column(Modifier.fillMaxWidth().padding(vertical = 48.dp, horizontal = 24.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+                Text(if (vm.loading) "Loading news…" else "Nothing here yet", style = MaterialTheme.typography.titleMedium)
+                if (!vm.loading) Text(
+                    "Bulletins from ${vm.city.municipalShort}, local stories and offers will appear here.",
+                    style = MaterialTheme.typography.bodyMedium, color = CityColors.Muted,
+                )
+            }
+        }
         items(items, key = { it.id }) { n ->
             val endorsed = vm.endorsedNews[n.id] == true
             val saved = vm.savedNews[n.id] == true
@@ -231,9 +240,12 @@ private fun StoryCard(n: NewsItem, endorsed: Boolean, saved: Boolean, onEndorse:
                     Text("${n.endorsements + if (endorsed) 1 else 0} Endorsed")
                 }
                 Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.weight(1f)) {
-                    Icon(Icons.AutoMirrored.Outlined.Chat, null, tint = CityColors.Muted, modifier = Modifier.size(16.dp))
-                    Spacer(Modifier.width(4.dp))
-                    Text("${n.comments}", style = MaterialTheme.typography.labelLarge, color = CityColors.Muted)
+                    // Comments aren't built yet, so live posts don't show a count.
+                    if (n.comments > 0) {
+                        Icon(Icons.AutoMirrored.Outlined.Chat, null, tint = CityColors.Muted, modifier = Modifier.size(16.dp))
+                        Spacer(Modifier.width(4.dp))
+                        Text("${n.comments}", style = MaterialTheme.typography.labelLarge, color = CityColors.Muted)
+                    }
                 }
                 IconButton(onClick = onShare) { Icon(Icons.Filled.Share, "Share", tint = CityColors.Muted) }
             }

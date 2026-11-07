@@ -318,7 +318,7 @@ object Transit {
             ),
             priceLabel = "₹$busFare", priceSub = if (ac) "AC" else "Non-AC", departsInMin = 5,
             tags = listOf("${85 - (busCode.length * 3)}% seats free"),
-            note = "Live GPS bus ${if (hyd) "TS09Z" else "#"}${4100 + busCode.length * 37} • 2 stops away", noteGood = true, distanceKm = km,
+            note = "Times estimated from the timetable", noteGood = true, distanceKm = km,
         )
 
         // 4. Cab
@@ -531,7 +531,7 @@ object LiveBoard {
         Departure("b-rd", BoardKind.METRO, "B", "Blue Line", "Toward Raidurg", LineColors.BLUE, 260, 5, "At Peddamma Gudi", true, listOf("Platform 2"), "Med crowd"),
         Departure("r-lb", BoardKind.METRO, "R", "Red Line", "Toward LB Nagar", LineColors.RED, 420, 5, "Delayed +5", false, listOf("Ameerpet interchange"), "Crowded"),
         Departure("g-mg", BoardKind.METRO, "G", "Green Line", "Toward MG Bus Station", LineColors.GREEN, 640, 8, "Departing Parade Ground", true, listOf("Parade Ground interchange"), "Low crowd"),
-        Departure("bus-10h", BoardKind.BUS, "10H", "TGSRTC 10H", "Kondapur → Secunderabad via HITEC City", LineColors.AC_BUS, 300, 12, "Live GPS", true, listOf("TS09Z4172", "Electric AC", "Accessible"), "Med crowd"),
+        Departure("bus-10h", BoardKind.BUS, "10H", "TGSRTC 10H", "Kondapur → Secunderabad via HITEC City", LineColors.AC_BUS, 300, 12, "Scheduled", true, listOf("TS09Z4172", "Electric AC", "Accessible"), "Med crowd"),
         Departure("bus-127k", BoardKind.BUS, "127K", "TGSRTC 127K", "Kondapur → Koti via Jubilee Hills", LineColors.BUS, 560, 15, "Diverted", false, listOf("Metro Express"), "Crowded"),
         Departure("bus-psh", BoardKind.BUS, "AIR", "Pushpak AC", "HITEC City → RGIA Airport", LineColors.AC_BUS, 900, 30, "Scheduled", true, listOf("Luggage space", "₹300"), "Low crowd"),
         Departure("mmts-lf", BoardKind.RAIL, "M", "MMTS", "Lingampally → Falaknuma", LineColors.MMTS, 840, 30, "On time", true, listOf("Hitech City • Platform 1"), "Low crowd"),
@@ -569,7 +569,7 @@ object LiveBoard {
         }
         val op = c.busOperator
         val codes = listOf("${100 + c.name.length * 17}", "${200 + c.name.length * 11}A", "AIR-${300 + c.name.length}")
-        deps += Departure("bus-0", BoardKind.BUS, codes[0], "$op ${codes[0]}", "$area0 → ${c.areas[3].first}", LineColors.AC_BUS, 300, 12, "Live GPS", true, listOf("AC", "Accessible"), "Med crowd")
+        deps += Departure("bus-0", BoardKind.BUS, codes[0], "$op ${codes[0]}", "$area0 → ${c.areas[3].first}", LineColors.AC_BUS, 300, 12, "Scheduled", true, listOf("AC", "Accessible"), "Med crowd")
         deps += Departure("bus-1", BoardKind.BUS, codes[1], "$op ${codes[1]}", "$area1 → ${c.areas[5].first} via ${c.areas[2].first}", LineColors.BUS, 560, 15, "Diverted", false, listOf("Ordinary"), "Crowded")
         deps += Departure("bus-2", BoardKind.BUS, "AIR", "$op Airport", "$area0 → Airport", LineColors.AC_BUS, 900, 30, "Scheduled", true, listOf("Luggage space"), "Low crowd")
         railRoutes(c).forEachIndexed { i, (route, meta) ->

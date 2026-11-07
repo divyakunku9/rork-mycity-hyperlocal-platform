@@ -121,7 +121,7 @@ fun TransitBoardScreen(vm: CityViewModel, onBack: () -> Unit, onPlan: () -> Unit
                 Column(Modifier.padding(16.dp)) {
                     Row(verticalAlignment = Alignment.Top) {
                         Column(Modifier.weight(1f)) {
-                            SoftBadge("Live city telemetry", CityColors.IndigoSoft, CityColors.Indigo)
+                            SoftBadge("Estimated from timetables", CityColors.IndigoSoft, CityColors.Indigo)
                             Spacer(Modifier.height(8.dp))
                             Text((com.sheharsaathi.app.data.CurrentCity.city.metroName?.let { "$it & " } ?: "") + "${com.sheharsaathi.app.data.CurrentCity.city.busOperator} Live Board", style = MaterialTheme.typography.headlineSmall)
                         }

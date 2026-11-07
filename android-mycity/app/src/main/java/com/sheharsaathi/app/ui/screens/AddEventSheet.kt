@@ -119,7 +119,9 @@ fun AddEventSheet(vm: CityViewModel, onDismiss: () -> Unit, onCreated: (String, 
     }
 
     val priceValue = price.toIntOrNull()
-    val valid = title.trim().length >= 4 && dayMillis != null && timeSet && venue != null && (free || (priceValue != null && priceValue > 0))
+    val startsAt = dayMillis?.let { com.sheharsaathi.app.data.backend.Times.istAt(it, hour, minute) }
+    val inPast = timeSet && startsAt != null && startsAt < System.currentTimeMillis()
+    val valid = title.trim().length >= 4 && dayMillis != null && timeSet && !inPast && venue != null && (free || (priceValue != null && priceValue > 0))
 
     ModalBottomSheet(onDismissRequest = onDismiss, sheetState = sheet, containerColor = CityColors.Surface) {
         Column(
@@ -242,13 +244,14 @@ fun AddEventSheet(vm: CityViewModel, onDismiss: () -> Unit, onCreated: (String, 
                 shape = RoundedCornerShape(14.dp), colors = formColors(), modifier = Modifier.fillMaxWidth(),
             )
 
+            if (inPast) Text("That time has already passed. Pick a later time.", color = CityColors.Red, style = MaterialTheme.typography.bodySmall)
             PrimaryButton("Publish event", enabled = valid) {
                 val ms = dayMillis ?: return@PrimaryButton
                 val (label, bucket) = dayInfo(ms)
                 val id = vm.addEvent(
                     title = title, category = category, dateLabel = label, timeLabel = timeLabel(hour, minute), bucket = bucket,
                     venue = venue!!, priceRupees = if (free) 0 else priceValue ?: 0, imageUri = photo, description = about,
-                    startsAtMillis = com.sheharsaathi.app.data.backend.Times.istAt(ms, hour, minute),
+                    startsAtMillis = startsAt,
                 )
                 haptic.performHapticFeedback(HapticFeedbackType.Confirm)
                 onCreated(id, bucket)

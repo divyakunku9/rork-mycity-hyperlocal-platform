@@ -157,10 +157,14 @@ class QaWalkthroughTest {
             val chip = SemanticsMatcher("click label 'Open weather'") { it.config.getOrNull(SemanticsActions.OnClick)?.label == "Open weather" }
             waitFor(chip, 20)
             node(chip).performClick()
-            waitText("Next 24 hours", 30)
-            shot("weather"); scrollDown(); shot("weather-scroll-1"); scrollDown(); shot("weather-scroll-2"); scrollDown(); shot("weather-scroll-3")
-            check(exists(hasText("day forecast", substring = true))) { "no daily forecast" }
-            back()
+            try {
+                waitText("Next 24 hours", 30)
+                shot("weather")
+                check(exists(hasText("Air quality", substring = true, ignoreCase = true))) { "no air quality" }
+                scrollDown(); shot("weather-scroll-1")
+                check(exists(hasText("day forecast", substring = true, ignoreCase = true))) { "no daily forecast" }
+                scrollDown(); shot("weather-scroll-2"); scrollDown(); shot("weather-scroll-3")
+            } finally { backToExplore() }
         }
         step("News Hub: city headlines load") {
             tab("News Hub")

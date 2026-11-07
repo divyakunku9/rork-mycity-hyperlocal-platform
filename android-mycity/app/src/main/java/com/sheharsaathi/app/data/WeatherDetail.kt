@@ -111,17 +111,22 @@ fun compass(deg: Int): String {
     return names[(((deg % 360) + 360) % 360 * 16 + 180) / 360 % 16]
 }
 
-/** One-line summary of the day, like a forecaster would say it. */
+/** One-line summary of the hours ahead, like a forecaster would say it. */
 fun WeatherDetail.headline(): String {
     val today = days.firstOrNull() ?: return now.condition
-    val rainSoon = hours.take(12).maxOfOrNull { it.rainPct } ?: 0
-    val sky = weatherText(today.code).lowercase().replaceFirstChar { it.uppercase() }
+    val next = hours.take(12)
+    val rainSoon = next.maxOfOrNull { it.rainPct } ?: 0
+    // The sky most of the next 12 hours, not the day's worst moment.
+    val skyCode = next.groupingBy { it.code }.eachCount().maxByOrNull { it.value }?.key ?: now.code
+    val sky = weatherText(skyCode)
+    val temps = if (now.isDay) "High ${maxOf(today.maxC, now.tempC)}°, low ${next.minOfOrNull { it.tempC } ?: today.minC}° tonight."
+        else "Low ${next.minOfOrNull { it.tempC } ?: today.minC}° overnight, then ${days.getOrNull(1)?.maxC ?: today.maxC}° tomorrow."
     val rain = when {
         rainSoon >= 60 -> "Rain likely in the next 12 hours."
         rainSoon >= 30 -> "A chance of showers in the next 12 hours."
         else -> "No rain expected in the next 12 hours."
     }
-    return "$sky today. High ${today.maxC}°, low ${today.minC}°. $rain Winds ${compass(windDeg)} at $windKmh km/h."
+    return "$sky ${if (now.isDay) "today" else "tonight"}. $temps $rain Winds ${compass(windDeg)} at $windKmh km/h."
 }
 
 @Serializable private data class DCurrent(

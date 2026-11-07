@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -152,7 +153,7 @@ fun WeatherScreen(vm: CityViewModel, onBack: () -> Unit) {
                 }
             } else {
                 LazyColumn(
-                    Modifier.fillMaxSize(),
+                    Modifier.fillMaxSize().navigationBarsPadding(),
                     contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = 4.dp, bottom = 28.dp),
                     verticalArrangement = Arrangement.spacedBy(14.dp),
                 ) {

@@ -46,7 +46,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -65,7 +64,6 @@ import com.sheharsaathi.app.data.PlaceKind
 import com.sheharsaathi.app.data.Transit
 import com.sheharsaathi.app.ui.theme.CityColors
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 /**
  * Returns a callback that asks for location permission when needed and then
@@ -74,18 +72,14 @@ import kotlinx.coroutines.launch
 @Composable
 fun rememberLocateMe(vm: CityViewModel): () -> Unit {
     val context = LocalContext.current
-    val scope = rememberCoroutineScope()
 
     val fetch: () -> Unit = {
         if (!LocationService.isLocationOn(context)) {
             vm.gpsFailed("Location is turned off on your phone. Turn it on or pick your area.")
         } else {
-            vm.locating = true
-            scope.launch {
-                val loc = LocationService.currentLocation(context)
-                if (loc == null) vm.gpsFailed("Couldn't get a GPS fix. Try again outdoors or pick your area.")
-                else vm.applyGpsFix(loc.latitude, loc.longitude)
-            }
+            // Runs in the view model, so leaving this screen can't cancel it halfway and
+            // leave every header stuck on "Finding you…".
+            vm.locateNow()
         }
     }
     val launcher = rememberLauncherForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { result ->

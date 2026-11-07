@@ -415,6 +415,23 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
         }
     }
 
+    private var gpsJob: Job? = null
+
+    /** Gets a one-shot GPS fix. Safe to call repeatedly; a request already running is reused. */
+    fun locateNow() {
+        if (gpsJob?.isActive == true) return
+        locating = true
+        gpsJob = viewModelScope.launch {
+            try {
+                val loc = LocationService.currentLocation(app)
+                if (loc == null) gpsFailed("Couldn't get a GPS fix. Try again outdoors or pick your area.")
+                else applyGpsFix(loc.latitude, loc.longitude)
+            } finally {
+                if (locating && locationSource != LocationSource.GPS) locating = false
+            }
+        }
+    }
+
     fun gpsFailed(message: String) {
         locating = false
         locationNotice = message

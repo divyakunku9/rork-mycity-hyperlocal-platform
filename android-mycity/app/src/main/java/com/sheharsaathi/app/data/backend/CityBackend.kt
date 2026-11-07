@@ -9,6 +9,7 @@ import com.sheharsaathi.app.data.IssueCategory
 import com.sheharsaathi.app.data.IssueStatus
 import com.sheharsaathi.app.data.NewsItem
 import com.sheharsaathi.app.data.NewsKind
+import com.sheharsaathi.app.data.ServiceStatus
 import com.sheharsaathi.app.data.Transit
 import com.sheharsaathi.app.data.Urgency
 import kotlinx.coroutines.async
@@ -141,6 +142,28 @@ class CityBackend(val sb: Supabase) {
                 options = p.options.sortedBy { it.position }.map { PollOptionUi(it.id, it.label, it.voteCount) },
             )
         )
+    }
+
+    /** Official transit notices posted by staff, most serious first. */
+    suspend fun serviceStatus(cityId: String): Res<List<ServiceStatus>> {
+        val rows = sb.select(
+            "service_status",
+            "select" to "title,body,level,transit_lines(code,color_hex)",
+            "city_id" to "eq.$cityId",
+            "order" to "level.desc,updated_at.desc",
+            "limit" to "20",
+        ).decode<List<ServiceStatusRow>>()
+        if (rows is Res.Err) return rows
+        return Res.Ok((rows as Res.Ok).value.map { r ->
+            val hex = r.line?.colorHex?.removePrefix("#")?.takeIf { it.length == 6 }
+            ServiceStatus(
+                title = r.title,
+                tag = when (r.level) { 0 -> "Good service"; 1 -> "Minor delays"; else -> "Disrupted" },
+                body = r.body.orEmpty(),
+                level = r.level,
+                color = hex?.toLongOrNull(16)?.let { 0xFF000000L or it } ?: 0xFF5C6BC0L,
+            )
+        })
     }
 
     suspend fun myActivity(uid: String): MyActivity = coroutineScope {

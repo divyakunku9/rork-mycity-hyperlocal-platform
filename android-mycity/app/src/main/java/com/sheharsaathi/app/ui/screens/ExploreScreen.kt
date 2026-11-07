@@ -262,6 +262,7 @@ fun ExploreScreen(
                             onHome = { planTo(Transit.place("home")!!) },
                             onWork = { planTo(Transit.place("work")!!) },
                             onBoard = onOpenBoard,
+                            live = vm.isLive,
                         )
                     }
                     item {
@@ -763,9 +764,10 @@ private fun WhereToBar(onClick: () -> Unit, onGo: () -> Unit) {
 }
 
 @Composable
-private fun CommuteStrip(onHome: () -> Unit, onWork: () -> Unit, onBoard: () -> Unit) {
+private fun CommuteStrip(onHome: () -> Unit, onWork: () -> Unit, onBoard: () -> Unit, live: Boolean = false) {
     Column(Modifier.padding(horizontal = 16.dp, vertical = 4.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-        Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+        // Live cities don't know the user's home or work yet, so no invented trip times.
+        if (!live) Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
             val c = CurrentCity.city
             CommuteTile(Icons.Filled.Home, "Home", "18 min • Auto", Modifier.weight(1f), onHome)
             CommuteTile(Icons.Filled.Work, "Work", if (c.metroName != null) "24 min • Metro" else "26 min • Bus", Modifier.weight(1f), onWork)
@@ -775,11 +777,11 @@ private fun CommuteStrip(onHome: () -> Unit, onWork: () -> Unit, onBoard: () -> 
                 Icon(Icons.Filled.Radar, null, tint = CityColors.Indigo, modifier = Modifier.size(20.dp))
                 Spacer(Modifier.width(10.dp))
                 Column(Modifier.weight(1f)) {
-                    Text("Live transit nearby", style = MaterialTheme.typography.titleSmall)
+                    Text(if (live) "Transit nearby" else "Live transit nearby", style = MaterialTheme.typography.titleSmall)
                     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp), modifier = Modifier.padding(top = 4.dp)) {
                         com.sheharsaathi.app.data.LiveBoard.departures.take(3).forEachIndexed { i, d ->
                             LineBadge(d.code, Color(d.color))
-                            Text("${2 + i * 3} min", style = MaterialTheme.typography.labelMedium)
+                            Text(if (live) "every ${d.headwayMin}m" else "${2 + i * 3} min", style = MaterialTheme.typography.labelMedium)
                         }
                     }
                 }

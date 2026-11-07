@@ -122,6 +122,17 @@ data class BookingRow(
     @SerialName("total_rupees") val totalRupees: Int = 0,
 )
 
+@Serializable
+data class LineRef(val code: String = "", @SerialName("color_hex") val colorHex: String? = null)
+
+@Serializable
+data class ServiceStatusRow(
+    val title: String,
+    val body: String? = null,
+    val level: Int = 0,
+    @SerialName("transit_lines") val line: LineRef? = null,
+)
+
 @Serializable data class IssueIdRow(@SerialName("issue_id") val issueId: String)
 @Serializable data class EventIdRow(@SerialName("event_id") val eventId: String)
 @Serializable data class NewsIdRow(@SerialName("news_id") val newsId: String)

@@ -143,8 +143,13 @@ fun CivicScreen(vm: CityViewModel, onOpenReports: (mine: Boolean) -> Unit) {
                     }
                     Text(
                         buildAnnotatedString {
-                            withStyle(SpanStyle(fontSize = 40.sp, color = CityColors.Green)) { append("${(health * 100).toInt()}") }
-                            withStyle(SpanStyle(fontSize = 18.sp, color = CityColors.Muted)) { append("/100") }
+                            if (vm.isLive && stats.total == 0) {
+                                // Nothing to score yet: a 0/100 would wrongly suggest the ward is doing badly.
+                                withStyle(SpanStyle(fontSize = 40.sp, color = CityColors.Muted)) { append("–") }
+                            } else {
+                                withStyle(SpanStyle(fontSize = 40.sp, color = CityColors.Green)) { append("${(health * 100).toInt()}") }
+                                withStyle(SpanStyle(fontSize = 18.sp, color = CityColors.Muted)) { append(if (vm.isLive) "%" else "/100") }
+                            }
                         },
                         style = MaterialTheme.typography.headlineMedium,
                     )
@@ -178,7 +183,7 @@ fun CivicScreen(vm: CityViewModel, onOpenReports: (mine: Boolean) -> Unit) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Column(Modifier.weight(1f)) {
                         Text(vm.citizenTier.first, style = MaterialTheme.typography.titleLarge)
-                        Text("${vm.userPlace.area}, ${city.name}", style = MaterialTheme.typography.bodySmall, color = CityColors.Muted)
+                        Text(vm.locationLabel, style = MaterialTheme.typography.bodySmall, color = CityColors.Muted)
                     }
                     SoftBadge(vm.citizenTier.second, CityColors.IndigoSoft, CityColors.IndigoDeep, icon = Icons.Filled.WorkspacePremium)
                 }

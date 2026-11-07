@@ -520,22 +520,20 @@ data class Departure(
 data class ServiceStatus(val title: String, val tag: String, val body: String, val level: Int, val color: Long)
 
 object LiveBoard {
-    private val hydStatus = listOf(
-        ServiceStatus("Red Line • Minor delay", "+5 min", "Signalling check between Ameerpet and Punjagutta. Normal service resuming shortly.", 1, LineColors.RED),
-        ServiceStatus("Blue Line • Good service", "Every 5 min", "Peak frequency between Raidurg and Nagole. First 6:00 AM • last 11:00 PM.", 0, LineColors.BLUE),
-        ServiceStatus("TGSRTC Bus Network Alert", "10H • 127K", "Biodiversity flyover lane closure. Expect +10–15 min around Gachibowli.", 2, LineColors.BUS),
-    )
+    // Hyderabad is a live city: disruption notices come from the backend (service_status), not
+    // from the app. Departures below are timetable estimates only, with no invented delays or crowding.
+    private val hydStatus = emptyList<ServiceStatus>()
 
     private val hydDepartures = listOf(
-        Departure("b-ng", BoardKind.METRO, "B", "Blue Line", "Toward Nagole", LineColors.BLUE, 130, 5, "On approach", true, listOf("Madhapur • Platform 1", "AC train"), "Low crowd"),
-        Departure("b-rd", BoardKind.METRO, "B", "Blue Line", "Toward Raidurg", LineColors.BLUE, 260, 5, "At Peddamma Gudi", true, listOf("Platform 2"), "Med crowd"),
-        Departure("r-lb", BoardKind.METRO, "R", "Red Line", "Toward LB Nagar", LineColors.RED, 420, 5, "Delayed +5", false, listOf("Ameerpet interchange"), "Crowded"),
-        Departure("g-mg", BoardKind.METRO, "G", "Green Line", "Toward MG Bus Station", LineColors.GREEN, 640, 8, "Departing Parade Ground", true, listOf("Parade Ground interchange"), "Low crowd"),
-        Departure("bus-10h", BoardKind.BUS, "10H", "TGSRTC 10H", "Kondapur → Secunderabad via HITEC City", LineColors.AC_BUS, 300, 12, "Scheduled", true, listOf("TS09Z4172", "Electric AC", "Accessible"), "Med crowd"),
-        Departure("bus-127k", BoardKind.BUS, "127K", "TGSRTC 127K", "Kondapur → Koti via Jubilee Hills", LineColors.BUS, 560, 15, "Diverted", false, listOf("Metro Express"), "Crowded"),
-        Departure("bus-psh", BoardKind.BUS, "AIR", "Pushpak AC", "HITEC City → RGIA Airport", LineColors.AC_BUS, 900, 30, "Scheduled", true, listOf("Luggage space", "₹300"), "Low crowd"),
-        Departure("mmts-lf", BoardKind.RAIL, "M", "MMTS", "Lingampally → Falaknuma", LineColors.MMTS, 840, 30, "On time", true, listOf("Hitech City • Platform 1"), "Low crowd"),
-        Departure("mmts-ln", BoardKind.RAIL, "M", "MMTS", "Lingampally → Hyderabad (Nampally)", LineColors.MMTS, 1620, 40, "On time", true, listOf("Platform 2"), "Med crowd"),
+        Departure("b-ng", BoardKind.METRO, "B", "Blue Line", "Toward Nagole", LineColors.BLUE, 130, 5, "Scheduled", true, listOf("Madhapur", "AC train"), ""),
+        Departure("b-rd", BoardKind.METRO, "B", "Blue Line", "Toward Raidurg", LineColors.BLUE, 260, 5, "Scheduled", true, listOf("Madhapur"), ""),
+        Departure("r-lb", BoardKind.METRO, "R", "Red Line", "Toward LB Nagar", LineColors.RED, 420, 5, "Scheduled", true, listOf("Ameerpet interchange"), ""),
+        Departure("g-mg", BoardKind.METRO, "G", "Green Line", "Toward MG Bus Station", LineColors.GREEN, 640, 8, "Scheduled", true, listOf("Parade Ground interchange"), ""),
+        Departure("bus-10h", BoardKind.BUS, "10H", "TGSRTC 10H", "Kondapur → Secunderabad via HITEC City", LineColors.AC_BUS, 300, 12, "Scheduled", true, listOf("Electric AC"), ""),
+        Departure("bus-127k", BoardKind.BUS, "127K", "TGSRTC 127K", "Kondapur → Koti via Jubilee Hills", LineColors.BUS, 560, 15, "Scheduled", true, listOf("Ordinary"), ""),
+        Departure("bus-psh", BoardKind.BUS, "AIR", "Pushpak AC", "HITEC City → RGIA Airport", LineColors.AC_BUS, 900, 30, "Scheduled", true, listOf("Luggage space"), ""),
+        Departure("mmts-lf", BoardKind.RAIL, "M", "MMTS", "Lingampally → Falaknuma", LineColors.MMTS, 840, 30, "Scheduled", true, listOf("Hitech City"), ""),
+        Departure("mmts-ln", BoardKind.RAIL, "M", "MMTS", "Lingampally → Hyderabad (Nampally)", LineColors.MMTS, 1620, 40, "Scheduled", true, listOf("Hitech City"), ""),
     )
 
     /** Suburban rail brand per city, or null where there is no city rail service. */

@@ -5,6 +5,8 @@ import android.accessibilityservice.AccessibilityService
 import android.graphics.Bitmap
 import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.getOrNull
+import androidx.compose.ui.test.isRoot
+import androidx.compose.ui.test.onLast
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.hasContentDescription
@@ -113,7 +115,7 @@ class QaWalkthroughTest {
         }
         step("Enter name and test number, send code") {
             node(hasSetTextAction() and hasText("Your name", substring = true)).performTextInput("QA Tester")
-            node(hasSetTextAction() and hasText("Mobile number", substring = true)).performTextInput("9999900001")
+            node(hasSetTextAction() and hasText("Mobile number", substring = true)).performTextInput("9999900002")
             shot("sign-in-filled")
             clickText("Send OTP")
             waitText("Enter the 6-digit code", 30)
@@ -125,7 +127,7 @@ class QaWalkthroughTest {
             shot("otp-wrong-code")
         }
         step("Right code signs in") {
-            node(hasContentDescription("One-time code, 6 digits")).performTextInput("246810")
+            node(hasContentDescription("One-time code, 6 digits")).performTextInput("135790")
             waitText("where do you live", 30)
             shot("choose-city")
         }
@@ -150,7 +152,10 @@ class QaWalkthroughTest {
         step("Add Event sheet") {
             scrollTop()
             clickText("Add Event")
-            Thread.sleep(1500); shot("add-event"); scrollDown(); shot("add-event-scroll")
+            Thread.sleep(1500); shot("add-event")
+            // The sheet is a second window, so swipe inside it rather than on the main screen.
+            rule.onAllNodes(isRoot()).onLast().performTouchInput { swipeUp(durationMillis = 400) }
+            shot("add-event-scroll")
             back()
         }
         step("Civic Hub tab") {
@@ -181,13 +186,15 @@ class QaWalkthroughTest {
         }
         step("Explore: planner") {
             tab("Explore"); Thread.sleep(1500); dismissLocationPicker()
-            clickText("Get me there")
+            node(hasText("ransit nearby", substring = true)).performScrollTo().performClick()
+            Thread.sleep(1500)
+            clickText("Plan trip")
             Thread.sleep(2000); shot("planner")
-            back()
+            back(); back()
         }
         step("Live transit board") {
             tab("Explore"); Thread.sleep(1000)
-            node(hasText("Live transit nearby", substring = true)).performScrollTo().performClick()
+            node(hasText("ransit nearby", substring = true)).performScrollTo().performClick()
             Thread.sleep(2000); shot("transit-board"); scrollDown(); shot("transit-board-scroll")
             back()
         }
@@ -207,6 +214,14 @@ class QaWalkthroughTest {
             node(hasText("My filed issues")).performScrollTo().performClick()
             waitText("Pothole reported", 15)
             shot("my-reports-after-recreate")
+        }
+
+        step("Clean up: delete the test report from the live backend") {
+            // The walkthrough runs against production, so it removes what it created.
+            val sb = com.sheharsaathi.app.data.backend.Supabase(instrumentation.targetContext)
+            val uid = sb.userId ?: error("not signed in")
+            val r = kotlinx.coroutines.runBlocking { sb.delete("civic_issues", "reporter_id" to "eq.$uid") }
+            if (r is com.sheharsaathi.app.data.backend.Res.Err) error("delete failed: ${r.message}")
         }
 
         File(outDir, "report.txt").writeText(report.toString() + "\n$failures step(s) failed\n")

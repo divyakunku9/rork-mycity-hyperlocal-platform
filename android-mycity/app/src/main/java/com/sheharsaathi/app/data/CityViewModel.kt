@@ -18,6 +18,7 @@ import com.sheharsaathi.app.data.backend.Supabase
 import com.sheharsaathi.app.data.backend.SupabaseConfig
 import com.sheharsaathi.app.data.backend.SupabaseOtpProvider
 import com.sheharsaathi.app.data.backend.photoForUpload
+import com.sheharsaathi.app.data.backend.valueOrNull
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
@@ -156,6 +157,10 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
     /** The city's current authority alert, or null when there is none in force. */
     var alert by mutableStateOf<CityAlert?>(null)
         private set
+    /** Official transit notices for live cities (from the backend), shown on the departures board. */
+    var serviceStatus by mutableStateOf<List<ServiceStatus>>(emptyList())
+        private set
+
     /** The ward poll to show, or null when there is no open poll. */
     var poll by mutableStateOf<PollUi?>(null)
         private set
@@ -205,7 +210,10 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
             return
         }
         // Clear the previous city's samples straight away so they never show as live content.
-        events.clear(); issues.clear(); news = emptyList(); alert = null; poll = null
+        // Reports and events filed in the last minute may not be in the server's list yet; keep them.
+        val pendingIssues = issues.filter { it.isMine && it.reportedAgo == "Just now" }
+        val pendingEvents = events.filter { it.hostedByYou }
+        events.clear(); issues.clear(); news = emptyList(); alert = null; poll = null; serviceStatus = emptyList()
         val cityId = city.id
         val uid = sb.userId
         contentJob = viewModelScope.launch {
@@ -216,10 +224,18 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
             val nws = async { backend.news(cityId) }
             val alr = async { backend.alert(cityId) }
             val pol = async { backend.poll(cityId, profile.ward) }
+            val sts = async { backend.serviceStatus(cityId) }
             val mine = uid?.let { async { backend.myActivity(it) } }
             var failed: String? = null
-            when (val r = iss.await()) { is Res.Ok -> { issues.clear(); issues.addAll(r.value) }; is Res.Err -> failed = r.message }
-            when (val r = evs.await()) { is Res.Ok -> { events.clear(); events.addAll(r.value) }; is Res.Err -> failed = r.message }
+            when (val r = iss.await()) {
+                is Res.Ok -> { val ids = r.value.map { it.id }.toSet(); issues.clear(); issues.addAll(pendingIssues.filter { it.id !in ids } + r.value) }
+                is Res.Err -> { issues.addAll(0, pendingIssues); failed = r.message }
+            }
+            when (val r = evs.await()) {
+                is Res.Ok -> { val ids = r.value.map { it.id }.toSet(); events.clear(); events.addAll(pendingEvents.filter { it.id !in ids } + r.value) }
+                is Res.Err -> { events.addAll(0, pendingEvents); failed = r.message }
+            }
+            sts.await().valueOrNull()?.let { serviceStatus = it }
             when (val r = nws.await()) { is Res.Ok -> news = r.value; is Res.Err -> failed = r.message }
             when (val r = alr.await()) { is Res.Ok -> alert = r.value; is Res.Err -> failed = r.message }
             when (val r = pol.await()) { is Res.Ok -> poll = r.value; is Res.Err -> failed = r.message }
@@ -389,12 +405,13 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
         locationNotice = null
         val provisional = Place("gps", "Current location", city.name, lat, lng, PlaceKind.CURRENT)
         setUserPlace(provisional, LocationSource.GPS)
+        // We know where the user is now; the area name is filled in when the lookup returns.
+        locating = false
         viewModelScope.launch {
             val named = Geocoder.reverse(lat, lng)
             if (named != null && locationSource == LocationSource.GPS && userPlace.lat == lat) {
                 setUserPlace(named.copy(lat = lat, lng = lng), LocationSource.GPS)
             }
-            locating = false
         }
     }
 

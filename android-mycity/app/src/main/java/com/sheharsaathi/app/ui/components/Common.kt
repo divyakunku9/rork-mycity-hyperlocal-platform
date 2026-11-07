@@ -160,7 +160,7 @@ fun LocationHeader(
                 }
                 Text(
                     if (locating) "Finding you…" else title,
-                    style = MaterialTheme.typography.titleLarge,
+                    style = MaterialTheme.typography.titleMedium,
                     color = CityColors.Ink,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,

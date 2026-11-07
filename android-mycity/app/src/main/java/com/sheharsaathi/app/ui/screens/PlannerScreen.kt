@@ -701,7 +701,7 @@ private fun NearbyRadarCard(onOpen: () -> Unit) {
             Spacer(Modifier.height(10.dp))
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
                 com.sheharsaathi.app.data.LiveBoard.departures.take(3).forEachIndexed { i, d ->
-                    LineBadge(d.code, Color(d.color)); Text("${2 + i * 4} min", style = MaterialTheme.typography.labelLarge)
+                    LineBadge(d.code, Color(d.color)); Text("every ${d.headwayMin}m", style = MaterialTheme.typography.labelLarge)
                 }
             }
         }

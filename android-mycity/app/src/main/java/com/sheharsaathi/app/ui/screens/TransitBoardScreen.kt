@@ -123,7 +123,7 @@ fun TransitBoardScreen(vm: CityViewModel, onBack: () -> Unit, onPlan: () -> Unit
                         Column(Modifier.weight(1f)) {
                             SoftBadge("Estimated from timetables", CityColors.IndigoSoft, CityColors.Indigo)
                             Spacer(Modifier.height(8.dp))
-                            Text((com.sheharsaathi.app.data.CurrentCity.city.metroName?.let { "$it & " } ?: "") + "${com.sheharsaathi.app.data.CurrentCity.city.busOperator} Live Board", style = MaterialTheme.typography.headlineSmall)
+                            Text((com.sheharsaathi.app.data.CurrentCity.city.metroName?.let { "$it & " } ?: "") + "${com.sheharsaathi.app.data.CurrentCity.city.busOperator} " + (if (vm.isLive) "Departures" else "Live Board"), style = MaterialTheme.typography.headlineSmall)
                         }
                         IconButton(onClick = {
                             haptic.performHapticFeedback(HapticFeedbackType.LongPress)
@@ -132,7 +132,16 @@ fun TransitBoardScreen(vm: CityViewModel, onBack: () -> Unit, onPlan: () -> Unit
                         }) { Icon(Icons.Filled.Sync, "Refresh", tint = CityColors.Indigo, modifier = Modifier.rotate(spin)) }
                     }
                     HorizontalDivider(Modifier.padding(vertical = 10.dp), color = CityColors.Outline)
-                    Row(verticalAlignment = Alignment.CenterVertically) {
+                    if (vm.isLive) {
+                        // No live feed yet: only official notices are shown, and times are timetable estimates.
+                        val disrupted = vm.serviceStatus.any { it.level > 0 }
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            if (disrupted) SoftBadge("Disruptions reported", CityColors.SaffronSoft, CityColors.SaffronText, icon = Icons.Filled.Warning)
+                            else SoftBadge("No disruptions reported", CityColors.GreenSoft, CityColors.Green, icon = Icons.Filled.CheckCircle)
+                        }
+                        Text("Departure times are estimates from published timetables. Check the operator for live updates.",
+                            style = MaterialTheme.typography.bodySmall, color = CityColors.Muted, modifier = Modifier.padding(top = 6.dp))
+                    } else Row(verticalAlignment = Alignment.CenterVertically) {
                         SoftBadge("System normal", CityColors.GreenSoft, CityColors.Green, icon = Icons.Filled.CheckCircle)
                         Spacer(Modifier.width(8.dp))
                         Text("98% on time", style = MaterialTheme.typography.labelLarge)
@@ -144,11 +153,15 @@ fun TransitBoardScreen(vm: CityViewModel, onBack: () -> Unit, onPlan: () -> Unit
         }
         item {
             Row(Modifier.fillMaxWidth().padding(start = 20.dp, end = 20.dp, top = 6.dp)) {
-                TagLabel("Corridor service status", CityColors.Ink, Modifier.weight(1f))
-                TagLabel("All 42 lines", CityColors.Indigo)
+                TagLabel(if (vm.isLive) "Official service notices" else "Corridor service status", CityColors.Ink, Modifier.weight(1f))
+                if (!vm.isLive) TagLabel("All 42 lines", CityColors.Indigo)
             }
         }
-        items(LiveBoard.status) { s ->
+        if (vm.isLive && vm.serviceStatus.isEmpty()) item {
+            Text("None right now. Notices from the operators will appear here.",
+                style = MaterialTheme.typography.bodySmall, color = CityColors.Muted, modifier = Modifier.padding(horizontal = 20.dp))
+        }
+        items(if (vm.isLive) vm.serviceStatus else LiveBoard.status) { s ->
             val color = Color(s.color)
             val tagColors = when (s.level) {
                 0 -> CityColors.IndigoSoft to CityColors.Indigo
@@ -328,7 +341,7 @@ private fun DepartureCard(d: Departure, tick: Int, fav: Boolean, onStar: () -> U
             HorizontalDivider(Modifier.padding(vertical = 10.dp), color = CityColors.Outline)
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(
-                    (d.meta + d.crowd).joinToString("  •  "),
+                    (d.meta + d.crowd).filter { it.isNotBlank() }.joinToString("  •  "),
                     style = MaterialTheme.typography.labelMedium, color = CityColors.IndigoDeep, modifier = Modifier.weight(1f), maxLines = 1,
                 )
                 Text("Then: ", style = MaterialTheme.typography.labelMedium, color = CityColors.Muted)

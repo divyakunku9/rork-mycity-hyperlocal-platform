@@ -220,8 +220,8 @@ fun FeedSection(title: String, items: List<FeedItem>, empty: String, actions: Fe
 fun NearbyScreen(vm: CityViewModel, onBack: () -> Unit, onOpenEvent: (String) -> Unit, onOpenIssue: (String) -> Unit) {
     val context = LocalContext.current
     var openListed by rememberSaveable { mutableStateOf<Long?>(null) }
-    val feed = remember(vm.userPlace, vm.events, vm.listedEvents, vm.issues, vm.webNews) {
-        NearbyFeed.build(vm.userPlace, CurrentCity.city.name, vm.events, vm.listedEvents, vm.issues, vm.webNews)
+    val feed = remember(vm.userPlace, vm.locationLabel, vm.events, vm.listedEvents, vm.issues, vm.webNews) {
+        NearbyFeed.build(vm.userPlace, CurrentCity.city.name, vm.locationLabel, vm.events, vm.listedEvents, vm.issues, vm.webNews)
     }
     val actions = FeedActions(onOpenEvent, onOpenIssue, { openListed = it }, { openStory(context, it) })
     var tab by rememberSaveable { mutableStateOf(0) }

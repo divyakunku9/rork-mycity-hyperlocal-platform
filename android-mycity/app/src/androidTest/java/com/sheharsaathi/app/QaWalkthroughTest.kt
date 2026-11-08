@@ -176,19 +176,21 @@ class QaWalkthroughTest {
         step("Explore rows: near you, civic, events, news") {
             tab("Explore"); Thread.sleep(1000); dismissLocationPicker()
             waitFor(hasContentDescription("Feed ", substring = true), 30)
-            val sheet = rule.onNode(hasScrollToNodeAction().and(hasAnyDescendant(hasText("Civic issues"))))
-            sheet.performScrollToNode(hasText("Happening near", substring = true)); Thread.sleep(1500); shot("explore-near")
-            sheet.performScrollToNode(hasText("Civic issues")); Thread.sleep(1200); shot("explore-civic")
-            sheet.performScrollToNode(hasText("Events")); Thread.sleep(1500); shot("explore-events")
-            sheet.performScrollToNode(hasText("News")); Thread.sleep(1500); shot("explore-news")
-            sheet.performScrollToNode(hasText("Happening near", substring = true)); Thread.sleep(800)
+            // Find the sheet's list afresh each time: it's rebuilt as rows fill in.
+            fun scrollTo(m: SemanticsMatcher) =
+                rule.onAllNodes(hasScrollToNodeAction().and(hasAnyDescendant(hasText("Civic issues"))))[0].performScrollToNode(m)
+            scrollTo(hasText("Happening near", substring = true)); Thread.sleep(1500); shot("explore-near")
+            scrollTo(hasText("Civic issues")); Thread.sleep(1200); shot("explore-civic")
+            scrollTo(hasText("Events")); Thread.sleep(1500); shot("explore-events")
+            scrollTo(hasText("News")); Thread.sleep(1500); shot("explore-news")
+            scrollTo(hasText("Happening near", substring = true)); Thread.sleep(800)
         }
         step("Happening near: See all") {
-            rule.onAllNodes(hasText("See all"))[0].performClick()
+            node(hasContentDescription("See all: Happening near", substring = true)).performClick()
             waitText("Within 5 km of you", 10); Thread.sleep(1500); shot("nearby-events")
             node(hasText("Civic (", substring = true)).performClick(); Thread.sleep(1000); shot("nearby-civic")
             node(hasText("News (", substring = true)).performClick(); Thread.sleep(1000); shot("nearby-news")
-            back(); Thread.sleep(800)
+            back(); Thread.sleep(1000)   // one press: Near page → Explore (never risk leaving the app)
         }
         step("Weather screen from the header chip") {
             tab("Explore"); Thread.sleep(1000); dismissLocationPicker()

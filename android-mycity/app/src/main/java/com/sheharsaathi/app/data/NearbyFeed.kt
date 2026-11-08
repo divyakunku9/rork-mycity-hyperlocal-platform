@@ -56,13 +56,17 @@ data class NearbyFeed(
         fun build(
             place: Place,
             cityName: String,
+            /** The area name the app shows at the top ("HITEC City"), when known; better than a street name. */
+            areaLabel: String?,
             events: List<CityEvent>,
             listed: List<ListedEvent>,
             issues: List<CivicIssue>,
             news: List<WebStory>,
             now: Long = System.currentTimeMillis(),
         ): NearbyFeed {
-            val words = areaWords(place, cityName)
+            val area = areaLabel?.substringBefore(",")?.trim()?.takeIf { it.isNotBlank() && !it.equals(cityName, true) }
+                ?: place.name.substringBefore(",").trim()
+            val words = (listOfNotNull(area.takeIf { it.length >= 4 }) + areaWords(place, cityName)).distinctBy { it.lowercase() }.take(4)
             val km = { lat: Double, lng: Double -> Transit.distanceKm(place.lat, place.lng, lat, lng) }
 
             // Events: what's on soonest first, nearer first on the same day.
@@ -109,7 +113,7 @@ data class NearbyFeed(
             }.take(12)
 
             return NearbyFeed(
-                area = place.name.substringBefore(",").trim(),
+                area = area,
                 happening = happening,
                 issues = open,
                 events = allEvents,

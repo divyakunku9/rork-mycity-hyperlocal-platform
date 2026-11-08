@@ -190,8 +190,8 @@ fun ExploreScreen(
     }
     val filter = vm.exploreFilter
     val query = vm.exploreQuery.trim()
-    val feed = remember(vm.userPlace, vm.events, vm.listedEvents, vm.issues, vm.webNews) {
-        com.sheharsaathi.app.data.NearbyFeed.build(vm.userPlace, CurrentCity.city.name, vm.events, vm.listedEvents, vm.issues, vm.webNews)
+    val feed = remember(vm.userPlace, vm.locationLabel, vm.events, vm.listedEvents, vm.issues, vm.webNews) {
+        com.sheharsaathi.app.data.NearbyFeed.build(vm.userPlace, CurrentCity.city.name, vm.locationLabel, vm.events, vm.listedEvents, vm.issues, vm.webNews)
     }
     var openListed by remember { mutableStateOf<Long?>(null) }
     val feedActions = FeedActions(onOpenEvent, onOpenIssue, { openListed = it }, { openStory(context, it) })

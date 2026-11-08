@@ -319,7 +319,7 @@ fun SectionHeader(
     ) {
         Text(title, style = MaterialTheme.typography.titleLarge, color = CityColors.Ink, modifier = Modifier.weight(1f))
         if (action != null && onAction != null) {
-            TextButton(onClick = onAction) {
+            TextButton(onClick = onAction, modifier = Modifier.semantics { contentDescription = "$action: $title" }) {
                 Text(action)
                 Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = null, modifier = Modifier.size(18.dp))
             }

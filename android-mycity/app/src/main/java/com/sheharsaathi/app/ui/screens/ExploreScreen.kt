@@ -109,6 +109,7 @@ import com.sheharsaathi.app.ui.components.StatusBadge
 import com.sheharsaathi.app.ui.components.TagLabel
 import com.sheharsaathi.app.ui.components.compactCount
 import com.sheharsaathi.app.ui.components.openDirections
+import com.sheharsaathi.app.ui.components.shareText
 import com.sheharsaathi.app.ui.components.rememberMapController
 import com.sheharsaathi.app.ui.components.rememberLocateMe
 import com.sheharsaathi.app.ui.components.rememberPlaceSearch
@@ -142,6 +143,8 @@ fun ExploreScreen(
     onSeeAllIssues: () -> Unit,
     onPlanTrip: () -> Unit,
     onOpenBoard: () -> Unit,
+    onSeeNearby: () -> Unit = {},
+    onSeeAllNews: () -> Unit = {},
 ) {
     val context = LocalContext.current
     val startSearch = {
@@ -187,6 +190,11 @@ fun ExploreScreen(
     }
     val filter = vm.exploreFilter
     val query = vm.exploreQuery.trim()
+    val feed = remember(vm.userPlace, vm.events, vm.listedEvents, vm.issues, vm.webNews) {
+        com.sheharsaathi.app.data.NearbyFeed.build(vm.userPlace, CurrentCity.city.name, vm.events, vm.listedEvents, vm.issues, vm.webNews)
+    }
+    var openListed by remember { mutableStateOf<Long?>(null) }
+    val feedActions = FeedActions(onOpenEvent, onOpenIssue, { openListed = it }, { openStory(context, it) })
 
     fun matches(text: String) = query.isEmpty() || text.contains(query, ignoreCase = true)
     val showEvents = filter == ExploreFilter.ALL || filter == ExploreFilter.EVENTS
@@ -265,75 +273,44 @@ fun ExploreScreen(
                             live = vm.isLive,
                         )
                     }
-                    item {
-                        SectionHeader("Happening near ${vm.userPlace.name.substringBefore(",")}", action = "See all", onAction = onSeeAllEvents)
-                    }
-                    if (showEvents) {
-                        val live = vm.events.filter { matches(it.title + it.venue) }.sortedBy { it.distanceKm }.take(2)
-                        if (live.isEmpty() && !vm.loading) item(key = "no-events") {
-                            Text(
-                                if (query.isEmpty()) "No upcoming events yet. Host one from the Events tab." else "No events match \"$query\".",
-                                style = MaterialTheme.typography.bodyMedium, color = CityColors.Muted,
-                                modifier = Modifier.padding(horizontal = 20.dp),
-                            )
-                        }
-                        items(live, key = { "ev-" + it.id }) { e ->
-                            LiveEventCard(
-                                title = e.title, category = e.category.label, date = "${e.dateLabel} • ${e.timeLabel}",
-                                venue = "${e.venue}, ${e.area}", interested = e.interested, priceRupees = e.priceRupees,
-                                imageRes = e.imageRes, imageUri = e.imageUri, saved = vm.savedEvents[e.id] == true, booked = (vm.bookings[e.id] ?: 0) > 0,
-                                onSave = {
-                                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                                    vm.toggleSaveEvent(e.id)
-                                },
-                                onOpen = { onOpenEvent(e.id) },
-                            )
+                    // Four sideways rows: what's near the user, civic reports, events, news. Each has See all.
+                    fun keep(list: List<com.sheharsaathi.app.data.FeedItem>) = list.filter { matches(it.text) }
+                    if (showCivic && vm.alert?.let { matches(it.title + it.body) } == true) {
+                        item(key = "alert") {
+                            AuthorityAlertCard(vm) {
+                                haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                vm.acknowledgeAlert()
+                            }
                         }
                     }
-                    if (showCivic) {
-                        if (vm.alert?.let { matches(it.title + it.body) } == true) {
-                            item(key = "alert") {
-                                AuthorityAlertCard(vm) {
-                                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                                    vm.acknowledgeAlert()
-                                }
-                            }
-                        }
-                        val open = vm.issues.filter { it.status != IssueStatus.RESOLVED && matches(it.title + it.location) }
-                            .sortedByDescending { it.upvotes }.take(2)
-                        if (open.isEmpty() && vm.isLive && !vm.loading && query.isEmpty()) item(key = "no-issues") {
-                            Text(
-                                "No open civic reports nearby. Spot a pothole or broken streetlight? Use the Report tab.",
-                                style = MaterialTheme.typography.bodyMedium, color = CityColors.Muted,
-                                modifier = Modifier.padding(horizontal = 20.dp),
-                            )
-                        }
-                        items(open, key = { "is-" + it.id }) { issue ->
-                            CityCard(Modifier.fillMaxWidth().padding(horizontal = 16.dp), onClick = { onOpenIssue(issue.id) }) {
-                                Row(Modifier.padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
-                                    Box(
-                                        Modifier.size(48.dp).clip(RoundedCornerShape(12.dp)).background(CityColors.RedSoft),
-                                        contentAlignment = Alignment.Center,
-                                    ) { Icon(Icons.Filled.Warning, null, tint = CityColors.Red) }
-                                    Spacer(Modifier.width(12.dp))
-                                    Column(Modifier.weight(1f)) {
-                                        TagLabel("Civic report • ${issue.reportedAgo}", CityColors.Red)
-                                        Text(issue.title, style = MaterialTheme.typography.titleMedium, maxLines = 1, overflow = TextOverflow.Ellipsis)
-                                        Row(verticalAlignment = Alignment.CenterVertically) {
-                                            StatusBadge(issue.status)
-                                            Spacer(Modifier.width(8.dp))
-                                            Text("${issue.upvotes} confirmations", style = MaterialTheme.typography.bodySmall, color = CityColors.Muted)
-                                        }
-                                    }
-                                    Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, null, tint = CityColors.Muted)
-                                }
-                            }
-                        }
-                        item(key = "all-issues") {
-                            TextButton(onClick = onSeeAllIssues, modifier = Modifier.padding(horizontal = 8.dp)) {
-                                Text("View all civic reports")
-                            }
-                        }
+                    if (filter == ExploreFilter.ALL || filter == ExploreFilter.EVENTS) item(key = "near") {
+                        FeedSection(
+                            "Happening near ${feed.area}", keep(feed.happening).take(12),
+                            if (query.isEmpty()) "Nothing listed within ${com.sheharsaathi.app.data.NearbyFeed.RADIUS_KM.toInt()} km of ${feed.area} yet. The rows below cover the whole city."
+                            else "Nothing near you matches \"$query\".",
+                            feedActions, onSeeNearby,
+                        )
+                    }
+                    if (showCivic) item(key = "civic") {
+                        FeedSection(
+                            "Civic issues", keep(feed.issues).take(10),
+                            if (query.isEmpty()) "No open civic reports. Spot a pothole or broken streetlight? Use the Report tab." else "No reports match \"$query\".",
+                            feedActions, onSeeAllIssues,
+                        )
+                    }
+                    if (showEvents) item(key = "events") {
+                        FeedSection(
+                            "Events", keep(feed.events).take(12),
+                            if (query.isEmpty()) "No upcoming events yet. Host one from the Events tab." else "No events match \"$query\".",
+                            feedActions, onSeeAllEvents,
+                        )
+                    }
+                    if (filter == ExploreFilter.ALL) item(key = "news") {
+                        FeedSection(
+                            "News", keep(feed.news).take(10),
+                            if (query.isEmpty()) (if (vm.isLive) "City news is loading." else "City news is coming to ${CurrentCity.city.name}.") else "No news matches \"$query\".",
+                            feedActions, onSeeAllNews,
+                        )
                     }
                     if (showFood) {
                         val spots = vm.spots.filter { matches(it.name + it.sub) }
@@ -532,6 +509,14 @@ fun ExploreScreen(
                 }
             }
         }
+    }
+
+    vm.listedEvents.firstOrNull { it.id == openListed }?.let { e ->
+        ListedEventSheet(
+            e, onDismiss = { openListed = null }, onBook = { openStory(context, e.url) },
+            onShare = { shareText(context, "${e.title}\n${com.sheharsaathi.app.data.ListedTime.whenLabel(e)}${e.venue?.let { " · $it" } ?: ""}\n${e.url}\n— via Shehar Saathi") },
+            onDirections = if (e.lat != null && e.lng != null) ({ openDirections(context, e.lat, e.lng, e.venue ?: e.title) }) else null,
+        )
     }
 
     selectedSpot?.let { spot ->

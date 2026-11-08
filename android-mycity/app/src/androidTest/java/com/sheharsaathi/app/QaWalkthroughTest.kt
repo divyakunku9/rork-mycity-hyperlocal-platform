@@ -10,6 +10,7 @@ import androidx.compose.ui.test.onLast
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.hasContentDescription
+import androidx.compose.ui.test.hasAnyDescendant
 import androidx.compose.ui.test.hasScrollToNodeAction
 import androidx.compose.ui.test.hasSetTextAction
 import androidx.compose.ui.test.hasText
@@ -171,6 +172,23 @@ class QaWalkthroughTest {
             scrollDown(); shot("explore-scroll-2")
             scrollDown(); shot("explore-scroll-3")
             scrollTop()
+        }
+        step("Explore rows: near you, civic, events, news") {
+            tab("Explore"); Thread.sleep(1000); dismissLocationPicker()
+            waitFor(hasContentDescription("Feed ", substring = true), 30)
+            val sheet = rule.onNode(hasScrollToNodeAction().and(hasAnyDescendant(hasText("Civic issues"))))
+            sheet.performScrollToNode(hasText("Happening near", substring = true)); Thread.sleep(1500); shot("explore-near")
+            sheet.performScrollToNode(hasText("Civic issues")); Thread.sleep(1200); shot("explore-civic")
+            sheet.performScrollToNode(hasText("Events")); Thread.sleep(1500); shot("explore-events")
+            sheet.performScrollToNode(hasText("News")); Thread.sleep(1500); shot("explore-news")
+            sheet.performScrollToNode(hasText("Happening near", substring = true)); Thread.sleep(800)
+        }
+        step("Happening near: See all") {
+            rule.onAllNodes(hasText("See all"))[0].performClick()
+            waitText("Within 5 km of you", 10); Thread.sleep(1500); shot("nearby-events")
+            node(hasText("Civic (", substring = true)).performClick(); Thread.sleep(1000); shot("nearby-civic")
+            node(hasText("News (", substring = true)).performClick(); Thread.sleep(1000); shot("nearby-news")
+            back(); Thread.sleep(800)
         }
         step("Weather screen from the header chip") {
             tab("Explore"); Thread.sleep(1000); dismissLocationPicker()

@@ -78,7 +78,7 @@ import com.sheharsaathi.app.ui.components.shareText
 import com.sheharsaathi.app.ui.theme.CityColors
 
 /** Colour and icon for each topic; also used when a story has no picture. */
-private fun NewsTopic.color(): Color = when (this) {
+internal fun NewsTopic.color(): Color = when (this) {
     NewsTopic.CIVIC -> Color(0xFF38BDF8)
     NewsTopic.TRAFFIC -> Color(0xFFF59E0B)
     NewsTopic.WEATHER -> Color(0xFF60A5FA)
@@ -92,7 +92,7 @@ private fun NewsTopic.color(): Color = when (this) {
     NewsTopic.CITY -> Color(0xFF94A3B8)
 }
 
-private fun NewsTopic.icon(): ImageVector = when (this) {
+internal fun NewsTopic.icon(): ImageVector = when (this) {
     NewsTopic.CIVIC -> Icons.Filled.LocationCity
     NewsTopic.TRAFFIC -> Icons.Filled.DirectionsBus
     NewsTopic.WEATHER -> Icons.Filled.Cloud

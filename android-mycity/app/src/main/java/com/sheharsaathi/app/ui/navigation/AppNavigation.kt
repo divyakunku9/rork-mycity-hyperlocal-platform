@@ -151,6 +151,16 @@ fun AppNavigation(vm: CityViewModel) {
                     onSeeAllIssues = { navController.navigate("reports?mine=false") },
                     onPlanTrip = { navController.navigate("plan") { launchSingleTop = true } },
                     onOpenBoard = { navController.navigate("transit") { launchSingleTop = true } },
+                    onSeeNearby = { navController.navigate("nearby") { launchSingleTop = true } },
+                    onSeeAllNews = { navController.switchTab("news") },
+                )
+            }
+            composable("nearby") {
+                com.sheharsaathi.app.ui.screens.NearbyScreen(
+                    vm = vm,
+                    onBack = { navController.popBackStack() },
+                    onOpenEvent = { navController.navigate("event/$it") },
+                    onOpenIssue = { navController.navigate("issue/$it") },
                 )
             }
             composable("plan") {

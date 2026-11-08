@@ -88,7 +88,7 @@ import com.sheharsaathi.app.ui.components.openDirections
 import com.sheharsaathi.app.ui.components.shareText
 import com.sheharsaathi.app.ui.theme.CityColors
 
-private fun ListedCategory.color(): Color = when (this) {
+internal fun ListedCategory.color(): Color = when (this) {
     ListedCategory.MUSIC -> Color(0xFFF58220)
     ListedCategory.COMEDY -> Color(0xFFFACC15)
     ListedCategory.THEATRE -> Color(0xFFF472B6)
@@ -104,7 +104,7 @@ private fun ListedCategory.color(): Color = when (this) {
     ListedCategory.OTHER -> Color(0xFF94A3B8)
 }
 
-private fun ListedCategory.icon(): ImageVector = when (this) {
+internal fun ListedCategory.icon(): ImageVector = when (this) {
     ListedCategory.MUSIC -> Icons.Filled.MusicNote
     ListedCategory.COMEDY -> Icons.Filled.Mic
     ListedCategory.THEATRE -> Icons.Filled.TheaterComedy
@@ -318,7 +318,7 @@ private fun Line(icon: ImageVector, text: String) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun ListedEventSheet(e: ListedEvent, onDismiss: () -> Unit, onBook: () -> Unit, onShare: () -> Unit, onDirections: (() -> Unit)?) {
+internal fun ListedEventSheet(e: ListedEvent, onDismiss: () -> Unit, onBook: () -> Unit, onShare: () -> Unit, onDirections: (() -> Unit)?) {
     ModalBottomSheet(onDismissRequest = onDismiss, sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true), containerColor = CityColors.Surface) {
         Column(Modifier.fillMaxWidth().verticalScroll(rememberScrollState()).navigationBarsPadding().padding(bottom = 16.dp)) {
             EventPicture(e, Modifier.fillMaxWidth().aspectRatio(16f / 9f), 56)

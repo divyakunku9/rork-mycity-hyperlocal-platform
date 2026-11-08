@@ -211,7 +211,7 @@ object AddressSearch {
                 if (a.door != null) {
                     val m = doorMatch(a.door, h.house ?: h.place.name.takeIf { Regex("\\d+-\\d+").containsMatchIn(it) })
                     if (m == 1.0) { h.precision = Precision.DOOR; h.score += 6 }
-                    else if (m >= 0.5) { h.score += 3 * m; h.note = "Door no. ${a.door} isn't mapped exactly; this is the nearest numbered building (${h.house ?: h.place.name})." }
+                    else if (m >= 0.5) { h.score += 3 * m; h.note = "Door no. ${a.door} isn't on the map. This building has a similar number (${h.house ?: h.place.name}) in the same block, so check before you go." }
                 }
                 if (t.why == "landmark" && a.landmark != null) h.note = "Near ${a.landmark}: the exact spot isn't named on the map. Long-press the map to drop a pin there."
                 hits += h
@@ -226,7 +226,11 @@ object AddressSearch {
         }
         // Then step back, one request at a time, only until something clearly matches (4 requests at most).
         var calls = first.size
-        while (tries.isNotEmpty() && calls < 4 && !good()) {
+        // When the exact door isn't mapped, also offer the area that was typed, so the person can pick it.
+        fun needArea() = a.door != null && a.locality != null && hits.none { it.precision == Precision.DOOR } &&
+            hits.none { it.precision == Precision.AREA && norm(it.place.name).contains(norm(a.locality!!)) }
+        if (needArea()) tries.add(0, Try(a.locality!!, 1.0, "area"))
+        while (tries.isNotEmpty() && calls < 4 && (!good() || needArea())) {
             val t = tries.removeAt(0)
             photon(t.q, city, biasLat, biasLng)?.let { reached = true; take(t, it) }
             calls++

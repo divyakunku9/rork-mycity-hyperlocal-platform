@@ -104,9 +104,10 @@ class QaWalkthroughTest {
 
     /** The Explore panel can be pulled up over the map; drag it back down until the map's search button shows. */
     private fun showMap() {
-        repeat(4) {
-            if (exists(mapSearchPill)) return
-            rule.onRoot().performTouchInput { swipe(Offset(centerX, height * 0.45f), Offset(centerX, height * 0.95f), 400) }
+        // The button stays in the screen tree even when the panel covers it, so always drag down;
+        // if the panel is already down this just pans the map a little.
+        repeat(2) {
+            rule.onRoot().performTouchInput { swipe(Offset(centerX, height * 0.55f), Offset(centerX, height * 0.95f), 400) }
             rule.waitForIdle(); Thread.sleep(500)
         }
     }

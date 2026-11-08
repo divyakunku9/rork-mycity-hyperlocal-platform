@@ -434,6 +434,13 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
     // Where the user is: GPS, manual pick, or the city's default neighbourhood
     var userPlace by mutableStateOf(Transit.currentLocation)
         private set
+
+    init {
+        // Searches lean towards wherever the user is (or the spot they picked).
+        viewModelScope.launch {
+            androidx.compose.runtime.snapshotFlow { userPlace }.collect { Geocoder.biasLat = it.lat; Geocoder.biasLng = it.lng }
+        }
+    }
     var locationSource by mutableStateOf(LocationSource.DEFAULT)
         private set
     var locating by mutableStateOf(false)
@@ -751,7 +758,7 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
         return id
     }
 
-    private fun toast(message: String) {
+    fun toast(message: String) {
         Toast.makeText(app, message, Toast.LENGTH_LONG).show()
     }
 

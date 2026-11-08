@@ -85,7 +85,20 @@ object Geocoder {
     private val client by lazy { HttpClient(Android) }
     private const val UA = "SheharSaathi-Android/1.0 (com.sheharsaathi.app)"
 
-    suspend fun search(query: String): List<Place> = withContext(Dispatchers.IO) {
+    /** Where results should lean towards: the user's spot, kept up to date by the view model. */
+    @Volatile var biasLat: Double? = null
+    @Volatile var biasLng: Double? = null
+
+    /** Address/place search. Uses the Indian-address-aware search; falls back to Nominatim if that's unreachable. */
+    suspend fun search(query: String): List<Place> {
+        val c = CurrentCity.city
+        val lat = biasLat ?: c.centerLat
+        val lng = biasLng ?: c.centerLng
+        AddressSearch.search(query, c, lat, lng)?.let { return it }
+        return nominatim(query)
+    }
+
+    private suspend fun nominatim(query: String): List<Place> = withContext(Dispatchers.IO) {
         runCatching {
             val text = client.get("https://nominatim.openstreetmap.org/search") {
                 header("User-Agent", UA)

@@ -84,6 +84,15 @@ fun openDirections(context: Context, lat: Double, lng: Double, label: String) {
     }
 }
 
+/** Starts turn-by-turn directions to a spot (Google Maps navigation), falling back to any maps app or the web. */
+fun openNavigation(context: Context, lat: Double, lng: Double, label: String) {
+    try {
+        context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("google.navigation:q=$lat,$lng")).setPackage("com.google.android.apps.maps"))
+    } catch (_: ActivityNotFoundException) {
+        openDirections(context, lat, lng, label)
+    }
+}
+
 fun openUrl(context: Context, url: String) {
     try {
         context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))

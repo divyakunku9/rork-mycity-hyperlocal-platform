@@ -126,8 +126,14 @@ fun PlaceResultRow(place: Place, icon: ImageVector, tint: Color, sub: String = p
         }
         Spacer(Modifier.width(12.dp))
         Column(Modifier.weight(1f)) {
-            Text(place.name, style = MaterialTheme.typography.titleSmall, maxLines = 1, overflow = TextOverflow.Ellipsis)
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(place.name, style = MaterialTheme.typography.titleSmall, maxLines = 1, overflow = TextOverflow.Ellipsis, modifier = Modifier.weight(1f, fill = false))
+                place.precision?.let { PrecisionTag(it, Modifier.padding(start = 6.dp)) }
+            }
             Text(sub, style = MaterialTheme.typography.bodySmall, color = CityColors.Muted, maxLines = 1, overflow = TextOverflow.Ellipsis)
+            place.note?.let {
+                Text(it, style = MaterialTheme.typography.labelSmall, color = CityColors.Saffron, maxLines = 2, overflow = TextOverflow.Ellipsis, modifier = Modifier.padding(top = 2.dp))
+            }
         }
     }
 }
@@ -267,4 +273,19 @@ fun LocationPickerSheet(vm: CityViewModel) {
             }
         }
     }
+}
+
+
+/** Small label saying how exactly a search result matches the typed address. */
+@Composable
+fun PrecisionTag(p: com.sheharsaathi.app.data.Precision, modifier: Modifier = Modifier) {
+    val (bg, fg) = when (p) {
+        com.sheharsaathi.app.data.Precision.DOOR -> CityColors.GreenText.copy(alpha = 0.16f) to CityColors.GreenText
+        com.sheharsaathi.app.data.Precision.BUILDING -> CityColors.IndigoSoft to CityColors.Indigo
+        else -> CityColors.SurfaceHigh to CityColors.Muted
+    }
+    Text(
+        p.label, style = MaterialTheme.typography.labelSmall, color = fg, maxLines = 1,
+        modifier = modifier.clip(RoundedCornerShape(6.dp)).background(bg).padding(horizontal = 6.dp, vertical = 1.dp),
+    )
 }

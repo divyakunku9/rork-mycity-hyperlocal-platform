@@ -169,6 +169,17 @@ class QaWalkthroughTest {
                 shot("weather-details")
             } finally { backToExplore() }
         }
+        step("Map search: full address with door number") {
+            tab("Explore"); Thread.sleep(1000); dismissLocationPicker()
+            node(SemanticsMatcher("click label 'Search the map'") { it.config.getOrNull(SemanticsActions.OnClick)?.label == "Search the map" }).performClick()
+            waitText("Find on map", 10)
+            node(hasSetTextAction()).performTextInput("8-2-293/82/A, Road No 36, Jubilee Hills")
+            waitFor(hasText("Exact door", substring = true).or(hasText("Building")).or(hasText("Street")), 30)
+            shot("map-search-address")
+            node(hasText("Jubilee Hills Road No 36", substring = true)).performClick()
+            waitText("Navigate", 10); shot("map-search-picked")
+            back()
+        }
         step("News Hub: city headlines load") {
             tab("News Hub")
             waitFor(hasContentDescription("Story:", substring = true), 30)

@@ -79,6 +79,9 @@ data class Place(
     val lat: Double,
     val lng: Double,
     val kind: PlaceKind,
+    /** For search results: how exactly this matches what was typed, and an honest note when it's approximate. */
+    val precision: Precision? = null,
+    val note: String? = null,
 )
 
 private data class Station(val name: String, val lat: Double, val lng: Double)

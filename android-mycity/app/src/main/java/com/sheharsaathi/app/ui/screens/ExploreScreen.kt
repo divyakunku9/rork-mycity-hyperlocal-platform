@@ -470,6 +470,7 @@ fun ExploreScreen(
         MapSearchSheet(
             onDismiss = { showMapSearch = false },
             onPick = { p -> showMapSearch = false; showPlace(p) },
+            onPickOnMap = { showMapSearch = false; vm.toast("Long-press the exact spot on the map to drop a pin") },
         )
     }
 
@@ -488,13 +489,18 @@ fun ExploreScreen(
                         Text(place.area, style = MaterialTheme.typography.bodyMedium, color = CityColors.Muted, maxLines = 2, overflow = TextOverflow.Ellipsis)
                     }
                 }
+                place.note?.let {
+                    Spacer(Modifier.height(8.dp))
+                    Text(it, style = MaterialTheme.typography.bodySmall, color = CityColors.Saffron)
+                }
                 Spacer(Modifier.height(10.dp))
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     SoftBadge(
                         if (km < 1) "${(km * 1000).toInt()} m from you" else "%.1f km from you".format(km),
                         CityColors.IndigoSoft, CityColors.Indigo, icon = Icons.Filled.Navigation,
                     )
-                    SoftBadge(CurrentCity.city.name, CityColors.Canvas, CityColors.Muted)
+                    place.precision?.let { com.sheharsaathi.app.ui.components.PrecisionTag(it, Modifier.align(Alignment.CenterVertically)) }
+                        ?: SoftBadge(CurrentCity.city.name, CityColors.Canvas, CityColors.Muted)
                 }
                 Spacer(Modifier.height(16.dp))
                 Button(
@@ -516,9 +522,13 @@ fun ExploreScreen(
                         Text("Set as my location", maxLines = 1)
                     }
                     OutlinedButton(
-                        onClick = { openDirections(context, place.lat, place.lng, place.name) },
+                        onClick = { com.sheharsaathi.app.ui.components.openNavigation(context, place.lat, place.lng, place.name) },
                         modifier = Modifier.height(48.dp),
-                    ) { Text("Maps") }
+                    ) {
+                        Icon(Icons.Filled.Navigation, null, Modifier.size(18.dp))
+                        Spacer(Modifier.width(6.dp))
+                        Text("Navigate")
+                    }
                 }
             }
         }
@@ -823,7 +833,7 @@ private fun MapSearchPill(onClick: () -> Unit) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun MapSearchSheet(onDismiss: () -> Unit, onPick: (Place) -> Unit) {
+private fun MapSearchSheet(onDismiss: () -> Unit, onPick: (Place) -> Unit, onPickOnMap: () -> Unit) {
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     var query by remember { mutableStateOf("") }
     val (remote, loading) = rememberPlaceSearch(query)
@@ -834,10 +844,10 @@ private fun MapSearchSheet(onDismiss: () -> Unit, onPick: (Place) -> Unit) {
     ModalBottomSheet(onDismissRequest = onDismiss, sheetState = sheetState, containerColor = CityColors.Surface) {
         Column(Modifier.fillMaxWidth().fillMaxHeight(0.9f).imePadding()) {
             Text("Find on map", style = MaterialTheme.typography.headlineSmall, modifier = Modifier.padding(horizontal = 20.dp))
-            Text("Search any street, landmark, shop or colony in ${CurrentCity.city.name}", style = MaterialTheme.typography.bodyMedium,
+            Text("Any street, landmark, shop, colony, or a full address with door number", style = MaterialTheme.typography.bodyMedium,
                 color = CityColors.Muted, modifier = Modifier.padding(horizontal = 20.dp, vertical = 4.dp))
             Spacer(Modifier.height(8.dp))
-            CitySearchField(query, { query = it }, "e.g. Paradise Biryani, Road No. 36, Inorbit")
+            CitySearchField(query, { query = it }, "e.g. 8-2-293/82/A, Road No 36, Jubilee Hills")
             LazyColumn(Modifier.fillMaxWidth().weight(1f), contentPadding = PaddingValues(top = 6.dp, bottom = 24.dp)) {
                 if (loading) item { SearchingRow() }
                 if (remote.isNotEmpty()) {
@@ -850,8 +860,24 @@ private fun MapSearchSheet(onDismiss: () -> Unit, onPick: (Place) -> Unit) {
                 }
                 if (!loading && q.length >= 3 && remote.isEmpty() && presets.isEmpty()) {
                     item {
-                        Text("No places found in ${CurrentCity.city.name} for \u201c$q\u201d.", style = MaterialTheme.typography.bodyMedium,
+                        Text("No places found in ${CurrentCity.city.name} for \u201c$q\u201d. Try the street or area name.", style = MaterialTheme.typography.bodyMedium,
                             color = CityColors.Muted, modifier = Modifier.padding(20.dp))
+                    }
+                }
+                if (q.length >= 3 && !loading) item {
+                    // Not every door is on any map; the user can always mark the exact spot themselves.
+                    Row(
+                        Modifier.fillMaxWidth().clickable(onClick = onPickOnMap).padding(horizontal = 20.dp, vertical = 14.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Box(Modifier.size(38.dp).clip(CircleShape).background(CityColors.SaffronSoft), contentAlignment = Alignment.Center) {
+                            Icon(Icons.Filled.Place, null, tint = CityColors.Saffron, modifier = Modifier.size(20.dp))
+                        }
+                        Spacer(Modifier.width(12.dp))
+                        Column(Modifier.weight(1f)) {
+                            Text("Can't find the exact door? Mark it on the map", style = MaterialTheme.typography.titleSmall)
+                            Text("Close this, then long-press the exact spot to drop a pin", style = MaterialTheme.typography.bodySmall, color = CityColors.Muted)
+                        }
                     }
                 }
             }

@@ -19,6 +19,7 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performScrollToNode
 import androidx.compose.ui.test.performTextInput
+import androidx.compose.ui.test.performTextClearance
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.test.swipeDown
 import androidx.compose.ui.test.swipeUp
@@ -94,6 +95,25 @@ class QaWalkthroughTest {
     private fun clickText(text: String) = node(hasText(text, substring = true)).performClick()
     private fun tab(label: String) = node(hasText(label)).performClick()
     private fun back() { instrumentation.uiAutomation.performGlobalAction(AccessibilityService.GLOBAL_ACTION_BACK); Thread.sleep(700) }
+    private val precisionTag = hasText("Exact door").or(hasText("Building")).or(hasText("Street")).or(hasText("Area"))
+
+    /** Types an address into map search, screenshots the results, opens the top one and screenshots the map. */
+    private fun searchAddress(label: String, address: String) {
+        backToExplore()
+        node(SemanticsMatcher("click label 'Search the map'") { it.config.getOrNull(SemanticsActions.OnClick)?.label == "Search the map" }).performClick()
+        waitText("Find on map", 10)
+        node(hasSetTextAction()).performTextClearance()
+        node(hasSetTextAction()).performTextInput(address)
+        waitFor(precisionTag, 30)
+        Thread.sleep(1500) // let the step-back searches finish so the list is final
+        shot("addr-$label")
+        rule.onAllNodes(precisionTag)[0].performClick()
+        waitText("Navigate", 10)
+        Thread.sleep(2500) // map flies to the spot and loads tiles
+        shot("addr-$label-map")
+        back()
+    }
+
     /** Presses back until the Explore screen is showing (the planner's keyboard can eat one press). */
     private fun backToExplore() {
         repeat(4) { if (exists(hasText("ransit nearby", substring = true))) return; back(); rule.waitForIdle() }
@@ -180,6 +200,15 @@ class QaWalkthroughTest {
             waitText("Navigate", 10); shot("map-search-picked")
             back()
         }
+        // More door numbers: four that exist in the map data, two that don't (to check the honest fallback).
+        listOf(
+            "banjara" to "6-3-596/23/1, Venkata Ramana Colony, Banjara Hills",
+            "jubilee-rd2" to "8-2-120/76/5, Road No 2, Jubilee Hills",
+            "begumpet" to "1-10-176, Begumpet Main Road, Begumpet",
+            "nallakunta" to "2-1-565/6/A, Nallakunta Main Road",
+            "dilsukhnagar" to "H.No 16-11-740/5, Dilsukhnagar",
+            "flat-kondapur" to "Flat 302, Aparna Towers, Kondapur",
+        ).forEach { (label, address) -> step("Map search: $address") { searchAddress(label, address) } }
         step("News Hub: city headlines load") {
             tab("News Hub")
             waitFor(hasContentDescription("Story:", substring = true), 30)

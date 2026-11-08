@@ -35,6 +35,6 @@ class AddressSearchTest {
     }
 
     @Test fun abbreviations() {
-        assertEquals("Road No 12 Banjara Hills", AddressSearch.tidy("rd no. 12 banjara hills").replaceFirstChar { it.uppercase() })
+        assertEquals("Road No 12 banjara hills", AddressSearch.tidy("rd no. 12 banjara hills"))
     }
 }

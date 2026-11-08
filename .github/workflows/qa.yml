@@ -60,9 +60,11 @@ jobs:
         continue-on-error: true
         run: |
           cd android-mycity/qa-out
-          ! grep -q "INSTALL FAILED" install.txt
-          ! grep -q "CHECKS EXITED WITH ERRORS" checks.txt
-          ! grep -q "^FAIL" shots/report.txt 2>/dev/null
+          bad=0
+          if grep -q "INSTALL FAILED" install.txt; then echo "The app didn't build or install"; bad=1; fi
+          if grep -q "CHECKS EXITED WITH ERRORS" checks.txt; then echo "Lint or unit tests failed"; grep -E "FAILED|e: " checks.txt | head -20; bad=1; fi
+          if grep -q "^FAIL" shots/report.txt 2>/dev/null; then echo "Walkthrough steps failed:"; grep "^FAIL" shots/report.txt; bad=1; fi
+          exit $bad
 
       - name: Publish results to the qa-results branch
         if: always()

@@ -97,6 +97,8 @@ object AddressSearch {
             .filter { it.isNotEmpty() }
         val locality = when {
             parts.size > 1 -> parts.last()
+            // "H.No 16-11-740/5, Dilsukhnagar": after the door number, what's left is the area.
+            (door != null || units.isNotEmpty()) && parts.size == 1 -> parts[0]
             lm != null && parts.isNotEmpty() -> parts[0].replace(Regex("^(lane|street|road|gali|cross)\\s+", RegexOption.IGNORE_CASE), "").trim().ifEmpty { null }
             else -> null
         }

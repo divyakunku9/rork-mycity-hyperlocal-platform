@@ -22,6 +22,12 @@ class AddressSearchTest {
         assertNull(p.door)
     }
 
+    @Test fun doorNumberWithJustAnArea() {
+        val a = AddressSearch.parse("H.No 16-11-740/5, Dilsukhnagar")
+        assertEquals("16-11-740/5", a.door)
+        assertEquals("Dilsukhnagar", a.locality)
+    }
+
     @Test fun landmarkDirections() {
         val a = AddressSearch.parse("lane opposite ratnadeep, kukatpally")
         assertEquals("ratnadeep", a.landmark)

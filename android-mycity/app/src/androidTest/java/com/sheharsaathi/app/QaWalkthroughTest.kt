@@ -193,11 +193,11 @@ class QaWalkthroughTest {
             waitFor(hasContentDescription("Feed ", substring = true), 30)
             // Find the sheet's list afresh each time: it's rebuilt as rows fill in.
             fun scrollTo(m: SemanticsMatcher) =
-                rule.onAllNodes(hasScrollToNodeAction().and(hasAnyDescendant(hasText("Civic issues"))))[0].performScrollToNode(m)
+                rule.onAllNodes(hasScrollToNodeAction().and(hasAnyDescendant(hasText("Civic issues near", substring = true))))[0].performScrollToNode(m)
             scrollTo(hasText("Happening near", substring = true)); Thread.sleep(1500); shot("explore-near")
-            scrollTo(hasText("Civic issues")); Thread.sleep(1200); shot("explore-civic")
-            scrollTo(hasText("Events")); Thread.sleep(1500); shot("explore-events")
-            scrollTo(hasText("News")); Thread.sleep(1500); shot("explore-news")
+            scrollTo(hasText("Civic issues near", substring = true)); Thread.sleep(1200); shot("explore-civic")
+            scrollTo(hasText("Events near", substring = true).or(hasText("Events in ", substring = true))); Thread.sleep(1500); shot("explore-events")
+            scrollTo(hasText("News near", substring = true).or(hasText("News in ", substring = true))); Thread.sleep(1500); shot("explore-news")
             scrollTo(hasText("Happening near", substring = true)); Thread.sleep(800)
         }
         step("Happening near: See all") {

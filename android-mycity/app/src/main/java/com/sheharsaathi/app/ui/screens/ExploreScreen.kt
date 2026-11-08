@@ -292,22 +292,28 @@ fun ExploreScreen(
                         )
                     }
                     if (showCivic) item(key = "civic") {
+                        // Open reports, nearest first (each card shows how far it is).
                         FeedSection(
-                            "Civic issues", keep(feed.issues).take(10),
+                            "Civic issues near ${feed.area}", keep(feed.issues).take(10),
                             if (query.isEmpty()) "No open civic reports. Spot a pothole or broken streetlight? Use the Report tab." else "No reports match \"$query\".",
                             feedActions, onSeeAllIssues,
                         )
                     }
                     if (showEvents) item(key = "events") {
+                        // Events within reach of the area; if there are none, say so in the heading and show the city.
+                        val near = keep(feed.eventsNear)
                         FeedSection(
-                            "Events", keep(feed.events).take(12),
+                            if (near.isNotEmpty()) "Events near ${feed.area}" else "Events in ${CurrentCity.city.name}",
+                            (near.ifEmpty { keep(feed.events) }).take(12),
                             if (query.isEmpty()) "No upcoming events yet. Host one from the Events tab." else "No events match \"$query\".",
                             feedActions, onSeeAllEvents,
                         )
                     }
                     if (filter == ExploreFilter.ALL) item(key = "news") {
+                        // Stories that name the area lead; the rest of the row is the latest city news.
+                        val local = feed.news.any { it.local }
                         FeedSection(
-                            "News", keep(feed.news).take(10),
+                            if (local) "News near ${feed.area}" else "News in ${CurrentCity.city.name}", keep(feed.news).take(10),
                             if (query.isEmpty()) (if (vm.isLive) "City news is loading." else "City news is coming to ${CurrentCity.city.name}.") else "No news matches \"$query\".",
                             feedActions, onSeeAllNews,
                         )

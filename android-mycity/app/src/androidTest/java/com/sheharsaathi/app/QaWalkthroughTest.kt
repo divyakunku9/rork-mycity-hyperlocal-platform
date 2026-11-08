@@ -4,6 +4,7 @@ import android.Manifest
 import android.accessibilityservice.AccessibilityService
 import android.graphics.Bitmap
 import androidx.compose.ui.semantics.SemanticsActions
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.isRoot
 import androidx.compose.ui.test.onLast
@@ -99,9 +100,21 @@ class QaWalkthroughTest {
     private val precisionTag = hasText("Exact door").or(hasText("Building")).or(hasText("Street")).or(hasText("Area"))
 
     /** Types an address into map search, screenshots the results, opens the top one and screenshots the map. */
+    private val mapSearchPill = SemanticsMatcher("click label 'Search the map'") { it.config.getOrNull(SemanticsActions.OnClick)?.label == "Search the map" }
+
+    /** The Explore panel can be pulled up over the map; drag it back down until the map's search button shows. */
+    private fun showMap() {
+        repeat(4) {
+            if (exists(mapSearchPill)) return
+            rule.onRoot().performTouchInput { swipe(Offset(centerX, height * 0.45f), Offset(centerX, height * 0.95f), 400) }
+            rule.waitForIdle(); Thread.sleep(500)
+        }
+    }
+
     private fun searchAddress(label: String, address: String) {
         backToExplore()
-        node(SemanticsMatcher("click label 'Search the map'") { it.config.getOrNull(SemanticsActions.OnClick)?.label == "Search the map" }).performClick()
+        showMap()
+        node(mapSearchPill).performClick()
         waitText("Find on map", 10)
         node(hasSetTextAction()).performTextClearance()
         node(hasSetTextAction()).performTextInput(address)
@@ -211,7 +224,8 @@ class QaWalkthroughTest {
         }
         step("Map search: full address with door number") {
             tab("Explore"); Thread.sleep(1000); dismissLocationPicker()
-            node(SemanticsMatcher("click label 'Search the map'") { it.config.getOrNull(SemanticsActions.OnClick)?.label == "Search the map" }).performClick()
+            showMap()
+            node(mapSearchPill).performClick()
             waitText("Find on map", 10)
             node(hasSetTextAction()).performTextInput("8-2-293/82/A, Road No 36, Jubilee Hills")
             waitFor(hasText("Exact door", substring = true).or(hasText("Building")).or(hasText("Street")), 30)

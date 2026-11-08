@@ -13,8 +13,9 @@ android {
         applicationId = "com.sheharsaathi.app"
         minSdk = 24
         targetSdk = 36
-        versionCode = 1
-        versionName = "1.0"
+        // Each GitHub build gets a higher number so phones accept it as an update.
+        versionCode = (System.getenv("GITHUB_RUN_NUMBER")?.toIntOrNull() ?: 1)
+        versionName = "1.0." + (System.getenv("GITHUB_RUN_NUMBER") ?: "0")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -24,10 +25,24 @@ android {
         textOutput = file("build/reports/lint.txt")
     }
 
+    // One fixed key for test builds, so each new build installs over the previous one on a phone.
+    // Only for testing; a Play Store release needs its own private key kept out of the repo.
+    signingConfigs {
+        create("testing") {
+            storeFile = file("testing.keystore")
+            storePassword = "sheharsaathi-test"
+            keyAlias = "testing"
+            keyPassword = "sheharsaathi-test"
+        }
+    }
+
     buildTypes {
+        debug {
+            signingConfig = signingConfigs.getByName("testing")
+        }
         release {
             isMinifyEnabled = false
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig = signingConfigs.getByName("testing")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"

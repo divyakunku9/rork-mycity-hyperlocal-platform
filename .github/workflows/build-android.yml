@@ -1,6 +1,6 @@
-# Builds the Android app on GitHub whenever code is pushed.
-# To get the app: open the repo's "Actions" tab → the latest "Build Android app" run →
-# download "app-debug-apk" at the bottom, unzip it, and install the .apk on an Android phone.
+# Builds the Android app on GitHub whenever code is pushed, and publishes the
+# supabase-backend build as a direct download for testing on a phone:
+# https://github.com/divyakunku9/rork-mycity-hyperlocal-platform/releases/download/test-build/SheharSaathi.apk
 name: Build Android app
 
 on:
@@ -8,6 +8,9 @@ on:
     branches: ["**"]
   pull_request:
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -30,9 +33,24 @@ jobs:
         run: |
           chmod +x gradlew
           ./gradlew assembleDebug --stacktrace
+          cp app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/debug/SheharSaathi.apk
 
       - uses: actions/upload-artifact@v4
         with:
           name: app-debug-apk
-          path: android-mycity/app/build/outputs/apk/debug/*.apk
+          path: android-mycity/app/build/outputs/apk/debug/SheharSaathi.apk
           retention-days: 14
+
+      - name: Publish test download
+        if: github.event_name != 'pull_request' && (github.ref == 'refs/heads/supabase-backend' || github.ref == 'refs/heads/main')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          APK=app/build/outputs/apk/debug/SheharSaathi.apk
+          NOTES="Test build ${GITHUB_RUN_NUMBER} from ${GITHUB_REF_NAME} ($(git rev-parse --short HEAD)), $(date -u '+%d %b %Y %H:%M UTC'). Download SheharSaathi.apk on your Android phone and open it to install."
+          if gh release view test-build > /dev/null 2>&1; then
+            gh release upload test-build "$APK" --clobber
+            gh release edit test-build --notes "$NOTES" --target "$GITHUB_SHA"
+          else
+            gh release create test-build "$APK" --title "Shehar Saathi — latest test build" --notes "$NOTES" --prerelease --target "$GITHUB_SHA"
+          fi

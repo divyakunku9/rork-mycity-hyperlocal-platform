@@ -463,13 +463,13 @@ class CityBackend(val sb: Supabase) {
 
     /** Hyderabad's 300 wards (three corporations since Feb 2026) and the bodies that run them. */
     suspend fun wards(): Res<Pair<List<com.sheharsaathi.app.data.Ward>, List<com.sheharsaathi.app.data.CivicBody>>> = coroutineScope {
-        val w = async { sb.select("civic_wards", "select" to "no,name,corporation,zone,circle,lat,lng,corporator,corporator_party", "order" to "no.asc", "limit" to "500").decode<List<WardRow>>() }
+        val w = async { sb.select("civic_wards", "select" to "no,name,corporation,zone,circle,lat,lng,corporator,corporator_party,approx", "order" to "no.asc", "limit" to "500").decode<List<WardRow>>() }
         val b = async { sb.select("civic_bodies", "select" to "code,name,head_title,head_name,council_note,website,helpline_display,helpline_dial,special_officer,as_of").decode<List<CivicBodyRow>>() }
         val wr = w.await(); val br = b.await()
         if (wr is Res.Err) return@coroutineScope wr
         if (br is Res.Err) return@coroutineScope br
         Res.Ok(
-            (wr as Res.Ok).value.map { com.sheharsaathi.app.data.Ward(it.no, it.name, it.corporation, it.zone, it.circle, it.lat, it.lng, it.corporator, it.corporatorParty) } to
+            (wr as Res.Ok).value.map { com.sheharsaathi.app.data.Ward(it.no, it.name, it.corporation, it.zone, it.circle, it.lat, it.lng, it.corporator, it.corporatorParty, it.approx) } to
                 (br as Res.Ok).value.map { com.sheharsaathi.app.data.CivicBody(it.code, it.name, it.headTitle, it.headName, it.councilNote, it.website, it.helplineDisplay, it.helplineDial, it.specialOfficer, it.asOf) }
         )
     }

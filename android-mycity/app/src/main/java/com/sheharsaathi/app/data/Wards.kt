@@ -16,6 +16,8 @@ data class Ward(
     /** Null while no council is elected (the case for all three corporations since Feb 2026). */
     val corporator: String? = null,
     val corporatorParty: String? = null,
+    /** True when the centre is only roughly known (e.g. the circle's centre); not used for "nearest ward". */
+    val approx: Boolean = false,
 ) {
     val label get() = "Ward $no · $name"
     /** What's saved in the profile and shown on the ward poll. */
@@ -87,7 +89,8 @@ object WardFinder {
                 .minByOrNull { dist.getValue(it) }
                 ?.let { return WardMatch(it, WardSource.LOCATION, byName = true, km = dist.getValue(it)) }
         }
-        val nearest = located.minBy { dist.getValue(it) }
+        // Rough centres would pull spots toward the circle middle, so only well-placed wards count here.
+        val nearest = located.filter { !it.approx }.minByOrNull { dist.getValue(it) } ?: return null
         if (dist.getValue(nearest) > OUTSIDE_KM) return null
         return WardMatch(nearest, WardSource.LOCATION, byName = false, km = dist.getValue(nearest))
     }

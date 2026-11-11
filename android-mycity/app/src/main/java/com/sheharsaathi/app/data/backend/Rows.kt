@@ -187,6 +187,7 @@ data class WardRow(
     val lng: Double? = null,
     val corporator: String? = null,
     @SerialName("corporator_party") val corporatorParty: String? = null,
+    val approx: Boolean = false,
 )
 
 @Serializable

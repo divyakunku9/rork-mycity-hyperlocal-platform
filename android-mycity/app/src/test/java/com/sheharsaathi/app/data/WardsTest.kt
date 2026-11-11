@@ -50,6 +50,14 @@ class WardsTest {
         assertFalse(m.byName)
     }
 
+    @Test fun roughCentresOnlyCountForNameMatches() {
+        val rough = wards + Ward(98, "Pathargatti", "GHMC", "Charminar", "Charminar", 17.3618, 78.4745, approx = true)
+        // Nearest is the rough Pathargatti point, but it isn't used for "nearest ward".
+        assertEquals(101, WardFinder.find(place("x", "Some lane", 17.3618, 78.4745), rough)!!.ward.no)
+        // By name it still matches.
+        assertEquals(98, WardFinder.find(place("x", "Pathargatti, Hyderabad", 17.3618, 78.4745), rough)!!.ward.no)
+    }
+
     @Test fun outsideTheCorporationsIsNull() {
         assertNull(WardFinder.find(place("Warangal", "Warangal", 17.97, 79.59), wards))
     }

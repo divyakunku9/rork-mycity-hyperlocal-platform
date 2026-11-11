@@ -132,7 +132,8 @@ class QaWalkthroughTest {
 
     /** Presses back until the Explore screen is showing (the planner's keyboard can eat one press). */
     private fun backToExplore() {
-        repeat(4) { if (exists(hasText("ransit nearby", substring = true))) return; back(); rule.waitForIdle() }
+        // The map's search button is always in Explore's tree, even when the rows below are scrolled away.
+        repeat(4) { if (exists(mapSearchPill) || exists(hasText("ransit nearby", substring = true))) return; back(); rule.waitForIdle() }
     }
     private fun scrollDown() = rule.onRoot().performTouchInput { swipeUp(durationMillis = 400) }
     private fun scrollTop() = repeat(4) { rule.onRoot().performTouchInput { swipeDown(durationMillis = 250) } }
@@ -192,8 +193,18 @@ class QaWalkthroughTest {
             tab("Explore"); Thread.sleep(1000); dismissLocationPicker()
             waitFor(hasContentDescription("Feed ", substring = true), 30)
             // Find the sheet's list afresh each time: it's rebuilt as rows fill in.
-            fun scrollTo(m: SemanticsMatcher) =
-                rule.onAllNodes(hasScrollToNodeAction().and(hasAnyDescendant(hasText("Civic issues near", substring = true))))[0].performScrollToNode(m)
+            // Rows fill in (and the list is rebuilt) while live data arrives, so retry a scroll that lands mid-rebuild.
+            fun scrollTo(m: SemanticsMatcher) {
+                var last: Throwable? = null
+                repeat(4) {
+                    try {
+                        rule.waitForIdle()
+                        rule.onAllNodes(hasScrollToNodeAction().and(hasAnyDescendant(hasText("Civic issues near", substring = true))))[0].performScrollToNode(m)
+                        return
+                    } catch (t: AssertionError) { last = t; Thread.sleep(1500) }
+                }
+                throw last!!
+            }
             scrollTo(hasText("Happening near", substring = true)); Thread.sleep(1500); shot("explore-near")
             scrollTo(hasText("Civic issues near", substring = true)); Thread.sleep(1200); shot("explore-civic")
             scrollTo(hasText("Events near", substring = true).or(hasText("Events in ", substring = true))); Thread.sleep(1500); shot("explore-events")
@@ -201,6 +212,10 @@ class QaWalkthroughTest {
             scrollTo(hasText("Happening near", substring = true)); Thread.sleep(800)
         }
         step("Happening near: See all") {
+            if (!exists(hasContentDescription("See all: Happening near", substring = true))) {
+                rule.onAllNodes(hasScrollToNodeAction().and(hasAnyDescendant(hasText("Civic issues near", substring = true))))[0]
+                    .performScrollToNode(hasText("Happening near", substring = true))
+            }
             node(hasContentDescription("See all: Happening near", substring = true)).performClick()
             waitText("Within 5 km of you", 10); Thread.sleep(1500); shot("nearby-events")
             node(hasText("Civic (", substring = true)).performClick(); Thread.sleep(1000); shot("nearby-civic")

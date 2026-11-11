@@ -1,0 +1,2102 @@
+[
+ {
+  "no": 1,
+  "name": "Keesara",
+  "zone": "Malkajgiri",
+  "circle": "Keesara",
+  "corp": "MMC"
+ },
+ {
+  "no": 2,
+  "name": "Chandrapuri Colony",
+  "zone": "Malkajgiri",
+  "circle": "Keesara",
+  "corp": "MMC"
+ },
+ {
+  "no": 3,
+  "name": "Jawaharnagar",
+  "zone": "Malkajgiri",
+  "circle": "Keesara",
+  "corp": "MMC"
+ },
+ {
+  "no": 4,
+  "name": "Dammaiguda",
+  "zone": "Malkajgiri",
+  "circle": "Keesara",
+  "corp": "MMC"
+ },
+ {
+  "no": 5,
+  "name": "Nagaram",
+  "zone": "Uppal",
+  "circle": "Ghatkesar",
+  "corp": "MMC"
+ },
+ {
+  "no": 6,
+  "name": "Ghatkesar",
+  "zone": "Uppal",
+  "circle": "Ghatkesar",
+  "corp": "MMC"
+ },
+ {
+  "no": 7,
+  "name": "Edulabad",
+  "zone": "Uppal",
+  "circle": "Ghatkesar",
+  "corp": "MMC"
+ },
+ {
+  "no": 8,
+  "name": "Pocharam",
+  "zone": "Uppal",
+  "circle": "Ghatkesar",
+  "corp": "MMC"
+ },
+ {
+  "no": 9,
+  "name": "Medipally",
+  "zone": "Uppal",
+  "circle": "Boduppal",
+  "corp": "MMC"
+ },
+ {
+  "no": 10,
+  "name": "Peerzadiguda",
+  "zone": "Uppal",
+  "circle": "Boduppal",
+  "corp": "MMC"
+ },
+ {
+  "no": 11,
+  "name": "Boduppal",
+  "zone": "Uppal",
+  "circle": "Boduppal",
+  "corp": "MMC"
+ },
+ {
+  "no": 12,
+  "name": "Chengicherla",
+  "zone": "Uppal",
+  "circle": "Boduppal",
+  "corp": "MMC"
+ },
+ {
+  "no": 13,
+  "name": "Vampuguda",
+  "zone": "Uppal",
+  "circle": "Kapra",
+  "corp": "MMC"
+ },
+ {
+  "no": 14,
+  "name": "Kapra",
+  "zone": "Uppal",
+  "circle": "Kapra",
+  "corp": "MMC"
+ },
+ {
+  "no": 15,
+  "name": "A. S. Rao Nagar",
+  "zone": "Uppal",
+  "circle": "Kapra",
+  "corp": "MMC"
+ },
+ {
+  "no": 16,
+  "name": "Kushaiguda",
+  "zone": "Uppal",
+  "circle": "Kapra",
+  "corp": "MMC"
+ },
+ {
+  "no": 17,
+  "name": "Cherlapally",
+  "zone": "Uppal",
+  "circle": "Kapra",
+  "corp": "MMC"
+ },
+ {
+  "no": 18,
+  "name": "Shakthi Sai Nagar",
+  "zone": "Uppal",
+  "circle": "Nacharam",
+  "corp": "MMC"
+ },
+ {
+  "no": 19,
+  "name": "H. B. Colony",
+  "zone": "Uppal",
+  "circle": "Nacharam",
+  "corp": "MMC"
+ },
+ {
+  "no": 20,
+  "name": "Mallapur",
+  "zone": "Uppal",
+  "circle": "Nacharam",
+  "corp": "MMC"
+ },
+ {
+  "no": 21,
+  "name": "Nacharam",
+  "zone": "Uppal",
+  "circle": "Nacharam",
+  "corp": "MMC"
+ },
+ {
+  "no": 22,
+  "name": "HMT Nagar",
+  "zone": "Uppal",
+  "circle": "Nacharam",
+  "corp": "MMC"
+ },
+ {
+  "no": 23,
+  "name": "Chilkanagar",
+  "zone": "Uppal",
+  "circle": "Uppal",
+  "corp": "MMC"
+ },
+ {
+  "no": 24,
+  "name": "Beerappagadda",
+  "zone": "Uppal",
+  "circle": "Uppal",
+  "corp": "MMC"
+ },
+ {
+  "no": 25,
+  "name": "Habsiguda",
+  "zone": "Uppal",
+  "circle": "Uppal",
+  "corp": "MMC"
+ },
+ {
+  "no": 26,
+  "name": "Ramanthapur",
+  "zone": "Uppal",
+  "circle": "Uppal",
+  "corp": "MMC"
+ },
+ {
+  "no": 27,
+  "name": "Venkat Reddy Nagar",
+  "zone": "Uppal",
+  "circle": "Uppal",
+  "corp": "MMC"
+ },
+ {
+  "no": 28,
+  "name": "Uppal",
+  "zone": "Uppal",
+  "circle": "Uppal",
+  "corp": "MMC"
+ },
+ {
+  "no": 29,
+  "name": "Nagole",
+  "zone": "LB Nagar",
+  "circle": "Nagole",
+  "corp": "MMC"
+ },
+ {
+  "no": 30,
+  "name": "Kothapet",
+  "zone": "LB Nagar",
+  "circle": "Saroornagar",
+  "corp": "MMC"
+ },
+ {
+  "no": 31,
+  "name": "Chaitanyapuri",
+  "zone": "LB Nagar",
+  "circle": "Saroornagar",
+  "corp": "MMC"
+ },
+ {
+  "no": 32,
+  "name": "Gaddiannaram",
+  "zone": "LB Nagar",
+  "circle": "Saroornagar",
+  "corp": "MMC"
+ },
+ {
+  "no": 33,
+  "name": "Saroornagar",
+  "zone": "LB Nagar",
+  "circle": "Saroornagar",
+  "corp": "MMC"
+ },
+ {
+  "no": 34,
+  "name": "Doctors Colony",
+  "zone": "LB Nagar",
+  "circle": "Saroornagar",
+  "corp": "MMC"
+ },
+ {
+  "no": 35,
+  "name": "Rama Krishna Puram",
+  "zone": "LB Nagar",
+  "circle": "Saroornagar",
+  "corp": "MMC"
+ },
+ {
+  "no": 36,
+  "name": "NTR Nagar",
+  "zone": "LB Nagar",
+  "circle": "Saroornagar",
+  "corp": "MMC"
+ },
+ {
+  "no": 37,
+  "name": "Lingojiguda",
+  "zone": "LB Nagar",
+  "circle": "LB Nagar",
+  "corp": "MMC"
+ },
+ {
+  "no": 38,
+  "name": "Champapet",
+  "zone": "LB Nagar",
+  "circle": "LB Nagar",
+  "corp": "MMC"
+ },
+ {
+  "no": 39,
+  "name": "Karmanghat",
+  "zone": "LB Nagar",
+  "circle": "LB Nagar",
+  "corp": "MMC"
+ },
+ {
+  "no": 40,
+  "name": "Bairamalguda",
+  "zone": "LB Nagar",
+  "circle": "LB Nagar",
+  "corp": "MMC"
+ },
+ {
+  "no": 41,
+  "name": "Hastinapuram",
+  "zone": "LB Nagar",
+  "circle": "LB Nagar",
+  "corp": "MMC"
+ },
+ {
+  "no": 42,
+  "name": "BN Reddy Nagar",
+  "zone": "LB Nagar",
+  "circle": "Hayathnagar",
+  "corp": "MMC"
+ },
+ {
+  "no": 43,
+  "name": "Vanasthalipuram",
+  "zone": "LB Nagar",
+  "circle": "Hayathnagar",
+  "corp": "MMC"
+ },
+ {
+  "no": 44,
+  "name": "Chintalakunta",
+  "zone": "LB Nagar",
+  "circle": "Hayathnagar",
+  "corp": "MMC"
+ },
+ {
+  "no": 45,
+  "name": "Mansoorabad",
+  "zone": "LB Nagar",
+  "circle": "Nagole",
+  "corp": "MMC"
+ },
+ {
+  "no": 46,
+  "name": "Geological Survey of India",
+  "zone": "LB Nagar",
+  "circle": "Nagole",
+  "corp": "MMC"
+ },
+ {
+  "no": 47,
+  "name": "Lecturers Colony",
+  "zone": "LB Nagar",
+  "circle": "Nagole",
+  "corp": "MMC"
+ },
+ {
+  "no": 48,
+  "name": "High Court Colony",
+  "zone": "LB Nagar",
+  "circle": "Hayathnagar",
+  "corp": "MMC"
+ },
+ {
+  "no": 49,
+  "name": "Sahebnagar",
+  "zone": "LB Nagar",
+  "circle": "Hayathnagar",
+  "corp": "MMC"
+ },
+ {
+  "no": 50,
+  "name": "Hayathnagar",
+  "zone": "LB Nagar",
+  "circle": "Hayathnagar",
+  "corp": "MMC"
+ },
+ {
+  "no": 51,
+  "name": "Kuntloor",
+  "zone": "LB Nagar",
+  "circle": "Nagole",
+  "corp": "MMC"
+ },
+ {
+  "no": 52,
+  "name": "Pedda Amberpet",
+  "zone": "LB Nagar",
+  "circle": "Nagole",
+  "corp": "MMC"
+ },
+ {
+  "no": 53,
+  "name": "Thorrur",
+  "zone": "Shamshabad",
+  "circle": "Adibatla",
+  "corp": "GHMC"
+ },
+ {
+  "no": 54,
+  "name": "Kongara Kalan",
+  "zone": "Shamshabad",
+  "circle": "Adibatla",
+  "corp": "GHMC"
+ },
+ {
+  "no": 55,
+  "name": "Adibatla",
+  "zone": "Shamshabad",
+  "circle": "Adibatla",
+  "corp": "GHMC"
+ },
+ {
+  "no": 56,
+  "name": "Turkayamjal",
+  "zone": "Shamshabad",
+  "circle": "Adibatla",
+  "corp": "GHMC"
+ },
+ {
+  "no": 57,
+  "name": "Nadergul",
+  "zone": "Shamshabad",
+  "circle": "Badangpet",
+  "corp": "GHMC"
+ },
+ {
+  "no": 58,
+  "name": "Prasanthi Hills",
+  "zone": "Shamshabad",
+  "circle": "Badangpet",
+  "corp": "GHMC"
+ },
+ {
+  "no": 59,
+  "name": "Jillelguda",
+  "zone": "Shamshabad",
+  "circle": "Badangpet",
+  "corp": "GHMC"
+ },
+ {
+  "no": 60,
+  "name": "Meerpet",
+  "zone": "Shamshabad",
+  "circle": "Badangpet",
+  "corp": "GHMC"
+ },
+ {
+  "no": 61,
+  "name": "Badangpet",
+  "zone": "Shamshabad",
+  "circle": "Badangpet",
+  "corp": "GHMC"
+ },
+ {
+  "no": 62,
+  "name": "Balapur",
+  "zone": "Shamshabad",
+  "circle": "Badangpet",
+  "corp": "GHMC"
+ },
+ {
+  "no": 63,
+  "name": "Shaheen Nagar",
+  "zone": "Shamshabad",
+  "circle": "Jalpally",
+  "corp": "GHMC"
+ },
+ {
+  "no": 64,
+  "name": "Pahari Sharif",
+  "zone": "Shamshabad",
+  "circle": "Jalpally",
+  "corp": "GHMC"
+ },
+ {
+  "no": 65,
+  "name": "Jalpally",
+  "zone": "Shamshabad",
+  "circle": "Jalpally",
+  "corp": "GHMC"
+ },
+ {
+  "no": 66,
+  "name": "Tukkuguda",
+  "zone": "Shamshabad",
+  "circle": "Shamshabad",
+  "corp": "GHMC"
+ },
+ {
+  "no": 67,
+  "name": "Mankhal",
+  "zone": "Shamshabad",
+  "circle": "Shamshabad",
+  "corp": "GHMC"
+ },
+ {
+  "no": 68,
+  "name": "Bandlaguda",
+  "zone": "Rajendranagar",
+  "circle": "Chandrayan Gutta",
+  "corp": "GHMC"
+ },
+ {
+  "no": 69,
+  "name": "Noori Nagar",
+  "zone": "Rajendranagar",
+  "circle": "Chandrayan Gutta",
+  "corp": "GHMC"
+ },
+ {
+  "no": 70,
+  "name": "Barkas",
+  "zone": "Rajendranagar",
+  "circle": "Chandrayan Gutta",
+  "corp": "GHMC"
+ },
+ {
+  "no": 71,
+  "name": "Kanchanbagh",
+  "zone": "Rajendranagar",
+  "circle": "Chandrayan Gutta",
+  "corp": "GHMC"
+ },
+ {
+  "no": 72,
+  "name": "Chandrayan Gutta",
+  "zone": "Rajendranagar",
+  "circle": "Chandrayan Gutta",
+  "corp": "GHMC"
+ },
+ {
+  "no": 73,
+  "name": "Riyasat Nagar",
+  "zone": "Rajendranagar",
+  "circle": "Jangammet",
+  "corp": "GHMC"
+ },
+ {
+  "no": 74,
+  "name": "Lalitha Bagh",
+  "zone": "Rajendranagar",
+  "circle": "Jangammet",
+  "corp": "GHMC"
+ },
+ {
+  "no": 75,
+  "name": "Jangammet",
+  "zone": "Rajendranagar",
+  "circle": "Jangammet",
+  "corp": "GHMC"
+ },
+ {
+  "no": 76,
+  "name": "Phool Bagh",
+  "zone": "Rajendranagar",
+  "circle": "Jangammet",
+  "corp": "GHMC"
+ },
+ {
+  "no": 77,
+  "name": "Quadri Chaman",
+  "zone": "Rajendranagar",
+  "circle": "Jangammet",
+  "corp": "GHMC"
+ },
+ {
+  "no": 78,
+  "name": "Gowlipura",
+  "zone": "Charminar",
+  "circle": "Yakutpura",
+  "corp": "GHMC"
+ },
+ {
+  "no": 79,
+  "name": "Talab Chanchalam",
+  "zone": "Charminar",
+  "circle": "Yakutpura",
+  "corp": "GHMC"
+ },
+ {
+  "no": 80,
+  "name": "Yakutpura",
+  "zone": "Charminar",
+  "circle": "Yakutpura",
+  "corp": "GHMC"
+ },
+ {
+  "no": 81,
+  "name": "Dabirpura",
+  "zone": "Charminar",
+  "circle": "Yakutpura",
+  "corp": "GHMC"
+ },
+ {
+  "no": 82,
+  "name": "Rein Bazar",
+  "zone": "Charminar",
+  "circle": "Yakutpura",
+  "corp": "GHMC"
+ },
+ {
+  "no": 83,
+  "name": "Madannapet",
+  "zone": "Charminar",
+  "circle": "Yakutpura",
+  "corp": "GHMC"
+ },
+ {
+  "no": 84,
+  "name": "Bhanu Nagar",
+  "zone": "Charminar",
+  "circle": "Santoshnagar",
+  "corp": "GHMC"
+ },
+ {
+  "no": 85,
+  "name": "Santoshnagar",
+  "zone": "Charminar",
+  "circle": "Santoshnagar",
+  "corp": "GHMC"
+ },
+ {
+  "no": 86,
+  "name": "IS Sadan",
+  "zone": "Charminar",
+  "circle": "Santoshnagar",
+  "corp": "GHMC"
+ },
+ {
+  "no": 87,
+  "name": "Saraswathi Nagar",
+  "zone": "Charminar",
+  "circle": "Santoshnagar",
+  "corp": "GHMC"
+ },
+ {
+  "no": 88,
+  "name": "Saidabad",
+  "zone": "Charminar",
+  "circle": "Malakpet",
+  "corp": "GHMC"
+ },
+ {
+  "no": 89,
+  "name": "Asmangadh",
+  "zone": "Charminar",
+  "circle": "Malakpet",
+  "corp": "GHMC"
+ },
+ {
+  "no": 90,
+  "name": "Moosarambagh",
+  "zone": "Charminar",
+  "circle": "Moosarambagh",
+  "corp": "GHMC"
+ },
+ {
+  "no": 91,
+  "name": "Old Malakpet",
+  "zone": "Charminar",
+  "circle": "Moosarambagh",
+  "corp": "GHMC"
+ },
+ {
+  "no": 92,
+  "name": "MCH Colony",
+  "zone": "Charminar",
+  "circle": "Moosarambagh",
+  "corp": "GHMC"
+ },
+ {
+  "no": 93,
+  "name": "Akberbagh",
+  "zone": "Charminar",
+  "circle": "Malakpet",
+  "corp": "GHMC"
+ },
+ {
+  "no": 94,
+  "name": "Chawani",
+  "zone": "Charminar",
+  "circle": "Malakpet",
+  "corp": "GHMC"
+ },
+ {
+  "no": 95,
+  "name": "Kala Dera",
+  "zone": "Charminar",
+  "circle": "Moosarambagh",
+  "corp": "GHMC"
+ },
+ {
+  "no": 96,
+  "name": "Azampura",
+  "zone": "Charminar",
+  "circle": "Moosarambagh",
+  "corp": "GHMC"
+ },
+ {
+  "no": 97,
+  "name": "Purani Haveli",
+  "zone": "Charminar",
+  "circle": "Charminar",
+  "corp": "GHMC"
+ },
+ {
+  "no": 98,
+  "name": "Pathargatti",
+  "zone": "Charminar",
+  "circle": "Charminar",
+  "corp": "GHMC"
+ },
+ {
+  "no": 99,
+  "name": "Hari Bowli",
+  "zone": "Charminar",
+  "circle": "Charminar",
+  "corp": "GHMC"
+ },
+ {
+  "no": 100,
+  "name": "Qazipura",
+  "zone": "Charminar",
+  "circle": "Charminar",
+  "corp": "GHMC"
+ },
+ {
+  "no": 101,
+  "name": "Ghansi Bazar",
+  "zone": "Charminar",
+  "circle": "Charminar",
+  "corp": "GHMC"
+ },
+ {
+  "no": 102,
+  "name": "Purana Pul",
+  "zone": "Charminar",
+  "circle": "Charminar",
+  "corp": "GHMC"
+ },
+ {
+  "no": 103,
+  "name": "Doodh Bowli",
+  "zone": "Rajendranagar",
+  "circle": "Bahadurpura",
+  "corp": "GHMC"
+ },
+ {
+  "no": 104,
+  "name": "Shah-Ali-Banda",
+  "zone": "Rajendranagar",
+  "circle": "Falaknuma",
+  "corp": "GHMC"
+ },
+ {
+  "no": 105,
+  "name": "Falaknuma",
+  "zone": "Rajendranagar",
+  "circle": "Falaknuma",
+  "corp": "GHMC"
+ },
+ {
+  "no": 106,
+  "name": "Jahanuma",
+  "zone": "Rajendranagar",
+  "circle": "Falaknuma",
+  "corp": "GHMC"
+ },
+ {
+  "no": 107,
+  "name": "Nawab Saheb Kunta",
+  "zone": "Rajendranagar",
+  "circle": "Falaknuma",
+  "corp": "GHMC"
+ },
+ {
+  "no": 108,
+  "name": "Teegal Kunta",
+  "zone": "Rajendranagar",
+  "circle": "Bahadurpura",
+  "corp": "GHMC"
+ },
+ {
+  "no": 109,
+  "name": "Chandu Lal Baradari",
+  "zone": "Rajendranagar",
+  "circle": "Bahadurpura",
+  "corp": "GHMC"
+ },
+ {
+  "no": 110,
+  "name": "Ramnastpura",
+  "zone": "Rajendranagar",
+  "circle": "Bahadurpura",
+  "corp": "GHMC"
+ },
+ {
+  "no": 111,
+  "name": "Kishanbagh",
+  "zone": "Rajendranagar",
+  "circle": "Bahadurpura",
+  "corp": "GHMC"
+ },
+ {
+  "no": 112,
+  "name": "Attapur",
+  "zone": "Rajendranagar",
+  "circle": "Attapur",
+  "corp": "GHMC"
+ },
+ {
+  "no": 113,
+  "name": "Hyderguda",
+  "zone": "Rajendranagar",
+  "circle": "Attapur",
+  "corp": "GHMC"
+ },
+ {
+  "no": 114,
+  "name": "Suleman Nagar",
+  "zone": "Rajendranagar",
+  "circle": "Attapur",
+  "corp": "GHMC"
+ },
+ {
+  "no": 115,
+  "name": "Shastripuram",
+  "zone": "Rajendranagar",
+  "circle": "Attapur",
+  "corp": "GHMC"
+ },
+ {
+  "no": 116,
+  "name": "Katedan",
+  "zone": "Rajendranagar",
+  "circle": "Attapur",
+  "corp": "GHMC"
+ },
+ {
+  "no": 117,
+  "name": "Mailardevpally",
+  "zone": "Rajendranagar",
+  "circle": "Attapur",
+  "corp": "GHMC"
+ },
+ {
+  "no": 118,
+  "name": "Shamshabad",
+  "zone": "Shamshabad",
+  "circle": "Shamshabad",
+  "corp": "GHMC"
+ },
+ {
+  "no": 119,
+  "name": "Kothwalguda",
+  "zone": "Shamshabad",
+  "circle": "Shamshabad",
+  "corp": "GHMC"
+ },
+ {
+  "no": 120,
+  "name": "Rajendranagar",
+  "zone": "Rajendranagar",
+  "circle": "Rajendranagar",
+  "corp": "GHMC"
+ },
+ {
+  "no": 121,
+  "name": "Bandlaguda Jagir",
+  "zone": "Rajendranagar",
+  "circle": "Rajendranagar",
+  "corp": "GHMC"
+ },
+ {
+  "no": 122,
+  "name": "Kismatpur",
+  "zone": "Rajendranagar",
+  "circle": "Rajendranagar",
+  "corp": "GHMC"
+ },
+ {
+  "no": 123,
+  "name": "Hydershahkote",
+  "zone": "Rajendranagar",
+  "circle": "Rajendranagar",
+  "corp": "GHMC"
+ },
+ {
+  "no": 124,
+  "name": "Narsingi",
+  "zone": "Serilingampally",
+  "circle": "Narsingi",
+  "corp": "CMC"
+ },
+ {
+  "no": 125,
+  "name": "Kokapet",
+  "zone": "Serilingampally",
+  "circle": "Narsingi",
+  "corp": "CMC"
+ },
+ {
+  "no": 126,
+  "name": "Gandipet",
+  "zone": "Serilingampally",
+  "circle": "Narsingi",
+  "corp": "CMC"
+ },
+ {
+  "no": 127,
+  "name": "Manikonda",
+  "zone": "Serilingampally",
+  "circle": "Narsingi",
+  "corp": "CMC"
+ },
+ {
+  "no": 128,
+  "name": "Neknampur",
+  "zone": "Serilingampally",
+  "circle": "Narsingi",
+  "corp": "CMC"
+ },
+ {
+  "no": 129,
+  "name": "Nizam Colony",
+  "zone": "Golconda",
+  "circle": "Golconda",
+  "corp": "GHMC"
+ },
+ {
+  "no": 130,
+  "name": "Nanalnagar",
+  "zone": "Golconda",
+  "circle": "Golconda",
+  "corp": "GHMC"
+ },
+ {
+  "no": 131,
+  "name": "Tolichowki",
+  "zone": "Golconda",
+  "circle": "Golconda",
+  "corp": "GHMC"
+ },
+ {
+  "no": 132,
+  "name": "Golconda",
+  "zone": "Golconda",
+  "circle": "Golconda",
+  "corp": "GHMC"
+ },
+ {
+  "no": 133,
+  "name": "Ibrahimbagh",
+  "zone": "Golconda",
+  "circle": "Golconda",
+  "corp": "GHMC"
+ },
+ {
+  "no": 134,
+  "name": "Langar Houz",
+  "zone": "Golconda",
+  "circle": "Karwan",
+  "corp": "GHMC"
+ },
+ {
+  "no": 135,
+  "name": "Gudimalkapur",
+  "zone": "Golconda",
+  "circle": "Karwan",
+  "corp": "GHMC"
+ },
+ {
+  "no": 136,
+  "name": "Karwan",
+  "zone": "Golconda",
+  "circle": "Karwan",
+  "corp": "GHMC"
+ },
+ {
+  "no": 137,
+  "name": "Tappachabutra",
+  "zone": "Golconda",
+  "circle": "Karwan",
+  "corp": "GHMC"
+ },
+ {
+  "no": 138,
+  "name": "Jiyaguda",
+  "zone": "Golconda",
+  "circle": "Karwan",
+  "corp": "GHMC"
+ },
+ {
+  "no": 139,
+  "name": "Asif Nagar",
+  "zone": "Golconda",
+  "circle": "Mehdipatnam",
+  "corp": "GHMC"
+ },
+ {
+  "no": 140,
+  "name": "Padmanabha Nagar",
+  "zone": "Golconda",
+  "circle": "Mehdipatnam",
+  "corp": "GHMC"
+ },
+ {
+  "no": 141,
+  "name": "Mehdipatnam",
+  "zone": "Golconda",
+  "circle": "Mehdipatnam",
+  "corp": "GHMC"
+ },
+ {
+  "no": 142,
+  "name": "Syed Nagar",
+  "zone": "Golconda",
+  "circle": "Mehdipatnam",
+  "corp": "GHMC"
+ },
+ {
+  "no": 143,
+  "name": "Vijayanagar Colony",
+  "zone": "Golconda",
+  "circle": "Masab Tank",
+  "corp": "GHMC"
+ },
+ {
+  "no": 144,
+  "name": "Ahmed Nagar",
+  "zone": "Golconda",
+  "circle": "Masab Tank",
+  "corp": "GHMC"
+ },
+ {
+  "no": 145,
+  "name": "Shanthi Nagar",
+  "zone": "Golconda",
+  "circle": "Masab Tank",
+  "corp": "GHMC"
+ },
+ {
+  "no": 146,
+  "name": "Red Hills",
+  "zone": "Khairatabad",
+  "circle": "Khairatabad",
+  "corp": "GHMC"
+ },
+ {
+  "no": 147,
+  "name": "Mallepally",
+  "zone": "Golconda",
+  "circle": "Masab Tank",
+  "corp": "GHMC"
+ },
+ {
+  "no": 148,
+  "name": "Dattatreya Nagar",
+  "zone": "Golconda",
+  "circle": "Goshamahal",
+  "corp": "GHMC"
+ },
+ {
+  "no": 149,
+  "name": "Mangalhat",
+  "zone": "Golconda",
+  "circle": "Goshamahal",
+  "corp": "GHMC"
+ },
+ {
+  "no": 150,
+  "name": "Goshamahal",
+  "zone": "Golconda",
+  "circle": "Goshamahal",
+  "corp": "GHMC"
+ },
+ {
+  "no": 151,
+  "name": "Begum Bazaar",
+  "zone": "Golconda",
+  "circle": "Goshamahal",
+  "corp": "GHMC"
+ },
+ {
+  "no": 152,
+  "name": "Jambagh",
+  "zone": "Golconda",
+  "circle": "Goshamahal",
+  "corp": "GHMC"
+ },
+ {
+  "no": 153,
+  "name": "Exhibition Grounds",
+  "zone": "Golconda",
+  "circle": "Goshamahal",
+  "corp": "GHMC"
+ },
+ {
+  "no": 154,
+  "name": "Gunfoundry",
+  "zone": "Khairatabad",
+  "circle": "Khairatabad",
+  "corp": "GHMC"
+ },
+ {
+  "no": 155,
+  "name": "Barkatpura",
+  "zone": "Secunderabad",
+  "circle": "Amberpet",
+  "corp": "GHMC"
+ },
+ {
+  "no": 156,
+  "name": "Kachiguda",
+  "zone": "Secunderabad",
+  "circle": "Amberpet",
+  "corp": "GHMC"
+ },
+ {
+  "no": 157,
+  "name": "Golnaka",
+  "zone": "Secunderabad",
+  "circle": "Amberpet",
+  "corp": "GHMC"
+ },
+ {
+  "no": 158,
+  "name": "Patel Nagar",
+  "zone": "Secunderabad",
+  "circle": "Amberpet",
+  "corp": "GHMC"
+ },
+ {
+  "no": 159,
+  "name": "Amberpet",
+  "zone": "Secunderabad",
+  "circle": "Amberpet",
+  "corp": "GHMC"
+ },
+ {
+  "no": 160,
+  "name": "Bagh Amberpet",
+  "zone": "Secunderabad",
+  "circle": "Amberpet",
+  "corp": "GHMC"
+ },
+ {
+  "no": 161,
+  "name": "Tilak Nagar",
+  "zone": "Secunderabad",
+  "circle": "Amberpet",
+  "corp": "GHMC"
+ },
+ {
+  "no": 162,
+  "name": "Nallakunta",
+  "zone": "Secunderabad",
+  "circle": "Amberpet",
+  "corp": "GHMC"
+ },
+ {
+  "no": 163,
+  "name": "Adikmet",
+  "zone": "Secunderabad",
+  "circle": "Musheerabad",
+  "corp": "GHMC"
+ },
+ {
+  "no": 164,
+  "name": "Bagh Lingampally",
+  "zone": "Secunderabad",
+  "circle": "Musheerabad",
+  "corp": "GHMC"
+ },
+ {
+  "no": 165,
+  "name": "Gandhi Nagar",
+  "zone": "Secunderabad",
+  "circle": "Kavadiguda",
+  "corp": "GHMC"
+ },
+ {
+  "no": 166,
+  "name": "Kavadiguda",
+  "zone": "Secunderabad",
+  "circle": "Kavadiguda",
+  "corp": "GHMC"
+ },
+ {
+  "no": 167,
+  "name": "Bakaram",
+  "zone": "Secunderabad",
+  "circle": "Kavadiguda",
+  "corp": "GHMC"
+ },
+ {
+  "no": 168,
+  "name": "Bholakpur",
+  "zone": "Secunderabad",
+  "circle": "Kavadiguda",
+  "corp": "GHMC"
+ },
+ {
+  "no": 169,
+  "name": "Musheerabad",
+  "zone": "Secunderabad",
+  "circle": "Musheerabad",
+  "corp": "GHMC"
+ },
+ {
+  "no": 170,
+  "name": "Ramnagar",
+  "zone": "Secunderabad",
+  "circle": "Musheerabad",
+  "corp": "GHMC"
+ },
+ {
+  "no": 171,
+  "name": "Bapuji Nagar",
+  "zone": "Secunderabad",
+  "circle": "Musheerabad",
+  "corp": "GHMC"
+ },
+ {
+  "no": 172,
+  "name": "Boudha Nagar",
+  "zone": "Secunderabad",
+  "circle": "Tarnaka",
+  "corp": "GHMC"
+ },
+ {
+  "no": 173,
+  "name": "Tarnaka",
+  "zone": "Secunderabad",
+  "circle": "Tarnaka",
+  "corp": "GHMC"
+ },
+ {
+  "no": 174,
+  "name": "Sitaphalmandi",
+  "zone": "Secunderabad",
+  "circle": "Tarnaka",
+  "corp": "GHMC"
+ },
+ {
+  "no": 175,
+  "name": "Chilkalguda",
+  "zone": "Secunderabad",
+  "circle": "Tarnaka",
+  "corp": "GHMC"
+ },
+ {
+  "no": 176,
+  "name": "Mettuguda",
+  "zone": "Secunderabad",
+  "circle": "Mettuguda",
+  "corp": "GHMC"
+ },
+ {
+  "no": 177,
+  "name": "Lalapet",
+  "zone": "Secunderabad",
+  "circle": "Mettuguda",
+  "corp": "GHMC"
+ },
+ {
+  "no": 178,
+  "name": "North Lallaguda",
+  "zone": "Secunderabad",
+  "circle": "Mettuguda",
+  "corp": "GHMC"
+ },
+ {
+  "no": 179,
+  "name": "Addagutta",
+  "zone": "Secunderabad",
+  "circle": "Mettuguda",
+  "corp": "GHMC"
+ },
+ {
+  "no": 180,
+  "name": "East Anandbagh",
+  "zone": "Malkajgiri",
+  "circle": "Malkajgiri",
+  "corp": "MMC"
+ },
+ {
+  "no": 181,
+  "name": "Mirjalguda",
+  "zone": "Malkajgiri",
+  "circle": "Malkajgiri",
+  "corp": "MMC"
+ },
+ {
+  "no": 182,
+  "name": "Gautham Nagar",
+  "zone": "Malkajgiri",
+  "circle": "Malkajgiri",
+  "corp": "MMC"
+ },
+ {
+  "no": 183,
+  "name": "Malkajgiri",
+  "zone": "Malkajgiri",
+  "circle": "Malkajgiri",
+  "corp": "MMC"
+ },
+ {
+  "no": 184,
+  "name": "Balram Nagar",
+  "zone": "Malkajgiri",
+  "circle": "Moula Ali",
+  "corp": "MMC"
+ },
+ {
+  "no": 185,
+  "name": "Vinayak Nagar",
+  "zone": "Malkajgiri",
+  "circle": "Moula Ali",
+  "corp": "MMC"
+ },
+ {
+  "no": 186,
+  "name": "Moula Ali",
+  "zone": "Malkajgiri",
+  "circle": "Moula Ali",
+  "corp": "MMC"
+ },
+ {
+  "no": 187,
+  "name": "Kakatiya Nagar",
+  "zone": "Malkajgiri",
+  "circle": "Moula Ali",
+  "corp": "MMC"
+ },
+ {
+  "no": 188,
+  "name": "Neredmet",
+  "zone": "Malkajgiri",
+  "circle": "Moula Ali",
+  "corp": "MMC"
+ },
+ {
+  "no": 189,
+  "name": "Yapral",
+  "zone": "Malkajgiri",
+  "circle": "Keesara",
+  "corp": "MMC"
+ },
+ {
+  "no": 190,
+  "name": "Turakapally",
+  "zone": "Malkajgiri",
+  "circle": "Alwal",
+  "corp": "MMC"
+ },
+ {
+  "no": 191,
+  "name": "Macha Bollaram",
+  "zone": "Malkajgiri",
+  "circle": "Alwal",
+  "corp": "MMC"
+ },
+ {
+  "no": 192,
+  "name": "Alwal",
+  "zone": "Malkajgiri",
+  "circle": "Alwal",
+  "corp": "MMC"
+ },
+ {
+  "no": 193,
+  "name": "Venkatapuram",
+  "zone": "Malkajgiri",
+  "circle": "Alwal",
+  "corp": "MMC"
+ },
+ {
+  "no": 194,
+  "name": "Bhudevi Nagar",
+  "zone": "Malkajgiri",
+  "circle": "Alwal",
+  "corp": "MMC"
+ },
+ {
+  "no": 195,
+  "name": "Kanajiguda",
+  "zone": "Malkajgiri",
+  "circle": "Alwal",
+  "corp": "MMC"
+ },
+ {
+  "no": 196,
+  "name": "Monda Market",
+  "zone": "Malkajgiri",
+  "circle": "Bowenpally",
+  "corp": "MMC"
+ },
+ {
+  "no": 197,
+  "name": "Padmarao Nagar",
+  "zone": "Secunderabad",
+  "circle": "Kavadiguda",
+  "corp": "GHMC"
+ },
+ {
+  "no": 198,
+  "name": "Bansilalpet",
+  "zone": "Secunderabad",
+  "circle": "Kavadiguda",
+  "corp": "GHMC"
+ },
+ {
+  "no": 199,
+  "name": "Ramgopalpet",
+  "zone": "Secunderabad",
+  "circle": "Kavadiguda",
+  "corp": "GHMC"
+ },
+ {
+  "no": 200,
+  "name": "Begumpet",
+  "zone": "Khairatabad",
+  "circle": "Ameerpet",
+  "corp": "GHMC"
+ },
+ {
+  "no": 201,
+  "name": "Ameerpet",
+  "zone": "Khairatabad",
+  "circle": "Ameerpet",
+  "corp": "GHMC"
+ },
+ {
+  "no": 202,
+  "name": "S. R. Nagar",
+  "zone": "Khairatabad",
+  "circle": "Ameerpet",
+  "corp": "GHMC"
+ },
+ {
+  "no": 203,
+  "name": "BK Guda",
+  "zone": "Khairatabad",
+  "circle": "Ameerpet",
+  "corp": "GHMC"
+ },
+ {
+  "no": 204,
+  "name": "Sanathnagar",
+  "zone": "Khairatabad",
+  "circle": "Ameerpet",
+  "corp": "GHMC"
+ },
+ {
+  "no": 205,
+  "name": "Erragadda",
+  "zone": "Khairatabad",
+  "circle": "Yousufguda",
+  "corp": "GHMC"
+ },
+ {
+  "no": 206,
+  "name": "Vengal Rao Nagar",
+  "zone": "Khairatabad",
+  "circle": "Yousufguda",
+  "corp": "GHMC"
+ },
+ {
+  "no": 207,
+  "name": "Srinagar Colony",
+  "zone": "Khairatabad",
+  "circle": "Yousufguda",
+  "corp": "GHMC"
+ },
+ {
+  "no": 208,
+  "name": "Yousufguda",
+  "zone": "Khairatabad",
+  "circle": "Yousufguda",
+  "corp": "GHMC"
+ },
+ {
+  "no": 209,
+  "name": "AG Colony",
+  "zone": "Khairatabad",
+  "circle": "Yousufguda",
+  "corp": "GHMC"
+ },
+ {
+  "no": 210,
+  "name": "Krishna Nagar",
+  "zone": "Khairatabad",
+  "circle": "Borabanda",
+  "corp": "GHMC"
+ },
+ {
+  "no": 211,
+  "name": "Rahmath Nagar",
+  "zone": "Khairatabad",
+  "circle": "Borabanda",
+  "corp": "GHMC"
+ },
+ {
+  "no": 212,
+  "name": "Karmika Nagar",
+  "zone": "Khairatabad",
+  "circle": "Borabanda",
+  "corp": "GHMC"
+ },
+ {
+  "no": 213,
+  "name": "Rajeev Nagar",
+  "zone": "Khairatabad",
+  "circle": "Borabanda",
+  "corp": "GHMC"
+ },
+ {
+  "no": 214,
+  "name": "Borabanda",
+  "zone": "Khairatabad",
+  "circle": "Borabanda",
+  "corp": "GHMC"
+ },
+ {
+  "no": 215,
+  "name": "Jubilee Hills",
+  "zone": "Khairatabad",
+  "circle": "Jubilee Hills",
+  "corp": "GHMC"
+ },
+ {
+  "no": 216,
+  "name": "Venkateswara Colony",
+  "zone": "Khairatabad",
+  "circle": "Jubilee Hills",
+  "corp": "GHMC"
+ },
+ {
+  "no": 217,
+  "name": "Irrum Manzil",
+  "zone": "Khairatabad",
+  "circle": "Khairatabad",
+  "corp": "GHMC"
+ },
+ {
+  "no": 218,
+  "name": "Somajiguda",
+  "zone": "Khairatabad",
+  "circle": "Khairatabad",
+  "corp": "GHMC"
+ },
+ {
+  "no": 219,
+  "name": "Khairatabad",
+  "zone": "Khairatabad",
+  "circle": "Khairatabad",
+  "corp": "GHMC"
+ },
+ {
+  "no": 220,
+  "name": "Himayatnagar",
+  "zone": "Khairatabad",
+  "circle": "Khairatabad",
+  "corp": "GHMC"
+ },
+ {
+  "no": 221,
+  "name": "Banjara Hills",
+  "zone": "Khairatabad",
+  "circle": "Jubilee Hills",
+  "corp": "GHMC"
+ },
+ {
+  "no": 222,
+  "name": "Film Nagar",
+  "zone": "Khairatabad",
+  "circle": "Jubilee Hills",
+  "corp": "GHMC"
+ },
+ {
+  "no": 223,
+  "name": "Shaikpet",
+  "zone": "Golconda",
+  "circle": "Golconda",
+  "corp": "GHMC"
+ },
+ {
+  "no": 224,
+  "name": "OU Colony",
+  "zone": "Golconda",
+  "circle": "Golconda",
+  "corp": "GHMC"
+ },
+ {
+  "no": 225,
+  "name": "Gachibowli",
+  "zone": "Serilingampally",
+  "circle": "Serilingampally",
+  "corp": "CMC"
+ },
+ {
+  "no": 226,
+  "name": "Nallagandla",
+  "zone": "Serilingampally",
+  "circle": "Serilingampally",
+  "corp": "CMC"
+ },
+ {
+  "no": 227,
+  "name": "Serilingampally",
+  "zone": "Serilingampally",
+  "circle": "Serilingampally",
+  "corp": "CMC"
+ },
+ {
+  "no": 228,
+  "name": "Masjid Banda",
+  "zone": "Serilingampally",
+  "circle": "Serilingampally",
+  "corp": "CMC"
+ },
+ {
+  "no": 229,
+  "name": "Sri Ram Nagar",
+  "zone": "Serilingampally",
+  "circle": "Serilingampally",
+  "corp": "CMC"
+ },
+ {
+  "no": 230,
+  "name": "Anjaiah Nagar",
+  "zone": "Kukatpally",
+  "circle": "Madhapur",
+  "corp": "CMC"
+ },
+ {
+  "no": 231,
+  "name": "HITEC City",
+  "zone": "Kukatpally",
+  "circle": "Madhapur",
+  "corp": "CMC"
+ },
+ {
+  "no": 232,
+  "name": "Madhapur",
+  "zone": "Kukatpally",
+  "circle": "Madhapur",
+  "corp": "CMC"
+ },
+ {
+  "no": 233,
+  "name": "Izzat Nagar",
+  "zone": "Kukatpally",
+  "circle": "Madhapur",
+  "corp": "CMC"
+ },
+ {
+  "no": 234,
+  "name": "Kondapur",
+  "zone": "Serilingampally",
+  "circle": "Serilingampally",
+  "corp": "CMC"
+ },
+ {
+  "no": 235,
+  "name": "Matrusri Nagar",
+  "zone": "Kukatpally",
+  "circle": "Madhapur",
+  "corp": "CMC"
+ },
+ {
+  "no": 236,
+  "name": "Hafeezpet",
+  "zone": "Serilingampally",
+  "circle": "Miyapur",
+  "corp": "CMC"
+ },
+ {
+  "no": 237,
+  "name": "Madeenaguda",
+  "zone": "Serilingampally",
+  "circle": "Miyapur",
+  "corp": "CMC"
+ },
+ {
+  "no": 238,
+  "name": "Chanda Nagar",
+  "zone": "Serilingampally",
+  "circle": "Miyapur",
+  "corp": "CMC"
+ },
+ {
+  "no": 239,
+  "name": "Deepthisri Nagar",
+  "zone": "Serilingampally",
+  "circle": "Miyapur",
+  "corp": "CMC"
+ },
+ {
+  "no": 240,
+  "name": "Miyapur",
+  "zone": "Serilingampally",
+  "circle": "Miyapur",
+  "corp": "CMC"
+ },
+ {
+  "no": 241,
+  "name": "Maktha Mahabubpet",
+  "zone": "Serilingampally",
+  "circle": "Miyapur",
+  "corp": "CMC"
+ },
+ {
+  "no": 242,
+  "name": "Mayuri Nagar",
+  "zone": "Kukatpally",
+  "circle": "Madhapur",
+  "corp": "CMC"
+ },
+ {
+  "no": 243,
+  "name": "Hyder Nagar",
+  "zone": "Kukatpally",
+  "circle": "Allwyn Colony",
+  "corp": "CMC"
+ },
+ {
+  "no": 244,
+  "name": "Bhagya Nagar Colony",
+  "zone": "Kukatpally",
+  "circle": "Allwyn Colony",
+  "corp": "CMC"
+ },
+ {
+  "no": 245,
+  "name": "Shamshiguda",
+  "zone": "Kukatpally",
+  "circle": "Allwyn Colony",
+  "corp": "CMC"
+ },
+ {
+  "no": 246,
+  "name": "Allwyn Colony",
+  "zone": "Kukatpally",
+  "circle": "Allwyn Colony",
+  "corp": "CMC"
+ },
+ {
+  "no": 247,
+  "name": "Vivekananda Nagar Colony",
+  "zone": "Kukatpally",
+  "circle": "Allwyn Colony",
+  "corp": "CMC"
+ },
+ {
+  "no": 248,
+  "name": "Venkateshwara Nagar",
+  "zone": "Kukatpally",
+  "circle": "Allwyn Colony",
+  "corp": "CMC"
+ },
+ {
+  "no": 249,
+  "name": "Kukatpally",
+  "zone": "Kukatpally",
+  "circle": "Kukatpally",
+  "corp": "CMC"
+ },
+ {
+  "no": 250,
+  "name": "Balaji Nagar",
+  "zone": "Kukatpally",
+  "circle": "Kukatpally",
+  "corp": "CMC"
+ },
+ {
+  "no": 251,
+  "name": "Vasanth Nagar",
+  "zone": "Kukatpally",
+  "circle": "Kukatpally",
+  "corp": "CMC"
+ },
+ {
+  "no": 252,
+  "name": "KPHB Colony",
+  "zone": "Kukatpally",
+  "circle": "Kukatpally",
+  "corp": "CMC"
+ },
+ {
+  "no": 253,
+  "name": "Kaithepally",
+  "zone": "Kukatpally",
+  "circle": "Kukatpally",
+  "corp": "CMC"
+ },
+ {
+  "no": 254,
+  "name": "Gayatri Nagar",
+  "zone": "Kukatpally",
+  "circle": "Kukatpally",
+  "corp": "CMC"
+ },
+ {
+  "no": 255,
+  "name": "Allapur",
+  "zone": "Kukatpally",
+  "circle": "Moosapet",
+  "corp": "CMC"
+ },
+ {
+  "no": 256,
+  "name": "Moti Nagar",
+  "zone": "Kukatpally",
+  "circle": "Moosapet",
+  "corp": "CMC"
+ },
+ {
+  "no": 257,
+  "name": "Moosapet",
+  "zone": "Kukatpally",
+  "circle": "Moosapet",
+  "corp": "CMC"
+ },
+ {
+  "no": 258,
+  "name": "Prashanth Nagar",
+  "zone": "Kukatpally",
+  "circle": "Moosapet",
+  "corp": "CMC"
+ },
+ {
+  "no": 259,
+  "name": "Balanagar",
+  "zone": "Kukatpally",
+  "circle": "Moosapet",
+  "corp": "CMC"
+ },
+ {
+  "no": 260,
+  "name": "Fateh Nagar",
+  "zone": "Malkajgiri",
+  "circle": "Bowenpally",
+  "corp": "MMC"
+ },
+ {
+  "no": 261,
+  "name": "Prakash Nagar",
+  "zone": "Malkajgiri",
+  "circle": "Bowenpally",
+  "corp": "MMC"
+ },
+ {
+  "no": 262,
+  "name": "Old Bowenpally",
+  "zone": "Malkajgiri",
+  "circle": "Bowenpally",
+  "corp": "MMC"
+ },
+ {
+  "no": 263,
+  "name": "Tellapur",
+  "zone": "Serilingampally",
+  "circle": "Patancheruvu",
+  "corp": "CMC"
+ },
+ {
+  "no": 264,
+  "name": "Hasmathpet",
+  "zone": "Malkajgiri",
+  "circle": "Bowenpally",
+  "corp": "MMC"
+ },
+ {
+  "no": 265,
+  "name": "Muthangi",
+  "zone": "Serilingampally",
+  "circle": "Patancheruvu",
+  "corp": "CMC"
+ },
+ {
+  "no": 266,
+  "name": "Patancheruvu",
+  "zone": "Serilingampally",
+  "circle": "Patancheruvu",
+  "corp": "CMC"
+ },
+ {
+  "no": 267,
+  "name": "JP Colony",
+  "zone": "Serilingampally",
+  "circle": "Patancheruvu",
+  "corp": "CMC"
+ },
+ {
+  "no": 268,
+  "name": "Ramachandrapuram (RC Puram)",
+  "zone": "Serilingampally",
+  "circle": "Ameenpur",
+  "corp": "CMC"
+ },
+ {
+  "no": 269,
+  "name": "Bharathi Nagar",
+  "zone": "Serilingampally",
+  "circle": "Ameenpur",
+  "corp": "CMC"
+ },
+ {
+  "no": 270,
+  "name": "Beeramguda",
+  "zone": "Serilingampally",
+  "circle": "Ameenpur",
+  "corp": "CMC"
+ },
+ {
+  "no": 271,
+  "name": "Ameenpur",
+  "zone": "Serilingampally",
+  "circle": "Ameenpur",
+  "corp": "CMC"
+ },
+ {
+  "no": 272,
+  "name": "Bollaram",
+  "zone": "Serilingampally",
+  "circle": "Ameenpur",
+  "corp": "CMC"
+ },
+ {
+  "no": 273,
+  "name": "Nizampet",
+  "zone": "Quthbullapur",
+  "circle": "Nizampet",
+  "corp": "CMC"
+ },
+ {
+  "no": 274,
+  "name": "Bachupally",
+  "zone": "Quthbullapur",
+  "circle": "Nizampet",
+  "corp": "CMC"
+ },
+ {
+  "no": 275,
+  "name": "Bhandari Layout",
+  "zone": "Quthbullapur",
+  "circle": "Nizampet",
+  "corp": "CMC"
+ },
+ {
+  "no": 276,
+  "name": "Pragathi Nagar",
+  "zone": "Quthbullapur",
+  "circle": "Nizampet",
+  "corp": "CMC"
+ },
+ {
+  "no": 277,
+  "name": "Mahadevapuram",
+  "zone": "Quthbullapur",
+  "circle": "Gajularamaram",
+  "corp": "CMC"
+ },
+ {
+  "no": 278,
+  "name": "Gajularamaram",
+  "zone": "Quthbullapur",
+  "circle": "Gajularamaram",
+  "corp": "CMC"
+ },
+ {
+  "no": 279,
+  "name": "Rodamestri Nagar",
+  "zone": "Quthbullapur",
+  "circle": "Chintal",
+  "corp": "CMC"
+ },
+ {
+  "no": 280,
+  "name": "Jagathgirigutta",
+  "zone": "Quthbullapur",
+  "circle": "Chintal",
+  "corp": "CMC"
+ },
+ {
+  "no": 281,
+  "name": "Ranga Reddy Nagar",
+  "zone": "Quthbullapur",
+  "circle": "Chintal",
+  "corp": "CMC"
+ },
+ {
+  "no": 282,
+  "name": "Chintal",
+  "zone": "Quthbullapur",
+  "circle": "Chintal",
+  "corp": "CMC"
+ },
+ {
+  "no": 283,
+  "name": "Giri Nagar",
+  "zone": "Quthbullapur",
+  "circle": "Chintal",
+  "corp": "CMC"
+ },
+ {
+  "no": 284,
+  "name": "Ganesh Nagar",
+  "zone": "Quthbullapur",
+  "circle": "Jeedimetla",
+  "corp": "CMC"
+ },
+ {
+  "no": 285,
+  "name": "Padma Nagar",
+  "zone": "Quthbullapur",
+  "circle": "Jeedimetla",
+  "corp": "CMC"
+ },
+ {
+  "no": 286,
+  "name": "Quthbullapur",
+  "zone": "Quthbullapur",
+  "circle": "Jeedimetla",
+  "corp": "CMC"
+ },
+ {
+  "no": 287,
+  "name": "Pet Basheerabad",
+  "zone": "Quthbullapur",
+  "circle": "Jeedimetla",
+  "corp": "CMC"
+ },
+ {
+  "no": 288,
+  "name": "Kompally",
+  "zone": "Quthbullapur",
+  "circle": "Kompally",
+  "corp": "CMC"
+ },
+ {
+  "no": 289,
+  "name": "Doolapally",
+  "zone": "Quthbullapur",
+  "circle": "Kompally",
+  "corp": "CMC"
+ },
+ {
+  "no": 290,
+  "name": "Subhash Nagar",
+  "zone": "Quthbullapur",
+  "circle": "Kompally",
+  "corp": "CMC"
+ },
+ {
+  "no": 291,
+  "name": "Shapur Nagar",
+  "zone": "Quthbullapur",
+  "circle": "Gajularamaram",
+  "corp": "CMC"
+ },
+ {
+  "no": 292,
+  "name": "Saibaba Nagar",
+  "zone": "Quthbullapur",
+  "circle": "Kompally",
+  "corp": "CMC"
+ },
+ {
+  "no": 293,
+  "name": "Suraram",
+  "zone": "Quthbullapur",
+  "circle": "Gajularamaram",
+  "corp": "CMC"
+ },
+ {
+  "no": 294,
+  "name": "Bahadurpally",
+  "zone": "Quthbullapur",
+  "circle": "Dundigal",
+  "corp": "CMC"
+ },
+ {
+  "no": 295,
+  "name": "Bowrampet",
+  "zone": "Quthbullapur",
+  "circle": "Dundigal",
+  "corp": "CMC"
+ },
+ {
+  "no": 296,
+  "name": "Dundigal",
+  "zone": "Quthbullapur",
+  "circle": "Dundigal",
+  "corp": "CMC"
+ },
+ {
+  "no": 297,
+  "name": "Medchal",
+  "zone": "Quthbullapur",
+  "circle": "Medchal",
+  "corp": "CMC"
+ },
+ {
+  "no": 298,
+  "name": "Pudur-Kistapur",
+  "zone": "Quthbullapur",
+  "circle": "Medchal",
+  "corp": "CMC"
+ },
+ {
+  "no": 299,
+  "name": "Gundlapochampally",
+  "zone": "Quthbullapur",
+  "circle": "Medchal",
+  "corp": "CMC"
+ },
+ {
+  "no": 300,
+  "name": "Shamirpet",
+  "zone": "Malkajgiri",
+  "circle": "Keesara",
+  "corp": "MMC"
+ }
+]

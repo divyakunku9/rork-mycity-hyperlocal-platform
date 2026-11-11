@@ -1,0 +1,52 @@
+# Civic Hub data checks: finds ward centres for the 300 Hyderabad wards and checks that every
+# Civic Hub link opens. Results go to the "civic-data" branch.
+name: Civic data
+
+on:
+  push:
+    branches: [supabase-backend]
+    paths: ["qa/geocode_wards.py", "qa/civic_links.txt", "supabase/data/hyderabad_wards.json", ".github/workflows/civic-data.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  civic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check Civic Hub links
+        run: |
+          mkdir -p out
+          UA='Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Mobile Safari/537.36'
+          grep -v '^#' qa/civic_links.txt | grep -v '^\s*$' | while read -r url; do
+            body=$(mktemp)
+            info=$(curl -sS -L --max-time 30 -A "$UA" -o "$body" -w '%{http_code} %{url_effective} %{time_total}s' "$url" 2>&1) || info="ERROR $info"
+            title=$(tr '\n' ' ' < "$body" | grep -oiE '<title[^>]*>[^<]*' | head -1 | sed -E 's/<title[^>]*>//I' | tr -s ' ' | cut -c1-90)
+            echo "$url | $info | $title" | tee -a out/links.txt
+          done
+          # The same check from India isn't possible on GitHub's runners (US); geo-blocked sites show up as 403 / timeouts.
+          echo "runner: $(curl -s --max-time 10 https://ipinfo.io/country || echo unknown)" >> out/links.txt
+
+      - name: Find ward centres
+        run: python3 -I qa/geocode_wards.py supabase/data/hyderabad_wards.json out/wards_geo.json 2>&1 | tee out/geocode.log
+
+      - name: Publish to the civic-data branch
+        if: always()
+        run: |
+          RES=$(mktemp -d)
+          cp -r out/. "$RES"/
+          echo "commit: $GITHUB_SHA" > "$RES/RUN.txt"
+          echo "run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" >> "$RES/RUN.txt"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout --orphan civic-data
+          git rm -rq --cached . || true
+          find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          cp -r "$RES"/. .
+          git add -A
+          git commit -qm "Civic data for $GITHUB_SHA"
+          git push -f origin civic-data

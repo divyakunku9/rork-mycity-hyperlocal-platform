@@ -1,0 +1,21 @@
+# Links used by the Civic Hub tiles (checked by .github/workflows/civic-data.yml)
+# Old links (before this change)
+https://tgsouthernpower.org
+https://www.ghmc.gov.in
+# GHMC
+https://ghmc.gov.in/Trade.aspx
+https://onlinepayments.ghmc.gov.in
+https://www.ghmc.gov.in/PropertyTax.aspx
+# Cyberabad and Malkajgiri corporations
+https://cmc.telangana.gov.in
+https://mmc.telangana.gov.in
+# State municipal portal (Bill One: property tax, water, trade licence)
+https://emunicipal.telangana.gov.in/
+# Power and water
+https://tgsouthernpower.org/paybillonline
+https://www.tgsouthernpower.org/onlinebillpayment
+https://www.hyderabadwater.gov.in
+https://www.hyderabadwater.gov.in/en/index.php/online-services/pay-bill
+# Tree falls / emergencies
+https://hydraa.telangana.gov.in
+https://wa.me/918712406899

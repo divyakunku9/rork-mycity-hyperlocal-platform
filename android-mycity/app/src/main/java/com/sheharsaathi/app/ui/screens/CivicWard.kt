@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -43,6 +44,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -60,6 +62,7 @@ import androidx.compose.ui.unit.dp
 import com.sheharsaathi.app.data.CityViewModel
 import com.sheharsaathi.app.data.CivicAction
 import com.sheharsaathi.app.data.CivicService
+import com.sheharsaathi.app.data.Geocoder
 import com.sheharsaathi.app.data.LocationSource
 import com.sheharsaathi.app.data.Ward
 import com.sheharsaathi.app.data.WardFinder
@@ -172,7 +175,7 @@ private fun WardDetails(vm: CityViewModel, w: Ward, source: WardSource, byName: 
         Text(
             when {
                 source == WardSource.CHOSEN -> "You chose this ward"
-                byName -> "From your location (${vm.userPlace.name.substringBefore(",")})"
+                byName -> "From your location (${Geocoder.headerLabel(vm.userPlace).substringBefore(",")})"
                 else -> "From your location: nearest ward. Near a ward edge? Check with Change ward."
             },
             style = MaterialTheme.typography.bodySmall, color = CityColors.Muted, modifier = Modifier.weight(1f),
@@ -196,6 +199,9 @@ fun WardPickerSheet(vm: CityViewModel) {
     if (!vm.showWardPicker) return
     var query by remember { mutableStateOf("") }
     val results = remember(query, vm.wards) { WardFinder.search(query, vm.wards) }
+    // A new search starts at the top; otherwise the list keeps its old place and the best match sits off screen.
+    val listState = rememberLazyListState()
+    LaunchedEffect(query) { listState.scrollToItem(0) }
     ModalBottomSheet(
         onDismissRequest = { vm.showWardPicker = false },
         sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
@@ -211,7 +217,7 @@ fun WardPickerSheet(vm: CityViewModel) {
             Spacer(Modifier.height(8.dp))
             CitySearchField(query, { query = it }, "e.g. 231, Kondapur, Malakpet")
             if (vm.wardsLoading) Row(Modifier.padding(20.dp)) { CircularProgressIndicator(Modifier.size(20.dp), strokeWidth = 2.dp) }
-            LazyColumn(Modifier.fillMaxWidth().weight(1f), contentPadding = PaddingValues(bottom = 24.dp)) {
+            LazyColumn(Modifier.fillMaxWidth().weight(1f), state = listState, contentPadding = PaddingValues(bottom = 24.dp)) {
                 if (results.isEmpty() && !vm.wardsLoading) item {
                     Text("No ward matches “${query.trim()}”.", style = MaterialTheme.typography.bodyMedium, color = CityColors.Muted, modifier = Modifier.padding(20.dp))
                 }

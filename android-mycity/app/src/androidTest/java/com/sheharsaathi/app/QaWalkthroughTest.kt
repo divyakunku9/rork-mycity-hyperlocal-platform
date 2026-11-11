@@ -131,6 +131,9 @@ class QaWalkthroughTest {
     }
 
     /** Presses back until the Explore screen is showing (the planner's keyboard can eat one press). */
+    /** Explore's scrolling list of rows (Happening near, Civic, Events, News). */
+    private val exploreRows = hasScrollToNodeAction().and(hasAnyDescendant(hasText("See all", substring = true)))
+
     private fun backToExplore() {
         // The map's search button is always in Explore's tree, even when the rows below are scrolled away.
         repeat(4) { if (exists(mapSearchPill) || exists(hasText("ransit nearby", substring = true))) return; back(); rule.waitForIdle() }
@@ -199,22 +202,22 @@ class QaWalkthroughTest {
                 repeat(4) {
                     try {
                         rule.waitForIdle()
-                        rule.onAllNodes(hasScrollToNodeAction().and(hasAnyDescendant(hasText("Civic issues near", substring = true))))[0].performScrollToNode(m)
+                        rule.onAllNodes(exploreRows)[0].performScrollToNode(m)
                         return
                     } catch (t: AssertionError) { last = t; Thread.sleep(1500) }
                 }
                 throw last!!
             }
             scrollTo(hasText("Happening near", substring = true)); Thread.sleep(1500); shot("explore-near")
-            scrollTo(hasText("Civic issues near", substring = true)); Thread.sleep(1200); shot("explore-civic")
+            // The civic row only shows when there are open reports nearby.
+            if (exists(hasText("Civic issues near", substring = true))) { scrollTo(hasText("Civic issues near", substring = true)); Thread.sleep(1200); shot("explore-civic") }
             scrollTo(hasText("Events near", substring = true).or(hasText("Events in ", substring = true))); Thread.sleep(1500); shot("explore-events")
             scrollTo(hasText("News near", substring = true).or(hasText("News in ", substring = true))); Thread.sleep(1500); shot("explore-news")
             scrollTo(hasText("Happening near", substring = true)); Thread.sleep(800)
         }
         step("Happening near: See all") {
             if (!exists(hasContentDescription("See all: Happening near", substring = true))) {
-                rule.onAllNodes(hasScrollToNodeAction().and(hasAnyDescendant(hasText("Civic issues near", substring = true))))[0]
-                    .performScrollToNode(hasText("Happening near", substring = true))
+                rule.onAllNodes(exploreRows)[0].performScrollToNode(hasText("Happening near", substring = true))
             }
             node(hasContentDescription("See all: Happening near", substring = true)).performClick()
             waitText("Within 5 km of you", 10); Thread.sleep(1500); shot("nearby-events")

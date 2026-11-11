@@ -184,6 +184,69 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
         }
     }
 
+    // ---------- Wards (Hyderabad: GHMC, Cyberabad and Malkajgiri corporations) ----------
+    var wards by mutableStateOf<List<Ward>>(emptyList())
+        private set
+    var civicBodies by mutableStateOf<Map<String, CivicBody>>(emptyMap())
+        private set
+    var wardsLoading by mutableStateOf(false)
+        private set
+    /** Ward number the user picked by hand; null means "follow my location". */
+    var chosenWardNo by mutableStateOf(prefs.chosenWard)
+        private set
+    /** True while the Civic Hub's ward picker is open. */
+    var showWardPicker by mutableStateOf(false)
+    private var wardsJob: Job? = null
+
+    /** True for cities whose wards we have (Hyderabad only for now). */
+    val hasWards: Boolean get() = city.id == "hyderabad" && isLive
+
+    fun refreshWards() {
+        if (!hasWards || wards.isNotEmpty() || wardsJob?.isActive == true) return
+        wardsJob = viewModelScope.launch {
+            wardsLoading = true
+            when (val r = backend.wards()) {
+                is Res.Ok -> { wards = r.value.first; civicBodies = r.value.second.associateBy { it.code }; saveWardToProfile() }
+                is Res.Err -> toast("Couldn't load ward list. Pull down to try again.")
+            }
+            wardsLoading = false
+        }
+    }
+
+    /**
+     * The user's ward: the one they picked, else the one for where they are (GPS or a spot they chose).
+     * Null until we know where they are, or when they're outside the three corporations.
+     */
+    val myWard: WardMatch?
+        get() {
+            if (!hasWards) return null
+            chosenWardNo?.let { no -> wards.firstOrNull { it.no == no }?.let { return WardMatch(it, WardSource.CHOSEN) } }
+            if (locationSource == LocationSource.DEFAULT) return null
+            return WardFinder.find(userPlace, wards)
+        }
+
+    fun civicBodyFor(w: Ward?): CivicBody? = w?.let { civicBodies[it.corporation] }
+
+    fun chooseWard(no: Int) {
+        chosenWardNo = no
+        prefs.chosenWard = no
+        showWardPicker = false
+        saveWardToProfile()
+    }
+
+    /** Go back to working the ward out from the user's location. */
+    fun followLocationForWard() {
+        chosenWardNo = null
+        prefs.chosenWard = null
+        saveWardToProfile()
+    }
+
+    /** Keeps the profile's ward (used for ward polls) in step with the Civic Hub. */
+    private fun saveWardToProfile() {
+        val label = myWard?.ward?.profileLabel ?: return
+        if (profile.ward != label) updateProfile(profile.copy(ward = label))
+    }
+
     /** Headlines from city news sites (live cities only). */
     var webNews by mutableStateOf<List<WebStory>>(emptyList())
     var webNewsLoading by mutableStateOf(false)
@@ -267,6 +330,7 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
         if (webNewsCity != city.id) webNews = emptyList() // never show another city's headlines
         refreshWebNews()
         refreshListedEvents()
+        refreshWards()
         val cityId = city.id
         val uid = sb.userId
         contentJob = viewModelScope.launch {
@@ -460,6 +524,7 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
         locationSource = source
         if (followTrip) tripFrom = userPlace
         recenterTick++
+        if (chosenWardNo == null) saveWardToProfile()
         refreshWeather()
         refreshTrending()
     }
@@ -583,7 +648,7 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
 
     private fun samplePoll() = PollUi(
         id = null,
-        title = "${profile.ward.ifBlank { "Ward 151" }} Infra Vote",
+        title = "${myWard?.ward?.label ?: profile.ward.ifBlank { "Your ward" }} Infra Vote",
         detail = "₹1.2 Cr ward fund — help prioritise the next project",
         endsLabel = "Ends in 3 days",
         options = listOf(

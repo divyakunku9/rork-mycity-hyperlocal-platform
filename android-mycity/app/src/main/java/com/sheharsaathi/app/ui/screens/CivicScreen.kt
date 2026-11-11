@@ -68,6 +68,8 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.sheharsaathi.app.data.CityViewModel
+import com.sheharsaathi.app.data.CivicService
+import com.sheharsaathi.app.data.HyderabadServices
 import com.sheharsaathi.app.data.HelplineKind
 import com.sheharsaathi.app.data.LocationService
 import com.sheharsaathi.app.data.LocationSource
@@ -104,12 +106,22 @@ fun CivicScreen(vm: CityViewModel, onOpenReports: (mine: Boolean) -> Unit) {
 
     val city = vm.city
     val mine = vm.myIssues
-    val gated = !LocationService.hasPermission(context) && vm.locationSource == LocationSource.DEFAULT
+    // A ward picked by hand counts as knowing where the user is.
+    val gated = !LocationService.hasPermission(context) && vm.locationSource == LocationSource.DEFAULT && vm.myWard == null
     val locate = rememberLocateMe(vm)
+    var service by remember { mutableStateOf<CivicService?>(null) }
+    LaunchedEffect(vm.hasWards) { vm.refreshWards() }
     if (gated) {
-        CivicLocationGate(cityName = city.name, onAllow = locate, onPick = { vm.showLocationPicker = true })
+        CivicLocationGate(
+            cityName = city.name, onAllow = locate, onPick = { vm.showLocationPicker = true },
+            onChooseWard = if (vm.hasWards) ({ vm.showWardPicker = true }) else null,
+        )
+        WardPickerSheet(vm)
         return
     }
+    val ward = vm.myWard?.ward
+    val body = vm.civicBodyFor(ward)
+    val corpShort = body?.shortName?.let { if (it == "GHMC") it else "$it MC" } ?: city.municipalShort
     val inReview = mine.count { it.status != IssueStatus.RESOLVED }
     val resolved = mine.count { it.status == IssueStatus.RESOLVED }
 
@@ -123,12 +135,14 @@ fun CivicScreen(vm: CityViewModel, onOpenReports: (mine: Boolean) -> Unit) {
             Spacer(Modifier.width(10.dp))
             Column(Modifier.weight(1f)) {
                 Text("Civic Hub", style = MaterialTheme.typography.headlineSmall, color = CityColors.IndigoDeep)
-                Text("${city.municipalShort} • ${vm.userPlace.area}", style = MaterialTheme.typography.bodyMedium, color = CityColors.Muted)
+                Text(if (ward != null) "$corpShort • ${ward.label}" else "${city.municipalShort} • ${vm.userPlace.area}", style = MaterialTheme.typography.bodyMedium, color = CityColors.Muted)
             }
             IconButton(onClick = { onOpenReports(true) }) { Icon(Icons.Filled.Notifications, "My report updates") }
             val openProfile = LocalOpenProfile.current
             ProfileAvatar(vm.profile, 44, Modifier.clip(CircleShape).clickable(onClickLabel = "Open profile", onClick = openProfile))
         }
+
+        if (vm.hasWards) WardCard(vm, onLocate = locate)
 
         // Health index
         CityCard(Modifier.fillMaxWidth().padding(horizontal = 16.dp)) {
@@ -267,28 +281,32 @@ fun CivicScreen(vm: CityViewModel, onOpenReports: (mine: Boolean) -> Unit) {
             Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                     ServiceTile(Icons.Filled.ReceiptLong, "Pay Utility Bills", "Tax, power & water", CityColors.Indigo, CityColors.IndigoSoft, Modifier.weight(1f)) {
-                        openUrl(context, city.portals.utilityBills)
+                        if (vm.hasWards) service = HyderabadServices.bills(ward?.corporation) else openUrl(context, city.portals.utilityBills)
                     }
-                    ServiceTile(Icons.Filled.Storefront, "Trade License", "Apply / Renew", CityColors.Saffron, CityColors.SaffronSoft, Modifier.weight(1f)) {
-                        openUrl(context, city.portals.tradeLicense)
+                    ServiceTile(Icons.Filled.Storefront, "Trade License", if (vm.hasWards) "Apply / Renew · $corpShort" else "Apply / Renew", CityColors.Saffron, CityColors.SaffronSoft, Modifier.weight(1f)) {
+                        if (vm.hasWards) service = HyderabadServices.trade(ward?.corporation) else openUrl(context, city.portals.tradeLicense)
                     }
                 }
                 Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                     ServiceTile(
                         Icons.Filled.LocalShipping, "Bulk Waste",
-                        if (vm.isLive) "Apply on the ${city.municipalShort} portal" else if (bulkRequested) "Pickup requested ✓" else "Request a pickup",
+                        if (vm.hasWards) "Debris pickup lines" else if (vm.isLive) "Apply on the ${city.municipalShort} portal" else if (bulkRequested) "Pickup requested ✓" else "Request a pickup",
                         CityColors.Green, CityColors.GreenSoft, Modifier.weight(1f),
                     ) {
                         // Pickups can't be booked through the app yet, so live cities go straight to the official service.
-                        if (vm.isLive) openUrl(context, city.portals.bulkWaste) else bulkWasteDialog = true
+                        if (vm.hasWards) service = HyderabadServices.bulkWaste
+                        else if (vm.isLive) openUrl(context, city.portals.bulkWaste) else bulkWasteDialog = true
                     }
-                    ServiceTile(Icons.Filled.Forest, "Tree Fall / Hazard", "Report to ${city.municipalShort}", CityColors.Red, CityColors.RedSoft, Modifier.weight(1f)) {
-                        openUrl(context, city.portals.treeHazard)
+                    ServiceTile(Icons.Filled.Forest, "Tree Fall / Hazard", if (vm.hasWards) "Report to HYDRAA" else "Report to ${city.municipalShort}", CityColors.Red, CityColors.RedSoft, Modifier.weight(1f)) {
+                        if (vm.hasWards) service = HyderabadServices.treeFall else openUrl(context, city.portals.treeHazard)
                     }
                 }
             }
         }
     }
+
+    WardPickerSheet(vm)
+    service?.let { CivicServiceSheet(it) { service = null } }
 
     if (bulkWasteDialog) {
         AlertDialog(
@@ -317,7 +335,7 @@ fun CivicScreen(vm: CityViewModel, onOpenReports: (mine: Boolean) -> Unit) {
 }
 
 @Composable
-private fun CivicLocationGate(cityName: String, onAllow: () -> Unit, onPick: () -> Unit) {
+private fun CivicLocationGate(cityName: String, onAllow: () -> Unit, onPick: () -> Unit, onChooseWard: (() -> Unit)?) {
     Box(
         Modifier.fillMaxSize().background(
             Brush.verticalGradient(listOf(Color(0xFF1A2547), CityColors.Canvas)),
@@ -333,7 +351,7 @@ private fun CivicLocationGate(cityName: String, onAllow: () -> Unit, onPick: () 
             Spacer(Modifier.height(22.dp))
             Text("Find your ward", style = MaterialTheme.typography.headlineSmall, color = CityColors.Ink)
             Text(
-                "Civic Hub shows your ward's helplines, infra votes and the local body that handles your complaints in $cityName. We need your location to match you to the right ward.",
+                "Civic Hub shows your ward number, who represents it, ward votes and the corporation that handles your complaints in $cityName. Share your location, pick a spot on the map, or choose your ward.",
                 style = MaterialTheme.typography.bodyLarge, color = CityColors.Muted,
                 textAlign = androidx.compose.ui.text.style.TextAlign.Center,
                 modifier = Modifier.padding(top = 8.dp, bottom = 26.dp),
@@ -341,6 +359,11 @@ private fun CivicLocationGate(cityName: String, onAllow: () -> Unit, onPick: () 
             PrimaryButton("Allow location", enabled = true, onClick = onAllow)
             TextButton(onClick = onPick, modifier = Modifier.padding(top = 6.dp)) {
                 Text("Pick on map instead", color = CityColors.Indigo, style = MaterialTheme.typography.titleSmall)
+            }
+            if (onChooseWard != null) {
+                TextButton(onClick = onChooseWard) {
+                    Text("Choose my ward from the list", color = CityColors.Indigo, style = MaterialTheme.typography.titleSmall)
+                }
             }
             Text(
                 "Your location stays on this phone.", style = MaterialTheme.typography.bodySmall, color = CityColors.Muted,

@@ -300,6 +300,49 @@ class QaWalkthroughTest {
             scrollDown(); shot("civic-scroll-1"); scrollDown(); shot("civic-scroll-2"); scrollDown(); shot("civic-scroll-3")
             scrollTop()
         }
+        step("Civic Hub: ward from my location") {
+            // The emulator's GPS is set to Madhapur.
+            waitText("From your location", 30)
+            waitText("Ward corporator", 5)
+            shot("civic-ward-location")
+        }
+        step("Civic Hub: choose a ward by hand") {
+            node(hasText("Change ward")).performClick()
+            waitText("Choose your ward", 10)
+            shot("ward-picker")
+            node(hasSetTextAction()).performTextInput("Malkajgiri")
+            Thread.sleep(800); shot("ward-picker-search")
+            node(hasText("Malkajgiri") and !hasSetTextAction()).performClick()
+            waitText("You chose this ward", 10)
+            waitText("Ward 183", 5)
+            shot("civic-ward-chosen")
+        }
+        step("Civic Hub: trade licence goes to the chosen ward's corporation") {
+            node(hasText("Trade License")).performScrollTo().performClick()
+            waitText("mmc.telangana.gov.in", 10)
+            shot("service-trade-mmc")
+            back()
+        }
+        step("Civic Hub: back to my location's ward") {
+            scrollTop()
+            node(hasText("Use location")).performClick()
+            waitText("From your location", 20)
+            shot("civic-ward-location-again")
+        }
+        step("Civic Hub: service tiles open their options") {
+            for ((tile, expect) in listOf(
+                "Pay Utility Bills" to "Property tax",
+                "Trade License" to "Apply / renew online",
+                "Bulk Waste" to "Shamshabad",
+                "Tree Fall / Hazard" to "Call HYDRAA",
+            )) {
+                node(hasText(tile)).performScrollTo().performClick()
+                waitText(expect, 10)
+                shot("service-" + tile.lowercase().replace(Regex("[^a-z]+"), "-").trim('-'))
+                back()
+            }
+            scrollTop()
+        }
         step("Report tab") { tab("Report"); Thread.sleep(2000); shot("report"); scrollDown(); shot("report-scroll") }
         step("Report: too-short description is blocked") {
             node(hasText("Submit Report")).performScrollTo().performClick()

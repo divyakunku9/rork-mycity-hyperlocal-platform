@@ -107,7 +107,7 @@ object Cities {
         ),
         portals = CityPortals(
             utilityBills = "https://tgsouthernpower.org",
-            tradeLicense = "https://www.ghmc.gov.in",
+            tradeLicense = "https://ghmc.gov.in/Trade.aspx",
             bulkWaste = "https://www.ghmc.gov.in",
             treeHazard = "https://www.ghmc.gov.in",
         ),

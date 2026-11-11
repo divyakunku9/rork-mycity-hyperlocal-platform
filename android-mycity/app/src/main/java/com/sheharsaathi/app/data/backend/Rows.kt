@@ -175,3 +175,30 @@ data class ListedEventRow(
     val category: String = "other",
     @SerialName("event_sources") val source: EventSourceRef? = null,
 )
+
+@Serializable
+data class WardRow(
+    val no: Int,
+    val name: String,
+    val corporation: String,
+    val zone: String,
+    val circle: String,
+    val lat: Double? = null,
+    val lng: Double? = null,
+    val corporator: String? = null,
+    @SerialName("corporator_party") val corporatorParty: String? = null,
+)
+
+@Serializable
+data class CivicBodyRow(
+    val code: String,
+    val name: String,
+    @SerialName("head_title") val headTitle: String,
+    @SerialName("head_name") val headName: String? = null,
+    @SerialName("council_note") val councilNote: String,
+    val website: String? = null,
+    @SerialName("helpline_display") val helplineDisplay: String? = null,
+    @SerialName("helpline_dial") val helplineDial: String? = null,
+    @SerialName("special_officer") val specialOfficer: String? = null,
+    @SerialName("as_of") val asOf: String? = null,
+)

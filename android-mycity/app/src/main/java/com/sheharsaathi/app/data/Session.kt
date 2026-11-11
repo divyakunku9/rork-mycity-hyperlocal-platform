@@ -102,8 +102,13 @@ class Prefs(context: Context) {
         set(v) = sp.edit().putString("signin_channel", v).apply()
 
     /** Forgets the account on this phone, so the next person starts fresh. */
+    /** A ward the user picked by hand in the Civic Hub (null: follow their location). */
+    var chosenWard: Int?
+        get() = sp.getInt("chosen_ward", -1).takeIf { it > 0 }
+        set(v) = sp.edit().putInt("chosen_ward", v ?: -1).apply()
+
     fun clearSession() {
         sp.edit().remove("signed_in").remove("city").remove("signin_channel")
-            .remove("p_name").remove("p_phone").remove("p_email").remove("p_ward").remove("p_photo").apply()
+            .remove("p_name").remove("p_phone").remove("p_email").remove("p_ward").remove("p_photo").remove("chosen_ward").apply()
     }
 }

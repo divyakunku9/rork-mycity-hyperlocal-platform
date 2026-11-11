@@ -1,0 +1,3240 @@
+{
+ "circles": {
+  "Adibatla": [
+   17.230899,
+   78.5558997
+  ],
+  "Allwyn Colony": [
+   17.5043618,
+   78.4149849
+  ],
+  "Alwal": [
+   17.5018763,
+   78.5090947
+  ],
+  "Amberpet": [
+   17.3861776,
+   78.5114709
+  ],
+  "Ameenpur": [
+   17.4977991,
+   78.3174971
+  ],
+  "Ameerpet": [
+   17.4375012,
+   78.4482505
+  ],
+  "Attapur": [
+   17.3672244,
+   78.4307278
+  ],
+  "Badangpet": [
+   17.3383467,
+   78.5222127
+  ],
+  "Bahadurpura": [
+   17.3570672,
+   78.4545419
+  ],
+  "Boduppal": [
+   17.3988408,
+   78.5366218
+  ],
+  "Borabanda": [
+   17.45167,
+   78.415421
+  ],
+  "Bowenpally": [
+   17.4617293,
+   78.4733842
+  ],
+  "Chandrayan Gutta": [
+   17.3246955,
+   78.4813558
+  ],
+  "Charminar": [
+   17.3616024,
+   78.4746421
+  ],
+  "Chintal": [
+   17.4096785,
+   78.4570516
+  ],
+  "Dundigal": [
+   17.6075319,
+   78.4141732
+  ],
+  "Falaknuma": [
+   17.333653,
+   78.4677481
+  ],
+  "Gajularamaram": [
+   17.5271759,
+   78.4200077
+  ],
+  "Ghatkesar": [
+   17.4510837,
+   78.6843022
+  ],
+  "Golconda": [
+   17.3873294,
+   78.4057336
+  ],
+  "Goshamahal": [
+   17.3805762,
+   78.468846
+  ],
+  "Hayathnagar": [
+   17.3281147,
+   78.6045399
+  ],
+  "Jalpally": [
+   17.3061541,
+   78.4738589
+  ],
+  "Jangammet": null,
+  "Jeedimetla": [
+   17.5096516,
+   78.4786567
+  ],
+  "Jubilee Hills": [
+   17.4308362,
+   78.4102882
+  ],
+  "Kapra": [
+   17.4846356,
+   78.5610095
+  ],
+  "Karwan": [
+   17.3734894,
+   78.4412105
+  ],
+  "Kavadiguda": [
+   17.4227022,
+   78.4917695
+  ],
+  "Keesara": [
+   17.5249309,
+   78.6665345
+  ],
+  "Khairatabad": [
+   17.4117706,
+   78.4622003
+  ],
+  "Kompally": [
+   17.5282237,
+   78.4762932
+  ],
+  "Kukatpally": [
+   17.4930841,
+   78.4054408
+  ],
+  "LB Nagar": [
+   17.3501617,
+   78.5510938
+  ],
+  "Madhapur": [
+   17.4408924,
+   78.3916304
+  ],
+  "Malakpet": [
+   17.3736706,
+   78.4996484
+  ],
+  "Malkajgiri": [
+   17.4511764,
+   78.5368997
+  ],
+  "Masab Tank": [
+   17.4029622,
+   78.450754
+  ],
+  "Medchal": [
+   17.5349835,
+   78.5246387
+  ],
+  "Mehdipatnam": [
+   17.3942627,
+   78.4342514
+  ],
+  "Mettuguda": [
+   17.4290496,
+   78.5252424
+  ],
+  "Miyapur": [
+   17.4981608,
+   78.3567628
+  ],
+  "Moosapet": [
+   17.4685307,
+   78.4206695
+  ],
+  "Moosarambagh": [
+   17.3743532,
+   78.5160835
+  ],
+  "Moula Ali": [
+   17.46171,
+   78.5571396
+  ],
+  "Musheerabad": [
+   17.4191423,
+   78.4985732
+  ],
+  "Nacharam": [
+   17.4284936,
+   78.5528098
+  ],
+  "Nagole": [
+   17.3775306,
+   78.5601231
+  ],
+  "Narsingi": [
+   17.3915187,
+   78.3598924
+  ],
+  "Nizampet": [
+   17.4945061,
+   78.4000017
+  ],
+  "Patancheruvu": [
+   17.5457885,
+   78.2222266
+  ],
+  "Rajendranagar": [
+   17.3200739,
+   78.418589
+  ],
+  "Santoshnagar": [
+   17.3467185,
+   78.5081947
+  ],
+  "Saroornagar": [
+   17.354892,
+   78.532407
+  ],
+  "Serilingampally": null,
+  "Shamshabad": [
+   17.2611444,
+   78.3931943
+  ],
+  "Tarnaka": [
+   17.4282965,
+   78.5284415
+  ],
+  "Uppal": [
+   17.4025091,
+   78.5612562
+  ],
+  "Yakutpura": [
+   17.3586277,
+   78.4858046
+  ],
+  "Yousufguda": [
+   17.4387499,
+   78.4279866
+  ]
+ },
+ "wards": [
+  {
+   "no": 1,
+   "name": "Keesara",
+   "zone": "Malkajgiri",
+   "circle": "Keesara",
+   "corp": "MMC",
+   "lat": 17.5249309,
+   "lng": 78.6665345,
+   "geo_note": "nominatim town: Keesara"
+  },
+  {
+   "no": 2,
+   "name": "Chandrapuri Colony",
+   "zone": "Malkajgiri",
+   "circle": "Keesara",
+   "corp": "MMC",
+   "lat": 17.5249309,
+   "lng": 78.6665345,
+   "geo_note": "Keesara circle centre (approx.)"
+  },
+  {
+   "no": 3,
+   "name": "Jawaharnagar",
+   "zone": "Malkajgiri",
+   "circle": "Keesara",
+   "corp": "MMC",
+   "lat": 17.5249309,
+   "lng": 78.6665345,
+   "geo_note": "Keesara circle centre (approx.)"
+  },
+  {
+   "no": 4,
+   "name": "Dammaiguda",
+   "zone": "Malkajgiri",
+   "circle": "Keesara",
+   "corp": "MMC",
+   "lat": 17.5026264,
+   "lng": 78.5887394,
+   "geo_note": "nominatim government: Dammaiguda Panchayat Office"
+  },
+  {
+   "no": 5,
+   "name": "Nagaram",
+   "zone": "Uppal",
+   "circle": "Ghatkesar",
+   "corp": "MMC",
+   "lat": 17.4910113,
+   "lng": 78.613677,
+   "geo_note": "nominatim house: Nagaram sarpanch house"
+  },
+  {
+   "no": 6,
+   "name": "Ghatkesar",
+   "zone": "Uppal",
+   "circle": "Ghatkesar",
+   "corp": "MMC",
+   "lat": 17.4510837,
+   "lng": 78.6843022,
+   "geo_note": "nominatim administrative: Ghatkesar mandal"
+  },
+  {
+   "no": 7,
+   "name": "Edulabad",
+   "zone": "Uppal",
+   "circle": "Ghatkesar",
+   "corp": "MMC",
+   "lat": 17.4189871,
+   "lng": 78.711049,
+   "geo_note": "nominatim village: Edulabad"
+  },
+  {
+   "no": 8,
+   "name": "Pocharam",
+   "zone": "Uppal",
+   "circle": "Ghatkesar",
+   "corp": "MMC",
+   "lat": 17.436614,
+   "lng": 78.6422235,
+   "geo_note": "nominatim village: Pocharam"
+  },
+  {
+   "no": 9,
+   "name": "Medipally",
+   "zone": "Uppal",
+   "circle": "Boduppal",
+   "corp": "MMC",
+   "lat": 17.4206569,
+   "lng": 78.5920428,
+   "geo_note": "nominatim administrative: Medipally mandal"
+  },
+  {
+   "no": 10,
+   "name": "Peerzadiguda",
+   "zone": "Uppal",
+   "circle": "Boduppal",
+   "corp": "MMC",
+   "lat": 17.4013579,
+   "lng": 78.5815697,
+   "geo_note": "nominatim bus_stop: Peerzadiguda Road Bus Stop"
+  },
+  {
+   "no": 11,
+   "name": "Boduppal",
+   "zone": "Uppal",
+   "circle": "Boduppal",
+   "corp": "MMC",
+   "lat": 17.3988408,
+   "lng": 78.5366218,
+   "geo_note": "nominatim childcare: Boduppal-IV"
+  },
+  {
+   "no": 12,
+   "name": "Chengicherla",
+   "zone": "Uppal",
+   "circle": "Boduppal",
+   "corp": "MMC",
+   "lat": 17.4329342,
+   "lng": 78.6066091,
+   "geo_note": "nominatim village: Chengicherla"
+  },
+  {
+   "no": 13,
+   "name": "Vampuguda",
+   "zone": "Uppal",
+   "circle": "Kapra",
+   "corp": "MMC",
+   "lat": 17.4935106,
+   "lng": 78.566213,
+   "geo_note": "nominatim childcare: Vampuguda Village"
+  },
+  {
+   "no": 14,
+   "name": "Kapra",
+   "zone": "Uppal",
+   "circle": "Kapra",
+   "corp": "MMC",
+   "lat": 17.4846356,
+   "lng": 78.5610095,
+   "geo_note": "nominatim suburb: Kapra"
+  },
+  {
+   "no": 15,
+   "name": "A. S. Rao Nagar",
+   "zone": "Uppal",
+   "circle": "Kapra",
+   "corp": "MMC",
+   "lat": 17.4799497,
+   "lng": 78.5568336,
+   "geo_note": "nominatim bus_stop: A.S. Rao Nagar"
+  },
+  {
+   "no": 16,
+   "name": "Kushaiguda",
+   "zone": "Uppal",
+   "circle": "Kapra",
+   "corp": "MMC",
+   "lat": 17.4825451,
+   "lng": 78.5726444,
+   "geo_note": "nominatim suburb: Kushaiguda"
+  },
+  {
+   "no": 17,
+   "name": "Cherlapally",
+   "zone": "Uppal",
+   "circle": "Kapra",
+   "corp": "MMC",
+   "lat": 17.4687455,
+   "lng": 78.6024858,
+   "geo_note": "nominatim suburb: Cherlapally"
+  },
+  {
+   "no": 18,
+   "name": "Shakthi Sai Nagar",
+   "zone": "Uppal",
+   "circle": "Nacharam",
+   "corp": "MMC",
+   "lat": 17.4489891,
+   "lng": 78.6115598,
+   "geo_note": "nominatim bus_stop: Shakthi Sai Nagar Kaman"
+  },
+  {
+   "no": 19,
+   "name": "H. B. Colony",
+   "zone": "Uppal",
+   "circle": "Nacharam",
+   "corp": "MMC",
+   "lat": 17.4533235,
+   "lng": 78.5654149,
+   "geo_note": "nominatim park: H.B colony Ground"
+  },
+  {
+   "no": 20,
+   "name": "Mallapur",
+   "zone": "Uppal",
+   "circle": "Nacharam",
+   "corp": "MMC",
+   "lat": 17.4405369,
+   "lng": 78.5788551,
+   "geo_note": "nominatim neighbourhood: Mallapur"
+  },
+  {
+   "no": 21,
+   "name": "Nacharam",
+   "zone": "Uppal",
+   "circle": "Nacharam",
+   "corp": "MMC",
+   "lat": 17.4284936,
+   "lng": 78.5528098,
+   "geo_note": "nominatim suburb: Nacharam"
+  },
+  {
+   "no": 22,
+   "name": "HMT Nagar",
+   "zone": "Uppal",
+   "circle": "Nacharam",
+   "corp": "MMC",
+   "lat": 17.4228949,
+   "lng": 78.547949,
+   "geo_note": "nominatim neighbourhood: HMT Nagar"
+  },
+  {
+   "no": 23,
+   "name": "Chilkanagar",
+   "zone": "Uppal",
+   "circle": "Uppal",
+   "corp": "MMC",
+   "lat": 17.4061835,
+   "lng": 78.5645628,
+   "geo_note": "nominatim secondary: Chilkanagar Main Road"
+  },
+  {
+   "no": 24,
+   "name": "Beerappagadda",
+   "zone": "Uppal",
+   "circle": "Uppal",
+   "corp": "MMC",
+   "lat": 17.4078388,
+   "lng": 78.5616003,
+   "geo_note": "nominatim childcare: Beerappagadda-I (ward no-7)"
+  },
+  {
+   "no": 25,
+   "name": "Habsiguda",
+   "zone": "Uppal",
+   "circle": "Uppal",
+   "corp": "MMC",
+   "lat": 17.4154761,
+   "lng": 78.5426918,
+   "geo_note": "nominatim suburb: Habsiguda"
+  },
+  {
+   "no": 26,
+   "name": "Ramanthapur",
+   "zone": "Uppal",
+   "circle": "Uppal",
+   "corp": "MMC",
+   "lat": 17.3965957,
+   "lng": 78.5333266,
+   "geo_note": "nominatim residential: ramanthapur colony road"
+  },
+  {
+   "no": 27,
+   "name": "Venkat Reddy Nagar",
+   "zone": "Uppal",
+   "circle": "Uppal",
+   "corp": "MMC",
+   "lat": 17.4025091,
+   "lng": 78.5612562,
+   "geo_note": "Uppal circle centre (approx.)"
+  },
+  {
+   "no": 28,
+   "name": "Uppal",
+   "zone": "Uppal",
+   "circle": "Uppal",
+   "corp": "MMC",
+   "lat": 17.4025091,
+   "lng": 78.5612562,
+   "geo_note": "nominatim suburb: Uppal"
+  },
+  {
+   "no": 29,
+   "name": "Nagole",
+   "zone": "LB Nagar",
+   "circle": "Nagole",
+   "corp": "MMC",
+   "lat": 17.3775306,
+   "lng": 78.5601231,
+   "geo_note": "nominatim suburb: Nagole"
+  },
+  {
+   "no": 30,
+   "name": "Kothapet",
+   "zone": "LB Nagar",
+   "circle": "Saroornagar",
+   "corp": "MMC",
+   "lat": 17.3758319,
+   "lng": 78.5409138,
+   "geo_note": "nominatim restaurant: kothapet"
+  },
+  {
+   "no": 31,
+   "name": "Chaitanyapuri",
+   "zone": "LB Nagar",
+   "circle": "Saroornagar",
+   "corp": "MMC",
+   "lat": 17.373017,
+   "lng": 78.5362644,
+   "geo_note": "nominatim suburb: Chaitanyapuri"
+  },
+  {
+   "no": 32,
+   "name": "Gaddiannaram",
+   "zone": "LB Nagar",
+   "circle": "Saroornagar",
+   "corp": "MMC",
+   "lat": 17.3636842,
+   "lng": 78.523971,
+   "geo_note": "nominatim suburb: Gaddiannaram"
+  },
+  {
+   "no": 33,
+   "name": "Saroornagar",
+   "zone": "LB Nagar",
+   "circle": "Saroornagar",
+   "corp": "MMC",
+   "lat": 17.354892,
+   "lng": 78.532407,
+   "geo_note": "nominatim hospital: Saroornagar Hospital"
+  },
+  {
+   "no": 34,
+   "name": "Doctors Colony",
+   "zone": "LB Nagar",
+   "circle": "Saroornagar",
+   "corp": "MMC",
+   "lat": 17.3567703,
+   "lng": 78.5429715,
+   "geo_note": "nominatim house: Doctors Colony"
+  },
+  {
+   "no": 35,
+   "name": "Rama Krishna Puram",
+   "zone": "LB Nagar",
+   "circle": "Saroornagar",
+   "corp": "MMC",
+   "lat": 17.3639021,
+   "lng": 78.5472514,
+   "geo_note": "photon residential: Ramakrishna Puram Main Road"
+  },
+  {
+   "no": 36,
+   "name": "NTR Nagar",
+   "zone": "LB Nagar",
+   "circle": "Saroornagar",
+   "corp": "MMC",
+   "lat": 17.3574723,
+   "lng": 78.548152,
+   "geo_note": "nominatim neighbourhood: NTR Nagar"
+  },
+  {
+   "no": 37,
+   "name": "Lingojiguda",
+   "zone": "LB Nagar",
+   "circle": "LB Nagar",
+   "corp": "MMC",
+   "lat": 17.3478809,
+   "lng": 78.5364577,
+   "geo_note": "nominatim neighbourhood: Lingojiguda"
+  },
+  {
+   "no": 38,
+   "name": "Champapet",
+   "zone": "LB Nagar",
+   "circle": "LB Nagar",
+   "corp": "MMC",
+   "lat": 17.3445706,
+   "lng": 78.5169717,
+   "geo_note": "nominatim suburb: Champapet"
+  },
+  {
+   "no": 39,
+   "name": "Karmanghat",
+   "zone": "LB Nagar",
+   "circle": "LB Nagar",
+   "corp": "MMC",
+   "lat": 17.3410061,
+   "lng": 78.5329747,
+   "geo_note": "nominatim suburb: Karmanghat"
+  },
+  {
+   "no": 40,
+   "name": "Bairamalguda",
+   "zone": "LB Nagar",
+   "circle": "LB Nagar",
+   "corp": "MMC",
+   "lat": 17.3421597,
+   "lng": 78.5457628,
+   "geo_note": "nominatim suburb: Bairamalguda"
+  },
+  {
+   "no": 41,
+   "name": "Hastinapuram",
+   "zone": "LB Nagar",
+   "circle": "LB Nagar",
+   "corp": "MMC",
+   "lat": 17.3291354,
+   "lng": 78.5542145,
+   "geo_note": "nominatim neighbourhood: Hastinapuram"
+  },
+  {
+   "no": 42,
+   "name": "BN Reddy Nagar",
+   "zone": "LB Nagar",
+   "circle": "Hayathnagar",
+   "corp": "MMC",
+   "lat": 17.3197609,
+   "lng": 78.5623061,
+   "geo_note": "nominatim neighbourhood: BN Reddy Nagar"
+  },
+  {
+   "no": 43,
+   "name": "Vanasthalipuram",
+   "zone": "LB Nagar",
+   "circle": "Hayathnagar",
+   "corp": "MMC",
+   "lat": 17.3303179,
+   "lng": 78.568278,
+   "geo_note": "nominatim suburb: Vanasthalipuram"
+  },
+  {
+   "no": 44,
+   "name": "Chintalakunta",
+   "zone": "LB Nagar",
+   "circle": "Hayathnagar",
+   "corp": "MMC",
+   "lat": 17.3281147,
+   "lng": 78.6045399,
+   "geo_note": "Hayathnagar circle centre (approx.)"
+  },
+  {
+   "no": 45,
+   "name": "Mansoorabad",
+   "zone": "LB Nagar",
+   "circle": "Nagole",
+   "corp": "MMC",
+   "lat": 17.3541765,
+   "lng": 78.5652906,
+   "geo_note": "nominatim suburb: Mansoorabad"
+  },
+  {
+   "no": 46,
+   "name": "Geological Survey of India",
+   "zone": "LB Nagar",
+   "circle": "Nagole",
+   "corp": "MMC",
+   "lat": 17.3630295,
+   "lng": 78.5768953,
+   "geo_note": "nominatim education: Geological Survey of India Training Institute"
+  },
+  {
+   "no": 47,
+   "name": "Lecturers Colony",
+   "zone": "LB Nagar",
+   "circle": "Nagole",
+   "corp": "MMC",
+   "lat": 17.3326773,
+   "lng": 78.5944473,
+   "geo_note": "nominatim neighbourhood: Lecturers Colony"
+  },
+  {
+   "no": 48,
+   "name": "High Court Colony",
+   "zone": "LB Nagar",
+   "circle": "Hayathnagar",
+   "corp": "MMC",
+   "lat": 17.3312134,
+   "lng": 78.5839782,
+   "geo_note": "nominatim neighbourhood: High Court Colony"
+  },
+  {
+   "no": 49,
+   "name": "Sahebnagar",
+   "zone": "LB Nagar",
+   "circle": "Hayathnagar",
+   "corp": "MMC",
+   "lat": 17.3206264,
+   "lng": 78.5769132,
+   "geo_note": "nominatim health_post: Sahebnagar (Basti Dawakhana)"
+  },
+  {
+   "no": 50,
+   "name": "Hayathnagar",
+   "zone": "LB Nagar",
+   "circle": "Hayathnagar",
+   "corp": "MMC",
+   "lat": 17.3281147,
+   "lng": 78.6045399,
+   "geo_note": "nominatim administrative: Hayathnagar mandal"
+  },
+  {
+   "no": 51,
+   "name": "Kuntloor",
+   "zone": "LB Nagar",
+   "circle": "Nagole",
+   "corp": "MMC",
+   "lat": 17.3311631,
+   "lng": 78.6082079,
+   "geo_note": "nominatim tertiary: Kuntloor Road"
+  },
+  {
+   "no": 52,
+   "name": "Pedda Amberpet",
+   "zone": "LB Nagar",
+   "circle": "Nagole",
+   "corp": "MMC",
+   "lat": 17.3775306,
+   "lng": 78.5601231,
+   "geo_note": "Nagole circle centre (approx.)"
+  },
+  {
+   "no": 53,
+   "name": "Thorrur",
+   "zone": "Shamshabad",
+   "circle": "Adibatla",
+   "corp": "GHMC",
+   "lat": 17.230899,
+   "lng": 78.5558997,
+   "geo_note": "Adibatla circle centre (approx.)"
+  },
+  {
+   "no": 54,
+   "name": "Kongara Kalan",
+   "zone": "Shamshabad",
+   "circle": "Adibatla",
+   "corp": "GHMC",
+   "lat": 17.230899,
+   "lng": 78.5558997,
+   "geo_note": "Adibatla circle centre (approx.)"
+  },
+  {
+   "no": 55,
+   "name": "Adibatla",
+   "zone": "Shamshabad",
+   "circle": "Adibatla",
+   "corp": "GHMC",
+   "lat": 17.230899,
+   "lng": 78.5558997,
+   "geo_note": "nominatim childcare: Adibatla-2"
+  },
+  {
+   "no": 56,
+   "name": "Turkayamjal",
+   "zone": "Shamshabad",
+   "circle": "Adibatla",
+   "corp": "GHMC",
+   "lat": 17.2751258,
+   "lng": 78.5771793,
+   "geo_note": "photon residential: Turka Yamjal Road"
+  },
+  {
+   "no": 57,
+   "name": "Nadergul",
+   "zone": "Shamshabad",
+   "circle": "Badangpet",
+   "corp": "GHMC",
+   "lat": 17.2746364,
+   "lng": 78.5399456,
+   "geo_note": "nominatim village: Nadergul"
+  },
+  {
+   "no": 58,
+   "name": "Prasanthi Hills",
+   "zone": "Shamshabad",
+   "circle": "Badangpet",
+   "corp": "GHMC",
+   "lat": 17.3383467,
+   "lng": 78.5222127,
+   "geo_note": "Badangpet circle centre (approx.)"
+  },
+  {
+   "no": 59,
+   "name": "Jillelguda",
+   "zone": "Shamshabad",
+   "circle": "Badangpet",
+   "corp": "GHMC",
+   "lat": 17.3383467,
+   "lng": 78.5222127,
+   "geo_note": "Badangpet circle centre (approx.)"
+  },
+  {
+   "no": 60,
+   "name": "Meerpet",
+   "zone": "Shamshabad",
+   "circle": "Badangpet",
+   "corp": "GHMC",
+   "lat": 17.3233291,
+   "lng": 78.5260272,
+   "geo_note": "nominatim residential: Meerpet Road"
+  },
+  {
+   "no": 61,
+   "name": "Badangpet",
+   "zone": "Shamshabad",
+   "circle": "Badangpet",
+   "corp": "GHMC",
+   "lat": 17.3383467,
+   "lng": 78.5222127,
+   "geo_note": "nominatim tertiary: badangpet-almasguda road"
+  },
+  {
+   "no": 62,
+   "name": "Balapur",
+   "zone": "Shamshabad",
+   "circle": "Badangpet",
+   "corp": "GHMC",
+   "lat": 17.3085041,
+   "lng": 78.5052949,
+   "geo_note": "nominatim childcare: Balapur - II"
+  },
+  {
+   "no": 63,
+   "name": "Shaheen Nagar",
+   "zone": "Shamshabad",
+   "circle": "Jalpally",
+   "corp": "GHMC",
+   "lat": 17.2927208,
+   "lng": 78.4778747,
+   "geo_note": "nominatim childcare: Shaheen Nagar-II"
+  },
+  {
+   "no": 64,
+   "name": "Pahari Sharif",
+   "zone": "Shamshabad",
+   "circle": "Jalpally",
+   "corp": "GHMC",
+   "lat": 17.3061541,
+   "lng": 78.4738589,
+   "geo_note": "Jalpally circle centre (approx.)"
+  },
+  {
+   "no": 65,
+   "name": "Jalpally",
+   "zone": "Shamshabad",
+   "circle": "Jalpally",
+   "corp": "GHMC",
+   "lat": 17.3061541,
+   "lng": 78.4738589,
+   "geo_note": "nominatim childcare: Jalpally - I"
+  },
+  {
+   "no": 66,
+   "name": "Tukkuguda",
+   "zone": "Shamshabad",
+   "circle": "Shamshabad",
+   "corp": "GHMC",
+   "lat": 17.2611444,
+   "lng": 78.3931943,
+   "geo_note": "Shamshabad circle centre (approx.)"
+  },
+  {
+   "no": 67,
+   "name": "Mankhal",
+   "zone": "Shamshabad",
+   "circle": "Shamshabad",
+   "corp": "GHMC",
+   "lat": 17.2611444,
+   "lng": 78.3931943,
+   "geo_note": "Shamshabad circle centre (approx.)"
+  },
+  {
+   "no": 68,
+   "name": "Bandlaguda",
+   "zone": "Rajendranagar",
+   "circle": "Chandrayan Gutta",
+   "corp": "GHMC",
+   "lat": 17.314596,
+   "lng": 78.4701106,
+   "geo_note": "nominatim neighbourhood: Bandlaguda"
+  },
+  {
+   "no": 69,
+   "name": "Noori Nagar",
+   "zone": "Rajendranagar",
+   "circle": "Chandrayan Gutta",
+   "corp": "GHMC",
+   "lat": 17.3246955,
+   "lng": 78.4813558,
+   "geo_note": "Chandrayan Gutta circle centre (approx.)"
+  },
+  {
+   "no": 70,
+   "name": "Barkas",
+   "zone": "Rajendranagar",
+   "circle": "Chandrayan Gutta",
+   "corp": "GHMC",
+   "lat": 17.3233696,
+   "lng": 78.4852043,
+   "geo_note": "nominatim residential: Barkas Cemetry lane"
+  },
+  {
+   "no": 71,
+   "name": "Kanchanbagh",
+   "zone": "Rajendranagar",
+   "circle": "Chandrayan Gutta",
+   "corp": "GHMC",
+   "lat": 17.3336885,
+   "lng": 78.5083007,
+   "geo_note": "nominatim police: Kanchanbagh Police Station"
+  },
+  {
+   "no": 72,
+   "name": "Chandrayan Gutta",
+   "zone": "Rajendranagar",
+   "circle": "Chandrayan Gutta",
+   "corp": "GHMC",
+   "lat": 17.3246955,
+   "lng": 78.4813558,
+   "geo_note": "nominatim suburb: Chandrayangutta"
+  },
+  {
+   "no": 73,
+   "name": "Riyasat Nagar",
+   "zone": "Rajendranagar",
+   "circle": "Jangammet",
+   "corp": "GHMC",
+   "lat": 17.3416392,
+   "lng": 78.4991656,
+   "geo_note": "nominatim neighbourhood: Riyasat Nagar"
+  },
+  {
+   "no": 74,
+   "name": "Lalitha Bagh",
+   "zone": "Rajendranagar",
+   "circle": "Jangammet",
+   "corp": "GHMC",
+   "lat": null,
+   "lng": null,
+   "geo_note": null
+  },
+  {
+   "no": 75,
+   "name": "Jangammet",
+   "zone": "Rajendranagar",
+   "circle": "Jangammet",
+   "corp": "GHMC",
+   "lat": null,
+   "lng": null,
+   "geo_note": null
+  },
+  {
+   "no": 76,
+   "name": "Phool Bagh",
+   "zone": "Rajendranagar",
+   "circle": "Jangammet",
+   "corp": "GHMC",
+   "lat": 17.4076149,
+   "lng": 78.4822311,
+   "geo_note": "nominatim health_post: Phool Bagh (Basthi Dawakhana)"
+  },
+  {
+   "no": 77,
+   "name": "Quadri Chaman",
+   "zone": "Rajendranagar",
+   "circle": "Jangammet",
+   "corp": "GHMC",
+   "lat": 17.3369479,
+   "lng": 78.4708558,
+   "geo_note": "nominatim tertiary: Quadri chaman road"
+  },
+  {
+   "no": 78,
+   "name": "Gowlipura",
+   "zone": "Charminar",
+   "circle": "Yakutpura",
+   "corp": "GHMC",
+   "lat": 17.3462321,
+   "lng": 78.4799077,
+   "geo_note": "nominatim neighbourhood: Gowlipura"
+  },
+  {
+   "no": 79,
+   "name": "Talab Chanchalam",
+   "zone": "Charminar",
+   "circle": "Yakutpura",
+   "corp": "GHMC",
+   "lat": 17.3586277,
+   "lng": 78.4858046,
+   "geo_note": "Yakutpura circle centre (approx.)"
+  },
+  {
+   "no": 80,
+   "name": "Yakutpura",
+   "zone": "Charminar",
+   "circle": "Yakutpura",
+   "corp": "GHMC",
+   "lat": 17.3586277,
+   "lng": 78.4858046,
+   "geo_note": "nominatim suburb: Yakutpura"
+  },
+  {
+   "no": 81,
+   "name": "Dabirpura",
+   "zone": "Charminar",
+   "circle": "Yakutpura",
+   "corp": "GHMC",
+   "lat": 17.3665277,
+   "lng": 78.4901244,
+   "geo_note": "nominatim halt: Dabirpura"
+  },
+  {
+   "no": 82,
+   "name": "Rein Bazar",
+   "zone": "Charminar",
+   "circle": "Yakutpura",
+   "corp": "GHMC",
+   "lat": 17.3586277,
+   "lng": 78.4858046,
+   "geo_note": "Yakutpura circle centre (approx.)"
+  },
+  {
+   "no": 83,
+   "name": "Madannapet",
+   "zone": "Charminar",
+   "circle": "Yakutpura",
+   "corp": "GHMC",
+   "lat": 17.3585578,
+   "lng": 78.4971064,
+   "geo_note": "nominatim neighbourhood: Madannapet"
+  },
+  {
+   "no": 84,
+   "name": "Bhanu Nagar",
+   "zone": "Charminar",
+   "circle": "Santoshnagar",
+   "corp": "GHMC",
+   "lat": 17.3467185,
+   "lng": 78.5081947,
+   "geo_note": "Santoshnagar circle centre (approx.)"
+  },
+  {
+   "no": 85,
+   "name": "Santoshnagar",
+   "zone": "Charminar",
+   "circle": "Santoshnagar",
+   "corp": "GHMC",
+   "lat": 17.3467185,
+   "lng": 78.5081947,
+   "geo_note": "nominatim bus_stop: Santoshnagar"
+  },
+  {
+   "no": 86,
+   "name": "IS Sadan",
+   "zone": "Charminar",
+   "circle": "Santoshnagar",
+   "corp": "GHMC",
+   "lat": 17.3523066,
+   "lng": 78.5066573,
+   "geo_note": "nominatim locality: IS Sadan Jn"
+  },
+  {
+   "no": 87,
+   "name": "Saraswathi Nagar",
+   "zone": "Charminar",
+   "circle": "Santoshnagar",
+   "corp": "GHMC",
+   "lat": 17.3476596,
+   "lng": 78.4864944,
+   "geo_note": "nominatim childcare: Saraswathi nagar"
+  },
+  {
+   "no": 88,
+   "name": "Saidabad",
+   "zone": "Charminar",
+   "circle": "Malakpet",
+   "corp": "GHMC",
+   "lat": 17.359533,
+   "lng": 78.5147979,
+   "geo_note": "nominatim administrative: Saidabad mandal"
+  },
+  {
+   "no": 89,
+   "name": "Asmangadh",
+   "zone": "Charminar",
+   "circle": "Malakpet",
+   "corp": "GHMC",
+   "lat": 17.3687913,
+   "lng": 78.5137788,
+   "geo_note": "nominatim neighbourhood: Asmangadh"
+  },
+  {
+   "no": 90,
+   "name": "Moosarambagh",
+   "zone": "Charminar",
+   "circle": "Moosarambagh",
+   "corp": "GHMC",
+   "lat": 17.3743532,
+   "lng": 78.5160835,
+   "geo_note": "nominatim suburb: Moosarambagh"
+  },
+  {
+   "no": 91,
+   "name": "Old Malakpet",
+   "zone": "Charminar",
+   "circle": "Moosarambagh",
+   "corp": "GHMC",
+   "lat": 17.3787081,
+   "lng": 78.4988983,
+   "geo_note": "nominatim neighbourhood: Old Malakpet"
+  },
+  {
+   "no": 92,
+   "name": "MCH Colony",
+   "zone": "Charminar",
+   "circle": "Moosarambagh",
+   "corp": "GHMC",
+   "lat": 17.3749382,
+   "lng": 78.5038513,
+   "geo_note": "nominatim neighbourhood: MCH Colony"
+  },
+  {
+   "no": 93,
+   "name": "Akberbagh",
+   "zone": "Charminar",
+   "circle": "Malakpet",
+   "corp": "GHMC",
+   "lat": 17.3736706,
+   "lng": 78.4996484,
+   "geo_note": "Malakpet circle centre (approx.)"
+  },
+  {
+   "no": 94,
+   "name": "Chawani",
+   "zone": "Charminar",
+   "circle": "Malakpet",
+   "corp": "GHMC",
+   "lat": 17.3736706,
+   "lng": 78.4996484,
+   "geo_note": "Malakpet circle centre (approx.)"
+  },
+  {
+   "no": 95,
+   "name": "Kala Dera",
+   "zone": "Charminar",
+   "circle": "Moosarambagh",
+   "corp": "GHMC",
+   "lat": 17.3729065,
+   "lng": 78.4975412,
+   "geo_note": "nominatim tertiary: Kala Dera Road"
+  },
+  {
+   "no": 96,
+   "name": "Azampura",
+   "zone": "Charminar",
+   "circle": "Moosarambagh",
+   "corp": "GHMC",
+   "lat": 17.3761935,
+   "lng": 78.490874,
+   "geo_note": "nominatim neighbourhood: Azampura"
+  },
+  {
+   "no": 97,
+   "name": "Purani Haveli",
+   "zone": "Charminar",
+   "circle": "Charminar",
+   "corp": "GHMC",
+   "lat": 17.3663487,
+   "lng": 78.4805382,
+   "geo_note": "nominatim suburb: Purani Haveli"
+  },
+  {
+   "no": 98,
+   "name": "Pathargatti",
+   "zone": "Charminar",
+   "circle": "Charminar",
+   "corp": "GHMC",
+   "lat": 17.3616024,
+   "lng": 78.4746421,
+   "geo_note": "Charminar circle centre (approx.)"
+  },
+  {
+   "no": 99,
+   "name": "Hari Bowli",
+   "zone": "Charminar",
+   "circle": "Charminar",
+   "corp": "GHMC",
+   "lat": 17.3503233,
+   "lng": 78.4758188,
+   "geo_note": "nominatim neighbourhood: Hari Bowli"
+  },
+  {
+   "no": 100,
+   "name": "Qazipura",
+   "zone": "Charminar",
+   "circle": "Charminar",
+   "corp": "GHMC",
+   "lat": 17.3531758,
+   "lng": 78.4678577,
+   "geo_note": "nominatim neighbourhood: Qazipura"
+  },
+  {
+   "no": 101,
+   "name": "Ghansi Bazar",
+   "zone": "Charminar",
+   "circle": "Charminar",
+   "corp": "GHMC",
+   "lat": 17.3671393,
+   "lng": 78.4709732,
+   "geo_note": "nominatim residential: Ghansi Bazar"
+  },
+  {
+   "no": 102,
+   "name": "Purana Pul",
+   "zone": "Charminar",
+   "circle": "Charminar",
+   "corp": "GHMC",
+   "lat": 17.3666789,
+   "lng": 78.4592941,
+   "geo_note": "nominatim neighbourhood: Purana Pul"
+  },
+  {
+   "no": 103,
+   "name": "Doodh Bowli",
+   "zone": "Rajendranagar",
+   "circle": "Bahadurpura",
+   "corp": "GHMC",
+   "lat": 17.3567994,
+   "lng": 78.4631485,
+   "geo_note": "nominatim residential: doodh bowli"
+  },
+  {
+   "no": 104,
+   "name": "Shah-Ali-Banda",
+   "zone": "Rajendranagar",
+   "circle": "Falaknuma",
+   "corp": "GHMC",
+   "lat": 17.355114,
+   "lng": 78.4706748,
+   "geo_note": "nominatim residential: shah ali banda"
+  },
+  {
+   "no": 105,
+   "name": "Falaknuma",
+   "zone": "Rajendranagar",
+   "circle": "Falaknuma",
+   "corp": "GHMC",
+   "lat": 17.333653,
+   "lng": 78.4677481,
+   "geo_note": "nominatim suburb: Falaknuma"
+  },
+  {
+   "no": 106,
+   "name": "Jahanuma",
+   "zone": "Rajendranagar",
+   "circle": "Falaknuma",
+   "corp": "GHMC",
+   "lat": 17.3433524,
+   "lng": 78.4614644,
+   "geo_note": "nominatim suburb: Jahanuma"
+  },
+  {
+   "no": 107,
+   "name": "Nawab Saheb Kunta",
+   "zone": "Rajendranagar",
+   "circle": "Falaknuma",
+   "corp": "GHMC",
+   "lat": 17.3397918,
+   "lng": 78.4578365,
+   "geo_note": "nominatim suburb: Nawab Saheb Kunta"
+  },
+  {
+   "no": 108,
+   "name": "Teegal Kunta",
+   "zone": "Rajendranagar",
+   "circle": "Bahadurpura",
+   "corp": "GHMC",
+   "lat": 17.3570672,
+   "lng": 78.4545419,
+   "geo_note": "Bahadurpura circle centre (approx.)"
+  },
+  {
+   "no": 109,
+   "name": "Chandu Lal Baradari",
+   "zone": "Rajendranagar",
+   "circle": "Bahadurpura",
+   "corp": "GHMC",
+   "lat": 17.3518433,
+   "lng": 78.4603915,
+   "geo_note": "photon neighbourhood: Chandulal Baradari"
+  },
+  {
+   "no": 110,
+   "name": "Ramnastpura",
+   "zone": "Rajendranagar",
+   "circle": "Bahadurpura",
+   "corp": "GHMC",
+   "lat": 17.3570672,
+   "lng": 78.4545419,
+   "geo_note": "Bahadurpura circle centre (approx.)"
+  },
+  {
+   "no": 111,
+   "name": "Kishanbagh",
+   "zone": "Rajendranagar",
+   "circle": "Bahadurpura",
+   "corp": "GHMC",
+   "lat": 17.3575261,
+   "lng": 78.44485,
+   "geo_note": "nominatim suburb: Kishan Bagh"
+  },
+  {
+   "no": 112,
+   "name": "Attapur",
+   "zone": "Rajendranagar",
+   "circle": "Attapur",
+   "corp": "GHMC",
+   "lat": 17.3672244,
+   "lng": 78.4307278,
+   "geo_note": "nominatim suburb: Attapur"
+  },
+  {
+   "no": 113,
+   "name": "Hyderguda",
+   "zone": "Rajendranagar",
+   "circle": "Attapur",
+   "corp": "GHMC",
+   "lat": 17.4012791,
+   "lng": 78.4804894,
+   "geo_note": "nominatim suburb: Hyderguda"
+  },
+  {
+   "no": 114,
+   "name": "Suleman Nagar",
+   "zone": "Rajendranagar",
+   "circle": "Attapur",
+   "corp": "GHMC",
+   "lat": 17.3486936,
+   "lng": 78.4231173,
+   "geo_note": "nominatim neighbourhood: Suleman Nagar"
+  },
+  {
+   "no": 115,
+   "name": "Shastripuram",
+   "zone": "Rajendranagar",
+   "circle": "Attapur",
+   "corp": "GHMC",
+   "lat": 17.3327514,
+   "lng": 78.4502307,
+   "geo_note": "nominatim neighbourhood: Shastripuram"
+  },
+  {
+   "no": 116,
+   "name": "Katedan",
+   "zone": "Rajendranagar",
+   "circle": "Attapur",
+   "corp": "GHMC",
+   "lat": 17.3026835,
+   "lng": 78.4398207,
+   "geo_note": "nominatim suburb: Katedan"
+  },
+  {
+   "no": 117,
+   "name": "Mailardevpally",
+   "zone": "Rajendranagar",
+   "circle": "Attapur",
+   "corp": "GHMC",
+   "lat": 17.3200218,
+   "lng": 78.4460585,
+   "geo_note": "nominatim suburb: Mailardevpally"
+  },
+  {
+   "no": 118,
+   "name": "Shamshabad",
+   "zone": "Shamshabad",
+   "circle": "Shamshabad",
+   "corp": "GHMC",
+   "lat": 17.2611444,
+   "lng": 78.3931943,
+   "geo_note": "nominatim village: Shamshabad"
+  },
+  {
+   "no": 119,
+   "name": "Kothwalguda",
+   "zone": "Shamshabad",
+   "circle": "Shamshabad",
+   "corp": "GHMC",
+   "lat": 17.2888971,
+   "lng": 78.3664132,
+   "geo_note": "nominatim village: Kothwalguda"
+  },
+  {
+   "no": 120,
+   "name": "Rajendranagar",
+   "zone": "Rajendranagar",
+   "circle": "Rajendranagar",
+   "corp": "GHMC",
+   "lat": 17.3200739,
+   "lng": 78.418589,
+   "geo_note": "nominatim administrative: Rajendranagar mandal"
+  },
+  {
+   "no": 121,
+   "name": "Bandlaguda Jagir",
+   "zone": "Rajendranagar",
+   "circle": "Rajendranagar",
+   "corp": "GHMC",
+   "lat": 17.3506317,
+   "lng": 78.3907531,
+   "geo_note": "nominatim village: Bandlaguda Jagir"
+  },
+  {
+   "no": 122,
+   "name": "Kismatpur",
+   "zone": "Rajendranagar",
+   "circle": "Rajendranagar",
+   "corp": "GHMC",
+   "lat": 17.3316182,
+   "lng": 78.4033571,
+   "geo_note": "nominatim tertiary: Kismatpur Rd"
+  },
+  {
+   "no": 123,
+   "name": "Hydershahkote",
+   "zone": "Rajendranagar",
+   "circle": "Rajendranagar",
+   "corp": "GHMC",
+   "lat": 17.3200739,
+   "lng": 78.418589,
+   "geo_note": "Rajendranagar circle centre (approx.)"
+  },
+  {
+   "no": 124,
+   "name": "Narsingi",
+   "zone": "Serilingampally",
+   "circle": "Narsingi",
+   "corp": "CMC",
+   "lat": 17.3915187,
+   "lng": 78.3598924,
+   "geo_note": "nominatim suburb: Narsingi"
+  },
+  {
+   "no": 125,
+   "name": "Kokapet",
+   "zone": "Serilingampally",
+   "circle": "Narsingi",
+   "corp": "CMC",
+   "lat": 17.3948624,
+   "lng": 78.3365214,
+   "geo_note": "nominatim suburb: Kokapet"
+  },
+  {
+   "no": 126,
+   "name": "Gandipet",
+   "zone": "Serilingampally",
+   "circle": "Narsingi",
+   "corp": "CMC",
+   "lat": 17.3872553,
+   "lng": 78.320471,
+   "geo_note": "nominatim suburb: Gandipet"
+  },
+  {
+   "no": 127,
+   "name": "Manikonda",
+   "zone": "Serilingampally",
+   "circle": "Narsingi",
+   "corp": "CMC",
+   "lat": 17.4135407,
+   "lng": 78.3744251,
+   "geo_note": "nominatim water: Manikonda Cheruvu"
+  },
+  {
+   "no": 128,
+   "name": "Neknampur",
+   "zone": "Serilingampally",
+   "circle": "Narsingi",
+   "corp": "CMC",
+   "lat": 17.3915525,
+   "lng": 78.375176,
+   "geo_note": "nominatim neighbourhood: Neknampur"
+  },
+  {
+   "no": 129,
+   "name": "Nizam Colony",
+   "zone": "Golconda",
+   "circle": "Golconda",
+   "corp": "GHMC",
+   "lat": 17.3873294,
+   "lng": 78.4057336,
+   "geo_note": "Golconda circle centre (approx.)"
+  },
+  {
+   "no": 130,
+   "name": "Nanalnagar",
+   "zone": "Golconda",
+   "circle": "Golconda",
+   "corp": "GHMC",
+   "lat": 17.3962507,
+   "lng": 78.4270607,
+   "geo_note": "nominatim bus_stop: Nanalnagar"
+  },
+  {
+   "no": 131,
+   "name": "Tolichowki",
+   "zone": "Golconda",
+   "circle": "Golconda",
+   "corp": "GHMC",
+   "lat": 17.4002904,
+   "lng": 78.4118051,
+   "geo_note": "nominatim suburb: Tolichowki"
+  },
+  {
+   "no": 132,
+   "name": "Golconda",
+   "zone": "Golconda",
+   "circle": "Golconda",
+   "corp": "GHMC",
+   "lat": 17.3873294,
+   "lng": 78.4057336,
+   "geo_note": "nominatim suburb: Golconda"
+  },
+  {
+   "no": 133,
+   "name": "Ibrahimbagh",
+   "zone": "Golconda",
+   "circle": "Golconda",
+   "corp": "GHMC",
+   "lat": 17.3767677,
+   "lng": 78.381442,
+   "geo_note": "nominatim residential: Ibrahimbagh Road"
+  },
+  {
+   "no": 134,
+   "name": "Langar Houz",
+   "zone": "Golconda",
+   "circle": "Karwan",
+   "corp": "GHMC",
+   "lat": 17.3734894,
+   "lng": 78.4412105,
+   "geo_note": "Karwan circle centre (approx.)"
+  },
+  {
+   "no": 135,
+   "name": "Gudimalkapur",
+   "zone": "Golconda",
+   "circle": "Karwan",
+   "corp": "GHMC",
+   "lat": 17.3879203,
+   "lng": 78.4371165,
+   "geo_note": "nominatim suburb: Gudimalkapur"
+  },
+  {
+   "no": 136,
+   "name": "Karwan",
+   "zone": "Golconda",
+   "circle": "Karwan",
+   "corp": "GHMC",
+   "lat": 17.3734894,
+   "lng": 78.4412105,
+   "geo_note": "nominatim neighbourhood: Karwan Sahu"
+  },
+  {
+   "no": 137,
+   "name": "Tappachabutra",
+   "zone": "Golconda",
+   "circle": "Karwan",
+   "corp": "GHMC",
+   "lat": 17.3737367,
+   "lng": 78.448083,
+   "geo_note": "nominatim secondary: Tappachabutra road"
+  },
+  {
+   "no": 138,
+   "name": "Jiyaguda",
+   "zone": "Golconda",
+   "circle": "Karwan",
+   "corp": "GHMC",
+   "lat": 17.3734894,
+   "lng": 78.4412105,
+   "geo_note": "Karwan circle centre (approx.)"
+  },
+  {
+   "no": 139,
+   "name": "Asif Nagar",
+   "zone": "Golconda",
+   "circle": "Mehdipatnam",
+   "corp": "GHMC",
+   "lat": 17.3857483,
+   "lng": 78.4505083,
+   "geo_note": "nominatim childcare: Asif Nagar"
+  },
+  {
+   "no": 140,
+   "name": "Padmanabha Nagar",
+   "zone": "Golconda",
+   "circle": "Mehdipatnam",
+   "corp": "GHMC",
+   "lat": 17.3907279,
+   "lng": 78.4294643,
+   "geo_note": "nominatim neighbourhood: Padmanabha Nagar"
+  },
+  {
+   "no": 141,
+   "name": "Mehdipatnam",
+   "zone": "Golconda",
+   "circle": "Mehdipatnam",
+   "corp": "GHMC",
+   "lat": 17.3942627,
+   "lng": 78.4342514,
+   "geo_note": "nominatim suburb: Mehdipatnam"
+  },
+  {
+   "no": 142,
+   "name": "Syed Nagar",
+   "zone": "Golconda",
+   "circle": "Mehdipatnam",
+   "corp": "GHMC",
+   "lat": 17.4055474,
+   "lng": 78.4320663,
+   "geo_note": "nominatim neighbourhood: Syed Nagar"
+  },
+  {
+   "no": 143,
+   "name": "Vijayanagar Colony",
+   "zone": "Golconda",
+   "circle": "Masab Tank",
+   "corp": "GHMC",
+   "lat": 17.4029622,
+   "lng": 78.450754,
+   "geo_note": "Masab Tank circle centre (approx.)"
+  },
+  {
+   "no": 144,
+   "name": "Ahmed Nagar",
+   "zone": "Golconda",
+   "circle": "Masab Tank",
+   "corp": "GHMC",
+   "lat": 17.404066,
+   "lng": 78.4442286,
+   "geo_note": "nominatim neighbourhood: Ahmed Nagar"
+  },
+  {
+   "no": 145,
+   "name": "Shanthi Nagar",
+   "zone": "Golconda",
+   "circle": "Masab Tank",
+   "corp": "GHMC",
+   "lat": 17.4024133,
+   "lng": 78.4552129,
+   "geo_note": "nominatim residential: Shanthinagar Road Number 1"
+  },
+  {
+   "no": 146,
+   "name": "Red Hills",
+   "zone": "Khairatabad",
+   "circle": "Khairatabad",
+   "corp": "GHMC",
+   "lat": 17.3982921,
+   "lng": 78.4642498,
+   "geo_note": "nominatim neighbourhood: Red Hills"
+  },
+  {
+   "no": 147,
+   "name": "Mallepally",
+   "zone": "Golconda",
+   "circle": "Masab Tank",
+   "corp": "GHMC",
+   "lat": 17.3920728,
+   "lng": 78.4546129,
+   "geo_note": "nominatim suburb: Mallepally"
+  },
+  {
+   "no": 148,
+   "name": "Dattatreya Nagar",
+   "zone": "Golconda",
+   "circle": "Goshamahal",
+   "corp": "GHMC",
+   "lat": 17.3805762,
+   "lng": 78.468846,
+   "geo_note": "Goshamahal circle centre (approx.)"
+  },
+  {
+   "no": 149,
+   "name": "Mangalhat",
+   "zone": "Golconda",
+   "circle": "Goshamahal",
+   "corp": "GHMC",
+   "lat": 17.3787687,
+   "lng": 78.4604403,
+   "geo_note": "nominatim neighbourhood: Mangalhat"
+  },
+  {
+   "no": 150,
+   "name": "Goshamahal",
+   "zone": "Golconda",
+   "circle": "Goshamahal",
+   "corp": "GHMC",
+   "lat": 17.3805762,
+   "lng": 78.468846,
+   "geo_note": "nominatim suburb: Goshamahal"
+  },
+  {
+   "no": 151,
+   "name": "Begum Bazaar",
+   "zone": "Golconda",
+   "circle": "Goshamahal",
+   "corp": "GHMC",
+   "lat": 17.3730788,
+   "lng": 78.4705549,
+   "geo_note": "nominatim suburb: Begum Bazaar"
+  },
+  {
+   "no": 152,
+   "name": "Jambagh",
+   "zone": "Golconda",
+   "circle": "Goshamahal",
+   "corp": "GHMC",
+   "lat": 17.3835866,
+   "lng": 78.4774067,
+   "geo_note": "nominatim neighbourhood: Jambagh"
+  },
+  {
+   "no": 153,
+   "name": "Exhibition Grounds",
+   "zone": "Golconda",
+   "circle": "Goshamahal",
+   "corp": "GHMC",
+   "lat": 17.38675,
+   "lng": 78.4704712,
+   "geo_note": "nominatim outdoor: Exhibition Grounds"
+  },
+  {
+   "no": 154,
+   "name": "Gunfoundry",
+   "zone": "Khairatabad",
+   "circle": "Khairatabad",
+   "corp": "GHMC",
+   "lat": 17.3947505,
+   "lng": 78.4777361,
+   "geo_note": "nominatim tertiary: Gunfoundry Street Number 3"
+  },
+  {
+   "no": 155,
+   "name": "Barkatpura",
+   "zone": "Secunderabad",
+   "circle": "Amberpet",
+   "corp": "GHMC",
+   "lat": 17.3926121,
+   "lng": 78.4969683,
+   "geo_note": "nominatim suburb: Barkatpura"
+  },
+  {
+   "no": 156,
+   "name": "Kachiguda",
+   "zone": "Secunderabad",
+   "circle": "Amberpet",
+   "corp": "GHMC",
+   "lat": 17.3896821,
+   "lng": 78.4992106,
+   "geo_note": "nominatim secondary: Kachiguda Station Road"
+  },
+  {
+   "no": 157,
+   "name": "Golnaka",
+   "zone": "Secunderabad",
+   "circle": "Amberpet",
+   "corp": "GHMC",
+   "lat": 17.3901064,
+   "lng": 78.5083605,
+   "geo_note": "nominatim neighbourhood: Golnaka"
+  },
+  {
+   "no": 158,
+   "name": "Patel Nagar",
+   "zone": "Secunderabad",
+   "circle": "Amberpet",
+   "corp": "GHMC",
+   "lat": 17.3825308,
+   "lng": 78.527926,
+   "geo_note": "nominatim neighbourhood: Patel Nagar"
+  },
+  {
+   "no": 159,
+   "name": "Amberpet",
+   "zone": "Secunderabad",
+   "circle": "Amberpet",
+   "corp": "GHMC",
+   "lat": 17.3861776,
+   "lng": 78.5114709,
+   "geo_note": "nominatim administrative: Amberpet mandal"
+  },
+  {
+   "no": 160,
+   "name": "Bagh Amberpet",
+   "zone": "Secunderabad",
+   "circle": "Amberpet",
+   "corp": "GHMC",
+   "lat": 17.3861776,
+   "lng": 78.5114709,
+   "geo_note": "Amberpet circle centre (approx.)"
+  },
+  {
+   "no": 161,
+   "name": "Tilak Nagar",
+   "zone": "Secunderabad",
+   "circle": "Amberpet",
+   "corp": "GHMC",
+   "lat": 17.3926401,
+   "lng": 78.5083876,
+   "geo_note": "nominatim neighbourhood: Tilak Nagar"
+  },
+  {
+   "no": 162,
+   "name": "Nallakunta",
+   "zone": "Secunderabad",
+   "circle": "Amberpet",
+   "corp": "GHMC",
+   "lat": 17.3975005,
+   "lng": 78.50557,
+   "geo_note": "nominatim suburb: Nallakunta"
+  },
+  {
+   "no": 163,
+   "name": "Adikmet",
+   "zone": "Secunderabad",
+   "circle": "Musheerabad",
+   "corp": "GHMC",
+   "lat": 17.4095495,
+   "lng": 78.5130943,
+   "geo_note": "nominatim neighbourhood: Adikmet"
+  },
+  {
+   "no": 164,
+   "name": "Bagh Lingampally",
+   "zone": "Secunderabad",
+   "circle": "Musheerabad",
+   "corp": "GHMC",
+   "lat": 17.3974359,
+   "lng": 78.4979706,
+   "geo_note": "nominatim neighbourhood: Bagh Lingampally"
+  },
+  {
+   "no": 165,
+   "name": "Gandhi Nagar",
+   "zone": "Secunderabad",
+   "circle": "Kavadiguda",
+   "corp": "GHMC",
+   "lat": 17.4123446,
+   "lng": 78.4899194,
+   "geo_note": "nominatim suburb: Gandhi Nagar"
+  },
+  {
+   "no": 166,
+   "name": "Kavadiguda",
+   "zone": "Secunderabad",
+   "circle": "Kavadiguda",
+   "corp": "GHMC",
+   "lat": 17.4227022,
+   "lng": 78.4917695,
+   "geo_note": "nominatim suburb: Kavadiguda"
+  },
+  {
+   "no": 167,
+   "name": "Bakaram",
+   "zone": "Secunderabad",
+   "circle": "Kavadiguda",
+   "corp": "GHMC",
+   "lat": 17.4150021,
+   "lng": 78.493784,
+   "geo_note": "nominatim tertiary: bakaram street 9"
+  },
+  {
+   "no": 168,
+   "name": "Bholakpur",
+   "zone": "Secunderabad",
+   "circle": "Kavadiguda",
+   "corp": "GHMC",
+   "lat": 17.4191997,
+   "lng": 78.4949035,
+   "geo_note": "nominatim neighbourhood: Bholakpur"
+  },
+  {
+   "no": 169,
+   "name": "Musheerabad",
+   "zone": "Secunderabad",
+   "circle": "Musheerabad",
+   "corp": "GHMC",
+   "lat": 17.4191423,
+   "lng": 78.4985732,
+   "geo_note": "nominatim neighbourhood: Musheerabad"
+  },
+  {
+   "no": 170,
+   "name": "Ramnagar",
+   "zone": "Secunderabad",
+   "circle": "Musheerabad",
+   "corp": "GHMC",
+   "lat": 17.4109979,
+   "lng": 78.5072917,
+   "geo_note": "nominatim locality: Ramnagar X Roads"
+  },
+  {
+   "no": 171,
+   "name": "Bapuji Nagar",
+   "zone": "Secunderabad",
+   "circle": "Musheerabad",
+   "corp": "GHMC",
+   "lat": 17.4044403,
+   "lng": 78.42186,
+   "geo_note": "nominatim childcare: Bapuji nagar"
+  },
+  {
+   "no": 172,
+   "name": "Boudha Nagar",
+   "zone": "Secunderabad",
+   "circle": "Tarnaka",
+   "corp": "GHMC",
+   "lat": 17.4175105,
+   "lng": 78.5169267,
+   "geo_note": "nominatim neighbourhood: Boudha Nagar"
+  },
+  {
+   "no": 173,
+   "name": "Tarnaka",
+   "zone": "Secunderabad",
+   "circle": "Tarnaka",
+   "corp": "GHMC",
+   "lat": 17.4282965,
+   "lng": 78.5284415,
+   "geo_note": "nominatim station: Tarnaka"
+  },
+  {
+   "no": 174,
+   "name": "Sitaphalmandi",
+   "zone": "Secunderabad",
+   "circle": "Tarnaka",
+   "corp": "GHMC",
+   "lat": 17.4297326,
+   "lng": 78.5174265,
+   "geo_note": "nominatim suburb: Sitaphalmandi"
+  },
+  {
+   "no": 175,
+   "name": "Chilkalguda",
+   "zone": "Secunderabad",
+   "circle": "Tarnaka",
+   "corp": "GHMC",
+   "lat": 17.4315325,
+   "lng": 78.5071619,
+   "geo_note": "nominatim suburb: Chilkalguda"
+  },
+  {
+   "no": 176,
+   "name": "Mettuguda",
+   "zone": "Secunderabad",
+   "circle": "Mettuguda",
+   "corp": "GHMC",
+   "lat": 17.4290496,
+   "lng": 78.5252424,
+   "geo_note": "nominatim neighbourhood: Mettuguda"
+  },
+  {
+   "no": 177,
+   "name": "Lalapet",
+   "zone": "Secunderabad",
+   "circle": "Mettuguda",
+   "corp": "GHMC",
+   "lat": 17.4290496,
+   "lng": 78.5252424,
+   "geo_note": "Mettuguda circle centre (approx.)"
+  },
+  {
+   "no": 178,
+   "name": "North Lallaguda",
+   "zone": "Secunderabad",
+   "circle": "Mettuguda",
+   "corp": "GHMC",
+   "lat": 17.4290496,
+   "lng": 78.5252424,
+   "geo_note": "Mettuguda circle centre (approx.)"
+  },
+  {
+   "no": 179,
+   "name": "Addagutta",
+   "zone": "Secunderabad",
+   "circle": "Mettuguda",
+   "corp": "GHMC",
+   "lat": 17.4458959,
+   "lng": 78.5201146,
+   "geo_note": "nominatim residential: Addagutta"
+  },
+  {
+   "no": 180,
+   "name": "East Anandbagh",
+   "zone": "Malkajgiri",
+   "circle": "Malkajgiri",
+   "corp": "MMC",
+   "lat": 17.4511764,
+   "lng": 78.5368997,
+   "geo_note": "Malkajgiri circle centre (approx.)"
+  },
+  {
+   "no": 181,
+   "name": "Mirjalguda",
+   "zone": "Malkajgiri",
+   "circle": "Malkajgiri",
+   "corp": "MMC",
+   "lat": 17.4511764,
+   "lng": 78.5368997,
+   "geo_note": "Malkajgiri circle centre (approx.)"
+  },
+  {
+   "no": 182,
+   "name": "Gautham Nagar",
+   "zone": "Malkajgiri",
+   "circle": "Malkajgiri",
+   "corp": "MMC",
+   "lat": 17.4608462,
+   "lng": 78.4589032,
+   "geo_note": "nominatim neighbourhood: Gautham Nagar"
+  },
+  {
+   "no": 183,
+   "name": "Malkajgiri",
+   "zone": "Malkajgiri",
+   "circle": "Malkajgiri",
+   "corp": "MMC",
+   "lat": 17.4511764,
+   "lng": 78.5368997,
+   "geo_note": "nominatim town: Malkajgiri"
+  },
+  {
+   "no": 184,
+   "name": "Balram Nagar",
+   "zone": "Malkajgiri",
+   "circle": "Moula Ali",
+   "corp": "MMC",
+   "lat": 17.46171,
+   "lng": 78.5571396,
+   "geo_note": "Moula Ali circle centre (approx.)"
+  },
+  {
+   "no": 185,
+   "name": "Vinayak Nagar",
+   "zone": "Malkajgiri",
+   "circle": "Moula Ali",
+   "corp": "MMC",
+   "lat": 17.469273,
+   "lng": 78.5391171,
+   "geo_note": "nominatim bus_stop: Vinayak Nagar"
+  },
+  {
+   "no": 186,
+   "name": "Moula Ali",
+   "zone": "Malkajgiri",
+   "circle": "Moula Ali",
+   "corp": "MMC",
+   "lat": 17.46171,
+   "lng": 78.5571396,
+   "geo_note": "nominatim suburb: Moula Ali"
+  },
+  {
+   "no": 187,
+   "name": "Kakatiya Nagar",
+   "zone": "Malkajgiri",
+   "circle": "Moula Ali",
+   "corp": "MMC",
+   "lat": 17.4738359,
+   "lng": 78.5409858,
+   "geo_note": "nominatim residential: kakatiya nagar"
+  },
+  {
+   "no": 188,
+   "name": "Neredmet",
+   "zone": "Malkajgiri",
+   "circle": "Moula Ali",
+   "corp": "MMC",
+   "lat": 17.470446,
+   "lng": 78.5360054,
+   "geo_note": "nominatim suburb: Neredmet"
+  },
+  {
+   "no": 189,
+   "name": "Yapral",
+   "zone": "Malkajgiri",
+   "circle": "Keesara",
+   "corp": "MMC",
+   "lat": 17.5249309,
+   "lng": 78.6665345,
+   "geo_note": "Keesara circle centre (approx.)"
+  },
+  {
+   "no": 190,
+   "name": "Turakapally",
+   "zone": "Malkajgiri",
+   "circle": "Alwal",
+   "corp": "MMC",
+   "lat": 17.5018763,
+   "lng": 78.5090947,
+   "geo_note": "Alwal circle centre (approx.)"
+  },
+  {
+   "no": 191,
+   "name": "Macha Bollaram",
+   "zone": "Malkajgiri",
+   "circle": "Alwal",
+   "corp": "MMC",
+   "lat": 17.5018763,
+   "lng": 78.5090947,
+   "geo_note": "Alwal circle centre (approx.)"
+  },
+  {
+   "no": 192,
+   "name": "Alwal",
+   "zone": "Malkajgiri",
+   "circle": "Alwal",
+   "corp": "MMC",
+   "lat": 17.5018763,
+   "lng": 78.5090947,
+   "geo_note": "nominatim neighbourhood: alwal"
+  },
+  {
+   "no": 193,
+   "name": "Venkatapuram",
+   "zone": "Malkajgiri",
+   "circle": "Alwal",
+   "corp": "MMC",
+   "lat": 17.496189,
+   "lng": 78.5043108,
+   "geo_note": "nominatim suburb: Venkatapuram"
+  },
+  {
+   "no": 194,
+   "name": "Bhudevi Nagar",
+   "zone": "Malkajgiri",
+   "circle": "Alwal",
+   "corp": "MMC",
+   "lat": 17.4913957,
+   "lng": 78.5022545,
+   "geo_note": "nominatim neighbourhood: Bhudevi Nagar"
+  },
+  {
+   "no": 195,
+   "name": "Kanajiguda",
+   "zone": "Malkajgiri",
+   "circle": "Alwal",
+   "corp": "MMC",
+   "lat": 17.4964651,
+   "lng": 78.4985969,
+   "geo_note": "nominatim residential: Kanajiguda"
+  },
+  {
+   "no": 196,
+   "name": "Monda Market",
+   "zone": "Malkajgiri",
+   "circle": "Bowenpally",
+   "corp": "MMC",
+   "lat": 17.4353394,
+   "lng": 78.4973474,
+   "geo_note": "nominatim marketplace: monda market"
+  },
+  {
+   "no": 197,
+   "name": "Padmarao Nagar",
+   "zone": "Secunderabad",
+   "circle": "Kavadiguda",
+   "corp": "GHMC",
+   "lat": 17.4261682,
+   "lng": 78.5076996,
+   "geo_note": "nominatim tertiary: Padmarao Nagar Road"
+  },
+  {
+   "no": 198,
+   "name": "Bansilalpet",
+   "zone": "Secunderabad",
+   "circle": "Kavadiguda",
+   "corp": "GHMC",
+   "lat": 17.4229569,
+   "lng": 78.4963676,
+   "geo_note": "nominatim childcare: Bansilal Pet-I"
+  },
+  {
+   "no": 199,
+   "name": "Ramgopalpet",
+   "zone": "Secunderabad",
+   "circle": "Kavadiguda",
+   "corp": "GHMC",
+   "lat": 17.4361643,
+   "lng": 78.4884749,
+   "geo_note": "nominatim police: Ramgopalpet Police Station"
+  },
+  {
+   "no": 200,
+   "name": "Begumpet",
+   "zone": "Khairatabad",
+   "circle": "Ameerpet",
+   "corp": "GHMC",
+   "lat": 17.446195,
+   "lng": 78.463016,
+   "geo_note": "nominatim suburb: Begumpet"
+  },
+  {
+   "no": 201,
+   "name": "Ameerpet",
+   "zone": "Khairatabad",
+   "circle": "Ameerpet",
+   "corp": "GHMC",
+   "lat": 17.4375012,
+   "lng": 78.4482505,
+   "geo_note": "nominatim suburb: Ameerpet"
+  },
+  {
+   "no": 202,
+   "name": "S. R. Nagar",
+   "zone": "Khairatabad",
+   "circle": "Ameerpet",
+   "corp": "GHMC",
+   "lat": 17.4417071,
+   "lng": 78.4416081,
+   "geo_note": "nominatim station: S. R. Nagar"
+  },
+  {
+   "no": 203,
+   "name": "BK Guda",
+   "zone": "Khairatabad",
+   "circle": "Ameerpet",
+   "corp": "GHMC",
+   "lat": 17.443861,
+   "lng": 78.4476003,
+   "geo_note": "nominatim residential: bk guda rd"
+  },
+  {
+   "no": 204,
+   "name": "Sanathnagar",
+   "zone": "Khairatabad",
+   "circle": "Ameerpet",
+   "corp": "GHMC",
+   "lat": 17.4542182,
+   "lng": 78.4454956,
+   "geo_note": "nominatim swimming_pool: Sanathnagar Swimming Pool"
+  },
+  {
+   "no": 205,
+   "name": "Erragadda",
+   "zone": "Khairatabad",
+   "circle": "Yousufguda",
+   "corp": "GHMC",
+   "lat": 17.4487999,
+   "lng": 78.4356074,
+   "geo_note": "nominatim suburb: Erragadda"
+  },
+  {
+   "no": 206,
+   "name": "Vengal Rao Nagar",
+   "zone": "Khairatabad",
+   "circle": "Yousufguda",
+   "corp": "GHMC",
+   "lat": 17.442681,
+   "lng": 78.4354451,
+   "geo_note": "nominatim suburb: Vengal Rao Nagar"
+  },
+  {
+   "no": 207,
+   "name": "Srinagar Colony",
+   "zone": "Khairatabad",
+   "circle": "Yousufguda",
+   "corp": "GHMC",
+   "lat": 17.431231,
+   "lng": 78.4337951,
+   "geo_note": "nominatim neighbourhood: Srinagar Colony"
+  },
+  {
+   "no": 208,
+   "name": "Yousufguda",
+   "zone": "Khairatabad",
+   "circle": "Yousufguda",
+   "corp": "GHMC",
+   "lat": 17.4387499,
+   "lng": 78.4279866,
+   "geo_note": "nominatim suburb: Yousufguda"
+  },
+  {
+   "no": 209,
+   "name": "AG Colony",
+   "zone": "Khairatabad",
+   "circle": "Yousufguda",
+   "corp": "GHMC",
+   "lat": 17.4480122,
+   "lng": 78.4242031,
+   "geo_note": "nominatim neighbourhood: AG Colony"
+  },
+  {
+   "no": 210,
+   "name": "Krishna Nagar",
+   "zone": "Khairatabad",
+   "circle": "Borabanda",
+   "corp": "GHMC",
+   "lat": 17.4330523,
+   "lng": 78.4246746,
+   "geo_note": "nominatim neighbourhood: Krishna Nagar"
+  },
+  {
+   "no": 211,
+   "name": "Rahmath Nagar",
+   "zone": "Khairatabad",
+   "circle": "Borabanda",
+   "corp": "GHMC",
+   "lat": 17.45167,
+   "lng": 78.415421,
+   "geo_note": "Borabanda circle centre (approx.)"
+  },
+  {
+   "no": 212,
+   "name": "Karmika Nagar",
+   "zone": "Khairatabad",
+   "circle": "Borabanda",
+   "corp": "GHMC",
+   "lat": 17.4456856,
+   "lng": 78.4208183,
+   "geo_note": "nominatim childcare: Karmikanagar-IV"
+  },
+  {
+   "no": 213,
+   "name": "Rajeev Nagar",
+   "zone": "Khairatabad",
+   "circle": "Borabanda",
+   "corp": "GHMC",
+   "lat": 17.447395,
+   "lng": 78.4258604,
+   "geo_note": "nominatim residential: Rajeev Nagar road Numbaer 2"
+  },
+  {
+   "no": 214,
+   "name": "Borabanda",
+   "zone": "Khairatabad",
+   "circle": "Borabanda",
+   "corp": "GHMC",
+   "lat": 17.45167,
+   "lng": 78.415421,
+   "geo_note": "nominatim suburb: Borabanda"
+  },
+  {
+   "no": 215,
+   "name": "Jubilee Hills",
+   "zone": "Khairatabad",
+   "circle": "Jubilee Hills",
+   "corp": "GHMC",
+   "lat": 17.4308362,
+   "lng": 78.4102882,
+   "geo_note": "nominatim suburb: Jubilee Hills"
+  },
+  {
+   "no": 216,
+   "name": "Venkateswara Colony",
+   "zone": "Khairatabad",
+   "circle": "Jubilee Hills",
+   "corp": "GHMC",
+   "lat": 17.4083465,
+   "lng": 78.4242184,
+   "geo_note": "nominatim neighbourhood: Venkateswara Colony"
+  },
+  {
+   "no": 217,
+   "name": "Irrum Manzil",
+   "zone": "Khairatabad",
+   "circle": "Khairatabad",
+   "corp": "GHMC",
+   "lat": 17.4183305,
+   "lng": 78.4537326,
+   "geo_note": "nominatim neighbourhood: Irrum Manzil"
+  },
+  {
+   "no": 218,
+   "name": "Somajiguda",
+   "zone": "Khairatabad",
+   "circle": "Khairatabad",
+   "corp": "GHMC",
+   "lat": 17.4255053,
+   "lng": 78.4585197,
+   "geo_note": "nominatim suburb: Somajiguda"
+  },
+  {
+   "no": 219,
+   "name": "Khairatabad",
+   "zone": "Khairatabad",
+   "circle": "Khairatabad",
+   "corp": "GHMC",
+   "lat": 17.4117706,
+   "lng": 78.4622003,
+   "geo_note": "nominatim suburb: Khairatabad"
+  },
+  {
+   "no": 220,
+   "name": "Himayatnagar",
+   "zone": "Khairatabad",
+   "circle": "Khairatabad",
+   "corp": "GHMC",
+   "lat": 17.4039821,
+   "lng": 78.4881942,
+   "geo_note": "nominatim administrative: Himayatnagar mandal"
+  },
+  {
+   "no": 221,
+   "name": "Banjara Hills",
+   "zone": "Khairatabad",
+   "circle": "Jubilee Hills",
+   "corp": "GHMC",
+   "lat": 17.4177464,
+   "lng": 78.4399014,
+   "geo_note": "nominatim suburb: Banjara Hills"
+  },
+  {
+   "no": 222,
+   "name": "Film Nagar",
+   "zone": "Khairatabad",
+   "circle": "Jubilee Hills",
+   "corp": "GHMC",
+   "lat": 17.4140574,
+   "lng": 78.4105031,
+   "geo_note": "nominatim neighbourhood: Film Nagar"
+  },
+  {
+   "no": 223,
+   "name": "Shaikpet",
+   "zone": "Golconda",
+   "circle": "Golconda",
+   "corp": "GHMC",
+   "lat": 17.4057955,
+   "lng": 78.4006536,
+   "geo_note": "nominatim suburb: Shaikpet"
+  },
+  {
+   "no": 224,
+   "name": "OU Colony",
+   "zone": "Golconda",
+   "circle": "Golconda",
+   "corp": "GHMC",
+   "lat": 17.4063509,
+   "lng": 78.3914679,
+   "geo_note": "nominatim tertiary: OU colony road"
+  },
+  {
+   "no": 225,
+   "name": "Gachibowli",
+   "zone": "Serilingampally",
+   "circle": "Serilingampally",
+   "corp": "CMC",
+   "lat": 17.4436222,
+   "lng": 78.3519638,
+   "geo_note": "nominatim suburb: Gachibowli"
+  },
+  {
+   "no": 226,
+   "name": "Nallagandla",
+   "zone": "Serilingampally",
+   "circle": "Serilingampally",
+   "corp": "CMC",
+   "lat": 17.4774828,
+   "lng": 78.3060359,
+   "geo_note": "nominatim neighbourhood: Nallagandla"
+  },
+  {
+   "no": 227,
+   "name": "Serilingampally",
+   "zone": "Serilingampally",
+   "circle": "Serilingampally",
+   "corp": "CMC",
+   "lat": null,
+   "lng": null,
+   "geo_note": null
+  },
+  {
+   "no": 228,
+   "name": "Masjid Banda",
+   "zone": "Serilingampally",
+   "circle": "Serilingampally",
+   "corp": "CMC",
+   "lat": 17.4670374,
+   "lng": 78.3415168,
+   "geo_note": "nominatim suburb: Masjid Banda"
+  },
+  {
+   "no": 229,
+   "name": "Sri Ram Nagar",
+   "zone": "Serilingampally",
+   "circle": "Serilingampally",
+   "corp": "CMC",
+   "lat": 17.342429,
+   "lng": 78.5978501,
+   "geo_note": "nominatim neighbourhood: Sri Ram Nagar"
+  },
+  {
+   "no": 230,
+   "name": "Anjaiah Nagar",
+   "zone": "Kukatpally",
+   "circle": "Madhapur",
+   "corp": "CMC",
+   "lat": 17.4473499,
+   "lng": 78.3589746,
+   "geo_note": "nominatim neighbourhood: Anjaiah Nagar"
+  },
+  {
+   "no": 231,
+   "name": "HITEC City",
+   "zone": "Kukatpally",
+   "circle": "Madhapur",
+   "corp": "CMC",
+   "lat": 17.4508058,
+   "lng": 78.3834535,
+   "geo_note": "nominatim suburb: HITEC City"
+  },
+  {
+   "no": 232,
+   "name": "Madhapur",
+   "zone": "Kukatpally",
+   "circle": "Madhapur",
+   "corp": "CMC",
+   "lat": 17.4408924,
+   "lng": 78.3916304,
+   "geo_note": "nominatim suburb: Madhapur"
+  },
+  {
+   "no": 233,
+   "name": "Izzat Nagar",
+   "zone": "Kukatpally",
+   "circle": "Madhapur",
+   "corp": "CMC",
+   "lat": 17.4681506,
+   "lng": 78.3725279,
+   "geo_note": "nominatim neighbourhood: Izzat Nagar"
+  },
+  {
+   "no": 234,
+   "name": "Kondapur",
+   "zone": "Serilingampally",
+   "circle": "Serilingampally",
+   "corp": "CMC",
+   "lat": 17.4587912,
+   "lng": 78.3730556,
+   "geo_note": "nominatim suburb: Kondapur"
+  },
+  {
+   "no": 235,
+   "name": "Matrusri Nagar",
+   "zone": "Kukatpally",
+   "circle": "Madhapur",
+   "corp": "CMC",
+   "lat": 17.4408924,
+   "lng": 78.3916304,
+   "geo_note": "Madhapur circle centre (approx.)"
+  },
+  {
+   "no": 236,
+   "name": "Hafeezpet",
+   "zone": "Serilingampally",
+   "circle": "Miyapur",
+   "corp": "CMC",
+   "lat": 17.4834409,
+   "lng": 78.3611316,
+   "geo_note": "nominatim neighbourhood: Hafeezpet"
+  },
+  {
+   "no": 237,
+   "name": "Madeenaguda",
+   "zone": "Serilingampally",
+   "circle": "Miyapur",
+   "corp": "CMC",
+   "lat": 17.4981608,
+   "lng": 78.3567628,
+   "geo_note": "Miyapur circle centre (approx.)"
+  },
+  {
+   "no": 238,
+   "name": "Chanda Nagar",
+   "zone": "Serilingampally",
+   "circle": "Miyapur",
+   "corp": "CMC",
+   "lat": 17.4962433,
+   "lng": 78.3249086,
+   "geo_note": "nominatim police: Chanda Nagar Police Station"
+  },
+  {
+   "no": 239,
+   "name": "Deepthisri Nagar",
+   "zone": "Serilingampally",
+   "circle": "Miyapur",
+   "corp": "CMC",
+   "lat": 17.4953362,
+   "lng": 78.3405813,
+   "geo_note": "photon bus_stop: Deepthi Sri Nagar"
+  },
+  {
+   "no": 240,
+   "name": "Miyapur",
+   "zone": "Serilingampally",
+   "circle": "Miyapur",
+   "corp": "CMC",
+   "lat": 17.4981608,
+   "lng": 78.3567628,
+   "geo_note": "nominatim suburb: Miyapur"
+  },
+  {
+   "no": 241,
+   "name": "Maktha Mahabubpet",
+   "zone": "Serilingampally",
+   "circle": "Miyapur",
+   "corp": "CMC",
+   "lat": 17.4981608,
+   "lng": 78.3567628,
+   "geo_note": "Miyapur circle centre (approx.)"
+  },
+  {
+   "no": 242,
+   "name": "Mayuri Nagar",
+   "zone": "Kukatpally",
+   "circle": "Madhapur",
+   "corp": "CMC",
+   "lat": 17.5116535,
+   "lng": 78.3676991,
+   "geo_note": "nominatim neighbourhood: Mayuri Nagar"
+  },
+  {
+   "no": 243,
+   "name": "Hyder Nagar",
+   "zone": "Kukatpally",
+   "circle": "Allwyn Colony",
+   "corp": "CMC",
+   "lat": 17.5014133,
+   "lng": 78.3842003,
+   "geo_note": "nominatim childcare: Hyder nagar"
+  },
+  {
+   "no": 244,
+   "name": "Bhagya Nagar Colony",
+   "zone": "Kukatpally",
+   "circle": "Allwyn Colony",
+   "corp": "CMC",
+   "lat": 17.4974865,
+   "lng": 78.403275,
+   "geo_note": "nominatim neighbourhood: Bhagyanagar Colony"
+  },
+  {
+   "no": 245,
+   "name": "Shamshiguda",
+   "zone": "Kukatpally",
+   "circle": "Allwyn Colony",
+   "corp": "CMC",
+   "lat": 17.503837,
+   "lng": 78.3998926,
+   "geo_note": "nominatim childcare: Shamshiguda Hadco-I"
+  },
+  {
+   "no": 246,
+   "name": "Allwyn Colony",
+   "zone": "Kukatpally",
+   "circle": "Allwyn Colony",
+   "corp": "CMC",
+   "lat": 17.5043618,
+   "lng": 78.4149849,
+   "geo_note": "nominatim neighbourhood: Allwyn Colony"
+  },
+  {
+   "no": 247,
+   "name": "Vivekananda Nagar Colony",
+   "zone": "Kukatpally",
+   "circle": "Allwyn Colony",
+   "corp": "CMC",
+   "lat": 17.4935675,
+   "lng": 78.4123478,
+   "geo_note": "nominatim neighbourhood: Vivekananda Nagar"
+  },
+  {
+   "no": 248,
+   "name": "Venkateshwara Nagar",
+   "zone": "Kukatpally",
+   "circle": "Allwyn Colony",
+   "corp": "CMC",
+   "lat": 17.5043618,
+   "lng": 78.4149849,
+   "geo_note": "Allwyn Colony circle centre (approx.)"
+  },
+  {
+   "no": 249,
+   "name": "Kukatpally",
+   "zone": "Kukatpally",
+   "circle": "Kukatpally",
+   "corp": "CMC",
+   "lat": 17.4930841,
+   "lng": 78.4054408,
+   "geo_note": "nominatim suburb: Kukatpally"
+  },
+  {
+   "no": 250,
+   "name": "Balaji Nagar",
+   "zone": "Kukatpally",
+   "circle": "Kukatpally",
+   "corp": "CMC",
+   "lat": 17.4821906,
+   "lng": 78.4096963,
+   "geo_note": "nominatim neighbourhood: Balaji Nagar"
+  },
+  {
+   "no": 251,
+   "name": "Vasanth Nagar",
+   "zone": "Kukatpally",
+   "circle": "Kukatpally",
+   "corp": "CMC",
+   "lat": 17.4938648,
+   "lng": 78.3862078,
+   "geo_note": "nominatim neighbourhood: Vasanth Nagar"
+  },
+  {
+   "no": 252,
+   "name": "KPHB Colony",
+   "zone": "Kukatpally",
+   "circle": "Kukatpally",
+   "corp": "CMC",
+   "lat": 17.4922068,
+   "lng": 78.3973638,
+   "geo_note": "nominatim suburb: KPHB Colony"
+  },
+  {
+   "no": 253,
+   "name": "Kaithepally",
+   "zone": "Kukatpally",
+   "circle": "Kukatpally",
+   "corp": "CMC",
+   "lat": 17.4930841,
+   "lng": 78.4054408,
+   "geo_note": "Kukatpally circle centre (approx.)"
+  },
+  {
+   "no": 254,
+   "name": "Gayatri Nagar",
+   "zone": "Kukatpally",
+   "circle": "Kukatpally",
+   "corp": "CMC",
+   "lat": 17.4566764,
+   "lng": 78.4035867,
+   "geo_note": "nominatim neighbourhood: Gayatri Nagar"
+  },
+  {
+   "no": 255,
+   "name": "Allapur",
+   "zone": "Kukatpally",
+   "circle": "Moosapet",
+   "corp": "CMC",
+   "lat": 17.4565793,
+   "lng": 78.4095538,
+   "geo_note": "nominatim neighbourhood: Allapur"
+  },
+  {
+   "no": 256,
+   "name": "Moti Nagar",
+   "zone": "Kukatpally",
+   "circle": "Moosapet",
+   "corp": "CMC",
+   "lat": 17.4508069,
+   "lng": 78.422242,
+   "geo_note": "nominatim neighbourhood: Moti Nagar"
+  },
+  {
+   "no": 257,
+   "name": "Moosapet",
+   "zone": "Kukatpally",
+   "circle": "Moosapet",
+   "corp": "CMC",
+   "lat": 17.4685307,
+   "lng": 78.4206695,
+   "geo_note": "nominatim suburb: Moosapet"
+  },
+  {
+   "no": 258,
+   "name": "Prashanth Nagar",
+   "zone": "Kukatpally",
+   "circle": "Moosapet",
+   "corp": "CMC",
+   "lat": 17.4748045,
+   "lng": 78.4255265,
+   "geo_note": "photon bus_station: Prashanth nagar bus stop"
+  },
+  {
+   "no": 259,
+   "name": "Balanagar",
+   "zone": "Kukatpally",
+   "circle": "Moosapet",
+   "corp": "CMC",
+   "lat": 17.4767602,
+   "lng": 78.4221009,
+   "geo_note": "nominatim stop: Balanagar"
+  },
+  {
+   "no": 260,
+   "name": "Fateh Nagar",
+   "zone": "Malkajgiri",
+   "circle": "Bowenpally",
+   "corp": "MMC",
+   "lat": 17.4581554,
+   "lng": 78.4513374,
+   "geo_note": "nominatim suburb: Fateh Nagar"
+  },
+  {
+   "no": 261,
+   "name": "Prakash Nagar",
+   "zone": "Malkajgiri",
+   "circle": "Bowenpally",
+   "corp": "MMC",
+   "lat": 17.4425252,
+   "lng": 78.4704161,
+   "geo_note": "nominatim neighbourhood: Prakash Nagar"
+  },
+  {
+   "no": 262,
+   "name": "Old Bowenpally",
+   "zone": "Malkajgiri",
+   "circle": "Bowenpally",
+   "corp": "MMC",
+   "lat": 17.4766303,
+   "lng": 78.4788563,
+   "geo_note": "nominatim bus_station: Old Bowenpally Bus stop"
+  },
+  {
+   "no": 263,
+   "name": "Tellapur",
+   "zone": "Serilingampally",
+   "circle": "Patancheruvu",
+   "corp": "CMC",
+   "lat": 17.5457885,
+   "lng": 78.2222266,
+   "geo_note": "Patancheruvu circle centre (approx.)"
+  },
+  {
+   "no": 264,
+   "name": "Hasmathpet",
+   "zone": "Malkajgiri",
+   "circle": "Bowenpally",
+   "corp": "MMC",
+   "lat": 17.4747091,
+   "lng": 78.4875069,
+   "geo_note": "nominatim childcare: Hasmathpet -13"
+  },
+  {
+   "no": 265,
+   "name": "Muthangi",
+   "zone": "Serilingampally",
+   "circle": "Patancheruvu",
+   "corp": "CMC",
+   "lat": 17.5410004,
+   "lng": 78.2275266,
+   "geo_note": "nominatim childcare: Muthangi-II"
+  },
+  {
+   "no": 266,
+   "name": "Patancheruvu",
+   "zone": "Serilingampally",
+   "circle": "Patancheruvu",
+   "corp": "CMC",
+   "lat": 17.5457885,
+   "lng": 78.2222266,
+   "geo_note": "nominatim administrative: Patancheruvu mandal"
+  },
+  {
+   "no": 267,
+   "name": "JP Colony",
+   "zone": "Serilingampally",
+   "circle": "Patancheruvu",
+   "corp": "CMC",
+   "lat": 17.531317,
+   "lng": 78.2657706,
+   "geo_note": "nominatim residential: JP Colony"
+  },
+  {
+   "no": 268,
+   "name": "Ramachandrapuram (RC Puram)",
+   "zone": "Serilingampally",
+   "circle": "Ameenpur",
+   "corp": "CMC",
+   "lat": 17.5063801,
+   "lng": 78.2954534,
+   "geo_note": "nominatim lake: Ramachandrapuram Cheruvu"
+  },
+  {
+   "no": 269,
+   "name": "Bharathi Nagar",
+   "zone": "Serilingampally",
+   "circle": "Ameenpur",
+   "corp": "CMC",
+   "lat": 17.4977991,
+   "lng": 78.3174971,
+   "geo_note": "Ameenpur circle centre (approx.)"
+  },
+  {
+   "no": 270,
+   "name": "Beeramguda",
+   "zone": "Serilingampally",
+   "circle": "Ameenpur",
+   "corp": "CMC",
+   "lat": 17.5091218,
+   "lng": 78.3004614,
+   "geo_note": "nominatim neighbourhood: Beeramguda Junction"
+  },
+  {
+   "no": 271,
+   "name": "Ameenpur",
+   "zone": "Serilingampally",
+   "circle": "Ameenpur",
+   "corp": "CMC",
+   "lat": 17.4977991,
+   "lng": 78.3174971,
+   "geo_note": "nominatim tertiary: Ameenpur Road"
+  },
+  {
+   "no": 272,
+   "name": "Bollaram",
+   "zone": "Serilingampally",
+   "circle": "Ameenpur",
+   "corp": "CMC",
+   "lat": 17.5027436,
+   "lng": 78.364581,
+   "geo_note": "nominatim residential: Bollaram Road, Miyapur"
+  },
+  {
+   "no": 273,
+   "name": "Nizampet",
+   "zone": "Quthbullapur",
+   "circle": "Nizampet",
+   "corp": "CMC",
+   "lat": 17.4950748,
+   "lng": 78.3992695,
+   "geo_note": "nominatim trunk: Nizampet - JNTU Road Mumbai Highway"
+  },
+  {
+   "no": 274,
+   "name": "Bachupally",
+   "zone": "Quthbullapur",
+   "circle": "Nizampet",
+   "corp": "CMC",
+   "lat": 17.5410548,
+   "lng": 78.3635484,
+   "geo_note": "nominatim administrative: Bachupally mandal"
+  },
+  {
+   "no": 275,
+   "name": "Bhandari Layout",
+   "zone": "Quthbullapur",
+   "circle": "Nizampet",
+   "corp": "CMC",
+   "lat": 17.4945061,
+   "lng": 78.4000017,
+   "geo_note": "Nizampet circle centre (approx.)"
+  },
+  {
+   "no": 276,
+   "name": "Pragathi Nagar",
+   "zone": "Quthbullapur",
+   "circle": "Nizampet",
+   "corp": "CMC",
+   "lat": 17.5200154,
+   "lng": 78.3968876,
+   "geo_note": "nominatim suburb: Pragathi Nagar"
+  },
+  {
+   "no": 277,
+   "name": "Mahadevapuram",
+   "zone": "Quthbullapur",
+   "circle": "Gajularamaram",
+   "corp": "CMC",
+   "lat": 17.5271759,
+   "lng": 78.4200077,
+   "geo_note": "Gajularamaram circle centre (approx.)"
+  },
+  {
+   "no": 278,
+   "name": "Gajularamaram",
+   "zone": "Quthbullapur",
+   "circle": "Gajularamaram",
+   "corp": "CMC",
+   "lat": 17.5271759,
+   "lng": 78.4200077,
+   "geo_note": "nominatim suburb: Gajularamaram"
+  },
+  {
+   "no": 279,
+   "name": "Rodamestri Nagar",
+   "zone": "Quthbullapur",
+   "circle": "Chintal",
+   "corp": "CMC",
+   "lat": 17.4096785,
+   "lng": 78.4570516,
+   "geo_note": "Chintal circle centre (approx.)"
+  },
+  {
+   "no": 280,
+   "name": "Jagathgirigutta",
+   "zone": "Quthbullapur",
+   "circle": "Chintal",
+   "corp": "CMC",
+   "lat": 17.4096785,
+   "lng": 78.4570516,
+   "geo_note": "Chintal circle centre (approx.)"
+  },
+  {
+   "no": 281,
+   "name": "Ranga Reddy Nagar",
+   "zone": "Quthbullapur",
+   "circle": "Chintal",
+   "corp": "CMC",
+   "lat": 17.4096785,
+   "lng": 78.4570516,
+   "geo_note": "Chintal circle centre (approx.)"
+  },
+  {
+   "no": 282,
+   "name": "Chintal",
+   "zone": "Quthbullapur",
+   "circle": "Chintal",
+   "corp": "CMC",
+   "lat": 17.4096785,
+   "lng": 78.4570516,
+   "geo_note": "nominatim neighbourhood: Chintal Basti"
+  },
+  {
+   "no": 283,
+   "name": "Giri Nagar",
+   "zone": "Quthbullapur",
+   "circle": "Chintal",
+   "corp": "CMC",
+   "lat": 17.488482,
+   "lng": 78.4406024,
+   "geo_note": "nominatim neighbourhood: Giri Nagar"
+  },
+  {
+   "no": 284,
+   "name": "Ganesh Nagar",
+   "zone": "Quthbullapur",
+   "circle": "Jeedimetla",
+   "corp": "CMC",
+   "lat": 17.4918194,
+   "lng": 78.4515872,
+   "geo_note": "nominatim neighbourhood: Ganesh Nagar"
+  },
+  {
+   "no": 285,
+   "name": "Padma Nagar",
+   "zone": "Quthbullapur",
+   "circle": "Jeedimetla",
+   "corp": "CMC",
+   "lat": 17.4906594,
+   "lng": 78.4596789,
+   "geo_note": "nominatim neighbourhood: Padma Nagar"
+  },
+  {
+   "no": 286,
+   "name": "Quthbullapur",
+   "zone": "Quthbullapur",
+   "circle": "Jeedimetla",
+   "corp": "CMC",
+   "lat": 17.5045122,
+   "lng": 78.4587452,
+   "geo_note": "nominatim residential: Quthbullapur Main Road"
+  },
+  {
+   "no": 287,
+   "name": "Pet Basheerabad",
+   "zone": "Quthbullapur",
+   "circle": "Jeedimetla",
+   "corp": "CMC",
+   "lat": 17.5091957,
+   "lng": 78.4763691,
+   "geo_note": "nominatim childcare: Pet Basheerabad - I"
+  },
+  {
+   "no": 288,
+   "name": "Kompally",
+   "zone": "Quthbullapur",
+   "circle": "Kompally",
+   "corp": "CMC",
+   "lat": 17.5282237,
+   "lng": 78.4762932,
+   "geo_note": "nominatim childcare: Kompally tanda"
+  },
+  {
+   "no": 289,
+   "name": "Doolapally",
+   "zone": "Quthbullapur",
+   "circle": "Kompally",
+   "corp": "CMC",
+   "lat": 17.5463751,
+   "lng": 78.4678122,
+   "geo_note": "nominatim suburb: Doolapally"
+  },
+  {
+   "no": 290,
+   "name": "Subhash Nagar",
+   "zone": "Quthbullapur",
+   "circle": "Kompally",
+   "corp": "CMC",
+   "lat": 17.4865053,
+   "lng": 78.5011252,
+   "geo_note": "nominatim neighbourhood: Subhash Nagar"
+  },
+  {
+   "no": 291,
+   "name": "Shapur Nagar",
+   "zone": "Quthbullapur",
+   "circle": "Gajularamaram",
+   "corp": "CMC",
+   "lat": 17.5173373,
+   "lng": 78.4450956,
+   "geo_note": "nominatim village: Shapur Nagar"
+  },
+  {
+   "no": 292,
+   "name": "Saibaba Nagar",
+   "zone": "Quthbullapur",
+   "circle": "Kompally",
+   "corp": "CMC",
+   "lat": 17.4978361,
+   "lng": 78.464418,
+   "geo_note": "photon residential: Sai Baba Nagar road no. 7"
+  },
+  {
+   "no": 293,
+   "name": "Suraram",
+   "zone": "Quthbullapur",
+   "circle": "Gajularamaram",
+   "corp": "CMC",
+   "lat": 17.5399879,
+   "lng": 78.4357578,
+   "geo_note": "nominatim residential: Suraram Market Road"
+  },
+  {
+   "no": 294,
+   "name": "Bahadurpally",
+   "zone": "Quthbullapur",
+   "circle": "Dundigal",
+   "corp": "CMC",
+   "lat": 17.6075319,
+   "lng": 78.4141732,
+   "geo_note": "Dundigal circle centre (approx.)"
+  },
+  {
+   "no": 295,
+   "name": "Bowrampet",
+   "zone": "Quthbullapur",
+   "circle": "Dundigal",
+   "corp": "CMC",
+   "lat": 17.5610356,
+   "lng": 78.3982185,
+   "geo_note": "nominatim suburb: Bowrampet"
+  },
+  {
+   "no": 296,
+   "name": "Dundigal",
+   "zone": "Quthbullapur",
+   "circle": "Dundigal",
+   "corp": "CMC",
+   "lat": 17.6075319,
+   "lng": 78.4141732,
+   "geo_note": "nominatim village: Dundigal"
+  },
+  {
+   "no": 297,
+   "name": "Medchal",
+   "zone": "Quthbullapur",
+   "circle": "Medchal",
+   "corp": "CMC",
+   "lat": 17.5349835,
+   "lng": 78.5246387,
+   "geo_note": "nominatim administrative: Medchal–Malkajgiri"
+  },
+  {
+   "no": 298,
+   "name": "Pudur-Kistapur",
+   "zone": "Quthbullapur",
+   "circle": "Medchal",
+   "corp": "CMC",
+   "lat": 17.5349835,
+   "lng": 78.5246387,
+   "geo_note": "Medchal circle centre (approx.)"
+  },
+  {
+   "no": 299,
+   "name": "Gundlapochampally",
+   "zone": "Quthbullapur",
+   "circle": "Medchal",
+   "corp": "CMC",
+   "lat": 17.568913,
+   "lng": 78.480271,
+   "geo_note": "nominatim bus_stop: gundlapochampally"
+  },
+  {
+   "no": 300,
+   "name": "Shamirpet",
+   "zone": "Malkajgiri",
+   "circle": "Keesara",
+   "corp": "MMC",
+   "lat": 17.5249309,
+   "lng": 78.6665345,
+   "geo_note": "Keesara circle centre (approx.)"
+  }
+ ]
+}

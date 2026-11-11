@@ -1,0 +1,20 @@
+https://tgsouthernpower.org | ERROR curl: (28) Connection timed out after 30002 milliseconds
+000 https://tgsouthernpower.org/ 30.002362s | 
+https://www.ghmc.gov.in | 403 https://www.ghmc.gov.in/ 0.236901s | Error Page
+https://ghmc.gov.in/Trade.aspx | 403 https://ghmc.gov.in/Trade.aspx 0.251393s | Error Page
+https://onlinepayments.ghmc.gov.in | 403 https://onlinepayments.ghmc.gov.in/ 0.271615s | Error Page
+https://www.ghmc.gov.in/PropertyTax.aspx | 403 https://www.ghmc.gov.in/PropertyTax.aspx 0.253136s | Error Page
+https://cmc.telangana.gov.in | ERROR curl: (28) Connection timed out after 30002 milliseconds
+000 https://cmc.telangana.gov.in/ 30.002405s | 
+https://mmc.telangana.gov.in | ERROR curl: (28) Connection timed out after 30001 milliseconds
+000 https://mmc.telangana.gov.in/ 30.001902s | 
+https://emunicipal.telangana.gov.in/ | ERROR curl: (28) Connection timed out after 30001 milliseconds
+000 https://emunicipal.telangana.gov.in/ 30.001609s | 
+https://tgsouthernpower.org/paybillonline | 403 https://tgsouthernpower.org/paybillonline 0.692805s | HTTP Status 403 – Forbidden
+https://www.tgsouthernpower.org/onlinebillpayment | 403 https://www.tgsouthernpower.org/onlinebillpayment 0.900633s | HTTP Status 403 – Forbidden
+https://www.hyderabadwater.gov.in | 200 https://www.hyderabadwater.gov.in/en/index.php/privacy-policies 1.569173s | Request Rejected
+https://www.hyderabadwater.gov.in/en/index.php/online-services/pay-bill | 200 https://www.hyderabadwater.gov.in/en/index.php/privacy-policies 1.078643s | Request Rejected
+https://hydraa.telangana.gov.in | ERROR curl: (28) Connection timed out after 30001 milliseconds
+000 https://hydraa.telangana.gov.in/ 30.001220s | 
+https://wa.me/918712406899 | 200 https://api.whatsapp.com/send/?phone=918712406899&text&type=phone_number&app_absent=0&wame_ctl=1 1.542326s | Share on WhatsApp
+runner: US

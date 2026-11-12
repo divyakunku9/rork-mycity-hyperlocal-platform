@@ -141,7 +141,9 @@ fun AppNavigation(vm: CityViewModel) {
                     onBack = { navController.popBackStack() },
                     onOpenEvent = { navController.navigate("event/$it") },
                     onOpenHelp = { navController.navigate("help") { launchSingleTop = true } },
-                    onShowOnMap = { navController.switchTab("explore") },
+                    // Explore is always at the bottom of the stack, so going back to it is reliable
+                    // (switchTab from here restored the Profile it had just closed).
+                    onShowOnMap = { navController.popBackStack("explore", inclusive = false) },
                 )
             }
             composable("help") {
@@ -150,7 +152,8 @@ fun AppNavigation(vm: CityViewModel) {
                     onBack = { navController.popBackStack() },
                     // Shortcuts under an answer: tabs switch like the bottom bar, other screens open on top.
                     onNavigate = { route ->
-                        if (route in tabRoutes) navController.switchTab(route)
+                        if (route == "explore") navController.popBackStack("explore", inclusive = false)
+                        else if (route in tabRoutes) navController.switchTab(route)
                         else navController.navigate(route) { launchSingleTop = true }
                     },
                 )

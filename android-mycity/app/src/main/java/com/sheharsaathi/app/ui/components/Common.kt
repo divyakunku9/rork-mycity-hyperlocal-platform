@@ -93,9 +93,22 @@ fun openNavigation(context: Context, lat: Double, lng: Double, label: String) {
     }
 }
 
+/**
+ * Opens a web link. Only http and https are followed: these addresses come from news feeds
+ * and council pages, and other schemes (intent:, file:, javascript:) can reach parts of the
+ * phone a link in a news story has no business reaching.
+ */
+/** True for ordinary web addresses. Used to keep other schemes out of [openUrl]. */
+fun isWebLink(url: String): Boolean =
+    Regex("^https?://[^\\s/?#]+[^\\s]*$", RegexOption.IGNORE_CASE).matches(url.trim())
+
 fun openUrl(context: Context, url: String) {
+    if (!isWebLink(url)) {
+        Toast.makeText(context, "That link can't be opened", Toast.LENGTH_SHORT).show()
+        return
+    }
     try {
-        context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+        context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url.trim())))
     } catch (_: ActivityNotFoundException) {
         Toast.makeText(context, "No app available to open this link", Toast.LENGTH_SHORT).show()
     }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Backup rules for Android 11 and earlier.
+
+  Backup is switched off for this app (android:allowBackup="false"), so nothing here runs
+  today. It stays as a safety net: if backup is ever turned on, the sign-in tokens must
+  still never leave the phone. Anyone holding them could read and write as that resident
+  until the session expires.
+-->
+<full-backup-content>
+    <exclude domain="sharedpref" path="mycity_auth.xml" />
+</full-backup-content>

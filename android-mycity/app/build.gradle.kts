@@ -25,14 +25,33 @@ android {
         textOutput = file("build/reports/lint.txt")
     }
 
-    // One fixed key for test builds, so each new build installs over the previous one on a phone.
-    // Only for testing; a Play Store release needs its own private key kept out of the repo.
+    // Test builds share one key so each new build installs over the previous one on a phone.
+    // Its password is in this file on purpose: it secures nothing and must never sign a
+    // public release. Anyone can read it here and sign an app Android would accept as an
+    // update to a release signed with it.
     signingConfigs {
         create("testing") {
             storeFile = file("testing.keystore")
             storePassword = "sheharsaathi-test"
             keyAlias = "testing"
             keyPassword = "sheharsaathi-test"
+        }
+        // The real signing key for a Play Store release. It is never kept in this repository:
+        // set RELEASE_STORE_FILE, RELEASE_STORE_PASSWORD, RELEASE_KEY_ALIAS and
+        // RELEASE_KEY_PASSWORD in the environment (or a local, ignored gradle.properties)
+        // when building one.
+        val releaseStore = System.getenv("RELEASE_STORE_FILE")
+            ?: project.findProperty("RELEASE_STORE_FILE") as String?
+        if (releaseStore != null) {
+            create("release") {
+                storeFile = file(releaseStore)
+                storePassword = System.getenv("RELEASE_STORE_PASSWORD")
+                    ?: project.findProperty("RELEASE_STORE_PASSWORD") as String?
+                keyAlias = System.getenv("RELEASE_KEY_ALIAS")
+                    ?: project.findProperty("RELEASE_KEY_ALIAS") as String?
+                keyPassword = System.getenv("RELEASE_KEY_PASSWORD")
+                    ?: project.findProperty("RELEASE_KEY_PASSWORD") as String?
+            }
         }
     }
 
@@ -42,7 +61,9 @@ android {
         }
         release {
             isMinifyEnabled = false
-            signingConfig = signingConfigs.getByName("testing")
+            // Signed only when a real key is supplied; otherwise the APK comes out unsigned
+            // rather than quietly carrying the public test key.
+            signingConfig = signingConfigs.findByName("release")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"

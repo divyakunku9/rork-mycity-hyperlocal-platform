@@ -193,9 +193,11 @@ object HelpFaqs {
             HelpLink("Open Events", "events"),
         ),
         Faq(
-            "saved", HelpTopic.EVENTS, "Where are my saved events and news?",
-            "Tap the bookmark on any event or news story to save it. " +
-                "Everything you've saved is listed in your Profile under \"Saved\".",
+            "saved", HelpTopic.EVENTS, "Where are my saved events, news and places?",
+            "Tap the bookmark on any event, news story or place you open on the map to save it. " +
+                "Everything you've saved is listed in your Profile under \"Saved\". Tap an item there to open it, " +
+                "or tap its bookmark to remove it.\n\n" +
+                "Saved places, city headlines and listings from ticketing sites are kept on this phone.",
             listOf("saved", "save", "bookmark", "bookmarks", "bookmarked", "favourite", "favorite", "saved places", "saved news", "wishlist"),
         ),
 

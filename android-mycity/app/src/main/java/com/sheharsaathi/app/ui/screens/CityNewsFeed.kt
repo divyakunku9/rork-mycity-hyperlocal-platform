@@ -36,6 +36,8 @@ import androidx.compose.material.icons.filled.LocalHospital
 import androidx.compose.material.icons.filled.LocationCity
 import androidx.compose.material.icons.filled.Newspaper
 import androidx.compose.material.icons.filled.School
+import androidx.compose.material.icons.filled.Bookmark
+import androidx.compose.material.icons.filled.BookmarkBorder
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.Shield
 import androidx.compose.material.icons.filled.SportsCricket
@@ -186,8 +188,10 @@ fun CityNewsFeed(vm: CityViewModel, header: LazyListScope.() -> Unit) {
                             val large = i == 0 || (i % 7 == 0 && s.imageUrl != null)
                             val open = { openStory(context, s.url) }
                             val share = { shareText(context, "${s.title}\n${s.url}\n— via Shehar Saathi") }
+                            val saved = vm.isStorySaved(s)
+                            val save = { vm.toggleSavedStory(s) }
                             Box(Modifier.animateItem()) {
-                                if (large) LargeStoryCard(s, open, share) else CompactStoryCard(s, open, share)
+                                if (large) LargeStoryCard(s, saved, open, share, save) else CompactStoryCard(s, saved, open, share, save)
                             }
                         }
                     }
@@ -262,9 +266,16 @@ private fun TopicTag(t: NewsTopic) {
 }
 
 @Composable
-private fun CardActions(s: WebStory, onShare: () -> Unit) {
+private fun CardActions(s: WebStory, saved: Boolean, onShare: () -> Unit, onSave: () -> Unit) {
     Row(verticalAlignment = Alignment.CenterVertically) {
         Box(Modifier.weight(1f)) { TopicTag(s.category) }
+        IconButton(onClick = onSave, modifier = Modifier.size(36.dp)) {
+            Icon(
+                if (saved) Icons.Filled.Bookmark else Icons.Filled.BookmarkBorder,
+                if (saved) "Remove saved story" else "Save story",
+                tint = if (saved) CityColors.Saffron else CityColors.Muted, modifier = Modifier.size(20.dp),
+            )
+        }
         IconButton(onClick = onShare, modifier = Modifier.size(36.dp)) {
             Icon(Icons.Filled.Share, "Share story", tint = CityColors.Muted, modifier = Modifier.size(18.dp))
         }
@@ -273,7 +284,7 @@ private fun CardActions(s: WebStory, onShare: () -> Unit) {
 }
 
 @Composable
-private fun LargeStoryCard(s: WebStory, onOpen: () -> Unit, onShare: () -> Unit) {
+private fun LargeStoryCard(s: WebStory, saved: Boolean, onOpen: () -> Unit, onShare: () -> Unit, onSave: () -> Unit) {
     CityCard(
         Modifier.fillMaxWidth().padding(horizontal = 16.dp).semantics { contentDescription = "Story: ${s.title}" },
         onClick = onOpen,
@@ -289,14 +300,14 @@ private fun LargeStoryCard(s: WebStory, onOpen: () -> Unit, onShare: () -> Unit)
                     Text(it, style = MaterialTheme.typography.bodyMedium, color = CityColors.Muted, maxLines = 3, overflow = TextOverflow.Ellipsis, modifier = Modifier.padding(end = 6.dp))
                 }
                 Spacer(Modifier.height(4.dp))
-                CardActions(s, onShare)
+                CardActions(s, saved, onShare, onSave)
             }
         }
     }
 }
 
 @Composable
-private fun CompactStoryCard(s: WebStory, onOpen: () -> Unit, onShare: () -> Unit) {
+private fun CompactStoryCard(s: WebStory, saved: Boolean, onOpen: () -> Unit, onShare: () -> Unit, onSave: () -> Unit) {
     CityCard(
         Modifier.fillMaxWidth().padding(horizontal = 16.dp).semantics { contentDescription = "Story: ${s.title}" },
         onClick = onOpen,
@@ -315,7 +326,7 @@ private fun CompactStoryCard(s: WebStory, onOpen: () -> Unit, onShare: () -> Uni
                 Spacer(Modifier.width(12.dp))
                 StoryImage(s, Modifier.padding(top = 2.dp).size(92.dp).clip(RoundedCornerShape(12.dp)), 32)
             }
-            CardActions(s, onShare)
+            CardActions(s, saved, onShare, onSave)
         }
     }
 }

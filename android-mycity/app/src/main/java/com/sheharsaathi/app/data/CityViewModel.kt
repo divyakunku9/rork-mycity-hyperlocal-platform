@@ -40,7 +40,7 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
             viewModelScope.launch {
                 if (signedIn) {
                     toast("Your session has expired. Please sign in again.")
-                    prefs.clearSession(); profile = UserProfile(); signedIn = false; hasCity = false; clearActivity()
+                    prefs.clearSession(); profile = UserProfile(); signedIn = false; hasCity = false; clearActivity(); savedItems.clear()
                 }
             }
         }
@@ -77,6 +77,7 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
         prefs.signInChannel = target.channel.name
         prefs.signedIn = true
         signedIn = true
+        loadSaved()
         syncAccount()
         if (hasCity) loadContent()
     }
@@ -106,6 +107,7 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
         signedIn = false
         hasCity = false
         clearActivity()
+        savedItems.clear()  // off the screen only; they stay stored for this account
     }
 
     /** How the user signed in; that contact is their login and can't be edited. */
@@ -477,12 +479,39 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
     }
 
 
-    val savedPlaces = mutableStateListOf<Place>()
-    fun toggleSavedPlace(p: Place) {
-        val i = savedPlaces.indexOfFirst { it.name == p.name && it.lat == p.lat }
-        if (i >= 0) savedPlaces.removeAt(i) else savedPlaces.add(0, p)
+    // ---- Saved places, listed events and headlines. Kept on this phone, separately for each account,
+    // so they survive closing the app and signing out and back in.
+    val savedItems = mutableStateListOf<SavedItem>()
+    private val savedAccount: String get() = sb.userId ?: "local"
+
+    private fun loadSaved() {
+        savedItems.clear()
+        savedItems.addAll(SavedItems.decode(prefs.savedJson(savedAccount)))
     }
-    fun isPlaceSaved(p: Place) = savedPlaces.any { it.name == p.name && it.lat == p.lat }
+
+    private fun toggleSaved(item: SavedItem, what: String) {
+        val next = SavedItems.toggle(savedItems, item)
+        val added = next.size > savedItems.size
+        savedItems.clear(); savedItems.addAll(next)
+        prefs.setSavedJson(savedAccount, SavedItems.encode(next))
+        Toast.makeText(app, if (added) "$what saved. Find it in your Profile." else "$what removed from saved.", Toast.LENGTH_SHORT).show()
+    }
+
+    fun isSaved(kind: SavedKind, key: String) = SavedItems.contains(savedItems, kind, key)
+    fun saved(kind: SavedKind): List<SavedItem> = savedItems.filter { it.kind == kind }
+
+    fun isPlaceSaved(p: Place) = isSaved(SavedKind.PLACE, SavedItems.placeKey(p.lat, p.lng))
+    fun toggleSavedPlace(p: Place) = toggleSaved(SavedItems.ofPlace(p), "Place")
+    fun isListedSaved(e: ListedEvent) = isSaved(SavedKind.EVENT, e.id.toString())
+    fun toggleSavedListed(e: ListedEvent) = toggleSaved(SavedItems.ofListed(e), "Event")
+    fun isStorySaved(s: WebStory) = isSaved(SavedKind.STORY, s.id.toString())
+    fun toggleSavedStory(s: WebStory) = toggleSaved(SavedItems.ofStory(s), "Story")
+    fun removeSaved(item: SavedItem) = toggleSaved(item, when (item.kind) { SavedKind.PLACE -> "Place"; SavedKind.EVENT -> "Event"; SavedKind.STORY -> "Story" })
+
+    /** A place the Profile asked Explore to show on the map; Explore clears it once shown. */
+    var placeToShow by mutableStateOf<Place?>(null)
+
+    init { loadSaved() }
 
     val savedEvents = mutableStateMapOf<String, Boolean>()
     val bookings = mutableStateMapOf<String, Int>()

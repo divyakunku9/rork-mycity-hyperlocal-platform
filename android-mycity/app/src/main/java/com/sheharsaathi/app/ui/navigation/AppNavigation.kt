@@ -141,6 +141,7 @@ fun AppNavigation(vm: CityViewModel) {
                     onBack = { navController.popBackStack() },
                     onOpenEvent = { navController.navigate("event/$it") },
                     onOpenHelp = { navController.navigate("help") { launchSingleTop = true } },
+                    onShowOnMap = { navController.switchTab("explore") },
                 )
             }
             composable("help") {

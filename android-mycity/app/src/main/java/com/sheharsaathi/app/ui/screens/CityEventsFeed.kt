@@ -41,6 +41,8 @@ import androidx.compose.material.icons.filled.Place
 import androidx.compose.material.icons.filled.Restaurant
 import androidx.compose.material.icons.filled.Schedule
 import androidx.compose.material.icons.filled.SelfImprovement
+import androidx.compose.material.icons.filled.Bookmark
+import androidx.compose.material.icons.filled.BookmarkBorder
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.SportsSoccer
 import androidx.compose.material.icons.filled.TheaterComedy
@@ -51,6 +53,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
@@ -211,8 +214,10 @@ fun CityEventsFeed(vm: CityViewModel, header: LazyListScope.() -> Unit) {
                             Box(Modifier.animateItem()) {
                                 ListedEventCard(
                                     e,
+                                    saved = vm.isListedSaved(e),
                                     onOpen = { openId = e.id },
                                     onBook = { openStory(context, e.url) },
+                                    onSave = { vm.toggleSavedListed(e) },
                                 )
                             }
                         }
@@ -233,6 +238,8 @@ fun CityEventsFeed(vm: CityViewModel, header: LazyListScope.() -> Unit) {
     all.firstOrNull { it.id == openId }?.let { e ->
         ListedEventSheet(
             e,
+            saved = vm.isListedSaved(e),
+            onSave = { vm.toggleSavedListed(e) },
             onDismiss = { openId = null },
             onBook = { openStory(context, e.url) },
             onShare = { shareText(context, "${e.title}\n${ListedTime.whenLabel(e)}${e.venue?.let { " · $it" } ?: ""}\n${e.url}\n— via Shehar Saathi") },
@@ -267,7 +274,7 @@ private fun EventPicture(e: ListedEvent, modifier: Modifier, iconSize: Int) {
 }
 
 @Composable
-private fun ListedEventCard(e: ListedEvent, onOpen: () -> Unit, onBook: () -> Unit) {
+private fun ListedEventCard(e: ListedEvent, saved: Boolean, onOpen: () -> Unit, onBook: () -> Unit, onSave: () -> Unit) {
     CityCard(
         Modifier.fillMaxWidth().padding(horizontal = 16.dp).semantics { contentDescription = "Listed event: ${e.title}" },
         onClick = onOpen,
@@ -279,9 +286,10 @@ private fun ListedEventCard(e: ListedEvent, onOpen: () -> Unit, onBook: () -> Un
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Box(Modifier.size(6.dp).background(e.category.color(), CircleShape))
                     Spacer(Modifier.width(6.dp))
-                    Text(e.category.label, style = MaterialTheme.typography.labelSmall, color = e.category.color(), maxLines = 1)
+                    Text(e.category.label, style = MaterialTheme.typography.labelSmall, color = e.category.color(), maxLines = 1, modifier = Modifier.weight(1f))
+                    IconButton(onClick = onSave, modifier = Modifier.size(28.dp)) { SaveIcon(saved, "event", 20) }
                 }
-                Spacer(Modifier.height(4.dp))
+                Spacer(Modifier.height(2.dp))
                 Text(e.title, style = MaterialTheme.typography.titleSmall, color = CityColors.Ink, maxLines = 2, overflow = TextOverflow.Ellipsis)
                 Spacer(Modifier.height(4.dp))
                 Line(Icons.Filled.Schedule, ListedTime.whenLabel(e))
@@ -307,6 +315,17 @@ private fun ListedEventCard(e: ListedEvent, onOpen: () -> Unit, onBook: () -> Un
     }
 }
 
+/** The bookmark used wherever something can be saved: filled saffron once saved. */
+@Composable
+internal fun SaveIcon(saved: Boolean, what: String, size: Int) {
+    Icon(
+        if (saved) Icons.Filled.Bookmark else Icons.Filled.BookmarkBorder,
+        contentDescription = if (saved) "Remove saved $what" else "Save $what",
+        tint = if (saved) CityColors.Saffron else CityColors.Muted,
+        modifier = Modifier.size(size.dp),
+    )
+}
+
 @Composable
 private fun Line(icon: ImageVector, text: String) {
     Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(top = 2.dp)) {
@@ -318,7 +337,10 @@ private fun Line(icon: ImageVector, text: String) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun ListedEventSheet(e: ListedEvent, onDismiss: () -> Unit, onBook: () -> Unit, onShare: () -> Unit, onDirections: (() -> Unit)?) {
+internal fun ListedEventSheet(
+    e: ListedEvent, saved: Boolean, onSave: () -> Unit,
+    onDismiss: () -> Unit, onBook: () -> Unit, onShare: () -> Unit, onDirections: (() -> Unit)?,
+) {
     ModalBottomSheet(onDismissRequest = onDismiss, sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true), containerColor = CityColors.Surface) {
         Column(Modifier.fillMaxWidth().verticalScroll(rememberScrollState()).navigationBarsPadding().padding(bottom = 16.dp)) {
             EventPicture(e, Modifier.fillMaxWidth().aspectRatio(16f / 9f), 56)
@@ -326,9 +348,10 @@ internal fun ListedEventSheet(e: ListedEvent, onDismiss: () -> Unit, onBook: () 
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(e.category.icon(), null, tint = e.category.color(), modifier = Modifier.size(16.dp))
                     Spacer(Modifier.width(6.dp))
-                    Text(e.category.label, style = MaterialTheme.typography.labelMedium, color = e.category.color())
+                    Text(e.category.label, style = MaterialTheme.typography.labelMedium, color = e.category.color(), modifier = Modifier.weight(1f))
+                    IconButton(onClick = onSave, modifier = Modifier.size(40.dp)) { SaveIcon(saved, "event", 24) }
                 }
-                Spacer(Modifier.height(6.dp))
+                Spacer(Modifier.height(2.dp))
                 Text(e.title, style = MaterialTheme.typography.headlineSmall, color = CityColors.Ink)
                 Spacer(Modifier.height(12.dp))
                 Detail(Icons.Filled.Schedule, ListedTime.whenLabel(e), if (!e.hasTime) "Check the time on ${e.source}" else null)

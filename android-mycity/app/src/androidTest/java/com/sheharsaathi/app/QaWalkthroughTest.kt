@@ -146,6 +146,11 @@ class QaWalkthroughTest {
     }
 
     /** The location picker can pop up if GPS puts us outside the city; close it so it doesn't block taps. */
+    private val showOnMap = SemanticsMatcher("click label 'Show on map'") {
+        it.config.getOrNull(SemanticsActions.OnClick)?.label == "Show on map"
+    }
+    private var placeSaved = false
+
     private fun dismissLocationPicker() {
         if (exists(hasText("Pick your area", substring = true)) || exists(hasText("Set as my location", substring = true))) back()
     }
@@ -252,6 +257,10 @@ class QaWalkthroughTest {
             shot("map-search-address")
             node(hasText("Jubilee Hills Road No 36", substring = true)).performClick()
             waitText("Navigate", 10); shot("map-search-picked")
+            node(hasContentDescription("Save place")).performClick()
+            waitFor(hasContentDescription("Remove saved place"), 5)
+            placeSaved = true
+            shot("map-place-saved")
             back()
         }
         // More door numbers: four that exist in the map data, two that don't (to check the honest fallback).
@@ -282,6 +291,12 @@ class QaWalkthroughTest {
             Thread.sleep(1500); shot("news-community")
             node(hasText("City news")).performClick(); Thread.sleep(500)
         }
+        step("Save a city news story") {
+            waitFor(hasContentDescription("Save story"), 10)
+            node(hasContentDescription("Save story")).performScrollTo().performClick()
+            waitFor(hasContentDescription("Remove saved story"), 5)
+            shot("news-story-saved")
+        }
         step("Events: listings from ticketing sites") {
             tab("Events")
             waitFor(hasContentDescription("Listed event:", substring = true), 30)
@@ -294,6 +309,11 @@ class QaWalkthroughTest {
             check(exists(hasText(" on District", substring = true)) || exists(hasText(" on Eventbrite", substring = true)) ||
                 exists(hasText(" on Meetup", substring = true)) || exists(hasText(" on AllEvents", substring = true))) { "no book link" }
             back()
+        }
+        step("Save a listed event") {
+            node(hasContentDescription("Save event")).performScrollTo().performClick()
+            waitFor(hasContentDescription("Remove saved event"), 5)
+            shot("event-saved")
         }
         step("Events: topic and day filters") {
             if (exists(hasText("Music"))) { node(hasText("Music")).performClick(); Thread.sleep(800) }
@@ -422,6 +442,29 @@ class QaWalkthroughTest {
             waitText("Sign out", 10)
             // Profile reopens scrolled down with its own arrow off screen, so use the system key here.
             back()
+            waitFor(hasText("Explore"), 10)
+        }
+        step("Saved story, event and place show in Profile") {
+            tab("Explore"); Thread.sleep(1000)
+            node(openProfile).performClick()
+            waitText("Sign out", 10)
+            node(hasContentDescription("Saved news: 1")).performScrollTo()
+            check(exists(hasContentDescription("Remove saved story"))) { "saved story isn't listed" }
+            check(exists(hasContentDescription("Remove saved event"))) { "saved event isn't listed" }
+            check(!exists(hasContentDescription("Bookmarked events: 0"))) { "event count didn't change" }
+            if (placeSaved) check(exists(hasContentDescription("Saved places: 1"))) { "saved place isn't counted" }
+            shot("profile-saved")
+            // Removing from the Profile takes it off the list and the count.
+            node(hasContentDescription("Remove saved story")).performScrollTo().performClick()
+            waitFor(hasContentDescription("Saved news: 0"), 5)
+            shot("profile-saved-story-removed")
+            if (placeSaved) {
+                // A saved place opens on the Explore map.
+                node(showOnMap).performScrollTo().performClick()
+                waitText("Get me there", 10); Thread.sleep(2000)
+                shot("saved-place-on-map")
+                back()
+            } else back()
             waitFor(hasText("Explore"), 10)
         }
         step("Screen recreate keeps the session and the new report") {

@@ -107,6 +107,10 @@ class Prefs(context: Context) {
         get() = sp.getInt("chosen_ward", -1).takeIf { it > 0 }
         set(v) = sp.edit().putInt("chosen_ward", v ?: -1).apply()
 
+    /** Saved places, listings and headlines, as JSON, kept separately for each account on this phone. */
+    fun savedJson(account: String): String? = sp.getString("saved_$account", null)
+    fun setSavedJson(account: String, json: String) = sp.edit().putString("saved_$account", json).apply()
+
     fun clearSession() {
         sp.edit().remove("signed_in").remove("city").remove("signin_channel")
             .remove("p_name").remove("p_phone").remove("p_email").remove("p_ward").remove("p_photo").remove("chosen_ward").apply()

@@ -176,6 +176,10 @@ fun ExploreScreen(
         mapPlace = p
         mapController.flyTo(p.lat, p.lng, 16.5)
     }
+    // A saved place tapped in the Profile opens here on the map.
+    LaunchedEffect(vm.placeToShow) {
+        vm.placeToShow?.let { showPlace(it); vm.placeToShow = null }
+    }
     val dropPin = { lat: Double, lng: Double ->
         haptic.performHapticFeedback(HapticFeedbackType.LongPress)
         val provisional = Place("pin-${System.currentTimeMillis()}", "Dropped pin", "Finding address…", lat, lng, PlaceKind.LANDMARK)
@@ -471,6 +475,7 @@ fun ExploreScreen(
                         Text(place.name, style = MaterialTheme.typography.titleLarge, maxLines = 2, overflow = TextOverflow.Ellipsis)
                         Text(place.area, style = MaterialTheme.typography.bodyMedium, color = CityColors.Muted, maxLines = 2, overflow = TextOverflow.Ellipsis)
                     }
+                    IconButton(onClick = { vm.toggleSavedPlace(place) }) { SaveIcon(vm.isPlaceSaved(place), "place", 26) }
                 }
                 place.note?.let {
                     Spacer(Modifier.height(8.dp))
@@ -519,7 +524,8 @@ fun ExploreScreen(
 
     vm.listedEvents.firstOrNull { it.id == openListed }?.let { e ->
         ListedEventSheet(
-            e, onDismiss = { openListed = null }, onBook = { openStory(context, e.url) },
+            e, saved = vm.isListedSaved(e), onSave = { vm.toggleSavedListed(e) },
+            onDismiss = { openListed = null }, onBook = { openStory(context, e.url) },
             onShare = { shareText(context, "${e.title}\n${com.sheharsaathi.app.data.ListedTime.whenLabel(e)}${e.venue?.let { " · $it" } ?: ""}\n${e.url}\n— via Shehar Saathi") },
             onDirections = if (e.lat != null && e.lng != null) ({ openDirections(context, e.lat, e.lng, e.venue ?: e.title) }) else null,
         )
@@ -535,7 +541,11 @@ fun ExploreScreen(
                     modifier = Modifier.fillMaxWidth().height(180.dp).clip(RoundedCornerShape(18.dp)),
                 )
                 Spacer(Modifier.height(14.dp))
-                TagLabel(spot.tag, CityColors.Saffron)
+                val spotPlace = Place(spot.id, spot.name, spot.sub.substringBefore(" •"), spot.lat, spot.lng, PlaceKind.VENUE)
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    TagLabel(spot.tag, CityColors.Saffron, Modifier.weight(1f))
+                    IconButton(onClick = { vm.toggleSavedPlace(spotPlace) }) { SaveIcon(vm.isPlaceSaved(spotPlace), "place", 26) }
+                }
                 Text(spot.name, style = MaterialTheme.typography.headlineSmall)
                 Text(spot.sub, style = MaterialTheme.typography.bodyMedium, color = CityColors.Muted)
                 Spacer(Modifier.height(8.dp))

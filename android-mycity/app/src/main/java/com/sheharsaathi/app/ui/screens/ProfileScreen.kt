@@ -75,10 +75,16 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.sheharsaathi.app.data.CityViewModel
+import com.sheharsaathi.app.data.SavedItems
+import com.sheharsaathi.app.data.SavedKind
+import com.sheharsaathi.app.data.Transit
 import com.sheharsaathi.app.ui.components.CityCard
 import com.sheharsaathi.app.ui.components.ProfileAvatar
 import com.sheharsaathi.app.ui.components.copyPickedPhoto
@@ -88,7 +94,11 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProfileScreen(vm: CityViewModel, onBack: () -> Unit, onOpenEvent: (String) -> Unit, onOpenHelp: () -> Unit) {
+fun ProfileScreen(
+    vm: CityViewModel, onBack: () -> Unit, onOpenEvent: (String) -> Unit, onOpenHelp: () -> Unit,
+    /** Called after a saved place is handed to Explore (vm.placeToShow), to go to the map. */
+    onShowOnMap: () -> Unit,
+) {
     val context = LocalContext.current
     val haptic = LocalHapticFeedback.current
     val scope = rememberCoroutineScope()
@@ -207,32 +217,40 @@ fun ProfileScreen(vm: CityViewModel, onBack: () -> Unit, onOpenEvent: (String) -
         }
 
         SectionTitle("Saved")
-        val bookmarked = vm.events.filter { vm.savedEvents[it.id] == true }
-        val savedNews = vm.news.count { vm.savedNews[it.id] == true }
+        val places = vm.saved(SavedKind.PLACE).map { item ->
+            val km = if (item.lat != null && item.lng != null) Transit.distanceKm(vm.userPlace.lat, vm.userPlace.lng, item.lat, item.lng) else null
+            val away = km?.let { if (it < 1) "${(it * 1000).toInt()} m from you" else "%.1f km from you".format(it) }
+            SavedEntry(
+                item.title, listOfNotNull(item.subtitle.takeIf { it.isNotBlank() }, away).joinToString(" • "),
+                removeLabel = "Remove saved place", onRemove = { vm.removeSaved(item) },
+                openLabel = "Show on map", onOpen = SavedItems.toPlace(item)?.let { place -> { vm.placeToShow = place; onShowOnMap() } },
+            )
+        }
+        val events = vm.events.filter { vm.savedEvents[it.id] == true }.map { e ->
+            SavedEntry(
+                e.title, "${e.dateLabel} • ${e.venue}", badge = if (e.hostedByYou) "Hosted by you" else null,
+                removeLabel = "Remove bookmark", onRemove = { vm.toggleSaveEvent(e.id) },
+                openLabel = "Open event", onOpen = { onOpenEvent(e.id) },
+            )
+        } + vm.saved(SavedKind.EVENT).map { item ->
+            SavedEntry(
+                item.title, item.subtitle, removeLabel = "Remove saved event", onRemove = { vm.removeSaved(item) },
+                openLabel = "Open listing", onOpen = item.url?.let { url -> { openStory(context, url) } },
+            )
+        }
+        val news = vm.saved(SavedKind.STORY).map { item ->
+            SavedEntry(
+                item.title, item.subtitle, removeLabel = "Remove saved story", onRemove = { vm.removeSaved(item) },
+                openLabel = "Read story", onOpen = item.url?.let { url -> { openStory(context, url) } },
+            )
+        } + vm.news.filter { vm.savedNews[it.id] == true }.map { n ->
+            SavedEntry(n.title, "${n.source} • Community", removeLabel = "Remove saved post", onRemove = { vm.toggleSaveNews(n.id) })
+        }
         CityCard(Modifier.fillMaxWidth().padding(horizontal = 16.dp)) {
             Column(Modifier.padding(vertical = 4.dp)) {
-                SavedRow(Icons.Filled.Place, "Saved places", "${vm.savedPlaces.size}")
-                vm.savedPlaces.take(3).forEach { pl ->
-                    Text("• ${pl.name}", style = MaterialTheme.typography.bodyMedium, color = CityColors.Muted, modifier = Modifier.padding(start = 56.dp, bottom = 4.dp))
-                }
-                SavedRow(Icons.Filled.Bookmark, "Bookmarked events", "${bookmarked.size}")
-                bookmarked.take(4).forEach { e ->
-                    Row(
-                        Modifier.fillMaxWidth().clickable { onOpenEvent(e.id) }.padding(start = 56.dp, end = 16.dp, top = 6.dp, bottom = 6.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        Column(Modifier.weight(1f)) {
-                            Text(e.title, style = MaterialTheme.typography.bodyMedium, maxLines = 1)
-                            Text("${e.dateLabel} • ${e.venue}", style = MaterialTheme.typography.bodySmall, color = CityColors.Muted, maxLines = 1)
-                        }
-                        if (e.hostedByYou) {
-                            Text("Hosted by you", style = MaterialTheme.typography.labelSmall, color = CityColors.SaffronText)
-                            Spacer(Modifier.width(6.dp))
-                        }
-                        Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, null, tint = CityColors.Muted, modifier = Modifier.size(18.dp))
-                    }
-                }
-                SavedRow(Icons.Filled.Bookmark, "Saved news", "$savedNews")
+                SavedGroup(Icons.Filled.Place, "Saved places", places, "Tap the bookmark on a place you open on the map to keep it here.")
+                SavedGroup(Icons.Filled.Event, "Bookmarked events", events, "Tap the bookmark on any event to keep it here.")
+                SavedGroup(Icons.Filled.Bookmark, "Saved news", news, "Tap the bookmark on any story in News Hub to keep it here.")
             }
         }
 
@@ -336,14 +354,60 @@ private fun NotifRow(icon: ImageVector, title: String, sub: String, on: Boolean,
     )
 }
 
+/** One saved thing in the Profile: what it is, how to open it and how to remove it. */
+private class SavedEntry(
+    val title: String,
+    val detail: String,
+    val removeLabel: String,
+    val onRemove: () -> Unit,
+    val badge: String? = null,
+    val openLabel: String? = null,
+    val onOpen: (() -> Unit)? = null,
+)
+
+/** A heading with its count, then the saved things under it (the first few, with "Show all"). */
 @Composable
-private fun SavedRow(icon: ImageVector, title: String, count: String) {
+private fun SavedGroup(icon: ImageVector, title: String, entries: List<SavedEntry>, emptyHint: String) {
+    var showAll by rememberSaveable(title) { mutableStateOf(false) }
+    val limit = 3
     ListItem(
         headlineContent = { Text(title) },
         leadingContent = { Icon(icon, null, tint = CityColors.Indigo) },
-        trailingContent = { Text(count, style = MaterialTheme.typography.titleMedium, color = CityColors.IndigoDeep) },
+        trailingContent = { Text("${entries.size}", style = MaterialTheme.typography.titleMedium, color = CityColors.IndigoDeep) },
         colors = ListItemDefaults.colors(containerColor = Color.Transparent),
+        modifier = Modifier.clearAndSetSemantics { contentDescription = "$title: ${entries.size}" },
     )
+    if (entries.isEmpty()) {
+        Text(emptyHint, style = MaterialTheme.typography.bodySmall, color = CityColors.Muted, modifier = Modifier.padding(start = 56.dp, end = 16.dp, bottom = 10.dp))
+    }
+    entries.take(if (showAll) entries.size else limit).forEach { entry ->
+        val open = entry.onOpen
+        Row(
+            Modifier.fillMaxWidth()
+                .then(if (open != null) Modifier.clickable(onClickLabel = entry.openLabel, onClick = open) else Modifier)
+                .padding(start = 56.dp, end = 4.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Column(Modifier.weight(1f).padding(vertical = 6.dp)) {
+                Text(entry.title, style = MaterialTheme.typography.bodyMedium, maxLines = 2, overflow = TextOverflow.Ellipsis)
+                if (entry.detail.isNotBlank()) {
+                    Text(entry.detail, style = MaterialTheme.typography.bodySmall, color = CityColors.Muted, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                }
+            }
+            entry.badge?.let {
+                Spacer(Modifier.width(6.dp))
+                Text(it, style = MaterialTheme.typography.labelSmall, color = CityColors.SaffronText)
+            }
+            IconButton(onClick = entry.onRemove) {
+                Icon(Icons.Filled.Bookmark, entry.removeLabel, tint = CityColors.Saffron, modifier = Modifier.size(20.dp))
+            }
+        }
+    }
+    if (entries.size > limit) {
+        TextButton(onClick = { showAll = !showAll }, modifier = Modifier.padding(start = 44.dp)) {
+            Text(if (showAll) "Show fewer" else "Show all ${entries.size}", color = CityColors.Indigo)
+        }
+    }
 }
 
 @Composable

@@ -267,7 +267,8 @@ fun NearbyScreen(vm: CityViewModel, onBack: () -> Unit, onOpenEvent: (String) ->
 
     vm.listedEvents.firstOrNull { it.id == openListed }?.let { e ->
         ListedEventSheet(
-            e, onDismiss = { openListed = null }, onBook = { openStory(context, e.url) },
+            e, saved = vm.isListedSaved(e), onSave = { vm.toggleSavedListed(e) },
+            onDismiss = { openListed = null }, onBook = { openStory(context, e.url) },
             onShare = { shareText(context, "${e.title}\n${ListedTime.whenLabel(e)}${e.venue?.let { " · $it" } ?: ""}\n${e.url}\n— via Shehar Saathi") },
             onDirections = if (e.lat != null && e.lng != null) ({ openDirections(context, e.lat, e.lng, e.venue ?: e.title) }) else null,
         )

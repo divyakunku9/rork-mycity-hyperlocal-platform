@@ -508,6 +508,15 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
     fun toggleSavedStory(s: WebStory) = toggleSaved(SavedItems.ofStory(s), "Story")
     fun removeSaved(item: SavedItem) = toggleSaved(item, when (item.kind) { SavedKind.PLACE -> "Place"; SavedKind.EVENT -> "Event"; SavedKind.STORY -> "Story" })
 
+    /** A dropped pin's address arrived after it was saved: keep the bookmark, show the real name. */
+    fun renameSavedPlace(p: Place) {
+        val key = SavedItems.placeKey(p.lat, p.lng)
+        val i = savedItems.indexOfFirst { it.kind == SavedKind.PLACE && it.key == key }
+        if (i < 0) return
+        savedItems[i] = SavedItems.ofPlace(p, savedItems[i].savedAtMs)
+        prefs.setSavedJson(savedAccount, SavedItems.encode(savedItems))
+    }
+
     /** A place the Profile asked Explore to show on the map; Explore clears it once shown. */
     var placeToShow by mutableStateOf<Place?>(null)
 

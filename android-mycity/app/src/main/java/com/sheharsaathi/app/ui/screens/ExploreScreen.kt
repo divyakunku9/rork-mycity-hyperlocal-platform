@@ -186,9 +186,9 @@ fun ExploreScreen(
         mapPlace = provisional
         scope.launch {
             val named = Geocoder.reverse(lat, lng)
-            if (mapPlace?.id == provisional.id) {
-                mapPlace = named?.copy(id = provisional.id) ?: provisional.copy(area = "%.5f, %.5f".format(lat, lng))
-            }
+            val settled = named?.copy(id = provisional.id) ?: provisional.copy(area = "%.5f, %.5f".format(lat, lng))
+            if (mapPlace?.id == provisional.id) mapPlace = settled
+            vm.renameSavedPlace(settled)  // in case it was bookmarked before the address arrived
         }
         Unit
     }

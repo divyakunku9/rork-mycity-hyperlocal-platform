@@ -106,20 +106,20 @@ object CityContent {
             CivicIssue(
                 id = "$p-pothole", title = "Severe pothole on ${area(c, 0)} main road", category = IssueCategory.POTHOLE,
                 location = "Main Road, ${area(c, 0)}", description = "Large water-filled crater causing two-wheelers to skid during peak hours.",
-                authorities = listOf(m, c.traffic.handle), urgency = Urgency.CRITICAL, status = IssueStatus.IN_PROGRESS, upvotes = 39,
+                authorities = listOf(m, c.traffic.handle), urgency = Urgency.CRITICAL, status = IssueStatus.IN_PROGRESS, upvotes = 39, responses = ResponseCounts(seen = 39),
                 imageRes = R.drawable.img_pothole, reportedAgo = "2 days ago", lat = i1.first, lng = i1.second,
                 authorityNote = "${c.municipalShort} ward crew assigned. Patch work scheduled tonight after 11 PM.",
             ),
             CivicIssue(
                 id = "$p-streetlight", title = "Streetlights restored, ${area(c, 0)}", category = IssueCategory.STREETLIGHT,
                 location = "Park entrance, ${area(c, 0)}", description = "Three streetlights out near the park entrance.",
-                authorities = listOf(c.power.handle), urgency = Urgency.MEDIUM, status = IssueStatus.RESOLVED, upvotes = 24,
+                authorities = listOf(c.power.handle), urgency = Urgency.MEDIUM, status = IssueStatus.RESOLVED, upvotes = 24, responses = ResponseCounts(seen = 24),
                 reportedAgo = "6 days ago", lat = i2.first, lng = i2.second, authorityNote = "All three fixtures replaced with LED units.",
             ),
             CivicIssue(
                 id = "$p-garbage", title = "Garbage pile-up near ${area(c, 0)} bus stop", category = IssueCategory.GARBAGE,
                 location = "Bus stop, ${area(c, 0)}", description = "Mixed waste dumped beside the bus stop for three days.",
-                authorities = listOf(m), urgency = Urgency.MEDIUM, status = IssueStatus.UNDER_REVIEW, upvotes = 16,
+                authorities = listOf(m), urgency = Urgency.MEDIUM, status = IssueStatus.UNDER_REVIEW, upvotes = 16, responses = ResponseCounts(seen = 16),
                 reportedAgo = "Yesterday", lat = i3.first, lng = i3.second,
             ),
         )

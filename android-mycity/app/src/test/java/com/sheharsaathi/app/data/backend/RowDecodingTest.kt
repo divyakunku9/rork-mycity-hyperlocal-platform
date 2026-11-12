@@ -22,6 +22,41 @@ class RowDecodingTest {
         assertNull(rows[0].ward)
     }
 
+    @Test fun issueWithPublicResponses() {
+        val row = json.decodeFromString<List<IssueRow>>(
+            """[{"id":"aaaaaaaa-0000-4000-8000-000000000001","category":"pothole","title":"Pothole reported","lat":17.4,"lng":78.3,
+               "upvote_count":3,"seen_count":2,"still_count":1,"worse_count":1,"fixed_count":4,"last_response_kind":"worse",
+               "last_response_at":"2026-11-12T19:05:00+00:00","created_at":"2026-11-06T19:31:36.34612+00:00"}]"""
+        ).single()
+        assertEquals(listOf(2, 1, 1, 4), listOf(row.seenCount, row.stillCount, row.worseCount, row.fixedCount))
+        assertEquals("worse", row.lastResponseKind)
+    }
+
+    @Test fun reportsFromBeforeResponsesExistedStillDecode() {
+        val row = json.decodeFromString<List<IssueRow>>(
+            """[{"id":"aaaaaaaa-0000-4000-8000-000000000001","category":"pothole","title":"Pothole reported","lat":17.4,"lng":78.3,
+               "upvote_count":3,"created_at":"2026-11-06T19:31:36.34612+00:00"}]"""
+        ).single()
+        assertEquals(0, row.fixedCount)
+        assertNull(row.lastResponseKind)
+    }
+
+    @Test fun responseReplies() {
+        val totals = json.decodeFromString<ResponseTotalsRow>(
+            """{"issue_id":"d1cfc042-77d3-4112-a17f-7ed6def4c528","my_kind":"fixed","upvote_count":1,"seen_count":1,"still_count":0,
+               "worse_count":0,"fixed_count":1,"last_response_kind":"fixed","last_response_at":"2026-11-12T19:05:00.123456+00:00"}"""
+        )
+        assertEquals(1, totals.fixedCount)
+        assertEquals("fixed", totals.lastResponseKind)
+        val removed = json.decodeFromString<ResponseTotalsRow>(
+            """{"issue_id":"d1cfc042-77d3-4112-a17f-7ed6def4c528","my_kind":null,"upvote_count":0,"seen_count":0,"still_count":0,
+               "worse_count":0,"fixed_count":0,"last_response_kind":null,"last_response_at":null}"""
+        )
+        assertNull(removed.lastResponseAt)
+        val mine = json.decodeFromString<List<IssueResponseRow>>("""[{"issue_id":"d1cfc042-77d3-4112-a17f-7ed6def4c528","kind":"still_there"}]""")
+        assertEquals(com.sheharsaathi.app.data.IssueResponse.STILL_THERE, com.sheharsaathi.app.data.IssueResponse.of(mine.single().kind))
+    }
+
     @Test fun webNewsWithEmbeddedSource() {
         val row = json.decodeFromString<List<WebNewsRow>>(
             """[{"id":7,"url":"https://example.com/a","title":"GHMC fills potholes","summary":null,"image_url":null,

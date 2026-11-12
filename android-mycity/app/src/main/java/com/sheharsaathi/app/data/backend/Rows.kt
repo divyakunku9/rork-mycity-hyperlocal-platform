@@ -26,8 +26,30 @@ data class IssueRow(
     val lng: Double,
     @SerialName("photo_path") val photoPath: String? = null,
     @SerialName("upvote_count") val upvoteCount: Int = 0,
+    @SerialName("seen_count") val seenCount: Int = 0,
+    @SerialName("still_count") val stillCount: Int = 0,
+    @SerialName("worse_count") val worseCount: Int = 0,
+    @SerialName("fixed_count") val fixedCount: Int = 0,
+    @SerialName("last_response_kind") val lastResponseKind: String? = null,
+    @SerialName("last_response_at") val lastResponseAt: String? = null,
     @SerialName("created_at") val createdAt: String,
     val authorities: AuthorityRef? = null,
+)
+
+/** The caller's own response to a report (issue_responses). */
+@Serializable
+data class IssueResponseRow(@SerialName("issue_id") val issueId: String, val kind: String)
+
+/** Fresh totals for one report, returned by set_issue_response. */
+@Serializable
+data class ResponseTotalsRow(
+    @SerialName("upvote_count") val upvoteCount: Int = 0,
+    @SerialName("seen_count") val seenCount: Int = 0,
+    @SerialName("still_count") val stillCount: Int = 0,
+    @SerialName("worse_count") val worseCount: Int = 0,
+    @SerialName("fixed_count") val fixedCount: Int = 0,
+    @SerialName("last_response_kind") val lastResponseKind: String? = null,
+    @SerialName("last_response_at") val lastResponseAt: String? = null,
 )
 
 @Serializable

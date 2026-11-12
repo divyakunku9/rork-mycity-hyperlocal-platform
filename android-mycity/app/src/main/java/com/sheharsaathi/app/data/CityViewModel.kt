@@ -17,6 +17,7 @@ import com.sheharsaathi.app.data.backend.Res
 import com.sheharsaathi.app.data.backend.Supabase
 import com.sheharsaathi.app.data.backend.SupabaseConfig
 import com.sheharsaathi.app.data.backend.SupabaseOtpProvider
+import com.sheharsaathi.app.data.backend.Times
 import com.sheharsaathi.app.data.backend.photoForUpload
 import com.sheharsaathi.app.data.backend.valueOrNull
 import kotlinx.coroutines.Job
@@ -359,7 +360,7 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
             when (val r = alr.await()) { is Res.Ok -> alert = r.value; is Res.Err -> failed = r.message }
             when (val r = pol.await()) { is Res.Ok -> poll = r.value; is Res.Err -> failed = r.message }
             mine?.await()?.let { a ->
-                a.upvoted.forEach { upvotedIssues[it] = true }
+                myResponses.putAll(a.responses)
                 a.savedEvents.forEach { savedEvents[it] = true }
                 bookings.putAll(a.bookings)
                 bookingCodes.putAll(a.bookingCodes)
@@ -377,7 +378,7 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
     }
 
     private fun clearActivity() {
-        savedEvents.clear(); bookings.clear(); bookingCodes.clear(); upvotedIssues.clear(); endorsedNews.clear()
+        savedEvents.clear(); bookings.clear(); bookingCodes.clear(); myResponses.clear(); respondingTo.clear(); endorsedNews.clear()
         savedNews.clear(); claimedOffers.clear(); pollChoice = null; alertAcknowledged = false
         helpChat.clear()
     }
@@ -526,7 +527,10 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
     val bookings = mutableStateMapOf<String, Int>()
     /** Booking codes from the server, by event id (live cities). */
     val bookingCodes = mutableStateMapOf<String, String>()
-    val upvotedIssues = mutableStateMapOf<String, Boolean>()
+    /** The user's own response to each report they have responded to, by report id. */
+    val myResponses = mutableStateMapOf<String, IssueResponse>()
+    /** Reports whose response is being sent, so a second tap waits for the first. */
+    val respondingTo = mutableStateMapOf<String, Boolean>()
     val endorsedNews = mutableStateMapOf<String, Boolean>()
     val savedNews = mutableStateMapOf<String, Boolean>()
     val claimedOffers = mutableStateMapOf<String, Boolean>()
@@ -760,18 +764,44 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
         }
     }
 
-    fun toggleUpvote(id: String) {
+    /**
+     * The user taps a public response on a report ("I see this too", "Still not fixed", "It's getting
+     * worse", "It's fixed now"). Tapping the response they already gave takes it back.
+     */
+    fun respondToIssue(id: String, tapped: IssueResponse) {
         val idx = issues.indexOfFirst { it.id == id }
-        if (idx < 0) return
+        if (idx < 0 || respondingTo[id] == true) return
         val item = issues[idx]
-        if (isLive && item.isMine) { toast("You reported this one — neighbours can confirm it."); return }
-        val already = upvotedIssues[id] == true
-        issues[idx] = item.copy(upvotes = item.upvotes + if (already) -1 else 1)
-        if (already) upvotedIssues.remove(id) else upvotedIssues[id] = true
-        syncMine("issue_upvotes", "issue_id", id, !already) {
+        if (tapped !in IssueResponses.choices(item)) {
+            toast(if (item.isMine) "You reported this one. You can say if it's still there, worse or fixed." else "This report is marked resolved.")
+            return
+        }
+        val old = myResponses[id]
+        val new = IssueResponses.next(old, tapped)
+        fun show(from: IssueResponse?, to: IssueResponse?) {
             val j = issues.indexOfFirst { it.id == id }
-            if (j >= 0) issues[j] = issues[j].copy(upvotes = issues[j].upvotes + if (already) 1 else -1)
-            if (already) upvotedIssues[id] = true else upvotedIssues.remove(id)
+            if (j >= 0) issues[j] = IssueResponses.apply(issues[j], from, to)
+            if (to == null) myResponses.remove(id) else myResponses[id] = to
+        }
+        show(old, new)
+        if (!isLive) return
+        if (sb.userId == null) { show(new, old); toast("Please sign in to respond to a report."); return }
+        respondingTo[id] = true
+        viewModelScope.launch {
+            when (val r = backend.respond(id, new)) {
+                is Res.Ok -> r.value?.let { t ->
+                    // The server's totals include everyone else's responses since the list was loaded.
+                    val j = issues.indexOfFirst { it.id == id }
+                    if (j >= 0) issues[j] = issues[j].copy(
+                        upvotes = t.upvoteCount,
+                        responses = ResponseCounts(seen = t.seenCount, stillThere = t.stillCount, worse = t.worseCount, fixed = t.fixedCount),
+                        lastResponse = IssueResponse.of(t.lastResponseKind),
+                        lastResponseAgo = t.lastResponseAt?.let { Times.ago(Times.parse(it)) },
+                    )
+                }
+                is Res.Err -> { show(new, old); toast(r.message) }
+            }
+            respondingTo.remove(id)
         }
     }
 
@@ -838,7 +868,7 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
             authorities = authorities.ifEmpty { listOf("@SheharSaathi") },
             urgency = urgency,
             status = IssueStatus.REPORTED,
-            upvotes = if (live) 0 else 1,
+            upvotes = 0,
             imageUri = imageUri,
             reportedAgo = "Just now",
             isMine = true,
@@ -846,7 +876,7 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
             lng = lng ?: (userPlace.lng - jitter),
         )
         if (live) issues.add(0, issue) else issues.add(issue)
-        if (!live) { upvotedIssues[id] = true; return id }
+        if (!live) return id
 
         val uid = sb.userId ?: return id
         val cityId = city.id

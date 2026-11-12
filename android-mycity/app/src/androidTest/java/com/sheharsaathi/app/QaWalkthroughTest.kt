@@ -403,6 +403,30 @@ class QaWalkthroughTest {
             waitText("Pothole reported", 20)
             Thread.sleep(4000) // upload + insert
             shot("issue-detail")
+        }
+        step("Report: public responses (still not fixed, then fixed)") {
+            // It is the tester's own report: they can say how it is now, but not confirm it.
+            node(hasText("What residents say")).performScrollTo()
+            check(!exists(hasText("I see this too"))) { "the reporter was offered 'I see this too' on their own report" }
+            node(hasText("Still not fixed")).performScrollTo().performClick()
+            waitText("Your response: Still not fixed", 10)
+            Thread.sleep(2500) // the server's totals arrive
+            check(exists(hasText("Only you so far"))) { "the response wasn't counted" }
+            shot("issue-response-still-not-fixed")
+            // Changing the response moves it.
+            node(hasText("It's fixed now")).performScrollTo().performClick()
+            waitText("Your response: It's fixed now", 10)
+            waitText("1 resident says this is fixed", 10)
+            Thread.sleep(2500)
+            shot("issue-response-fixed")
+            // Tapping it again takes it back.
+            node(hasText("It's fixed now")).performScrollTo().performClick()
+            rule.waitUntil(10_000) { !exists(hasText("Your response:", substring = true)) }
+            Thread.sleep(2500)
+            node(hasText("Still not fixed")).performScrollTo().performClick()
+            waitText("Your response: Still not fixed", 10)
+            Thread.sleep(2500)
+            shot("issue-response-final")
             back()
         }
         step("My filed issues list") {

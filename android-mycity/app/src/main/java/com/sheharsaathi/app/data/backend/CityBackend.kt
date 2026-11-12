@@ -6,9 +6,11 @@ import com.sheharsaathi.app.data.CityEvent
 import com.sheharsaathi.app.data.CivicIssue
 import com.sheharsaathi.app.data.EventCategory
 import com.sheharsaathi.app.data.IssueCategory
+import com.sheharsaathi.app.data.IssueResponse
 import com.sheharsaathi.app.data.IssueStatus
 import com.sheharsaathi.app.data.NewsItem
 import com.sheharsaathi.app.data.NewsKind
+import com.sheharsaathi.app.data.ResponseCounts
 import com.sheharsaathi.app.data.ServiceStatus
 import com.sheharsaathi.app.data.Transit
 import com.sheharsaathi.app.data.Urgency
@@ -30,7 +32,8 @@ data class PollOptionUi(val id: Long?, val label: String, val votes: Int)
 
 /** Everything the signed-in user has done that the screens need to show. */
 data class MyActivity(
-    val upvoted: Set<String> = emptySet(),
+    /** The user's response to each report they have responded to, by report id. */
+    val responses: Map<String, IssueResponse> = emptyMap(),
     val savedEvents: Set<String> = emptySet(),
     val bookings: Map<String, Int> = emptyMap(),
     val bookingCodes: Map<String, String> = emptyMap(),
@@ -222,7 +225,7 @@ class CityBackend(val sb: Supabase) {
 
     suspend fun myActivity(uid: String): MyActivity = coroutineScope {
         fun get(table: String, cols: String) = async { sb.select(table, "select" to cols, "user_id" to "eq.$uid") }
-        val upvotes = get("issue_upvotes", "issue_id")
+        val responses = get("issue_responses", "issue_id,kind")
         val eventSaves = get("event_saves", "event_id")
         val bookings = get("event_bookings", "event_id,quantity,status,booking_code")
         val endorsed = get("news_endorsements", "news_id")
@@ -232,7 +235,8 @@ class CityBackend(val sb: Supabase) {
         val acks = get("alert_acknowledgements", "alert_id")
         val myBookings = bookings.await().decodeList<BookingRow>().orEmpty().filter { it.status == "confirmed" }
         MyActivity(
-            upvoted = upvotes.await().decodeList<IssueIdRow>().orEmpty().map { it.issueId }.toSet(),
+            responses = responses.await().decodeList<IssueResponseRow>().orEmpty()
+                .mapNotNull { r -> IssueResponse.of(r.kind)?.let { r.issueId to it } }.toMap(),
             savedEvents = eventSaves.await().decodeList<EventIdRow>().orEmpty().map { it.eventId }.toSet(),
             bookings = myBookings.associate { it.eventId to it.quantity },
             bookingCodes = myBookings.filter { it.bookingCode.isNotBlank() }.associate { it.eventId to it.bookingCode },
@@ -310,7 +314,18 @@ class CityBackend(val sb: Supabase) {
             .getOrElse { Res.Err("Booked, but the confirmation couldn't be read. Pull to refresh.") }
     }
 
-    /** Adds or removes a "mine" row such as an upvote, a save or an acknowledgement. */
+    /**
+     * Sets, changes or (with null) removes the signed-in user's response to a report.
+     * Returns the report's fresh totals, or null if the reply couldn't be read (the change still went through).
+     */
+    suspend fun respond(issueId: String, response: IssueResponse?): Res<ResponseTotalsRow?> {
+        val kind = response?.let { Supabase.q(it.key) } ?: "null"
+        val r = sb.rpc("set_issue_response", """{"p_issue_id":${Supabase.q(issueId)},"p_kind":$kind}""")
+        if (r !is Res.Ok) return r as Res.Err
+        return Res.Ok(runCatching { json.decodeFromString<ResponseTotalsRow>(r.value) }.getOrNull())
+    }
+
+    /** Adds or removes a "mine" row such as a save or an acknowledgement. */
     suspend fun setMine(table: String, keyColumn: String, key: String, uid: String, on: Boolean): Res<String> =
         if (on) sb.insert(table, """{${Supabase.q(keyColumn)}:${Supabase.q(key)},"user_id":${Supabase.q(uid)}}""", upsert = true)
         else sb.delete(table, keyColumn to "eq.$key", "user_id" to "eq.$uid")
@@ -377,6 +392,9 @@ class CityBackend(val sb: Supabase) {
             else -> IssueStatus.REPORTED
         },
         upvotes = upvoteCount,
+        responses = ResponseCounts(seen = seenCount, stillThere = stillCount, worse = worseCount, fixed = fixedCount),
+        lastResponse = IssueResponse.of(lastResponseKind),
+        lastResponseAgo = lastResponseAt?.let { Times.ago(Times.parse(it)) },
         imageUri = photoPath?.let { sb.publicUrl("issue-photos", it) },
         reportedAgo = Times.ago(Times.parse(createdAt)),
         isMine = myId != null && reporterId == myId,

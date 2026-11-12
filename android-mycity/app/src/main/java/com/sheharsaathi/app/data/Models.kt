@@ -51,6 +51,46 @@ enum class IssueStatus(val label: String) {
 
 data class Authority(val handle: String, val name: String, val verified: Boolean)
 
+/**
+ * What a resident says about a report they are looking at. One response per person per report;
+ * it can be changed or removed. Responses are public as totals only and never change the
+ * report's official status.
+ */
+enum class IssueResponse(val key: String, val label: String) {
+    SEEN("seen", "I see this too"),
+    STILL_THERE("still_there", "Still not fixed"),
+    WORSE("worse", "It's getting worse"),
+    FIXED("fixed", "It's fixed now");
+
+    /** Says the problem is there right now, so it counts towards the report's priority. */
+    val confirms: Boolean get() = this != FIXED
+
+    companion object {
+        fun of(key: String?): IssueResponse? = entries.firstOrNull { it.key == key }
+    }
+}
+
+/** How many residents currently give each response to a report. */
+data class ResponseCounts(val seen: Int = 0, val stillThere: Int = 0, val worse: Int = 0, val fixed: Int = 0) {
+    operator fun get(r: IssueResponse): Int = when (r) {
+        IssueResponse.SEEN -> seen
+        IssueResponse.STILL_THERE -> stillThere
+        IssueResponse.WORSE -> worse
+        IssueResponse.FIXED -> fixed
+    }
+
+    fun plus(r: IssueResponse, by: Int): ResponseCounts = when (r) {
+        IssueResponse.SEEN -> copy(seen = (seen + by).coerceAtLeast(0))
+        IssueResponse.STILL_THERE -> copy(stillThere = (stillThere + by).coerceAtLeast(0))
+        IssueResponse.WORSE -> copy(worse = (worse + by).coerceAtLeast(0))
+        IssueResponse.FIXED -> copy(fixed = (fixed + by).coerceAtLeast(0))
+    }
+
+    /** Residents who say it has not been fixed. */
+    val notFixed: Int get() = stillThere + worse
+    val total: Int get() = seen + stillThere + worse + fixed
+}
+
 data class CivicIssue(
     val id: String,
     val title: String,
@@ -68,6 +108,10 @@ data class CivicIssue(
     val lat: Double,
     val lng: Double,
     val authorityNote: String? = null,
+    /** Public responses from residents; see [IssueResponse]. */
+    val responses: ResponseCounts = ResponseCounts(),
+    val lastResponse: IssueResponse? = null,
+    val lastResponseAgo: String? = null,
 )
 
 enum class NewsKind { STORY, CIVIC_WIN, OFFER, BULLETIN }

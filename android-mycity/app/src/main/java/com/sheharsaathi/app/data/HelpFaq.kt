@@ -103,7 +103,7 @@ object HelpFaqs {
                 "2. Snap a live photo of the problem. It's stamped with your GPS position so crews can find the spot.\n" +
                 "3. Choose a category and add a short description (you can also speak it).\n" +
                 "4. Submit. It's routed to the right authority automatically.\n\n" +
-                "Neighbours can confirm your report to raise its priority.",
+                "Neighbours can confirm your report to raise its priority, and say later whether it's still there, worse or fixed.",
             listOf("report", "complaint", "complain", "issue", "problem", "pothole", "garbage", "streetlight", "street light", "drain", "sewage", "water leak", "file", "raise", "submit", "shikayat", "flag"),
             HelpLink("Open Report", "report"),
         ),
@@ -115,10 +115,18 @@ object HelpFaqs {
             HelpLink("My filed issues", "reports?mine=true"),
         ),
         Faq(
-            "report-confirm", HelpTopic.REPORT, "What does \"I see this too\" do?",
-            "If you've seen the same problem, open the report and tap \"I see this too\". " +
-                "Every confirmation from a resident raises the report's priority, so popular issues stand out to the authority.",
-            listOf("i see this too", "confirm", "upvote", "vote", "support", "same problem", "priority", "like"),
+            "report-confirm", HelpTopic.REPORT, "How do I respond to a report someone else filed?",
+            "Open the report and look for \"What residents say\". Tap the one that matches what you've seen:\n" +
+                "• I see this too: you've seen the problem as well\n" +
+                "• Still not fixed: it's still there\n" +
+                "• It's getting worse\n" +
+                "• It's fixed now\n\n" +
+                "You can give one response per report, change it later, or tap it again to take it back. " +
+                "Everyone sees the totals, not who said what. The more residents say a problem is still there, the higher its priority. " +
+                "Responses don't change the official status; only the authority can mark a report resolved.",
+            listOf("i see this too", "confirm", "upvote", "vote", "support", "same problem", "priority", "like", "respond", "response",
+                "someone else", "still not fixed", "not fixed", "getting worse", "worse", "it's fixed", "fixed now", "already fixed",
+                "resolved", "acknowledge", "what residents say"),
             HelpLink("Community reports", "reports?mine=false"),
         ),
         Faq(

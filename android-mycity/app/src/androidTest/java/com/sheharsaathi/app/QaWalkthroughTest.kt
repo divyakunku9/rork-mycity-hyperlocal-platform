@@ -405,8 +405,9 @@ class QaWalkthroughTest {
             shot("issue-detail")
         }
         step("Report: public responses (still not fixed, then fixed)") {
+          try {
             // It is the tester's own report: they can say how it is now, but not confirm it.
-            node(hasText("What residents say")).performScrollTo()
+            node(hasText("WHAT RESIDENTS SAY")).performScrollTo()  // section labels are shown in capitals
             check(!exists(hasText("I see this too"))) { "the reporter was offered 'I see this too' on their own report" }
             node(hasText("Still not fixed")).performScrollTo().performClick()
             waitText("Your response: Still not fixed", 10)
@@ -427,7 +428,7 @@ class QaWalkthroughTest {
             waitText("Your response: Still not fixed", 10)
             Thread.sleep(2500)
             shot("issue-response-final")
-            back()
+          } finally { back() }  // leave the report even if a check fails, so later steps start from the tabs
         }
         step("My filed issues list") {
             tab("Civic Hub"); Thread.sleep(1500)

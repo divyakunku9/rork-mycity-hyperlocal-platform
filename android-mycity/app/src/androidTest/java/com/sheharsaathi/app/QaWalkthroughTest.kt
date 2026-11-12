@@ -247,6 +247,19 @@ class QaWalkthroughTest {
                 shot("weather-details")
             } finally { backToExplore() }
         }
+        step("Save a place: drop a pin on the map and bookmark it") {
+            tab("Explore"); Thread.sleep(1000); dismissLocationPicker()
+            showMap()
+            // A real long press on an empty part of the map (the system's own gesture, as a finger would do it).
+            instrumentation.uiAutomation.executeShellCommand("input swipe 375 1000 375 1000 1500").close()
+            waitFor(hasContentDescription("Save place"), 15)
+            Thread.sleep(2500) // the pin's address is looked up
+            node(hasContentDescription("Save place")).performClick()
+            waitFor(hasContentDescription("Remove saved place"), 5)
+            placeSaved = true
+            shot("map-place-saved")
+            back()
+        }
         step("Map search: full address with door number") {
             tab("Explore"); Thread.sleep(1000); dismissLocationPicker()
             showMap()
@@ -257,10 +270,6 @@ class QaWalkthroughTest {
             shot("map-search-address")
             node(hasText("Jubilee Hills Road No 36", substring = true)).performClick()
             waitText("Navigate", 10); shot("map-search-picked")
-            node(hasContentDescription("Save place")).performClick()
-            waitFor(hasContentDescription("Remove saved place"), 5)
-            placeSaved = true
-            shot("map-place-saved")
             back()
         }
         // More door numbers: four that exist in the map data, two that don't (to check the honest fallback).

@@ -140,6 +140,18 @@ fun AppNavigation(vm: CityViewModel) {
                     vm = vm,
                     onBack = { navController.popBackStack() },
                     onOpenEvent = { navController.navigate("event/$it") },
+                    onOpenHelp = { navController.navigate("help") { launchSingleTop = true } },
+                )
+            }
+            composable("help") {
+                com.sheharsaathi.app.ui.screens.HelpChatScreen(
+                    vm = vm,
+                    onBack = { navController.popBackStack() },
+                    // Shortcuts under an answer: tabs switch like the bottom bar, other screens open on top.
+                    onNavigate = { route ->
+                        if (route in tabRoutes) navController.switchTab(route)
+                        else navController.navigate(route) { launchSingleTop = true }
+                    },
                 )
             }
             composable("explore") {

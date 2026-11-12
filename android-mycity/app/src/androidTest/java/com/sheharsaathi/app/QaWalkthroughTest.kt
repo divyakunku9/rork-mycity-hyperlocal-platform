@@ -403,6 +403,25 @@ class QaWalkthroughTest {
             shot("profile"); scrollDown(); shot("profile-scroll")
             back()
         }
+        step("Help chat answers questions") {
+            tab("Explore"); Thread.sleep(1000)
+            node(openProfile).performClick()
+            waitText("Sign out", 10)
+            node(hasText("Help & FAQs")).performScrollTo().performClick()
+            waitText("Browse by topic", 10)
+            shot("help-welcome")
+            clickText("How do I report a civic issue?")
+            waitText("Open Report", 10)
+            shot("help-answer")
+            node(hasSetTextAction()).performTextInput("otp not received")
+            node(hasContentDescription("Send question")).performClick()
+            waitText("Resend code", 10)
+            shot("help-typed-question")
+            // The keyboard may be open, so leave with the on-screen back arrows rather than the system key.
+            node(hasContentDescription("Back")).performClick(); Thread.sleep(1000)
+            waitText("Sign out", 10)
+            node(hasContentDescription("Back")).performClick(); Thread.sleep(1000)
+        }
         step("Screen recreate keeps the session and the new report") {
             rule.activityRule.scenario.recreate()
             Thread.sleep(5000)

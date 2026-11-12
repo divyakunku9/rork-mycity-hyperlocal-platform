@@ -40,6 +40,7 @@ import androidx.compose.material.icons.filled.Image
 import androidx.compose.material.icons.filled.PhotoCamera
 import androidx.compose.material.icons.filled.Place
 import androidx.compose.material.icons.filled.ReportProblem
+import androidx.compose.material.icons.filled.SupportAgent
 import androidx.compose.material.icons.filled.SwapHoriz
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -87,7 +88,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProfileScreen(vm: CityViewModel, onBack: () -> Unit, onOpenEvent: (String) -> Unit) {
+fun ProfileScreen(vm: CityViewModel, onBack: () -> Unit, onOpenEvent: (String) -> Unit, onOpenHelp: () -> Unit) {
     val context = LocalContext.current
     val haptic = LocalHapticFeedback.current
     val scope = rememberCoroutineScope()
@@ -233,6 +234,18 @@ fun ProfileScreen(vm: CityViewModel, onBack: () -> Unit, onOpenEvent: (String) -
                 }
                 SavedRow(Icons.Filled.Bookmark, "Saved news", "$savedNews")
             }
+        }
+
+        SectionTitle("Help")
+        CityCard(Modifier.fillMaxWidth().padding(horizontal = 16.dp)) {
+            ListItem(
+                headlineContent = { Text("Help & FAQs") },
+                supportingContent = { Text("Ask Saathi anything about using the app", color = CityColors.Muted) },
+                leadingContent = { Icon(Icons.Filled.SupportAgent, null, tint = CityColors.Saffron) },
+                trailingContent = { Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, null, tint = CityColors.Muted) },
+                colors = ListItemDefaults.colors(containerColor = Color.Transparent),
+                modifier = Modifier.clickable(onClickLabel = "Open Help and FAQs", onClick = onOpenHelp),
+            )
         }
 
         OutlinedButton(

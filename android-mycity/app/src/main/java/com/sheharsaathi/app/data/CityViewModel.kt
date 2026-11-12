@@ -377,7 +377,11 @@ class CityViewModel(private val app: Application) : AndroidViewModel(app) {
     private fun clearActivity() {
         savedEvents.clear(); bookings.clear(); bookingCodes.clear(); upvotedIssues.clear(); endorsedNews.clear()
         savedNews.clear(); claimedOffers.clear(); pollChoice = null; alertAcknowledged = false
+        helpChat.clear()
     }
+
+    /** The Help & FAQs conversation. Kept only while the app is open; never stored or sent anywhere. */
+    val helpChat = mutableStateListOf<HelpMessage>()
 
     fun addEvent(
         title: String, category: EventCategory, dateLabel: String, timeLabel: String, bucket: DayBucket,

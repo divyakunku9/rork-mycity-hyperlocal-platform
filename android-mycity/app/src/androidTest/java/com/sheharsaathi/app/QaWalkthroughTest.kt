@@ -417,10 +417,12 @@ class QaWalkthroughTest {
             node(hasContentDescription("Send question")).performClick()
             waitText("Resend code", 10)
             shot("help-typed-question")
-            // The keyboard may be open, so leave with the on-screen back arrows rather than the system key.
+            // The keyboard is open, so leave the chat with its back arrow (the system key would only close the keyboard).
             node(hasContentDescription("Back")).performClick(); Thread.sleep(1000)
             waitText("Sign out", 10)
-            node(hasContentDescription("Back")).performClick(); Thread.sleep(1000)
+            // Profile reopens scrolled down with its own arrow off screen, so use the system key here.
+            back()
+            waitFor(hasText("Explore"), 10)
         }
         step("Screen recreate keeps the session and the new report") {
             rule.activityRule.scenario.recreate()

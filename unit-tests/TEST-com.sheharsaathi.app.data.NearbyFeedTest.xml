@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sheharsaathi.app.data.NearbyFeedTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-11-12T20:28:17.960Z" hostname="runnervmccnms" time="0.027">
+  <properties/>
+  <testcase name="headingUsesTheAreaNotTheStreet" classname="com.sheharsaathi.app.data.NearbyFeedTest" time="0.019"/>
+  <testcase name="newsThatNamesTheAreaComesFirst" classname="com.sheharsaathi.app.data.NearbyFeedTest" time="0.0"/>
+  <testcase name="areaWordsSkipCityAndWardNumbers" classname="com.sheharsaathi.app.data.NearbyFeedTest" time="0.0"/>
+  <testcase name="nearbyEventsAreWithinRadiusAndSoonestFirst" classname="com.sheharsaathi.app.data.NearbyFeedTest" time="0.007"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

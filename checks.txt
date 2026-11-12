@@ -1,0 +1,102 @@
+Downloading https://services.gradle.org/distributions/gradle-8.14.1-bin.zip
+.............10%.............20%.............30%.............40%.............50%.............60%.............70%.............80%.............90%..............100%
+
+Welcome to Gradle 8.14.1!
+
+Here are the highlights of this release:
+ - Java 24 support
+ - GraalVM Native Image toolchain selection
+ - Enhancements to test reporting
+ - Build Authoring improvements
+
+For more details see https://docs.gradle.org/8.14.1/release-notes.html
+
+Starting a Gradle Daemon (subsequent builds will be faster)
+Calculating task graph as no cached configuration is available for tasks: lintDebug testDebugUnitTest
+> Task :app:preBuild UP-TO-DATE
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:preDebugUnitTestBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:generateDebugResValues
+> Task :app:generateDebugBuildConfig
+> Task :app:generateDebugResources
+> Task :app:processDebugNavigationResources
+> Task :app:mapDebugSourceSetPaths
+> Task :app:checkDebugAarMetadata
+> Task :app:createDebugCompatibleScreenManifests
+> Task :app:extractDeepLinksDebug
+> Task :app:compileDebugNavigationResources
+> Task :app:javaPreCompileDebug
+> Task :app:preDebugAndroidTestBuild SKIPPED
+> Task :app:generateDebugAndroidTestResValues FROM-CACHE
+> Task :app:extractProguardFiles
+> Task :app:javaPreCompileDebugUnitTest FROM-CACHE
+> Task :app:packageDebugResources
+> Task :app:processDebugMainManifest
+> Task :app:processDebugManifest
+> Task :app:processDebugManifestForPackage
+> Task :app:parseDebugLocalResources
+> Task :app:mergeDebugResources
+> Task :app:processDebugResources
+> Task :app:compileDebugKotlin
+w: file:///home/runner/work/rork-mycity-hyperlocal-platform/rork-mycity-hyperlocal-platform/android-mycity/app/src/main/java/com/sheharsaathi/app/data/AddressSearch.kt:233:103 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///home/runner/work/rork-mycity-hyperlocal-platform/rork-mycity-hyperlocal-platform/android-mycity/app/src/main/java/com/sheharsaathi/app/data/Cities.kt:50:5 This annotation is currently applied to the value parameter only, but in the future it will also be applied to field.
+- To opt in to applying to both value parameter and field, add '-Xannotation-default-target=param-property' to your compiler arguments.
+- To keep applying to the value parameter only, use the '@param:' annotation target.
+
+See https://youtrack.jetbrains.com/issue/KT-73255 for more details.
+w: file:///home/runner/work/rork-mycity-hyperlocal-platform/rork-mycity-hyperlocal-platform/android-mycity/app/src/main/java/com/sheharsaathi/app/data/CityViewModel.kt:417:99 Elvis operator (?:) always returns the left operand of non-nullable type 'Long'.
+w: file:///home/runner/work/rork-mycity-hyperlocal-platform/rork-mycity-hyperlocal-platform/android-mycity/app/src/main/java/com/sheharsaathi/app/data/LocationService.kt:11:8 'class CancellationSignal : Any' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/rork-mycity-hyperlocal-platform/rork-mycity-hyperlocal-platform/android-mycity/app/src/main/java/com/sheharsaathi/app/data/LocationService.kt:52:34 'constructor(): CancellationSignal' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/rork-mycity-hyperlocal-platform/rork-mycity-hyperlocal-platform/android-mycity/app/src/main/java/com/sheharsaathi/app/data/LocationService.kt:55:47 'static fun getCurrentLocation(p0: LocationManager, p1: String, p2: CancellationSignal?, p3: Executor, p4: Consumer<Location!>): Unit' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/rork-mycity-hyperlocal-platform/rork-mycity-hyperlocal-platform/android-mycity/app/src/main/java/com/sheharsaathi/app/data/Models.kt:24:5 This annotation is currently applied to the value parameter only, but in the future it will also be applied to field.
+- To opt in to applying to both value parameter and field, add '-Xannotation-default-target=param-property' to your compiler arguments.
+- To keep applying to the value parameter only, use the '@param:' annotation target.
+
+See https://youtrack.jetbrains.com/issue/KT-73255 for more details.
+w: file:///home/runner/work/rork-mycity-hyperlocal-platform/rork-mycity-hyperlocal-platform/android-mycity/app/src/main/java/com/sheharsaathi/app/data/Models.kt:104:5 This annotation is currently applied to the value parameter only, but in the future it will also be applied to field.
+- To opt in to applying to both value parameter and field, add '-Xannotation-default-target=param-property' to your compiler arguments.
+- To keep applying to the value parameter only, use the '@param:' annotation target.
+
+See https://youtrack.jetbrains.com/issue/KT-73255 for more details.
+w: file:///home/runner/work/rork-mycity-hyperlocal-platform/rork-mycity-hyperlocal-platform/android-mycity/app/src/main/java/com/sheharsaathi/app/data/Models.kt:127:5 This annotation is currently applied to the value parameter only, but in the future it will also be applied to field.
+- To opt in to applying to both value parameter and field, add '-Xannotation-default-target=param-property' to your compiler arguments.
+- To keep applying to the value parameter only, use the '@param:' annotation target.
+
+See https://youtrack.jetbrains.com/issue/KT-73255 for more details.
+w: file:///home/runner/work/rork-mycity-hyperlocal-platform/rork-mycity-hyperlocal-platform/android-mycity/app/src/main/java/com/sheharsaathi/app/data/Models.kt:139:5 This annotation is currently applied to the value parameter only, but in the future it will also be applied to field.
+- To opt in to applying to both value parameter and field, add '-Xannotation-default-target=param-property' to your compiler arguments.
+- To keep applying to the value parameter only, use the '@param:' annotation target.
+
+See https://youtrack.jetbrains.com/issue/KT-73255 for more details.
+w: file:///home/runner/work/rork-mycity-hyperlocal-platform/rork-mycity-hyperlocal-platform/android-mycity/app/src/main/java/com/sheharsaathi/app/ui/components/Common.kt:74:43 'constructor(p0: String!, p1: String!): Locale' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/rork-mycity-hyperlocal-platform/rork-mycity-hyperlocal-platform/android-mycity/app/src/main/java/com/sheharsaathi/app/ui/screens/CivicScreen.kt:283:46 'val Icons.Filled.ReceiptLong: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.ReceiptLong.
+w: file:///home/runner/work/rork-mycity-hyperlocal-platform/rork-mycity-hyperlocal-platform/android-mycity/app/src/main/java/com/sheharsaathi/app/ui/screens/PlannerScreen.kt:344:59 'val Icons.Filled.Accessible: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.Accessible.
+
+> Task :app:processDebugJavaRes
+> Task :app:compileDebugJavaWithJavac
+> Task :app:bundleDebugClassesToCompileJar
+> Task :app:bundleDebugClassesToRuntimeJar
+> Task :app:generateDebugLintReportModel
+> Task :app:generateDebugUnitTestLintModel
+> Task :app:generateDebugAndroidTestLintModel
+> Task :app:compileDebugUnitTestKotlin
+> Task :app:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :app:processDebugUnitTestJavaRes
+> Task :app:testDebugUnitTest
+> Task :app:lintAnalyzeDebugAndroidTest
+> Task :app:lintAnalyzeDebug
+> Task :app:lintAnalyzeDebugUnitTest
+
+> Task :app:lintReportDebug
+Wrote HTML report to file:///home/runner/work/rork-mycity-hyperlocal-platform/rork-mycity-hyperlocal-platform/android-mycity/app/build/reports/lint-results-debug.html
+
+> Task :app:lintDebug
+
+> Task :app:copyDebugLintReports
+Copying lint text report to /home/runner/work/rork-mycity-hyperlocal-platform/rork-mycity-hyperlocal-platform/android-mycity/app/build/reports/lint.txt
+gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run-1794515141172.json
+
+BUILD SUCCESSFUL in 4m 24s
+37 actionable tasks: 35 executed, 2 from cache
+Configuration cache entry stored.

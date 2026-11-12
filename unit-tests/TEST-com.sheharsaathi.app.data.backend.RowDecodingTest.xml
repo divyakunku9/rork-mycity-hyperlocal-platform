@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sheharsaathi.app.data.backend.RowDecodingTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-11-12T20:28:18.125Z" hostname="runnervmccnms" time="0.054">
+  <properties/>
+  <testcase name="webNewsWithEmbeddedSource" classname="com.sheharsaathi.app.data.backend.RowDecodingTest" time="0.002"/>
+  <testcase name="reportsFromBeforeResponsesExistedStillDecode" classname="com.sheharsaathi.app.data.backend.RowDecodingTest" time="0.001"/>
+  <testcase name="emptyListsAndMissingFields" classname="com.sheharsaathi.app.data.backend.RowDecodingTest" time="0.005"/>
+  <testcase name="jsonStringQuoting" classname="com.sheharsaathi.app.data.backend.RowDecodingTest" time="0.001"/>
+  <testcase name="issueWithEmbeddedAuthority" classname="com.sheharsaathi.app.data.backend.RowDecodingTest" time="0.024"/>
+  <testcase name="issueWithPublicResponses" classname="com.sheharsaathi.app.data.backend.RowDecodingTest" time="0.0"/>
+  <testcase name="pollWithOptions" classname="com.sheharsaathi.app.data.backend.RowDecodingTest" time="0.006"/>
+  <testcase name="responseReplies" classname="com.sheharsaathi.app.data.backend.RowDecodingTest" time="0.002"/>
+  <testcase name="bookingReply" classname="com.sheharsaathi.app.data.backend.RowDecodingTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

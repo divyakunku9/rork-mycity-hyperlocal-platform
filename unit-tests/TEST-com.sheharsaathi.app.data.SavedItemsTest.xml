@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sheharsaathi.app.data.SavedItemsTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-11-12T20:28:17.994Z" hostname="runnervmccnms" time="0.076">
+  <properties/>
+  <testcase name="savedListSurvivesBeingStoredAndReadBack" classname="com.sheharsaathi.app.data.SavedItemsTest" time="0.054"/>
+  <testcase name="aStoryAndAnEventWithTheSameIdAreSeparate" classname="com.sheharsaathi.app.data.SavedItemsTest" time="0.004"/>
+  <testcase name="theListIsCapped" classname="com.sheharsaathi.app.data.SavedItemsTest" time="0.007"/>
+  <testcase name="savingAgainRemovesIt" classname="com.sheharsaathi.app.data.SavedItemsTest" time="0.0"/>
+  <testcase name="missingOrDamagedStorageGivesAnEmptyList" classname="com.sheharsaathi.app.data.SavedItemsTest" time="0.006"/>
+  <testcase name="newestSaveComesFirst" classname="com.sheharsaathi.app.data.SavedItemsTest" time="0.0"/>
+  <testcase name="snapshotsKeepWhatTheProfileNeeds" classname="com.sheharsaathi.app.data.SavedItemsTest" time="0.002"/>
+  <testcase name="placeDetailDropsNotesThatGoStale" classname="com.sheharsaathi.app.data.SavedItemsTest" time="0.0"/>
+  <testcase name="theSameSpotUnderAnotherNameIsOneSave" classname="com.sheharsaathi.app.data.SavedItemsTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

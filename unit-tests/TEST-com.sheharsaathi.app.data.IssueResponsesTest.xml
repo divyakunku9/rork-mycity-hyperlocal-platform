@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sheharsaathi.app.data.IssueResponsesTest" tests="16" skipped="0" failures="0" errors="0" timestamp="2026-11-12T20:28:17.922Z" hostname="runnervmccnms" time="0.013">
+  <properties/>
+  <testcase name="moreSayingNotFixedThanFixedShowsTheWorseningInstead" classname="com.sheharsaathi.app.data.IssueResponsesTest" time="0.002"/>
+  <testcase name="aFirstResponseIsCountedAndRaisesPriority" classname="com.sheharsaathi.app.data.IssueResponsesTest" time="0.0"/>
+  <testcase name="theReportersOwnResponseIsShownButDoesNotRaiseTheirOwnPriority" classname="com.sheharsaathi.app.data.IssueResponsesTest" time="0.0"/>
+  <testcase name="onAResolvedReportTheQuestionIsWhetherItIsReallyFixed" classname="com.sheharsaathi.app.data.IssueResponsesTest" time="0.0"/>
+  <testcase name="responseKeysMatchTheDatabase" classname="com.sheharsaathi.app.data.IssueResponsesTest" time="0.0"/>
+  <testcase name="changingAResponseMovesTheCountAndKeepsPriorityWhileTheProblemIsThere" classname="com.sheharsaathi.app.data.IssueResponsesTest" time="0.0"/>
+  <testcase name="theReporterCannotConfirmTheirOwnReportButCanSayHowItIsNow" classname="com.sheharsaathi.app.data.IssueResponsesTest" time="0.0"/>
+  <testcase name="tappingYourOwnResponseAgainTakesItBack" classname="com.sheharsaathi.app.data.IssueResponsesTest" time="0.0"/>
+  <testcase name="aResolvedReportThatResidentsSayIsNotFixedIsCalledOut" classname="com.sheharsaathi.app.data.IssueResponsesTest" time="0.003"/>
+  <testcase name="aNeighbourCanGiveAnyOfTheFourResponses" classname="com.sheharsaathi.app.data.IssueResponsesTest" time="0.001"/>
+  <testcase name="takingAResponseBackUndoesIt" classname="com.sheharsaathi.app.data.IssueResponsesTest" time="0.0"/>
+  <testcase name="applyingAndUndoingReturnsTheSameTotals" classname="com.sheharsaathi.app.data.IssueResponsesTest" time="0.001"/>
+  <testcase name="residentsSayingAnOpenReportIsFixedIsCalledOut" classname="com.sheharsaathi.app.data.IssueResponsesTest" time="0.0"/>
+  <testcase name="countsNeverGoBelowZero" classname="com.sheharsaathi.app.data.IssueResponsesTest" time="0.0"/>
+  <testcase name="countLabels" classname="com.sheharsaathi.app.data.IssueResponsesTest" time="0.0"/>
+  <testcase name="sayingItIsFixedStopsCountingTowardsPriority" classname="com.sheharsaathi.app.data.IssueResponsesTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

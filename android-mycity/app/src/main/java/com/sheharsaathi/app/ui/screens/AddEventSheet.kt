@@ -293,7 +293,7 @@ private fun formColors() = OutlinedTextFieldDefaults.colors(
 @Composable
 private fun PhotoChip(icon: androidx.compose.ui.graphics.vector.ImageVector, label: String, onClick: () -> Unit) {
     Row(
-        Modifier.clip(CircleShape).background(CityColors.Glass).border(1.dp, CityColors.GlassBorder, CircleShape)
+        Modifier.clip(CircleShape).background(CityColors.PhotoChip).border(1.dp, CityColors.PhotoChipEdge, CircleShape)
             .clickable(onClick = onClick).padding(horizontal = 12.dp, vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {

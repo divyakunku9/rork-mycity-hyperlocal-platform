@@ -169,6 +169,13 @@ object CityColors {
 
     /** White text sits on saffron and periwinkle fills in both themes. */
     val OnBrand: Color get() = Color.White
+
+    // Photos keep their dark wash in both themes, so anything drawn over one holds still.
+    /** A frosted chip resting on a photo or on the map. */
+    val PhotoChip: Color = Color(0xD91E293B)
+    val PhotoChipEdge: Color = Color(0x33FFFFFF)
+    /** The saffron that stays legible on a photo. */
+    val OnPhotoAccent: Color = Color(0xFFFDBA74)
 }
 
 /**

@@ -300,7 +300,7 @@ fun ReportScreen(vm: CityViewModel, onSubmitted: (String) -> Unit) {
             )
             Row(
                 Modifier.align(Alignment.TopStart).padding(8.dp).clip(RoundedCornerShape(10.dp))
-                    .background(CityColors.Glass).padding(horizontal = 10.dp, vertical = 5.dp),
+                    .background(CityColors.PhotoChip).padding(horizontal = 10.dp, vertical = 5.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Icon(Icons.Filled.MyLocation, null, tint = CityColors.GreenText, modifier = Modifier.size(14.dp))

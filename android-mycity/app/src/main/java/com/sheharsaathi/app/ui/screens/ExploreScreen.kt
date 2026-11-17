@@ -686,9 +686,9 @@ private fun TrendingCard(t: com.sheharsaathi.app.data.TrendingPlace, onClick: ()
                     modifier = Modifier.size(96.dp).align(Alignment.BottomEnd).offset(x = 14.dp, y = 14.dp),
                 )
                 Icon(trendIcon(t.kind), null, tint = Color.White, modifier = Modifier.padding(12.dp).size(28.dp).align(Alignment.BottomStart))
-                SoftBadge(t.kind.tag, CityColors.Glass, CityColors.SaffronText, modifier = Modifier.padding(8.dp))
+                SoftBadge(t.kind.tag, CityColors.PhotoChip, CityColors.OnPhotoAccent, modifier = Modifier.padding(8.dp))
                 SoftBadge(
-                    "%.1f km".format(t.distanceKm), CityColors.Glass, Color.White,
+                    "%.1f km".format(t.distanceKm), CityColors.PhotoChip, Color.White,
                     modifier = Modifier.align(Alignment.TopEnd).padding(8.dp),
                 )
             }
@@ -738,7 +738,7 @@ private fun SpotCard(spot: Spot, onClick: () -> Unit) {
                     "${spot.rating}", CityColors.Green, Color.White, icon = Icons.Filled.Star,
                     modifier = Modifier.align(Alignment.BottomEnd).padding(8.dp),
                 )
-                SoftBadge(spot.tag, CityColors.Glass, CityColors.SaffronText, modifier = Modifier.padding(8.dp))
+                SoftBadge(spot.tag, CityColors.PhotoChip, CityColors.OnPhotoAccent, modifier = Modifier.padding(8.dp))
             }
             Column(Modifier.padding(10.dp)) {
                 Text(spot.name, style = MaterialTheme.typography.titleSmall, maxLines = 1)

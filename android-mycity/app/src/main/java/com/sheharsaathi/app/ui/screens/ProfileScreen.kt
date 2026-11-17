@@ -174,12 +174,12 @@ fun ProfileScreen(
             Box(Modifier.fillMaxSize().background(Brush.horizontalGradient(listOf(Color(0xF00F172A), Color(0x660F172A)))))
             Row(Modifier.fillMaxSize().padding(18.dp), verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f)) {
-                    Text("YOUR CITY", style = MaterialTheme.typography.labelSmall, color = CityColors.SaffronText)
+                    Text("YOUR CITY", style = MaterialTheme.typography.labelSmall, color = CityColors.OnPhotoAccent)
                     Text(city.name, style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold, color = Color.White)
                     Text("${city.state} • ${city.municipalShort}", style = MaterialTheme.typography.bodySmall, color = Color.White.copy(alpha = 0.75f))
                 }
                 Row(
-                    Modifier.clip(CircleShape).background(CityColors.Glass).border(1.dp, CityColors.GlassBorder, CircleShape)
+                    Modifier.clip(CircleShape).background(CityColors.PhotoChip).border(1.dp, CityColors.PhotoChipEdge, CircleShape)
                         .padding(horizontal = 14.dp, vertical = 8.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {

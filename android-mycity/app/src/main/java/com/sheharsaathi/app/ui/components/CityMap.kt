@@ -289,7 +289,7 @@ fun CityMap(
             style = MaterialTheme.typography.labelSmall,
             color = CityColors.Muted,
             modifier = Modifier.align(Alignment.BottomStart).padding(6.dp)
-                .background(CityColors.Glass, RoundedCornerShape(6.dp))
+                .background(CityColors.PhotoChip, RoundedCornerShape(6.dp))
                 .padding(horizontal = 6.dp, vertical = 2.dp),
         )
     }

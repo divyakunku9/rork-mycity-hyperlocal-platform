@@ -159,6 +159,15 @@ async function enrich(it: Item): Promise<void> {
 }
 
 Deno.serve(async (req) => {
+
+  // Only the scheduled job may run this. It fetches every source and writes to the database
+  // with full rights, so while it was open anyone could run up the project's bill and point
+  // our scraping at publishers' sites on demand. The key lives in the database
+  // (private.job_keys), never in this file or in an environment variable.
+  const jobKey = req.headers.get("x-refresh-key") ?? "";
+  if (!jobKey) return new Response("Not found", { status: 404 });
+  const { data: allowed } = await db.rpc("check_job_key", { p_name: "refresh", p_key: jobKey });
+  if (allowed !== true) return new Response("Not found", { status: 404 });
   const force = new URL(req.url).searchParams.get("force") === "1";
   const { data: sources, error } = await db.from("news_sources").select("id,city_id,name,feed_url,keep_if,max_items,last_fetched_at").eq("enabled", true);
   if (error) return Response.json({ error: error.message }, { status: 500 });

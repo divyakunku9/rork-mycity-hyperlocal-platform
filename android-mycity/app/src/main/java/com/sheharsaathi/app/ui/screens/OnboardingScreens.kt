@@ -196,7 +196,7 @@ private fun SplashScreen() {
 
     Box(
         Modifier.fillMaxSize().background(
-            Brush.radialGradient(listOf(Color(0xFF1E2A4A), CityColors.Canvas), radius = 1400f),
+            Brush.radialGradient(listOf(CityColors.SplashGlow, CityColors.Canvas), radius = 1400f),
         ),
         contentAlignment = Alignment.Center,
     ) {
@@ -538,7 +538,7 @@ private fun OtpScreen(
                     Spacer(Modifier.width(8.dp))
                     Text("Checking…", color = CityColors.Muted, style = MaterialTheme.typography.labelLarge)
                 }
-                wrong -> Text(vm.lastSignInError ?: "That code didn't match. Try again.", color = Color(0xFFFCA5A5), style = MaterialTheme.typography.labelLarge)
+                wrong -> Text(vm.lastSignInError ?: "That code didn't match. Try again.", color = CityColors.RedText, style = MaterialTheme.typography.labelLarge)
             }
         }
 

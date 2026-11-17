@@ -27,8 +27,11 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.DirectionsWalk
 import androidx.compose.material.icons.automirrored.filled.OpenInNew
 import androidx.compose.material.icons.filled.AutoAwesome
+import androidx.compose.material.icons.filled.Bookmark
+import androidx.compose.material.icons.filled.BookmarkBorder
 import androidx.compose.material.icons.filled.Brush
 import androidx.compose.material.icons.filled.ChildCare
+import androidx.compose.material.icons.filled.ConfirmationNumber
 import androidx.compose.material.icons.filled.Event
 import androidx.compose.material.icons.filled.EventBusy
 import androidx.compose.material.icons.filled.Festival
@@ -41,20 +44,17 @@ import androidx.compose.material.icons.filled.Place
 import androidx.compose.material.icons.filled.Restaurant
 import androidx.compose.material.icons.filled.Schedule
 import androidx.compose.material.icons.filled.SelfImprovement
-import androidx.compose.material.icons.filled.Bookmark
-import androidx.compose.material.icons.filled.BookmarkBorder
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.SportsSoccer
 import androidx.compose.material.icons.filled.TheaterComedy
-import androidx.compose.material.icons.filled.ConfirmationNumber
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
-import androidx.compose.material3.FilledTonalButton
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedButton
@@ -90,8 +90,11 @@ import com.sheharsaathi.app.ui.components.CitySearchField
 import com.sheharsaathi.app.ui.components.openDirections
 import com.sheharsaathi.app.ui.components.shareText
 import com.sheharsaathi.app.ui.theme.CityColors
+import com.sheharsaathi.app.ui.theme.readableAccent
 
-internal fun ListedCategory.color(): Color = when (this) {
+internal fun ListedCategory.color(): Color = rawCategoryColor().readableAccent()
+
+private fun ListedCategory.rawCategoryColor(): Color = when (this) {
     ListedCategory.MUSIC -> Color(0xFFF58220)
     ListedCategory.COMEDY -> Color(0xFFFACC15)
     ListedCategory.THEATRE -> Color(0xFFF472B6)

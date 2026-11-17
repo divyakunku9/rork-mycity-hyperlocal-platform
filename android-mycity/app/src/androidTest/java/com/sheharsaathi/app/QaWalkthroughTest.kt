@@ -512,6 +512,43 @@ class QaWalkthroughTest {
             shot("my-reports-after-recreate")
         }
 
+        step("Light theme: every main screen") {
+          try {
+            tab("Explore"); Thread.sleep(1500)
+            node(openProfile).performClick()
+            waitText("Appearance", 10)
+            node(hasText("Light")).performScrollTo().performClick()
+            Thread.sleep(1200)
+            shot("light-01-profile")
+            check(exists(hasText("Always light, whatever the phone is set to"))) { "the Light choice didn't take" }
+            back(); Thread.sleep(1200)
+            // Each tab, so the screenshots show whether anything is unreadable in light.
+            shot("light-02-explore")
+            tab("News Hub"); Thread.sleep(2500); shot("light-03-news")
+            tab("Report"); Thread.sleep(1800); shot("light-04-report")
+            tab("Events"); Thread.sleep(2500); shot("light-05-events")
+            tab("Civic Hub"); Thread.sleep(2500); shot("light-06-civic")
+            node(hasText("My filed issues")).performScrollTo().performClick()
+            Thread.sleep(2500); shot("light-07-my-reports")
+            if (exists(hasText("Pothole reported", substring = true))) {
+                node(hasText("Pothole reported", substring = true)).performClick()
+                Thread.sleep(2500); shot("light-08-report-detail")
+                back(); Thread.sleep(1200)
+            }
+            back(); Thread.sleep(1200)
+            // The help chat and the weather screen both have their own colouring.
+            tab("Explore"); Thread.sleep(1500)
+            node(openProfile).performClick(); waitText("Appearance", 10)
+            node(hasText("Help & FAQs")).performScrollTo().performClick()
+            waitText("Browse by topic", 10); Thread.sleep(800); shot("light-09-help")
+            node(hasContentDescription("Back")).performClick(); Thread.sleep(1200)
+            // Put it back to dark so the next run starts where the others did.
+            node(hasText("Dark")).performScrollTo().performClick()
+            Thread.sleep(1200)
+            shot("light-10-back-to-dark")
+          } finally { back(); Thread.sleep(1000) }
+        }
+
         step("Clean up: delete the test report from the live backend") {
             // The walkthrough runs against production, so it removes what it created.
             val sb = com.sheharsaathi.app.data.backend.Supabase(instrumentation.targetContext)

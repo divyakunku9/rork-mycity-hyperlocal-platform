@@ -220,7 +220,7 @@ fun aqiColor(aqi: Int?): Color = when {
     aqi == null -> CityColors.Muted
     aqi <= 50 -> CityColors.GreenText
     aqi <= 100 -> CityColors.SaffronText
-    else -> Color(0xFFFCA5A5)
+    else -> CityColors.RedText
 }
 
 @Composable

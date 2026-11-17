@@ -219,7 +219,7 @@ private fun responseIcon(r: IssueResponse): ImageVector = when (r) {
 private fun responseColors(r: IssueResponse): Pair<Color, Color> = when (r) {
     IssueResponse.SEEN -> CityColors.IndigoSoft to CityColors.IndigoDeep
     IssueResponse.STILL_THERE -> CityColors.SaffronSoft to CityColors.SaffronText
-    IssueResponse.WORSE -> CityColors.RedSoft to Color(0xFFFCA5A5)
+    IssueResponse.WORSE -> CityColors.RedSoft to CityColors.RedText
     IssueResponse.FIXED -> CityColors.GreenSoft to CityColors.GreenText
 }
 

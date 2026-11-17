@@ -18,6 +18,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -34,8 +36,11 @@ import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.automirrored.filled.Logout
 import androidx.compose.material.icons.filled.Bookmark
 import androidx.compose.material.icons.filled.Campaign
+import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Event
+import androidx.compose.material.icons.filled.LightMode
+import androidx.compose.material.icons.filled.PhoneAndroid
 import androidx.compose.material.icons.filled.Image
 import androidx.compose.material.icons.filled.PhotoCamera
 import androidx.compose.material.icons.filled.Place
@@ -75,6 +80,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.text.font.FontWeight
@@ -90,6 +97,8 @@ import com.sheharsaathi.app.ui.components.ProfileAvatar
 import com.sheharsaathi.app.ui.components.copyPickedPhoto
 import com.sheharsaathi.app.ui.components.saveCameraPhoto
 import com.sheharsaathi.app.ui.theme.CityColors
+import com.sheharsaathi.app.ui.theme.ThemeChoice
+import com.sheharsaathi.app.ui.theme.ThemeStore
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -207,6 +216,21 @@ fun ProfileScreen(
             }
         }
 
+        SectionTitle("Appearance")
+        CityCard(Modifier.fillMaxWidth().padding(horizontal = 16.dp)) {
+            Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                Text("How Shehar Saathi looks on this phone.", style = MaterialTheme.typography.bodyMedium, color = CityColors.Muted)
+                Row(Modifier.fillMaxWidth().selectableGroup(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                    ThemeChoice.entries.forEach { option ->
+                        ThemeTile(option, selected = ThemeStore.choice == option, modifier = Modifier.weight(1f)) {
+                            ThemeStore.set(option)
+                        }
+                    }
+                }
+                Text(ThemeStore.choice.detail, style = MaterialTheme.typography.bodySmall, color = CityColors.Muted)
+            }
+        }
+
         SectionTitle("Notifications")
         CityCard(Modifier.fillMaxWidth().padding(horizontal = 16.dp)) {
             Column(Modifier.padding(vertical = 4.dp)) {
@@ -272,9 +296,9 @@ fun ProfileScreen(
             shape = RoundedCornerShape(18.dp),
             border = androidx.compose.foundation.BorderStroke(1.dp, CityColors.Red.copy(alpha = 0.6f)),
         ) {
-            Icon(Icons.AutoMirrored.Filled.Logout, null, tint = Color(0xFFFCA5A5))
+            Icon(Icons.AutoMirrored.Filled.Logout, null, tint = CityColors.RedText)
             Spacer(Modifier.width(8.dp))
-            Text("Sign out", color = Color(0xFFFCA5A5), modifier = Modifier.padding(vertical = 6.dp))
+            Text("Sign out", color = CityColors.RedText, modifier = Modifier.padding(vertical = 6.dp))
         }
     }
 
@@ -302,7 +326,7 @@ fun ProfileScreen(
             onDismissRequest = { confirmSignOut = false },
             title = { Text("Sign out of Shehar Saathi?") },
             text = { Text("You'll need a new one-time code to sign back in. Your profile stays on this phone.") },
-            confirmButton = { TextButton(onClick = { confirmSignOut = false; vm.signOut() }) { Text("Sign out", color = Color(0xFFFCA5A5)) } },
+            confirmButton = { TextButton(onClick = { confirmSignOut = false; vm.signOut() }) { Text("Sign out", color = CityColors.RedText) } },
             dismissButton = { TextButton(onClick = { confirmSignOut = false }) { Text("Cancel") } },
         )
     }
@@ -335,6 +359,32 @@ private fun ProfileField(
         ),
         modifier = Modifier.fillMaxWidth(),
     )
+}
+
+/** One of the three appearance choices: an icon, its name, and a tick when it is the one in use. */
+@Composable
+private fun ThemeTile(option: ThemeChoice, selected: Boolean, modifier: Modifier = Modifier, onPick: () -> Unit) {
+    val shape = RoundedCornerShape(14.dp)
+    val icon = when (option) {
+        ThemeChoice.LIGHT -> Icons.Filled.LightMode
+        ThemeChoice.DARK -> Icons.Filled.DarkMode
+        ThemeChoice.SYSTEM -> Icons.Filled.PhoneAndroid
+    }
+    Column(
+        modifier.clip(shape)
+            .background(if (selected) CityColors.IndigoSoft else CityColors.SurfaceHigh)
+            .border(if (selected) 2.dp else 1.dp, if (selected) CityColors.Indigo else CityColors.Outline, shape)
+            .selectable(selected = selected, role = Role.RadioButton, onClick = onPick)
+            .padding(vertical = 14.dp, horizontal = 8.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(6.dp),
+    ) {
+        Icon(icon, null, tint = if (selected) CityColors.IndigoDeep else CityColors.Muted, modifier = Modifier.size(24.dp))
+        Text(
+            option.label, style = MaterialTheme.typography.labelLarge, textAlign = TextAlign.Center, maxLines = 2,
+            color = if (selected) CityColors.IndigoDeep else CityColors.Ink,
+        )
+    }
 }
 
 @Composable

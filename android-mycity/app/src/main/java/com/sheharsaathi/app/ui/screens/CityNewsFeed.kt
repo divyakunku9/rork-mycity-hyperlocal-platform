@@ -28,6 +28,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.OpenInNew
 import androidx.compose.material.icons.automirrored.filled.TrendingUp
+import androidx.compose.material.icons.filled.Bookmark
+import androidx.compose.material.icons.filled.BookmarkBorder
 import androidx.compose.material.icons.filled.BusinessCenter
 import androidx.compose.material.icons.filled.Cloud
 import androidx.compose.material.icons.filled.DirectionsBus
@@ -36,8 +38,6 @@ import androidx.compose.material.icons.filled.LocalHospital
 import androidx.compose.material.icons.filled.LocationCity
 import androidx.compose.material.icons.filled.Newspaper
 import androidx.compose.material.icons.filled.School
-import androidx.compose.material.icons.filled.Bookmark
-import androidx.compose.material.icons.filled.BookmarkBorder
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.Shield
 import androidx.compose.material.icons.filled.SportsCricket
@@ -61,6 +61,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -78,9 +79,12 @@ import com.sheharsaathi.app.ui.components.CityCard
 import com.sheharsaathi.app.ui.components.openUrl
 import com.sheharsaathi.app.ui.components.shareText
 import com.sheharsaathi.app.ui.theme.CityColors
+import com.sheharsaathi.app.ui.theme.readableAccent
 
 /** Colour and icon for each topic; also used when a story has no picture. */
-internal fun NewsTopic.color(): Color = when (this) {
+internal fun NewsTopic.color(): Color = rawTopicColor().readableAccent()
+
+private fun NewsTopic.rawTopicColor(): Color = when (this) {
     NewsTopic.CIVIC -> Color(0xFF38BDF8)
     NewsTopic.TRAFFIC -> Color(0xFFF59E0B)
     NewsTopic.WEATHER -> Color(0xFF60A5FA)
@@ -113,7 +117,7 @@ fun openStory(context: Context, url: String) {
     try {
         CustomTabsIntent.Builder()
             .setShowTitle(true)
-            .setDefaultColorSchemeParams(CustomTabColorSchemeParams.Builder().setToolbarColor(0xFF0F172A.toInt()).build())
+            .setDefaultColorSchemeParams(CustomTabColorSchemeParams.Builder().setToolbarColor(CityColors.Canvas.toArgb()).build())
             .build()
             .launchUrl(context, Uri.parse(url))
     } catch (_: Exception) {

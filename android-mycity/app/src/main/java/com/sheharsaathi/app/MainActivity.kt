@@ -8,6 +8,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.sheharsaathi.app.ui.screens.AppRoot
 import com.sheharsaathi.app.ui.theme.AppTheme
+import com.sheharsaathi.app.ui.theme.ThemeStore
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,12 +19,14 @@ class MainActivity : ComponentActivity() {
             osmdroidBasePath = cacheDir.resolve("osmdroid")
             osmdroidTileCache = cacheDir.resolve("osmdroid/tiles")
         }
+        // Transparent bars either way; AppTheme sets the icon colour to suit the active theme.
         enableEdgeToEdge(
             statusBarStyle = SystemBarStyle.dark(Color.TRANSPARENT),
             navigationBarStyle = SystemBarStyle.dark(Color.TRANSPARENT),
         )
+        ThemeStore.load(this)
         setContent {
-            AppTheme {
+            AppTheme(ThemeStore.choice) {
                 AppRoot()
             }
         }

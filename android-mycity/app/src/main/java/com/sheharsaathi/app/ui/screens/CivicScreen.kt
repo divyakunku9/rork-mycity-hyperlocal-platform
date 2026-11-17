@@ -338,7 +338,7 @@ fun CivicScreen(vm: CityViewModel, onOpenReports: (mine: Boolean) -> Unit) {
 private fun CivicLocationGate(cityName: String, onAllow: () -> Unit, onPick: () -> Unit, onChooseWard: (() -> Unit)?) {
     Box(
         Modifier.fillMaxSize().background(
-            Brush.verticalGradient(listOf(Color(0xFF1A2547), CityColors.Canvas)),
+            Brush.verticalGradient(listOf(CityColors.HeaderWash, CityColors.Canvas)),
         ).statusBarsPadding().padding(24.dp),
         contentAlignment = Alignment.Center,
     ) {

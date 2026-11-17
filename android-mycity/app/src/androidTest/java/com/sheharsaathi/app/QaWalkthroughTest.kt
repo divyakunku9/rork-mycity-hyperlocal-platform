@@ -527,7 +527,9 @@ class QaWalkthroughTest {
 
             // The help chat while Profile is already open, rather than navigating back to it.
             node(hasText("Help & FAQs")).performScrollTo().performClick()
-            waitText("Browse by topic", 15); Thread.sleep(800)
+            // The chat keeps the earlier conversation from this run, so the welcome message and
+            // its topic chips are no longer on screen; the question box always is.
+            waitText("Type your question", 15); Thread.sleep(800)
             shot("light-02-help")
             node(hasContentDescription("Back")).performClick(); Thread.sleep(1200)
 

@@ -514,6 +514,9 @@ class QaWalkthroughTest {
 
         step("Light theme: every main screen") {
           try {
+            // The step before ends on My filed issues, which is pushed over the tabs and hides
+            // the bottom bar, so come back to a tab screen first.
+            while (!exists(hasText("Explore"))) { back(); Thread.sleep(1200) }
             tab("Explore"); Thread.sleep(1500)
             node(openProfile).performClick()
             waitText("Appearance", 10)
@@ -535,8 +538,8 @@ class QaWalkthroughTest {
                 Thread.sleep(2500); shot("light-08-report-detail")
                 back(); Thread.sleep(1200)
             }
-            back(); Thread.sleep(1200)
-            // The help chat and the weather screen both have their own colouring.
+            // The help chat has its own colouring.
+            while (!exists(hasText("Explore"))) { back(); Thread.sleep(1200) }
             tab("Explore"); Thread.sleep(1500)
             node(openProfile).performClick(); waitText("Appearance", 10)
             node(hasText("Help & FAQs")).performScrollTo().performClick()

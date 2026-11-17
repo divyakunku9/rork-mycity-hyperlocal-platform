@@ -102,6 +102,31 @@ class MapController {
     fun zoomOut() { view?.controller?.zoomOut(250L) }
 }
 
+/** Repaints OpenStreetMap's light tiles to suit the theme in use. */
+private fun MapView.tintTilesForTheme() {
+    overlayManager.tilesOverlay.apply {
+        loadingBackgroundColor = CityColors.MapBase.toArgb()
+        loadingLineColor = CityColors.MapBlock.toArgb()
+        if (CityColors.isLight) {
+            setColorFilter(null)
+        } else {
+            // Midnight navy tiles: grayscale, invert, then tint toward navy.
+            val m = ColorMatrix().apply { setSaturation(0f) }
+            val tint = ColorMatrix(
+                floatArrayOf(
+                    -0.62f, 0f, 0f, 0f, 170f,
+                    0f, -0.72f, 0f, 0f, 203f,
+                    0f, 0f, -0.95f, 0f, 280f,
+                    0f, 0f, 0f, 1f, 0f,
+                ),
+            )
+            m.postConcat(tint)
+            setColorFilter(ColorMatrixColorFilter(m))
+        }
+    }
+    invalidate()
+}
+
 private fun MapView.applyCityLimits(c: City) {
     val padLat = (c.north - c.south) * 0.15
     val padLng = (c.east - c.west) * 0.15
@@ -150,22 +175,7 @@ fun CityMap(
                     minZoomLevel = 10.0
                     maxZoomLevel = 19.0
                     applyCityLimits(CurrentCity.city)
-                    overlayManager.tilesOverlay.apply {
-                        loadingBackgroundColor = CityColors.MapBase.toArgb()
-                        loadingLineColor = CityColors.MapBlock.toArgb()
-                        // Midnight navy tiles: grayscale, invert, then tint toward navy.
-                        val m = ColorMatrix().apply { setSaturation(0f) }
-                        val tint = ColorMatrix(
-                            floatArrayOf(
-                                -0.62f, 0f, 0f, 0f, 170f,
-                                0f, -0.72f, 0f, 0f, 203f,
-                                0f, 0f, -0.95f, 0f, 280f,
-                                0f, 0f, 0f, 1f, 0f,
-                            ),
-                        )
-                        m.postConcat(tint)
-                        setColorFilter(ColorMatrixColorFilter(m))
-                    }
+                    tintTilesForTheme()
                     this.controller.setZoom(15.0)
                     this.controller.setCenter(GeoPoint(userLat, userLng))
                     overlays.add(
@@ -187,6 +197,11 @@ fun CityMap(
                 }.also { controller.view = it }
             },
         )
+
+        // Map tiles arrive light from OpenStreetMap. The dark theme repaints them navy; the
+        // light theme leaves them as they come, so the map matches the rest of the app.
+        val lightTheme = CityColors.isLight
+        LaunchedEffect(lightTheme) { controller.view?.tintTilesForTheme() }
 
         val activeCity = CurrentCity.city
         LaunchedEffect(activeCity.id) {

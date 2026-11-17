@@ -519,33 +519,37 @@ class QaWalkthroughTest {
             while (!exists(hasText("Explore"))) { back(); Thread.sleep(1200) }
             tab("Explore"); Thread.sleep(1500)
             node(openProfile).performClick()
-            waitText("APPEARANCE", 10)  // section headings render in capitals
+            waitText("APPEARANCE", 15)  // section headings render in capitals
             node(hasText("Light")).performScrollTo().performClick()
             Thread.sleep(1200)
             shot("light-01-profile")
             check(exists(hasText("Always light, whatever the phone is set to"))) { "the Light choice didn't take" }
-            back(); Thread.sleep(1200)
+
+            // The help chat while Profile is already open, rather than navigating back to it.
+            node(hasText("Help & FAQs")).performScrollTo().performClick()
+            waitText("Browse by topic", 15); Thread.sleep(800)
+            shot("light-02-help")
+            node(hasContentDescription("Back")).performClick(); Thread.sleep(1200)
+
             // Each tab, so the screenshots show whether anything is unreadable in light.
-            shot("light-02-explore")
-            tab("News Hub"); Thread.sleep(2500); shot("light-03-news")
-            tab("Report"); Thread.sleep(1800); shot("light-04-report")
-            tab("Events"); Thread.sleep(2500); shot("light-05-events")
-            tab("Civic Hub"); Thread.sleep(2500); shot("light-06-civic")
+            while (!exists(hasText("Explore"))) { back(); Thread.sleep(1200) }
+            tab("Explore"); Thread.sleep(2500); shot("light-03-explore")
+            tab("News Hub"); Thread.sleep(2500); shot("light-04-news")
+            tab("Report"); Thread.sleep(1800); shot("light-05-report")
+            tab("Events"); Thread.sleep(2500); shot("light-06-events")
+            tab("Civic Hub"); Thread.sleep(2500); shot("light-07-civic")
             node(hasText("My filed issues")).performScrollTo().performClick()
-            Thread.sleep(2500); shot("light-07-my-reports")
+            Thread.sleep(2500); shot("light-08-my-reports")
             if (exists(hasText("Pothole reported", substring = true))) {
                 node(hasText("Pothole reported", substring = true)).performClick()
-                Thread.sleep(2500); shot("light-08-report-detail")
-                back(); Thread.sleep(1200)
+                Thread.sleep(2500); shot("light-09-report-detail")
             }
-            // The help chat has its own colouring.
+
+            // Put it back to dark so the next run starts where the others did.
             while (!exists(hasText("Explore"))) { back(); Thread.sleep(1200) }
             tab("Explore"); Thread.sleep(1500)
-            node(openProfile).performClick(); waitText("APPEARANCE", 10)  // section headings render in capitals
-            node(hasText("Help & FAQs")).performScrollTo().performClick()
-            waitText("Browse by topic", 10); Thread.sleep(800); shot("light-09-help")
-            node(hasContentDescription("Back")).performClick(); Thread.sleep(1200)
-            // Put it back to dark so the next run starts where the others did.
+            node(openProfile).performClick()
+            waitText("APPEARANCE", 15)
             node(hasText("Dark")).performScrollTo().performClick()
             Thread.sleep(1200)
             shot("light-10-back-to-dark")

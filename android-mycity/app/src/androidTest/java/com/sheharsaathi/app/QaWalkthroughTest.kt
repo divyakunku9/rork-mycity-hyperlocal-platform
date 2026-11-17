@@ -519,7 +519,7 @@ class QaWalkthroughTest {
             while (!exists(hasText("Explore"))) { back(); Thread.sleep(1200) }
             tab("Explore"); Thread.sleep(1500)
             node(openProfile).performClick()
-            waitText("Appearance", 10)
+            waitText("APPEARANCE", 10)  // section headings render in capitals
             node(hasText("Light")).performScrollTo().performClick()
             Thread.sleep(1200)
             shot("light-01-profile")
@@ -541,7 +541,7 @@ class QaWalkthroughTest {
             // The help chat has its own colouring.
             while (!exists(hasText("Explore"))) { back(); Thread.sleep(1200) }
             tab("Explore"); Thread.sleep(1500)
-            node(openProfile).performClick(); waitText("Appearance", 10)
+            node(openProfile).performClick(); waitText("APPEARANCE", 10)  // section headings render in capitals
             node(hasText("Help & FAQs")).performScrollTo().performClick()
             waitText("Browse by topic", 10); Thread.sleep(800); shot("light-09-help")
             node(hasContentDescription("Back")).performClick(); Thread.sleep(1200)

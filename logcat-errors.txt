@@ -1,0 +1,400 @@
+11-18 00:01:31.089 I/AndroidIME( 2520): DummyIme.onActivate() : EditorInfo = Package = com.sheharsaathi.app : Type = Number : Learning = Disable : Suggestion = Hide : AutoCorrection = Disable : Microphone = Hide : NoPersonalizedLearning = Disable
+11-18 00:01:31.171 I/AndroidIME( 2520): DummyIme.onActivate() : EditorInfo = Package = com.sheharsaathi.app : Type = Number : Learning = Disable : Suggestion = Hide : AutoCorrection = Disable : Microphone = Hide : NoPersonalizedLearning = Disable
+11-18 00:01:31.172 I/Conv2QueryExtension( 2520): Conv2Query not enabled due to current app [com.sheharsaathi.app] not in whitelist
+11-18 00:01:31.681 E/ActivityThread( 2557): Failed to find provider info for com.google.android.apps.wellbeing.api
+11-18 00:01:31.695 E/ModelDnldProcssHelpr( 3958): pending download info for pending_hotword_model_download_info is null
+11-18 00:01:31.695 E/ModelDnldProcssHelpr( 3958): pending download info for pending_xgoogle_hotword_model_download_info is null
+11-18 00:01:32.811 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:01:33.779 I/heharsaathi.ap( 6279): Compiler allocated 6175KB to compile void com.sheharsaathi.app.ui.screens.OnboardingScreensKt.OtpScreen(com.sheharsaathi.app.data.CityViewModel, com.sheharsaathi.app.data.OtpTarget, java.lang.String, kotlin.jvm.functions.Function1, kotlin.jvm.functions.Function0, kotlin.jvm.functions.Function0, androidx.compose.runtime.Composer, int)
+11-18 00:01:33.947 E/GmsClient( 2213): unable to connect to service: com.google.android.gms.auth.key.retrieval.service.START on com.google.android.gms
+11-18 00:01:34.442 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:01:34.969 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:01:35.179 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:01:35.258 E/GmsClient( 2213): unable to connect to service: com.google.android.gms.auth.key.retrieval.service.START on com.google.android.gms
+11-18 00:01:35.710 E/GmsClient( 2213): unable to connect to service: com.google.android.gms.auth.key.retrieval.service.START on com.google.android.gms
+11-18 00:01:35.953 I/AndroidIME( 2520): DummyIme.onActivate() : EditorInfo = Package = com.sheharsaathi.app : Type = Number : Learning = Disable : Suggestion = Hide : AutoCorrection = Disable : Microphone = Hide : NoPersonalizedLearning = Disable
+11-18 00:01:35.956 I/Conv2QueryExtension( 2520): Conv2Query not enabled due to current app [com.sheharsaathi.app] not in whitelist
+11-18 00:01:36.453 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:01:36.776 E/GmsClient( 2213): unable to connect to service: com.google.android.gms.auth.key.retrieval.service.START on com.google.android.gms
+11-18 00:01:38.111 E/cklt    ( 2213): *~*~*~ Channel {0} was not shutdown properly!!! ~*~*~*
+11-18 00:01:38.111 E/cklt    ( 2213):     Make sure to call shutdown()/shutdownNow() and wait until awaitTermination() returns true.
+11-18 00:01:38.111 E/cklt    ( 2213): java.lang.RuntimeException: ManagedChannel allocation site
+11-18 00:01:38.111 E/cklt    ( 2213): 	at ckls.<init>(:com.google.android.gms@202414023@20.24.14 (040800-319035315):3)
+11-18 00:01:38.111 E/cklt    ( 2213): 	at cklt.<init>(:com.google.android.gms@202414023@20.24.14 (040800-319035315):2)
+11-18 00:01:38.111 E/cklt    ( 2213): 	at ckfk.b(:com.google.android.gms@202414023@20.24.14 (040800-319035315):21)
+11-18 00:01:38.111 E/cklt    ( 2213): 	at sjo.a(:com.google.android.gms@202414023@20.24.14 (040800-319035315):29)
+11-18 00:01:38.111 E/cklt    ( 2213): 	at sjo.a(:com.google.android.gms@202414023@20.24.14 (040800-319035315):31)
+11-18 00:01:38.111 E/cklt    ( 2213): 	at szt.a(:com.google.android.gms@202414023@20.24.14 (040800-319035315):479)
+11-18 00:01:38.111 E/cklt    ( 2213): 	at szt.a(:com.google.android.gms@202414023@20.24.14 (040800-319035315):553)
+11-18 00:01:38.111 E/cklt    ( 2213): 	at syy.a(:com.google.android.gms@202414023@20.24.14 (040800-319035315):141)
+11-18 00:01:38.111 E/cklt    ( 2213): 	at com.google.android.gms.constellation.EventManager.onHandleIntent(:com.google.android.gms@202414023@20.24.14 (040800-319035315):240)
+11-18 00:01:38.111 E/cklt    ( 2213): 	at com.google.android.chimera.IntentOperation.onHandleIntent(:com.google.android.gms@202414023@20.24.14 (040800-319035315):2)
+11-18 00:01:38.111 E/cklt    ( 2213): 	at qlx.onHandleIntent(:com.google.android.gms@202414023@20.24.14 (040800-319035315):4)
+11-18 00:01:38.111 E/cklt    ( 2213): 	at cuo.run(:com.google.android.gms@202414023@20.24.14 (040800-319035315):5)
+11-18 00:01:38.111 E/cklt    ( 2213): 	at cun.run(:com.google.android.gms@202414023@20.24.14 (040800-319035315):10)
+11-18 00:01:38.111 E/cklt    ( 2213): 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-18 00:01:38.111 E/cklt    ( 2213): 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-18 00:01:38.111 E/cklt    ( 2213): 	at java.lang.Thread.run(Thread.java:919)
+11-18 00:01:38.317 E/ResolverController( 1660): No valid NAT64 prefix (100, <unspecified>/0)
+11-18 00:01:38.464 E/BluetoothAdapter( 2061): Bluetooth binder is null
+11-18 00:01:39.409 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:01:40.152 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:01:40.442 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:01:41.300 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:01:41.815 E/SuperpacksMgr( 2520): emoji.registerManifest() failed
+11-18 00:01:41.815 E/SuperpacksMgr( 2520): jhy: Request of 1 packs for emoji-manifest failed
+11-18 00:01:41.815 E/SuperpacksMgr( 2520): 	at jri.a(PG:273)
+11-18 00:01:41.815 E/SuperpacksMgr( 2520): 	at jrp.call(Unknown Source:8)
+11-18 00:01:41.815 E/SuperpacksMgr( 2520): 	at mdm.b(PG:2)
+11-18 00:01:41.815 E/SuperpacksMgr( 2520): 	at mef.run(PG:5)
+11-18 00:01:41.815 E/SuperpacksMgr( 2520): 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:462)
+11-18 00:01:41.815 E/SuperpacksMgr( 2520): 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+11-18 00:01:41.815 E/SuperpacksMgr( 2520): 	at ihg.run(PG:11)
+11-18 00:01:41.815 E/SuperpacksMgr( 2520): 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-18 00:01:41.815 E/SuperpacksMgr( 2520): 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-18 00:01:41.815 E/SuperpacksMgr( 2520): 	at java.lang.Thread.run(Thread.java:919)
+11-18 00:01:41.815 E/SuperpacksMgr( 2520): 	at igq.run(PG:8)
+11-18 00:01:41.815 E/SuperpacksMgr( 2520): Caused by: jrc: CANCELED, url: https://www.gstatic.com/android/keyboard/modelpack/emoji/20190401132437/superpacks_manifest.zip
+11-18 00:01:41.815 E/SuperpacksMgr( 2520): 	at jqz.a(PG:10)
+11-18 00:01:41.815 E/SuperpacksMgr( 2520): 	at kdo.a(PG:212)
+11-18 00:01:41.815 E/SuperpacksMgr( 2520): 	at kdo.a(PG:179)
+11-18 00:01:41.815 E/SuperpacksMgr( 2520): 	at kdu.run(PG:5)
+11-18 00:01:41.815 E/SuperpacksMgr( 2520): 	... 7 more
+11-18 00:01:41.929 E/NetworkScheduler.ATC( 2061): Called cancelTask for already completed task com.google.android.inputmethod.latin/com.firebase.jobdispatcher.GooglePlayReceiver{u=0 tag="superpacks-main" trigger=window{start=0s,end=1s,earliest=0s,latest=0s} requirements=[NET_CONNECTED] attributes=[PERSISTED] scheduled=0s last_run=0s jid=N/A status=ACTIVE retries=0 client_lib=FIREBASE_JOB_DISPATCHER-1} :0 [CONTEXT service_id=218 ]
+11-18 00:01:41.978 E/PeopleGalProvider( 2213): Gal task threw exception.
+11-18 00:01:41.978 E/PeopleGalProvider( 2213): java.lang.UnsupportedOperationException
+11-18 00:01:41.978 E/PeopleGalProvider( 2213): 	at com.google.android.gms.people.service.galprovider.PeopleGalChimeraProvider.a(:com.google.android.gms@202414023@20.24.14 (040800-319035315):22)
+11-18 00:01:41.978 E/PeopleGalProvider( 2213): 	at com.google.android.gms.people.service.galprovider.PeopleGalChimeraProvider.query(:com.google.android.gms@202414023@20.24.14 (040800-319035315):14)
+11-18 00:01:41.978 E/PeopleGalProvider( 2213): 	at qlv.query(:com.google.android.gms@202414023@20.24.14 (040800-319035315):3)
+11-18 00:01:41.978 E/PeopleGalProvider( 2213): 	at android.content.ContentProvider.query(ContentProvider.java:1214)
+11-18 00:01:41.978 E/PeopleGalProvider( 2213): 	at ctk.superQuery(:com.google.android.gms@202414023@20.24.14 (040800-319035315):2)
+11-18 00:01:41.978 E/PeopleGalProvider( 2213): 	at com.google.android.chimera.ContentProvider.query(:com.google.android.gms@202414023@20.24.14 (040800-319035315):2)
+11-18 00:01:41.978 E/PeopleGalProvider( 2213): 	at qlv.query(:com.google.android.gms@202414023@20.24.14 (040800-319035315):8)
+11-18 00:01:41.978 E/PeopleGalProvider( 2213): 	at android.content.ContentProvider.query(ContentProvider.java:1307)
+11-18 00:01:41.978 E/PeopleGalProvider( 2213): 	at ctk.superQuery(:com.google.android.gms@202414023@20.24.14 (040800-319035315):1)
+11-18 00:01:41.978 E/PeopleGalProvider( 2213): 	at com.google.android.chimera.ContentProvider.query(:com.google.android.gms@202414023@20.24.14 (040800-319035315):1)
+11-18 00:01:41.978 E/PeopleGalProvider( 2213): 	at ctk.query(:com.google.android.gms@202414023@20.24.14 (040800-319035315):2)
+11-18 00:01:41.978 E/PeopleGalProvider( 2213): 	at android.content.ContentProvider$Transport.query(ContentProvider.java:267)
+11-18 00:01:41.978 E/PeopleGalProvider( 2213): 	at android.content.ContentResolver.query(ContentResolver.java:944)
+11-18 00:01:41.978 E/PeopleGalProvider( 2213): 	at android.content.ContentResolver.query(ContentResolver.java:880)
+11-18 00:01:41.978 E/PeopleGalProvider( 2213): 	at android.content.ContentResolver.query(ContentResolver.java:836)
+11-18 00:01:41.978 E/PeopleGalProvider( 2213): 	at anvv.b(:com.google.android.gms@202414023@20.24.14 (040800-319035315):4)
+11-18 00:01:41.978 E/PeopleGalProvider( 2213): 	at anuy.a(:com.google.android.gms@202414023@20.24.14 (040800-319035315):2)
+11-18 00:01:41.978 E/PeopleGalProvider( 2213): 	at aabt.run(:com.google.android.gms@202414023@20.24.14 (040800-319035315):9)
+11-18 00:01:41.978 E/PeopleGalProvider( 2213): 	at bnin.run(:com.google.android.gms@202414023@20.24.14 (040800-319035315):2)
+11-18 00:01:41.978 E/PeopleGalProvider( 2213): 	at soy.b(:com.google.android.gms@202414023@20.24.14 (040800-319035315):12)
+11-18 00:01:41.978 E/PeopleGalProvider( 2213): 	at soy.run(:com.google.android.gms@202414023@20.24.14 (040800-319035315):7)
+11-18 00:01:41.978 E/PeopleGalProvider( 2213): 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-18 00:01:41.978 E/PeopleGalProvider( 2213): 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-18 00:01:41.978 E/PeopleGalProvider( 2213): 	at sux.run(:com.google.android.gms@202414023@20.24.14 (040800-319035315):0)
+11-18 00:01:41.978 E/PeopleGalProvider( 2213): 	at java.lang.Thread.run(Thread.java:919)
+11-18 00:01:41.982 E/ProxyGalProvider( 6647): QueryGalProvider in GmsCore failed.
+11-18 00:01:41.982 E/ProxyGalProvider( 6647): java.util.concurrent.ExecutionException: com.google.android.gms.common.api.ApiException: 102: 
+11-18 00:01:41.982 E/ProxyGalProvider( 6647): 	at com.google.android.gms.tasks.Tasks.zza(Tasks.java:61)
+11-18 00:01:41.982 E/ProxyGalProvider( 6647): 	at com.google.android.gms.tasks.Tasks.await(Tasks.java:33)
+11-18 00:01:41.982 E/ProxyGalProvider( 6647): 	at com.google.android.syncadapters.contacts.ProxyGalProvider.query(ProxyGalProvider.java:84)
+11-18 00:01:41.982 E/ProxyGalProvider( 6647): 	at android.content.ContentProvider.query(ContentProvider.java:1214)
+11-18 00:01:41.982 E/ProxyGalProvider( 6647): 	at android.content.ContentProvider.query(ContentProvider.java:1307)
+11-18 00:01:41.982 E/ProxyGalProvider( 6647): 	at android.content.ContentProvider$Transport.query(ContentProvider.java:267)
+11-18 00:01:41.982 E/ProxyGalProvider( 6647): 	at android.content.ContentProviderNative.onTransact(ContentProviderNative.java:104)
+11-18 00:01:41.982 E/ProxyGalProvider( 6647): 	at android.os.Binder.execTransactInternal(Binder.java:1021)
+11-18 00:01:41.982 E/ProxyGalProvider( 6647): 	at android.os.Binder.execTransact(Binder.java:994)
+11-18 00:01:41.982 E/ProxyGalProvider( 6647): Caused by: com.google.android.gms.common.api.ApiException: 102: 
+11-18 00:01:41.982 E/ProxyGalProvider( 6647): 	at com.google.android.gms.common.api.internal.zzdm.zza(TaskUtil.java:3)
+11-18 00:01:41.982 E/ProxyGalProvider( 6647): 	at com.google.android.gms.people.zzy.zza(GalProviderClient.java:2)
+11-18 00:01:41.982 E/ProxyGalProvider( 6647): 	at com.google.android.gms.people.internal.zzf.onTransact(IPeopleCallbacks.java:77)
+11-18 00:01:41.982 E/ProxyGalProvider( 6647): 	... 2 more
+11-18 00:01:41.996 E/PeopleGalProvider( 2213): Gal task threw exception.
+11-18 00:01:41.996 E/PeopleGalProvider( 2213): java.lang.UnsupportedOperationException
+11-18 00:01:41.996 E/PeopleGalProvider( 2213): 	at com.google.android.gms.people.service.galprovider.PeopleGalChimeraProvider.a(:com.google.android.gms@202414023@20.24.14 (040800-319035315):22)
+11-18 00:01:41.996 E/PeopleGalProvider( 2213): 	at com.google.android.gms.people.service.galprovider.PeopleGalChimeraProvider.query(:com.google.android.gms@202414023@20.24.14 (040800-319035315):14)
+11-18 00:01:41.996 E/PeopleGalProvider( 2213): 	at qlv.query(:com.google.android.gms@202414023@20.24.14 (040800-319035315):3)
+11-18 00:01:41.996 E/PeopleGalProvider( 2213): 	at android.content.ContentProvider.query(ContentProvider.java:1214)
+11-18 00:01:41.996 E/PeopleGalProvider( 2213): 	at ctk.superQuery(:com.google.android.gms@202414023@20.24.14 (040800-319035315):2)
+11-18 00:01:41.996 E/PeopleGalProvider( 2213): 	at com.google.android.chimera.ContentProvider.query(:com.google.android.gms@202414023@20.24.14 (040800-319035315):2)
+11-18 00:01:41.996 E/PeopleGalProvider( 2213): 	at qlv.query(:com.google.android.gms@202414023@20.24.14 (040800-319035315):8)
+11-18 00:01:41.996 E/PeopleGalProvider( 2213): 	at android.content.ContentProvider.query(ContentProvider.java:1307)
+11-18 00:01:41.996 E/PeopleGalProvider( 2213): 	at ctk.superQuery(:com.google.android.gms@202414023@20.24.14 (040800-319035315):1)
+11-18 00:01:41.996 E/PeopleGalProvider( 2213): 	at com.google.android.chimera.ContentProvider.query(:com.google.android.gms@202414023@20.24.14 (040800-319035315):1)
+11-18 00:01:41.996 E/PeopleGalProvider( 2213): 	at ctk.query(:com.google.android.gms@202414023@20.24.14 (040800-319035315):2)
+11-18 00:01:41.996 E/PeopleGalProvider( 2213): 	at android.content.ContentProvider$Transport.query(ContentProvider.java:267)
+11-18 00:01:41.996 E/PeopleGalProvider( 2213): 	at android.content.ContentResolver.query(ContentResolver.java:944)
+11-18 00:01:41.996 E/PeopleGalProvider( 2213): 	at android.content.ContentResolver.query(ContentResolver.java:880)
+11-18 00:01:41.996 E/PeopleGalProvider( 2213): 	at android.content.ContentResolver.query(ContentResolver.java:836)
+11-18 00:01:41.996 E/PeopleGalProvider( 2213): 	at anvv.b(:com.google.android.gms@202414023@20.24.14 (040800-319035315):4)
+11-18 00:01:41.996 E/PeopleGalProvider( 2213): 	at anuy.a(:com.google.android.gms@202414023@20.24.14 (040800-319035315):2)
+11-18 00:01:41.996 E/PeopleGalProvider( 2213): 	at aabt.run(:com.google.android.gms@202414023@20.24.14 (040800-319035315):9)
+11-18 00:01:41.996 E/PeopleGalProvider( 2213): 	at bnin.run(:com.google.android.gms@202414023@20.24.14 (040800-319035315):2)
+11-18 00:01:41.996 E/PeopleGalProvider( 2213): 	at soy.b(:com.google.android.gms@202414023@20.24.14 (040800-319035315):12)
+11-18 00:01:41.996 E/PeopleGalProvider( 2213): 	at soy.run(:com.google.android.gms@202414023@20.24.14 (040800-319035315):7)
+11-18 00:01:41.996 E/PeopleGalProvider( 2213): 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-18 00:01:41.996 E/PeopleGalProvider( 2213): 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-18 00:01:41.996 E/PeopleGalProvider( 2213): 	at sux.run(:com.google.android.gms@202414023@20.24.14 (040800-319035315):0)
+11-18 00:01:41.996 E/PeopleGalProvider( 2213): 	at java.lang.Thread.run(Thread.java:919)
+11-18 00:01:41.996 E/ProxyGalProvider( 6647): QueryGalProvider in GmsCore failed.
+11-18 00:01:41.996 E/ProxyGalProvider( 6647): java.util.concurrent.ExecutionException: com.google.android.gms.common.api.ApiException: 102: 
+11-18 00:01:41.996 E/ProxyGalProvider( 6647): 	at com.google.android.gms.tasks.Tasks.zza(Tasks.java:61)
+11-18 00:01:41.996 E/ProxyGalProvider( 6647): 	at com.google.android.gms.tasks.Tasks.await(Tasks.java:33)
+11-18 00:01:41.996 E/ProxyGalProvider( 6647): 	at com.google.android.syncadapters.contacts.ProxyGalProvider.query(ProxyGalProvider.java:84)
+11-18 00:01:41.996 E/ProxyGalProvider( 6647): 	at android.content.ContentProvider.query(ContentProvider.java:1214)
+11-18 00:01:41.996 E/ProxyGalProvider( 6647): 	at android.content.ContentProvider.query(ContentProvider.java:1307)
+11-18 00:01:41.996 E/ProxyGalProvider( 6647): 	at android.content.ContentProvider$Transport.query(ContentProvider.java:267)
+11-18 00:01:41.996 E/ProxyGalProvider( 6647): 	at android.content.ContentProviderNative.onTransact(ContentProviderNative.java:104)
+11-18 00:01:41.996 E/ProxyGalProvider( 6647): 	at android.os.Binder.execTransactInternal(Binder.java:1021)
+11-18 00:01:41.996 E/ProxyGalProvider( 6647): 	at android.os.Binder.execTransact(Binder.java:994)
+11-18 00:01:41.996 E/ProxyGalProvider( 6647): Caused by: com.google.android.gms.common.api.ApiException: 102: 
+11-18 00:01:41.996 E/ProxyGalProvider( 6647): 	at com.google.android.gms.common.api.internal.zzdm.zza(TaskUtil.java:3)
+11-18 00:01:41.996 E/ProxyGalProvider( 6647): 	at com.google.android.gms.people.zzy.zza(GalProviderClient.java:2)
+11-18 00:01:41.996 E/ProxyGalProvider( 6647): 	at com.google.android.gms.people.internal.zzf.onTransact(IPeopleCallbacks.java:77)
+11-18 00:01:41.996 E/ProxyGalProvider( 6647): 	... 2 more
+11-18 00:01:42.764 E/ResolverController( 1660): No valid NAT64 prefix (100, <unspecified>/0)
+11-18 00:01:43.006 E/ResolverController( 1660): No valid NAT64 prefix (100, <unspecified>/0)
+11-18 00:01:45.852 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:01:47.756 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:01:49.038 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:01:49.043 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:01:51.262 E/netmgr  ( 1793): Failed to open QEMU pipe 'qemud:network': Invalid argument
+11-18 00:01:51.296 E/wifi_forwarder( 1814): RemoteConnection failed to initialize: RemoteConnection failed to open pipe
+11-18 00:01:51.562 E/ResolverController( 1660): No valid NAT64 prefix (100, <unspecified>/0)
+11-18 00:01:53.833 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:01:54.894 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:01:55.044 E/CAR.TEL.Service( 6819): Failed to bind to InCallService [CONTEXT service_id=13 ]
+11-18 00:01:56.152 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:01:57.045 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:01:59.721 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:01:59.725 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:01:59.726 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:02:00.446 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:02:01.686 E/ActivityThread( 2557): Failed to find provider info for com.google.android.apps.wellbeing.api
+11-18 00:02:06.379 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:02:09.991 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:02:09.993 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:02:14.268 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:02:15.402 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:02:18.482 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:02:24.377 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:02:24.381 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:02:24.383 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:02:28.202 E/ResolverController( 1660): No valid NAT64 prefix (100, <unspecified>/0)
+11-18 00:02:28.418 I/heharsaathi.ap( 6279): Compiler allocated 5538KB to compile kotlin.Unit com.sheharsaathi.app.ui.screens.WeatherScreenKt.AirQuality$lambda$0(com.sheharsaathi.app.data.AirDetail, long, androidx.compose.runtime.Composer, int)
+11-18 00:02:28.441 I/heharsaathi.ap( 6279): Compiler allocated 5597KB to compile kotlin.Unit com.sheharsaathi.app.ui.screens.WeatherScreenKt.AirQuality$lambda$0(com.sheharsaathi.app.data.AirDetail, long, androidx.compose.runtime.Composer, int)
+11-18 00:02:31.570 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:02:34.391 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:02:39.721 D/AndroidRuntime( 6886): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-18 00:02:39.726 E/libc    ( 6886): Access denied finding property "persist.device_config.runtime_native_boot.enable_apex_image"
+11-18 00:02:39.726 I/AndroidRuntime( 6886): Using default boot image
+11-18 00:02:39.726 E/libc    ( 6886): Access denied finding property "persist.device_config.runtime_native_boot.disable_lock_profiling"
+11-18 00:02:39.726 I/AndroidRuntime( 6886): Leaving lock profiling enabled
+11-18 00:02:39.726 E/libc    ( 6886): Access denied finding property "persist.device_config.runtime_native_boot.enable_generational_cc"
+11-18 00:02:39.875 D/AndroidRuntime( 6886): Calling main entry com.android.commands.input.Input
+11-18 00:02:41.389 D/AndroidRuntime( 6886): Shutting down VM
+11-18 00:02:41.431 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:02:44.394 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:02:44.401 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:02:45.284 W/NotificationService( 1914): Toast already killed. pkg=com.sheharsaathi.app callback=android.app.ITransientNotification$Stub$Proxy@4304eb2
+11-18 00:02:50.715 I/AndroidIME( 2520): LatinIme.onActivate() : EditorInfo = Package = com.sheharsaathi.app : Type = Text : Learning = Enable : Suggestion = Show : AutoCorrection = Enable : Microphone = Show : NoPersonalizedLearning = Disable
+11-18 00:02:50.765 I/Conv2QueryExtension( 2520): Conv2Query not enabled due to current app [com.sheharsaathi.app] not in whitelist
+11-18 00:02:51.318 E/netmgr  ( 1793): Failed to open QEMU pipe 'qemud:network': Invalid argument
+11-18 00:02:51.318 E/wifi_forwarder( 1814): RemoteConnection failed to initialize: RemoteConnection failed to open pipe
+11-18 00:02:52.190 E/ResolverController( 1660): No valid NAT64 prefix (100, <unspecified>/0)
+11-18 00:02:52.190 E/ResolverController( 1660): No valid NAT64 prefix (100, <unspecified>/0)
+11-18 00:02:54.456 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:03:01.397 I/AndroidIME( 2520): LatinIme.onActivate() : EditorInfo = Package = com.sheharsaathi.app : Type = Text : Learning = Enable : Suggestion = Show : AutoCorrection = Enable : Microphone = Show : NoPersonalizedLearning = Disable
+11-18 00:03:01.410 I/Conv2QueryExtension( 2520): Conv2Query not enabled due to current app [com.sheharsaathi.app] not in whitelist
+11-18 00:03:14.484 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:03:15.793 I/AndroidIME( 2520): LatinIme.onActivate() : EditorInfo = Package = com.sheharsaathi.app : Type = Text : Learning = Enable : Suggestion = Show : AutoCorrection = Enable : Microphone = Show : NoPersonalizedLearning = Disable
+11-18 00:03:15.809 I/Conv2QueryExtension( 2520): Conv2Query not enabled due to current app [com.sheharsaathi.app] not in whitelist
+11-18 00:03:30.426 I/AndroidIME( 2520): LatinIme.onActivate() : EditorInfo = Package = com.sheharsaathi.app : Type = Text : Learning = Enable : Suggestion = Show : AutoCorrection = Enable : Microphone = Show : NoPersonalizedLearning = Disable
+11-18 00:03:30.434 I/Conv2QueryExtension( 2520): Conv2Query not enabled due to current app [com.sheharsaathi.app] not in whitelist
+11-18 00:03:34.498 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:03:44.787 I/AndroidIME( 2520): LatinIme.onActivate() : EditorInfo = Package = com.sheharsaathi.app : Type = Text : Learning = Enable : Suggestion = Show : AutoCorrection = Enable : Microphone = Show : NoPersonalizedLearning = Disable
+11-18 00:03:44.905 I/Conv2QueryExtension( 2520): Conv2Query not enabled due to current app [com.sheharsaathi.app] not in whitelist
+11-18 00:03:45.448 E/ResolverController( 1660): No valid NAT64 prefix (100, <unspecified>/0)
+11-18 00:03:51.335 E/netmgr  ( 1793): Failed to open QEMU pipe 'qemud:network': Invalid argument
+11-18 00:03:51.336 E/wifi_forwarder( 1814): RemoteConnection failed to initialize: RemoteConnection failed to open pipe
+11-18 00:03:54.650 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:03:57.052 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:03:58.843 I/AndroidIME( 2520): LatinIme.onActivate() : EditorInfo = Package = com.sheharsaathi.app : Type = Text : Learning = Enable : Suggestion = Show : AutoCorrection = Enable : Microphone = Show : NoPersonalizedLearning = Disable
+11-18 00:03:58.870 I/Conv2QueryExtension( 2520): Conv2Query not enabled due to current app [com.sheharsaathi.app] not in whitelist
+11-18 00:04:04.479 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:04:13.879 I/AndroidIME( 2520): LatinIme.onActivate() : EditorInfo = Package = com.sheharsaathi.app : Type = Text : Learning = Enable : Suggestion = Show : AutoCorrection = Enable : Microphone = Show : NoPersonalizedLearning = Disable
+11-18 00:04:13.895 I/Conv2QueryExtension( 2520): Conv2Query not enabled due to current app [com.sheharsaathi.app] not in whitelist
+11-18 00:04:25.373 E/ResolverController( 1660): No valid NAT64 prefix (100, <unspecified>/0)
+11-18 00:04:29.260 E/ResolverController( 1660): No valid NAT64 prefix (100, <unspecified>/0)
+11-18 00:04:41.079 W/NotificationService( 1914): Toast already killed. pkg=com.sheharsaathi.app callback=android.app.ITransientNotification$Stub$Proxy@f2df11b
+11-18 00:04:41.351 E/ResolverController( 1660): No valid NAT64 prefix (100, <unspecified>/0)
+11-18 00:04:51.396 E/netmgr  ( 1793): Failed to open QEMU pipe 'qemud:network': Invalid argument
+11-18 00:04:51.396 E/wifi_forwarder( 1814): RemoteConnection failed to initialize: RemoteConnection failed to open pipe
+11-18 00:04:51.657 W/NotificationService( 1914): Toast already killed. pkg=com.sheharsaathi.app callback=android.app.ITransientNotification$Stub$Proxy@1eeba2c
+11-18 00:04:59.946 I/heharsaathi.ap( 6279): Compiler allocated 10100KB to compile kotlin.Unit com.sheharsaathi.app.ui.screens.AddEventSheetKt.AddEventSheet$lambda$45(com.sheharsaathi.app.data.CityViewModel, boolean, boolean, java.lang.Integer, java.lang.Long, androidx.compose.ui.hapticfeedback.HapticFeedback, kotlin.jvm.functions.Function2, androidx.compose.runtime.MutableState, androidx.activity.compose.ManagedActivityResultLauncher, androidx.activity.compose.ManagedActivityResultLauncher, androidx.compose.runtime.MutableState, androidx.compose.runtime.MutableState, androidx.compose.runtime.MutableState, androidx.compose.runtime.MutableState, androidx.compose.runtime.MutableState, androidx.compose.runtime.MutableState, androidx.compose.runtime.MutableState, androidx.compose.runtime.MutableState, androidx.compose.runtime.MutableState, androidx.compose.runtime.MutableState, androidx.compose.runtime.MutableState, androidx.compose.runtime.MutableState, androidx.compose.runtime.MutableState, androidx.compose.foundation.layout.ColumnScope, androidx.compose
+11-18 00:05:06.929 I/heharsaathi.ap( 6279): Compiler allocated 4206KB to compile void com.sheharsaathi.app.ui.screens.CivicScreenKt.CivicScreen(com.sheharsaathi.app.data.CityViewModel, kotlin.jvm.functions.Function1, androidx.compose.runtime.Composer, int)
+11-18 00:05:06.945 I/heharsaathi.ap( 6279): Compiler allocated 5016KB to compile void com.sheharsaathi.app.ui.screens.CivicWardKt.WardDetails(com.sheharsaathi.app.data.CityViewModel, com.sheharsaathi.app.data.Ward, com.sheharsaathi.app.data.WardSource, boolean, kotlin.jvm.functions.Function0, androidx.compose.runtime.Composer, int)
+11-18 00:05:20.337 I/AndroidIME( 2520): LatinIme.onActivate() : EditorInfo = Package = com.sheharsaathi.app : Type = Text : Learning = Enable : Suggestion = Show : AutoCorrection = Enable : Microphone = Show : NoPersonalizedLearning = Disable
+11-18 00:05:20.360 I/Conv2QueryExtension( 2520): Conv2Query not enabled due to current app [com.sheharsaathi.app] not in whitelist
+11-18 00:05:49.121 I/heharsaathi.ap( 6279): JIT allocated 62KB for stack maps of void com.sheharsaathi.app.ui.screens.ReportScreenKt.ReportScreen(com.sheharsaathi.app.data.CityViewModel, kotlin.jvm.functions.Function1, androidx.compose.runtime.Composer, int)
+11-18 00:05:49.124 I/heharsaathi.ap( 6279): JIT allocated 54KB for compiled code of void com.sheharsaathi.app.ui.screens.ReportScreenKt.ReportScreen(com.sheharsaathi.app.data.CityViewModel, kotlin.jvm.functions.Function1, androidx.compose.runtime.Composer, int)
+11-18 00:05:49.181 I/heharsaathi.ap( 6279): Compiler allocated 14MB to compile void com.sheharsaathi.app.ui.screens.ReportScreenKt.ReportScreen(com.sheharsaathi.app.data.CityViewModel, kotlin.jvm.functions.Function1, androidx.compose.runtime.Composer, int)
+11-18 00:05:51.456 E/netmgr  ( 1793): Failed to open QEMU pipe 'qemud:network': Invalid argument
+11-18 00:05:51.456 E/wifi_forwarder( 1814): RemoteConnection failed to initialize: RemoteConnection failed to open pipe
+11-18 00:05:55.541 I/AndroidIME( 2520): LatinIme.onActivate() : EditorInfo = Package = com.sheharsaathi.app : Type = Text : Learning = Enable : Suggestion = Show : AutoCorrection = Enable : Microphone = Show : NoPersonalizedLearning = Disable
+11-18 00:05:55.592 I/Conv2QueryExtension( 2520): Conv2Query not enabled due to current app [com.sheharsaathi.app] not in whitelist
+11-18 00:05:57.428 I/AndroidIME( 2520): LatinIme.onActivate() : EditorInfo = Package = com.sheharsaathi.app : Type = Text : Learning = Enable : Suggestion = Show : AutoCorrection = Enable : Microphone = Show : NoPersonalizedLearning = Disable
+11-18 00:05:57.434 I/Conv2QueryExtension( 2520): Conv2Query not enabled due to current app [com.sheharsaathi.app] not in whitelist
+11-18 00:06:20.136 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:06:25.107 E/SQLiteDatabase( 2061): Error inserting flex_time=1000 extras={"fetchReason":{"6":0},"fetchPackage":{"com.google.android.gms.people.ui":4}} job_id=-1 period=2000 source=16 requires_charging=0 target_class=com.google.android.gms.phenotype.service.sync.PhenotypeConfigurator user_id=0 target_package=com.google.android.gms tag=PhenotypeSyncImmediately task_type=0 required_idleness_state=0 service_kind=0 source_version=202414000 persistence_level=1 required_network_type=0 runtime=1794960063098 retry_strategy={"maximum_backoff_seconds":{"3600":0},"initial_backoff_seconds":{"30":0},"retry_policy":{"0":0}} last_runtime=0
+11-18 00:06:25.107 E/SQLiteDatabase( 2061): android.database.sqlite.SQLiteConstraintException: UNIQUE constraint failed: pending_ops.tag, pending_ops.target_class, pending_ops.target_package, pending_ops.user_id (code 2067 SQLITE_CONSTRAINT_UNIQUE)
+11-18 00:06:25.107 E/SQLiteDatabase( 2061): 	at android.database.sqlite.SQLiteConnection.nativeExecuteForLastInsertedRowId(Native Method)
+11-18 00:06:25.107 E/SQLiteDatabase( 2061): 	at android.database.sqlite.SQLiteConnection.executeForLastInsertedRowId(SQLiteConnection.java:879)
+11-18 00:06:25.107 E/SQLiteDatabase( 2061): 	at android.database.sqlite.SQLiteSession.executeForLastInsertedRowId(SQLiteSession.java:790)
+11-18 00:06:25.107 E/SQLiteDatabase( 2061): 	at android.database.sqlite.SQLiteStatement.executeInsert(SQLiteStatement.java:88)
+11-18 00:06:25.107 E/SQLiteDatabase( 2061): 	at android.database.sqlite.SQLiteDatabase.insertWithOnConflict(SQLiteDatabase.java:1599)
+11-18 00:06:25.107 E/SQLiteDatabase( 2061): 	at android.database.sqlite.SQLiteDatabase.insert(SQLiteDatabase.java:1468)
+11-18 00:06:25.107 E/SQLiteDatabase( 2061): 	at aqui.a(:com.google.android.gms@202414023@20.24.14 (040800-319035315):175)
+11-18 00:06:25.107 E/SQLiteDatabase( 2061): 	at aqtk.a(:com.google.android.gms@202414023@20.24.14 (040800-319035315):182)
+11-18 00:06:25.107 E/SQLiteDatabase( 2061): 	at aqtk.a(:com.google.android.gms@202414023@20.24.14 (040800-319035315):23)
+11-18 00:06:25.107 E/SQLiteDatabase( 2061): 	at aqtk.c(:com.google.android.gms@202414023@20.24.14 (040800-319035315):9)
+11-18 00:06:25.107 E/SQLiteDatabase( 2061): 	at aqtk.a(:com.google.android.gms@202414023@20.24.14 (040800-319035315):94)
+11-18 00:06:25.107 E/SQLiteDatabase( 2061): 	at aqtg.handleMessage(:com.google.android.gms@202414023@20.24.14 (040800-319035315):16)
+11-18 00:06:25.107 E/SQLiteDatabase( 2061): 	at android.os.Handler.dispatchMessage(Handler.java:107)
+11-18 00:06:25.107 E/SQLiteDatabase( 2061): 	at aekz.a(:com.google.android.gms@202414023@20.24.14 (040800-319035315):2)
+11-18 00:06:25.107 E/SQLiteDatabase( 2061): 	at aekz.dispatchMessage(:com.google.android.gms@202414023@20.24.14 (040800-319035315):14)
+11-18 00:06:25.107 E/SQLiteDatabase( 2061): 	at android.os.Looper.loop(Looper.java:214)
+11-18 00:06:25.107 E/SQLiteDatabase( 2061): 	at android.os.HandlerThread.run(HandlerThread.java:67)
+11-18 00:06:25.493 E/ResolverController( 1660): No valid NAT64 prefix (100, <unspecified>/0)
+11-18 00:06:25.639 E/ApplicationPropertiesBu( 3958): Error when converting version: 4.1.067 (Ettin_RC12_alldpi.x86.phone)
+11-18 00:06:25.639 E/ApplicationPropertiesBu( 3958): java.lang.NumberFormatException: For input string: "067 (Ettin_RC12_alldpi"
+11-18 00:06:25.639 E/ApplicationPropertiesBu( 3958): 	at java.lang.Long.parseLong(Long.java:594)
+11-18 00:06:25.639 E/ApplicationPropertiesBu( 3958): 	at java.lang.Long.parseLong(Long.java:636)
+11-18 00:06:25.639 E/ApplicationPropertiesBu( 3958): 	at com.google.android.apps.gsa.staticplugins.ac.a.a(SourceFile:495)
+11-18 00:06:25.639 E/ApplicationPropertiesBu( 3958): 	at com.google.android.apps.gsa.staticplugins.ac.a.a(SourceFile:300)
+11-18 00:06:25.639 E/ApplicationPropertiesBu( 3958): 	at com.google.android.apps.gsa.staticplugins.ac.k.run(SourceFile:10)
+11-18 00:06:25.639 E/ApplicationPropertiesBu( 3958): 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:462)
+11-18 00:06:25.639 E/ApplicationPropertiesBu( 3958): 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+11-18 00:06:25.639 E/ApplicationPropertiesBu( 3958): 	at com.google.android.apps.gsa.shared.util.c.b.f.run(Unknown Source:3)
+11-18 00:06:25.639 E/ApplicationPropertiesBu( 3958): 	at com.google.android.apps.gsa.shared.util.c.b.bj.run(SourceFile:3)
+11-18 00:06:25.639 E/ApplicationPropertiesBu( 3958): 	at com.google.android.apps.gsa.shared.util.c.b.bj.run(SourceFile:3)
+11-18 00:06:25.639 E/ApplicationPropertiesBu( 3958): 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-18 00:06:25.639 E/ApplicationPropertiesBu( 3958): 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-18 00:06:25.639 E/ApplicationPropertiesBu( 3958): 	at java.lang.Thread.run(Thread.java:919)
+11-18 00:06:25.639 E/ApplicationPropertiesBu( 3958): 	at com.google.android.apps.gsa.shared.util.c.b.m.run(SourceFile:6)
+11-18 00:06:27.479 E/SQLiteDatabase( 2061): Error inserting flex_time=1000 extras={"fetchReason":{"15":0},"fetchPackage":{"com.google.android.googlequicksearchbox":4}} job_id=-1 period=2000 source=16 requires_charging=0 target_class=com.google.android.gms.phenotype.service.sync.PhenotypeConfigurator user_id=0 target_package=com.google.android.gms tag=PhenotypeSyncImmediately task_type=0 required_idleness_state=0 service_kind=0 source_version=202414000 persistence_level=1 required_network_type=0 runtime=1794960387470 retry_strategy={"maximum_backoff_seconds":{"3600":0},"initial_backoff_seconds":{"30":0},"retry_policy":{"0":0}} last_runtime=0
+11-18 00:06:27.479 E/SQLiteDatabase( 2061): android.database.sqlite.SQLiteConstraintException: UNIQUE constraint failed: pending_ops.tag, pending_ops.target_class, pending_ops.target_package, pending_ops.user_id (code 2067 SQLITE_CONSTRAINT_UNIQUE)
+11-18 00:06:27.479 E/SQLiteDatabase( 2061): 	at android.database.sqlite.SQLiteConnection.nativeExecuteForLastInsertedRowId(Native Method)
+11-18 00:06:27.479 E/SQLiteDatabase( 2061): 	at android.database.sqlite.SQLiteConnection.executeForLastInsertedRowId(SQLiteConnection.java:879)
+11-18 00:06:27.479 E/SQLiteDatabase( 2061): 	at android.database.sqlite.SQLiteSession.executeForLastInsertedRowId(SQLiteSession.java:790)
+11-18 00:06:27.479 E/SQLiteDatabase( 2061): 	at android.database.sqlite.SQLiteStatement.executeInsert(SQLiteStatement.java:88)
+11-18 00:06:27.479 E/SQLiteDatabase( 2061): 	at android.database.sqlite.SQLiteDatabase.insertWithOnConflict(SQLiteDatabase.java:1599)
+11-18 00:06:27.479 E/SQLiteDatabase( 2061): 	at android.database.sqlite.SQLiteDatabase.insert(SQLiteDatabase.java:1468)
+11-18 00:06:27.479 E/SQLiteDatabase( 2061): 	at aqui.a(:com.google.android.gms@202414023@20.24.14 (040800-319035315):175)
+11-18 00:06:27.479 E/SQLiteDatabase( 2061): 	at aqtk.a(:com.google.android.gms@202414023@20.24.14 (040800-319035315):182)
+11-18 00:06:27.479 E/SQLiteDatabase( 2061): 	at aqtk.a(:com.google.android.gms@202414023@20.24.14 (040800-319035315):23)
+11-18 00:06:27.479 E/SQLiteDatabase( 2061): 	at aqtk.a(:com.google.android.gms@202414023@20.24.14 (040800-319035315):177)
+11-18 00:06:27.479 E/SQLiteDatabase( 2061): 	at aqpu.run(:com.google.android.gms@202414023@20.24.14 (040800-319035315):9)
+11-18 00:06:27.479 E/SQLiteDatabase( 2061): 	at soy.b(:com.google.android.gms@202414023@20.24.14 (040800-319035315):12)
+11-18 00:06:27.479 E/SQLiteDatabase( 2061): 	at soy.run(:com.google.android.gms@202414023@20.24.14 (040800-319035315):8)
+11-18 00:06:27.479 E/SQLiteDatabase( 2061): 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-18 00:06:27.479 E/SQLiteDatabase( 2061): 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-18 00:06:27.479 E/SQLiteDatabase( 2061): 	at sux.run(:com.google.android.gms@202414023@20.24.14 (040800-319035315):0)
+11-18 00:06:27.479 E/SQLiteDatabase( 2061): 	at java.lang.Thread.run(Thread.java:919)
+11-18 00:06:29.432 I/heharsaathi.ap( 6279): Compiler allocated 4440KB to compile kotlin.Unit com.sheharsaathi.app.ui.screens.TransitBoardScreenKt.DepartureCard$lambda$0(long, com.sheharsaathi.app.data.Departure, kotlin.jvm.functions.Function0, boolean, int, int, boolean, androidx.compose.runtime.Composer, int)
+11-18 00:06:31.707 I/AndroidIME( 2520): LatinIme.onActivate() : EditorInfo = Package = com.sheharsaathi.app : Type = Text : Learning = Enable : Suggestion = Show : AutoCorrection = Enable : Microphone = Show : NoPersonalizedLearning = Disable
+11-18 00:06:31.746 I/Conv2QueryExtension( 2520): Conv2Query not enabled due to current app [com.sheharsaathi.app] not in whitelist
+11-18 00:06:43.032 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:06:44.767 I/heharsaathi.ap( 6279): Compiler allocated 13MB to compile void com.sheharsaathi.app.ui.screens.ProfileScreenKt.ProfileScreen(com.sheharsaathi.app.data.CityViewModel, kotlin.jvm.functions.Function0, kotlin.jvm.functions.Function1, kotlin.jvm.functions.Function0, kotlin.jvm.functions.Function0, androidx.compose.runtime.Composer, int)
+11-18 00:06:51.349 I/heharsaathi.ap( 6279): Compiler allocated 4298KB to compile void com.sheharsaathi.app.ui.screens.HelpChatScreenKt.HelpChatScreen(com.sheharsaathi.app.data.CityViewModel, kotlin.jvm.functions.Function0, kotlin.jvm.functions.Function1, androidx.compose.runtime.Composer, int)
+11-18 00:06:51.465 E/netmgr  ( 1793): Failed to open QEMU pipe 'qemud:network': Invalid argument
+11-18 00:06:51.465 E/wifi_forwarder( 1814): RemoteConnection failed to initialize: RemoteConnection failed to open pipe
+11-18 00:06:52.644 E/BluetoothAdapter( 7128): Bluetooth binder is null
+11-18 00:06:55.922 I/AndroidIME( 2520): LatinIme.onActivate() : EditorInfo = Package = com.sheharsaathi.app : Type = Text : Learning = Enable : Suggestion = Show : AutoCorrection = Enable : Microphone = Show : NoPersonalizedLearning = Disable
+11-18 00:06:55.935 I/Conv2QueryExtension( 2520): Conv2Query not enabled due to current app [com.sheharsaathi.app] not in whitelist
+11-18 00:06:56.634 I/AndroidIME( 2520): LatinIme.onActivate() : EditorInfo = Package = com.sheharsaathi.app : Type = Text : Learning = Enable : Suggestion = Show : AutoCorrection = Enable : Microphone = Show : NoPersonalizedLearning = Disable
+11-18 00:06:56.645 I/Conv2QueryExtension( 2520): Conv2Query not enabled due to current app [com.sheharsaathi.app] not in whitelist
+11-18 00:07:04.561 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:07:06.757 W/NotificationService( 1914): Toast already killed. pkg=com.sheharsaathi.app callback=android.app.ITransientNotification$Stub$Proxy@83ab51c
+11-18 00:07:11.798 D/LifecycleMonitor( 6279): Lifecycle status change: com.sheharsaathi.app.MainActivity@db7838d in: PAUSED
+11-18 00:07:11.798 V/ActivityScenario( 6279): Update currentActivityStage to PAUSED, currentActivity=com.sheharsaathi.app.MainActivity@db7838d
+11-18 00:07:11.803 D/LifecycleMonitor( 6279): Lifecycle status change: com.sheharsaathi.app.MainActivity@db7838d in: STOPPED
+11-18 00:07:11.804 V/ActivityScenario( 6279): Update currentActivityStage to STOPPED, currentActivity=com.sheharsaathi.app.MainActivity@db7838d
+11-18 00:07:11.815 D/LifecycleMonitor( 6279): Lifecycle status change: com.sheharsaathi.app.MainActivity@db7838d in: DESTROYED
+11-18 00:07:11.825 D/LifecycleMonitor( 6279): Lifecycle status change: com.sheharsaathi.app.MainActivity@ef42950 in: PRE_ON_CREATE
+11-18 00:07:11.828 D/LifecycleMonitor( 6279): Lifecycle status change: com.sheharsaathi.app.MainActivity@ef42950 in: CREATED
+11-18 00:07:11.828 V/ActivityScenario( 6279): Update currentActivityStage to CREATED, currentActivity=com.sheharsaathi.app.MainActivity@ef42950
+11-18 00:07:11.829 D/LifecycleMonitor( 6279): Lifecycle status change: com.sheharsaathi.app.MainActivity@ef42950 in: STARTED
+11-18 00:07:11.829 V/ActivityScenario( 6279): Update currentActivityStage to STARTED, currentActivity=com.sheharsaathi.app.MainActivity@ef42950
+11-18 00:07:11.830 D/LifecycleMonitor( 6279): Lifecycle status change: com.sheharsaathi.app.MainActivity@ef42950 in: RESUMED
+11-18 00:07:11.830 V/ActivityScenario( 6279): Update currentActivityStage to RESUMED, currentActivity=com.sheharsaathi.app.MainActivity@ef42950
+11-18 00:07:15.559 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:07:39.828 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:07:51.525 E/netmgr  ( 1793): Failed to open QEMU pipe 'qemud:network': Invalid argument
+11-18 00:07:51.526 E/wifi_forwarder( 1814): RemoteConnection failed to initialize: RemoteConnection failed to open pipe
+11-18 00:08:09.931 E/memtrack( 1914): Couldn't load memtrack module
+11-18 00:08:18.249 I/ActivityTaskManager( 1914): START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10000000 cmp=com.sheharsaathi.app.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity} from uid 10147
+11-18 00:08:18.268 E/system_server( 1914): Invalid ID 0x00000000.
+11-18 00:08:18.270 D/LifecycleMonitor( 6279): Lifecycle status change: com.sheharsaathi.app.MainActivity@ef42950 in: PAUSED
+11-18 00:08:18.270 V/ActivityScenario( 6279): Update currentActivityStage to PAUSED, currentActivity=com.sheharsaathi.app.MainActivity@ef42950
+11-18 00:08:18.320 I/ActivityManager( 1914): Start proc 7255:com.sheharsaathi.app.test/u0a146 for activity {com.sheharsaathi.app.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity}
+11-18 00:08:18.335 E/saathi.app.tes( 7255): Unknown bits set in runtime_flags: 0x8000
+11-18 00:08:18.514 E/SurfaceFlinger( 1712): ro.sf.lcd_density must be defined as a build property
+11-18 00:08:18.515 E/SurfaceFlinger( 1712): ro.sf.lcd_density must be defined as a build property
+11-18 00:08:18.518 E/SurfaceFlinger( 1712): ro.sf.lcd_density must be defined as a build property
+11-18 00:08:18.518 E/SurfaceFlinger( 1712): ro.sf.lcd_density must be defined as a build property
+11-18 00:08:18.549 D/LifecycleMonitor( 6279): Lifecycle status change: com.sheharsaathi.app.MainActivity@ef42950 in: STOPPED
+11-18 00:08:18.549 V/ActivityScenario( 6279): Update currentActivityStage to STOPPED, currentActivity=com.sheharsaathi.app.MainActivity@ef42950
+11-18 00:08:18.588 D/LifecycleMonitor( 6279): Lifecycle status change: com.sheharsaathi.app.MainActivity@ef42950 in: DESTROYED
+11-18 00:08:18.628 I/TestRunner( 6279): finished: walkthrough(com.sheharsaathi.app.QaWalkthroughTest)
+11-18 00:08:18.798 I/ActivityTaskManager( 1914): Displayed com.sheharsaathi.app.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity: +548ms
+11-18 00:08:18.829 I/ActivityManager( 1914): Force stopping com.sheharsaathi.app appid=10147 user=0: finished inst
+11-18 00:08:18.829 I/ActivityManager( 1914): Killing 6279:com.sheharsaathi.app/u0a147 (adj 0): stop com.sheharsaathi.app
+11-18 00:08:18.857 D/AndroidRuntime( 6267): Shutting down VM
+11-18 00:08:18.510 W/RenderThread( 7255): type=1400 audit(0.0:34): avc: denied { write } for name="property_service" dev="tmpfs" ino=6844 scontext=u:r:untrusted_app:s0:c146,c256,c512,c768 tcontext=u:object_r:property_socket:s0 tclass=sock_file permissive=0 app=com.sheharsaathi.app.test
+11-18 00:08:19.289 E/Layer   ( 1712): [Surface(name=AppWindowToken{37640b1 token=Token{56aa758 ActivityRecord{5c1743b u0 com.google.android.apps.nexuslauncher/.NexusLauncherActivity t5}}})/@0x9a353fb - animation-leash#0] No local sync point found
+11-18 00:08:19.289 E/Layer   ( 1712): [Surface(name=AppWindowToken{40b1b55 token=Token{d5d760c ActivityRecord{4603d3f u0 com.sheharsaathi.app.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity t7}}})/@0x9dd6b64 - animation-leash#0] No local sync point found
+11-18 00:08:19.327 E/Layer   ( 1712): [Surface(name=AppWindowToken{37640b1 token=Token{56aa758 ActivityRecord{5c1743b u0 com.google.android.apps.nexuslauncher/.NexusLauncherActivity t5}}})/@0x9a353fb - animation-leash#0] No local sync point found
+11-18 00:08:19.327 E/Layer   ( 1712): [Surface(name=AppWindowToken{40b1b55 token=Token{d5d760c ActivityRecord{4603d3f u0 com.sheharsaathi.app.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity t7}}})/@0x9dd6b64 - animation-leash#0] No local sync point found
+11-18 00:08:19.418 E/Layer   ( 1712): [Surface(name=AppWindowToken{37640b1 token=Token{56aa758 ActivityRecord{5c1743b u0 com.google.android.apps.nexuslauncher/.NexusLauncherActivity t5}}})/@0x9a353fb - animation-leash#0] No local sync point found
+11-18 00:08:19.418 E/Layer   ( 1712): [Surface(name=AppWindowToken{40b1b55 token=Token{d5d760c ActivityRecord{4603d3f u0 com.sheharsaathi.app.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity t7}}})/@0x9dd6b64 - animation-leash#0] No local sync point found
+11-18 00:08:19.595 E/Layer   ( 1712): [Surface(name=AppWindowToken{37640b1 token=Token{56aa758 ActivityRecord{5c1743b u0 com.google.android.apps.nexuslauncher/.NexusLauncherActivity t5}}})/@0x9a353fb - animation-leash#0] No local sync point found
+11-18 00:08:19.595 E/Layer   ( 1712): [Surface(name=AppWindowToken{40b1b55 token=Token{d5d760c ActivityRecord{4603d3f u0 com.sheharsaathi.app.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity t7}}})/@0x9dd6b64 - animation-leash#0] No local sync point found
+11-18 00:08:19.663 E/Layer   ( 1712): [Surface(name=AppWindowToken{37640b1 token=Token{56aa758 ActivityRecord{5c1743b u0 com.google.android.apps.nexuslauncher/.NexusLauncherActivity t5}}})/@0x9a353fb - animation-leash#0] No local sync point found
+11-18 00:08:19.664 E/Layer   ( 1712): [Surface(name=AppWindowToken{40b1b55 token=Token{d5d760c ActivityRecord{4603d3f u0 com.sheharsaathi.app.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity t7}}})/@0x9dd6b64 - animation-leash#0] No local sync point found
+11-18 00:08:20.599 E/ModuleIdSetter( 2061): exception when setting module id
+11-18 00:08:20.599 E/ModuleIdSetter( 2061): java.lang.IllegalStateException: Unable to get current module info in ModuleManager created with non-module Context
+11-18 00:08:20.599 E/ModuleIdSetter( 2061): 	at com.google.android.chimera.config.ModuleManager.getCurrentModule(:com.google.android.gms@202414023@20.24.14 (040800-319035315):2)
+11-18 00:08:20.599 E/ModuleIdSetter( 2061): 	at aewd.a(:com.google.android.gms@202414023@20.24.14 (040800-319035315):4)
+11-18 00:08:20.599 E/ModuleIdSetter( 2061): 	at aewg.b(:com.google.android.gms@202414023@20.24.14 (040800-319035315):9)
+11-18 00:08:20.599 E/ModuleIdSetter( 2061): 	at aeso.a(Unknown Source:0)
+11-18 00:08:20.599 E/ModuleIdSetter( 2061): 	at rpm.a(:com.google.android.gms@202414023@20.24.14 (040800-319035315):0)
+11-18 00:08:20.599 E/ModuleIdSetter( 2061): 	at rlv.c(:com.google.android.gms@202414023@20.24.14 (040800-319035315):1)
+11-18 00:08:20.599 E/ModuleIdSetter( 2061): 	at rlt.b(:com.google.android.gms@202414023@20.24.14 (040800-319035315):1)
+11-18 00:08:20.599 E/ModuleIdSetter( 2061): 	at rok.b(:com.google.android.gms@202414023@20.24.14 (040800-319035315):6)
+11-18 00:08:20.599 E/ModuleIdSetter( 2061): 	at rok.c(:com.google.android.gms@202414023@20.24.14 (040800-319035315):6)
+11-18 00:08:20.599 E/ModuleIdSetter( 2061): 	at rok.b(:com.google.android.gms@202414023@20.24.14 (040800-319035315):10)
+11-18 00:08:20.599 E/ModuleIdSetter( 2061): 	at rok.a(:com.google.android.gms@202414023@20.24.14 (040800-319035315):17)
+11-18 00:08:20.599 E/ModuleIdSetter( 2061): 	at rok.g(:com.google.android.gms@202414023@20.24.14 (040800-319035315):3)
+11-18 00:08:20.599 E/ModuleIdSetter( 2061): 	at sdr.a(:com.google.android.gms@202414023@20.24.14 (040800-319035315):2)
+11-18 00:08:20.599 E/ModuleIdSetter( 2061): 	at scr.a(:com.google.android.gms@202414023@20.24.14 (040800-319035315):10)
+11-18 00:08:20.599 E/ModuleIdSetter( 2061): 	at sci.a(:com.google.android.gms@202414023@20.24.14 (040800-319035315):0)
+11-18 00:08:20.599 E/ModuleIdSetter( 2061): 	at scl.handleMessage(:com.google.android.gms@202414023@20.24.14 (040800-319035315):28)
+11-18 00:08:20.599 E/ModuleIdSetter( 2061): 	at android.os.Handler.dispatchMessage(Handler.java:107)
+11-18 00:08:20.599 E/ModuleIdSetter( 2061): 	at aekz.a(:com.google.android.gms@202414023@20.24.14 (040800-319035315):2)
+11-18 00:08:20.599 E/ModuleIdSetter( 2061): 	at aekz.dispatchMessage(:com.google.android.gms@202414023@20.24.14 (040800-319035315):14)
+11-18 00:08:20.599 E/ModuleIdSetter( 2061): 	at android.os.Looper.loop(Looper.java:214)
+11-18 00:08:20.599 E/ModuleIdSetter( 2061): 	at android.os.HandlerThread.run(HandlerThread.java:67)
+11-18 00:08:21.350 E/BeaconBle( 2061): Missing BluetoothAdapter [CONTEXT service_id=111 ]
+11-18 00:08:21.391 E/BeaconBle( 2061): Scan couldn't start for Places [CONTEXT service_id=111 ]
+11-18 00:08:21.396 E/cklt    ( 2061): *~*~*~ Channel {0} was not shutdown properly!!! ~*~*~*
+11-18 00:08:21.396 E/cklt    ( 2061):     Make sure to call shutdown()/shutdownNow() and wait until awaitTermination() returns true.
+11-18 00:08:21.396 E/cklt    ( 2061): java.lang.RuntimeException: ManagedChannel allocation site
+11-18 00:08:21.396 E/cklt    ( 2061): 	at ckls.<init>(:com.google.android.gms@202414023@20.24.14 (040800-319035315):3)
+11-18 00:08:21.396 E/cklt    ( 2061): 	at cklt.<init>(:com.google.android.gms@202414023@20.24.14 (040800-319035315):2)
+11-18 00:08:21.396 E/cklt    ( 2061): 	at ckfk.b(:com.google.android.gms@202414023@20.24.14 (040800-319035315):21)
+11-18 00:08:21.396 E/cklt    ( 2061): 	at sjo.a(:com.google.android.gms@202414023@20.24.14 (040800-319035315):29)
+11-18 00:08:21.396 E/cklt    ( 2061): 	at sjo.a(:com.google.android.gms@202414023@20.24.14 (040800-319035315):52)
+11-18 00:08:21.396 E/cklt    ( 2061): 	at bjxj.call(:com.google.android.gms@202414023@20.24.14 (040800-319035315):0)
+11-18 00:08:21.396 E/cklt    ( 2061): 	at bjvu.run(:com.google.android.gms@202414023@20.24.14 (040800-319035315):1)
+11-18 00:08:21.396 E/cklt    ( 2061): 	at soy.b(:com.google.android.gms@202414023@20.24.14 (040800-319035315):12)
+11-18 00:08:21.396 E/cklt    ( 2061): 	at soy.run(:com.google.android.gms@202414023@20.24.14 (040800-319035315):7)
+11-18 00:08:21.396 E/cklt    ( 2061): 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-18 00:08:21.396 E/cklt    ( 2061): 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-18 00:08:21.396 E/cklt    ( 2061): 	at sux.run(:com.google.android.gms@202414023@20.24.14 (040800-319035315):0)
+11-18 00:08:21.396 E/cklt    ( 2061): 	at java.lang.Thread.run(Thread.java:919)

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sheharsaathi.app.data.WeatherDetailTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-11-17T23:56:35.168Z" hostname="runnervmccnms" time="0.008">
+  <properties/>
+  <testcase name="indiaScaleFromParticulates" classname="com.sheharsaathi.app.data.WeatherDetailTest" time="0.001"/>
+  <testcase name="windDirections" classname="com.sheharsaathi.app.data.WeatherDetailTest" time="0.0"/>
+  <testcase name="localTimeLabels" classname="com.sheharsaathi.app.data.WeatherDetailTest" time="0.006"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
